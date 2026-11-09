@@ -1,0 +1,9 @@
+{
+  "default_variant": "best",
+  "criterion": "full Val Stage1-15 macro Kendall tau-b",
+  "selected_global_update": 67982,
+  "selected_val_tau_b": 0.4342530491895346,
+  "stopped_global_update": 113303,
+  "test_used_to_select_weights": false,
+  "ongoing_continuation_included": false
+}

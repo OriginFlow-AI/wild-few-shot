@@ -1,0 +1,30 @@
+{
+  "html_links_checked": true,
+  "all_links_exist": true,
+  "scientific_figures_visually_checked": [
+    "01_force_bands.png",
+    "2026-11-09_median_effect.png"
+  ],
+  "prediction_files": 690,
+  "point_files": 1196,
+  "paired_AB_coverage_equal": true,
+  "preprocessing_parity": {
+    "trial": "ad78177c0c58a0ffd0fe",
+    "samples": 30000,
+    "max_abs_uV": 0.0,
+    "exact_match": true,
+    "source_file": "/data/lr_data/FM_PULSE/src/data_prep/processors/raw_to_training.py",
+    "source_function": "_apply_semg_filter",
+    "params": "50Hz harmonics notch Q30; 4th-order 40-850Hz bandpass; first1000 mean steady-state SOS"
+  },
+  "model_parity": {
+    "trial": "ad78177c0c58a0ffd0fe",
+    "outputs": 178,
+    "time_indices_exact": true,
+    "max_score_abs_difference": 0.0244140625,
+    "mean_score_abs_difference": 0.0033740783110260963,
+    "variant": "best",
+    "precision": "bf16",
+    "comparison": "official RankPredictor.predict_trial first two full reset windows vs experiment output"
+  }
+}

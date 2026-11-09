@@ -1,0 +1,9 @@
+{
+  "enabled": false,
+  "output_units": "dimensionless_ranking_score",
+  "force_mean": null,
+  "force_std": null,
+  "forward_calibration": null,
+  "inverse_calibration": null,
+  "explanation": "This ranking model has no Newton calibration; do not reuse ex45 calibration assets."
+}

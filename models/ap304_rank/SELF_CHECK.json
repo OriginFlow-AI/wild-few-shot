@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "manifest_files": 31,
+  "python": "3.10.21",
+  "torch": "2.11.0+cu130",
+  "numpy": "1.26.4",
+  "gpu_used": false,
+  "weights": {
+    "best": {
+      "strict_load": true,
+      "parameters": 18357945,
+      "state_tensors": 245,
+      "cpu_forward": true,
+      "points": 179,
+      "tail_deduplicated": true,
+      "production_scaling_exact": true
+    },
+    "last": {
+      "strict_load": true,
+      "parameters": 18357945,
+      "state_tensors": 245,
+      "cpu_forward": true,
+      "points": 179,
+      "tail_deduplicated": true,
+      "production_scaling_exact": true
+    }
+  },
+  "source_recordings_read": 0,
+  "synthetic_only": true,
+  "input_normalization": "complete Train frozen mean/std",
+  "output_units": "dimensionless_ranking_score"
+}

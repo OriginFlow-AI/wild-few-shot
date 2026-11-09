@@ -1,0 +1,72 @@
+{
+  "source_trials": 690,
+  "test5": 465,
+  "test7": 225,
+  "subjects": 28,
+  "eligible_test7": 216,
+  "scored_test7": 210,
+  "scored_subjects": 28,
+  "scored_trial_fingers": 1196,
+  "calibration_points": 737485,
+  "test_points": 315059,
+  "candidate_test_points": 322671,
+  "same_coverage": true,
+  "force_clock_ok": 689,
+  "tare_methods": {
+    "low_decile_mode": 465,
+    "first4s_median_user_requested": 225
+  },
+  "dates": {
+    "2026-11-07": {
+      "test7": 116,
+      "test5": 238,
+      "subjects": 14
+    },
+    "2026-11-09": {
+      "test7": 109,
+      "test5": 227,
+      "subjects": 14
+    }
+  },
+  "eligible_trial_fingers": 1728,
+  "trial_finger_available_pct": 69.21296296296296,
+  "tare_first4_vs_first3_abs_max_N": 0.0,
+  "tare_first4_vs_first3_abs_median_N": 0.0,
+  "input_preprocessing": "canonical force-training MCAP preprocessing once: 50Hz harmonic notches Q30, order4 40-850Hz bandpass; model normalization unchanged",
+  "filter_result": {
+    "done": 690,
+    "errors": [],
+    "seconds": 14.079508270020597
+  },
+  "sha256": {
+    "ap304_rank_best_model_state_dict.pt": "f6dfe88f7e25d5be934ee0b065ae76d94aa89edc88340164244ecd149fa89928",
+    "train_norm.npz": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+    "sources.json": "2bf424ec58127be698ac28d6e84dde0843e2e5da891f5cd45af7a95e60d572fd"
+  },
+  "extraction": {
+    "done": 690,
+    "errors": [],
+    "seconds": 202.2210467630066
+  },
+  "inference": {
+    "done": 690,
+    "errors": [],
+    "shards": [
+      {
+        "done": 230,
+        "errors": [],
+        "seconds": 137.98632701701717
+      },
+      {
+        "done": 230,
+        "errors": [],
+        "seconds": 181.32224390801275
+      },
+      {
+        "done": 230,
+        "errors": [],
+        "seconds": 76.74973950802814
+      }
+    ]
+  }
+}

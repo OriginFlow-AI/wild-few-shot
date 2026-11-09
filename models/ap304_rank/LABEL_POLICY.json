@@ -1,0 +1,21 @@
+{
+  "raw_force_transform": "identity",
+  "force_normalization": "none",
+  "force_calibration": "none",
+  "output_units": "dimensionless_ranking_score",
+  "physical_force_accuracy_claimed": false,
+  "pair_scope": "same_trial_same_finger",
+  "pair_gap_rule": {
+    "reference_scope": "same_trial_same_finger",
+    "reference_samples": "raw_force[470::40, finger]",
+    "reference_span": "percentile95_minus_percentile5",
+    "fraction_of_reference_span": 0.05,
+    "numerical_relative_tolerance": 1e-06,
+    "degenerate_span": "no_rank_pairs_for_this_trial_finger",
+    "absolute_force_threshold_n": null
+  },
+  "label_rule": "sign(raw_force_i - raw_force_j)",
+  "pair_sampling_replacement": false,
+  "native_label_rule": "raw_force[start+470+40*k,f], k=0..88",
+  "raw_record_deletion": false
+}

@@ -1,0 +1,31 @@
+{
+  "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+  "training_reference_sha256": {
+    "__init__.py": "29f5e19352d42211e821cc64785ea3f453711e3775cb45e497d05246114ca7d2",
+    "config.py": "f5285bd909dee40b89e0d3bdc0032c8fc0484b76f28bfc08ec7847817dc27ccb",
+    "ap304_rank_data.py": "4b70a916db49d4726759afe661e7f742b147c761008646ff3aeb026611eed282",
+    "ap304_rank_loss.py": "b034face856dff43c3da79087da2826a2c72ae50e01dc138ea8a98101e07f953",
+    "ap304_rank_train.py": "6fa66be1c54fe5239cf2bbb8992d0235f2d838370054bf01617286b66f5ff9f4"
+  },
+  "normalization": {
+    "sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+    "fit_role": "train_only",
+    "train_trials": 188777,
+    "time_samples": 44990082249,
+    "index_sha256": "d08938dee5fd15dec0662fe292208b72d6f46f70d9036cbb73ea9aee6727aa3c"
+  },
+  "original_training_environment": {
+    "torch": "2.11.0+cu130",
+    "numpy": "1.26.4",
+    "python": "3.10.21",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "world_size": 8,
+    "parameters": 18357945,
+    "encoder_frozen": false
+  },
+  "completed_stage_only": true,
+  "no_source_recordings": true,
+  "no_dataset_index": true,
+  "no_subject_results": true,
+  "created_bjt": "2026-10-28T17:49:43.608652+08:00"
+}

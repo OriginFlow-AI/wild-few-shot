@@ -1,0 +1,292 @@
+{
+  "experiment": {
+    "id": "AP304-FULL-RAW-RANK-PRETRAIN-v1",
+    "seed": 43,
+    "initialization": "random",
+    "checkpoint": null,
+    "train_all_parameters": true,
+    "output_units": "dimensionless_ranking_score"
+  },
+  "architecture": {
+    "source": "model_reference/model_source.py",
+    "source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+    "class": "K2RingNetwork",
+    "config_class": "K2RingConfig",
+    "expected_parameters": 18357945,
+    "d_model": 304,
+    "num_heads": 8,
+    "dim_feedforward": 1216,
+    "encoder_blocks": 9,
+    "decoder_blocks": 4,
+    "dropout": 0.1,
+    "pool_queries": 2,
+    "output_channels": 5,
+    "head": "original_affine_15_commands",
+    "output_scale": 0.01,
+    "ranking_score": "native_output_divided_by_output_scale",
+    "frozen_encoder": false
+  },
+  "dataset": {
+    "index": "<provide your own frozen split index>",
+    "index_sha256": "d08938dee5fd15dec0662fe292208b72d6f46f70d9036cbb73ea9aee6727aa3c",
+    "cache_root": "<provide your own raw cache>",
+    "train_split": "train",
+    "validation_split": "val",
+    "test_split": "test",
+    "stage_filter": null,
+    "include_stage_zero": true,
+    "train_fraction": 1.0,
+    "train_hour_cap": null,
+    "subject_disjoint_required": true,
+    "force_source": "raw_fz_npy",
+    "clean_supervision_root": null,
+    "force_calibration": "none",
+    "force_smoothing": "none",
+    "sample_deletion": false,
+    "nonfinite_or_missing_file": "fail_fast",
+    "sample_rate_hz": 2000,
+    "emg_channels": 16,
+    "finger_order": [
+      "thumb",
+      "index",
+      "middle",
+      "ring",
+      "little"
+    ],
+    "expected_train_trials": 188777,
+    "expected_val_trials": 10890,
+    "expected_train_windows": 11422364,
+    "expected_val_windows": 654478
+  },
+  "normalization": {
+    "emg": "fit_mean_std_on_full_train_only",
+    "output": "train_norm.npz",
+    "force": "none",
+    "use_archived_ap304_norm": false,
+    "emg_filter": false,
+    "channel_mirror": false,
+    "augmentation": "none"
+  },
+  "windows": {
+    "input_samples": 4000,
+    "stride_samples": 4000,
+    "append_last_complete_window": true,
+    "pad_raw_arrays": false,
+    "left_context_samples": 428,
+    "context_tokens": 11,
+    "native_output_tokens": 89,
+    "native_target_first_sample": 470,
+    "native_target_stride_samples": 40,
+    "native_target_last_sample": 3990,
+    "target_rule": "raw_force[start + 470 + 40 * k, finger], k=0..88",
+    "state_reset": "every_window",
+    "extra_prefix_samples": 0,
+    "ma7": false
+  },
+  "window_groups": {
+    "windows_per_group": 2,
+    "grouping_scope": "same_trial",
+    "train_order": "seeded_per_trial_window_permutation_then_pair_consecutively",
+    "validation_order": "fixed_seed43_per_trial_window_permutation_then_pair_consecutively",
+    "odd_window_policy": "second_slot_zero_weight_dummy",
+    "shuffle_groups_each_epoch": true,
+    "expected_train_groups": 5800996,
+    "expected_val_groups": 332429,
+    "expected_train_dummy_window_slots": 179628
+  },
+  "pair_supervision": {
+    "compare_same_finger_only": true,
+    "compare_across_trials": false,
+    "compare_across_subjects": false,
+    "label": "sign_of_raw_force_difference",
+    "equal_force_pairs": "no_order_constraint",
+    "min_gap": {
+      "reference_scope": "same_trial_same_finger",
+      "reference_samples": "raw_force[470::40, finger]",
+      "reference_span": "percentile95_minus_percentile5",
+      "fraction_of_reference_span": 0.05,
+      "numerical_relative_tolerance": 1e-06,
+      "degenerate_span": "no_rank_pairs_for_this_trial_finger",
+      "absolute_force_threshold_n": null
+    },
+    "within_window": {
+      "max_pairs_per_finger_per_window": 128,
+      "lag_token_bins": [
+        [
+          5,
+          15
+        ],
+        [
+          16,
+          40
+        ],
+        [
+          41,
+          88
+        ]
+      ],
+      "pair_quotas": [
+        38,
+        52,
+        38
+      ],
+      "bin_weights": [
+        0.3,
+        0.4,
+        0.3
+      ],
+      "replacement": false,
+      "shortage": "use_available_pairs_without_backfill"
+    },
+    "across_windows": {
+      "max_pairs_per_finger_per_group": 128,
+      "min_absolute_time_gap_samples": 200,
+      "replacement": false,
+      "exclude_same_raw_timestamp": true,
+      "require_two_real_windows": true
+    },
+    "train_seed_components": [
+      "seed",
+      "epoch",
+      "trial_key",
+      "window_start_or_group_id",
+      "finger",
+      "pair_kind"
+    ],
+    "validation_seed_components": [
+      "seed",
+      "trial_key",
+      "window_start_or_group_id",
+      "finger",
+      "pair_kind"
+    ]
+  },
+  "objective": {
+    "pair_loss": "logistic_softplus",
+    "temperature": 1.0,
+    "within_window_weight": 0.8,
+    "across_window_weight": 0.2,
+    "absent_component": "renormalize_available_weights",
+    "score_l2_weight": 0.001,
+    "score_l2_scope": "real_window_scores_in_groups_with_any_eligible_pair",
+    "aggregation": "mean_pair_then_lag_bin_then_finger_then_window_then_group",
+    "no_eligible_pair_group": "zero_loss_and_report_coverage",
+    "ddp_reduction": "global_sum_divided_by_global_valid_group_count",
+    "pearson_weight": 0.0,
+    "mae_weight": 0.0,
+    "mape_weight": 0.0,
+    "huber_weight": 0.0
+  },
+  "optimization": {
+    "name": "AdamW",
+    "learning_rate": 0.0001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "epsilon": 1e-08,
+    "weight_decay": 0.0001,
+    "no_weight_decay": [
+      "bias",
+      "normalization_parameters"
+    ],
+    "scheduler": "linear_warmup_then_cosine",
+    "warmup_optimizer_updates": 2000,
+    "minimum_lr_ratio": 0.1,
+    "gradient_clip_norm": 1.0,
+    "loss_precision": "float32"
+  },
+  "execution": {
+    "accelerator": "gpu",
+    "devices": 8,
+    "distributed": "ddp",
+    "precision": "bf16_mixed",
+    "model_parameter_precision": "float32",
+    "groups_per_device_microbatch": 4,
+    "windows_per_device_microbatch": 8,
+    "accumulate_microbatches": 4,
+    "effective_groups_per_update": 128,
+    "effective_window_slots_per_update": 256,
+    "train_workers_per_device": 4,
+    "validation_workers_per_device": 4,
+    "pin_memory": true,
+    "max_open_trials_per_worker": 8,
+    "global_epoch_padding": "zero_weight_dummy_groups_to_effective_batch",
+    "drop_last_real_samples": false,
+    "expected_optimizer_updates_per_epoch": 45321,
+    "max_epochs": 3,
+    "min_epochs_before_early_stop": 1,
+    "max_optimizer_updates": 135963,
+    "gpu_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "auto_launch": true,
+    "overlap_validation_preparation": true,
+    "prepare_test_in_background": true
+  },
+  "evaluation": {
+    "full_validation": true,
+    "fractions_of_each_train_epoch": [
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "native_target_lattice": "same_as_training",
+    "prediction_mode": "independent_4000_sample_reset_windows",
+    "trial_stitch_tail": "keep_tail_timestamps_only_after_last_regular_window_timestamp",
+    "primary_metric": "val_stage_macro_trial_finger_tau_b",
+    "primary_mode": "max",
+    "primary_stage_values": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "constant_target": "undefined_exclude_and_report_count",
+    "constant_prediction_with_nonconstant_target": "zero_for_selection_and_report_actual_nan",
+    "all_undefined_primary_metric": "fail",
+    "secondary_metrics": [
+      "within_window_pair_accuracy",
+      "across_window_pair_accuracy",
+      "pair_logistic_loss",
+      "tau_b_by_stage_hand_finger_subject",
+      "valid_pair_coverage",
+      "score_mean_std_and_abs_max"
+    ],
+    "early_stop_patience_validation_rounds": 4,
+    "early_stop_min_delta": 0.001,
+    "checkpoint_keep": [
+      "best_tau",
+      "last",
+      "each_complete_epoch"
+    ],
+    "validation_changes_weights": false,
+    "run_test_during_development": false,
+    "claim_absolute_force_accuracy": false,
+    "record_corr": true,
+    "record_uncalibrated_mape_diagnostic": true,
+    "diagnostic_mape_min_raw_abs": 0.5,
+    "epoch_metrics_file": "epoch_metrics.csv",
+    "initial_validation": false
+  },
+  "reference_only": true
+}

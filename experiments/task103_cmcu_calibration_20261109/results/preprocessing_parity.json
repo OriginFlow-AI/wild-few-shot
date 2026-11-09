@@ -1,0 +1,9 @@
+{
+  "trial": "ad78177c0c58a0ffd0fe",
+  "samples": 30000,
+  "max_abs_uV": 0.0,
+  "exact_match": true,
+  "source_file": "/data/lr_data/FM_PULSE/src/data_prep/processors/raw_to_training.py",
+  "source_function": "_apply_semg_filter",
+  "params": "50Hz harmonics notch Q30; 4th-order 40-850Hz bandpass; first1000 mean steady-state SOS"
+}

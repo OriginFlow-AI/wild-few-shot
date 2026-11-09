@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "isolated_python": true,
+  "relocated_to_unrelated_directory": true,
+  "original_workspace_required": false,
+  "original_data_required": false,
+  "GPU_used": false,
+  "model_variants_checked": [
+    "best",
+    "last"
+  ],
+  "self_check_status": "PASS",
+  "cli_output_shape": [
+    179,
+    5
+  ],
+  "output_units": "dimensionless_ranking_score"
+}

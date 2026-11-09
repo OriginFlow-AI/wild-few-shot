@@ -1,0 +1,65 @@
+{
+  "model": "AP304",
+  "network_class": "K2RingNetwork",
+  "network_config": {
+    "input_channels": 16,
+    "output_channels": 5,
+    "input_samples": 4000,
+    "left_context": 428,
+    "right_context": 0,
+    "d_model": 304,
+    "num_heads": 8,
+    "dim_feedforward": 1216,
+    "encoder_blocks": 9,
+    "decoder_blocks": 4,
+    "pool_queries": 2,
+    "dropout": 0.1,
+    "temporal_chunk_size": 32,
+    "patch_hidden": 96,
+    "patch_stride": 40,
+    "patch_receptive_fields": [
+      40,
+      128
+    ],
+    "patch_left_paddings": [
+      16,
+      98
+    ],
+    "output_scale": 0.01,
+    "gate_bias": 4.0,
+    "num_position_steps": 500
+  },
+  "parameter_count": 18357945,
+  "state_tensor_count": 245,
+  "state_includes_buffers": true,
+  "encoder_frozen": false,
+  "input_shape": [
+    "B",
+    16,
+    4000
+  ],
+  "output_shape": [
+    "B",
+    5,
+    89
+  ],
+  "input_emg_hz": 2000,
+  "native_within_window_hz": 50,
+  "raw_sample_offsets": [
+    470,
+    3990
+  ],
+  "offset_step": 40,
+  "output_units": "dimensionless_ranking_score",
+  "score_transform": "native.float() / 0.01",
+  "wrapper_state_dict_prefix": "network.",
+  "exported_state_dict_prefix": "",
+  "finger_order": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "little"
+  ],
+  "inference_mode": "independent_2second_reset_window_no_MA7_no_prefix"
+}

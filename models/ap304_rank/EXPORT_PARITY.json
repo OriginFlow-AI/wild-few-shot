@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "variants": {
+    "best": {
+      "state_tensors": 245,
+      "tensor_values_bitwise_equal": true,
+      "cpu_fp32_production_parity": true,
+      "max_abs_score_error": 0.0,
+      "native_points": 179,
+      "time_alignment_exact": true
+    },
+    "last": {
+      "state_tensors": 245,
+      "tensor_values_bitwise_equal": true,
+      "cpu_fp32_production_parity": true,
+      "max_abs_score_error": 0.0,
+      "native_points": 179,
+      "time_alignment_exact": true
+    }
+  },
+  "synthetic_only": true,
+  "source_recordings_read": 0,
+  "precision": "CPU FP32 on both sides",
+  "GPU_BF16_metrics_rerun": false
+}

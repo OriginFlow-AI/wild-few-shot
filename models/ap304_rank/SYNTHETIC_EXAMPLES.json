@@ -1,0 +1,19 @@
+{
+  "seed": 43,
+  "shape": [
+    8010,
+    16
+  ],
+  "sample_rate_hz": 2000,
+  "generation": "normal(0,1)*emg_std + emg_mean; float32",
+  "source_recording": false,
+  "force_ground_truth": false,
+  "expected_window_starts": [
+    0,
+    4000,
+    4010
+  ],
+  "expected_output_points": 179,
+  "first_sample": 470,
+  "last_sample": 8000
+}

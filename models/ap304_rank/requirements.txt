@@ -1,0 +1,4 @@
+# Inference and self-check. Tested environment recorded in SELF_CHECK.json.
+# Install a PyTorch build matching your platform; no automatic CUDA install.
+numpy
+torch

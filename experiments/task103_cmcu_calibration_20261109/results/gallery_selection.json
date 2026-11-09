@@ -1,0 +1,56 @@
+[
+  {
+    "date": "2026-11-07",
+    "subject": "zjy07124625",
+    "trial": "2fa8cc629c0511a5402c",
+    "target": "right_middle",
+    "selection": "largest_improvement",
+    "delta_N": -24.462125693575057,
+    "file": "figures/2026-11-07_largest_improvement.png"
+  },
+  {
+    "date": "2026-11-07",
+    "subject": "fyn03154426",
+    "trial": "c8a2cb16dde5978438c5",
+    "target": "left_middle",
+    "selection": "median_effect",
+    "delta_N": -2.598406677016003,
+    "file": "figures/2026-11-07_median_effect.png"
+  },
+  {
+    "date": "2026-11-07",
+    "subject": "zjy07124625",
+    "trial": "c1a9cc3bfc024747fe06",
+    "target": "left_middle",
+    "selection": "largest_degradation",
+    "delta_N": 4.683339815211722,
+    "file": "figures/2026-11-07_largest_degradation.png"
+  },
+  {
+    "date": "2026-11-09",
+    "subject": "tjt06064732",
+    "trial": "ff813d804265b9325f04",
+    "target": "right_little",
+    "selection": "largest_improvement",
+    "delta_N": -37.48824451983872,
+    "file": "figures/2026-11-09_largest_improvement.png"
+  },
+  {
+    "date": "2026-11-09",
+    "subject": "xbq02174720",
+    "trial": "8415d0f76e27508e453e",
+    "target": "left_ring",
+    "selection": "median_effect",
+    "delta_N": -1.5041159255827958,
+    "file": "figures/2026-11-09_median_effect.png"
+  },
+  {
+    "date": "2026-11-09",
+    "subject": "wy11274712",
+    "trial": "d4122ca01a198793a9db",
+    "target": "right_middle",
+    "selection": "largest_degradation",
+    "delta_N": 6.916028199611582,
+    "file": "figures/2026-11-09_largest_degradation.png"
+  }
+]

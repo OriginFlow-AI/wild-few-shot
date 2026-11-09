@@ -1,0 +1,35 @@
+{
+  "default": "best",
+  "source_run": "ap304_full_raw_rank_seed43_20261027",
+  "scope": "completed initial full-raw ranking training; continuation not included",
+  "weights": {
+    "best": {
+      "file": "ap304_rank_best_model_state_dict.pt",
+      "sha256": "f6dfe88f7e25d5be934ee0b065ae76d94aa89edc88340164244ecd149fa89928",
+      "source_checkpoint": "runs/ap304_full_raw_rank_seed43_20261027/checkpoints/best_tau.pt",
+      "source_checkpoint_sha256": "85445c11c7b20764ddb04bbf7e4baedfb6ff269ac0c3ff608b84e6e7be15d22a",
+      "global_update": 67982,
+      "human_epoch": 2,
+      "epoch_fraction": 0.5000110324132301,
+      "state_tensors": 245,
+      "parameter_count": 18357945,
+      "optimizer_exported": false,
+      "rng_exported": false,
+      "output_units": "dimensionless_ranking_score"
+    },
+    "last": {
+      "file": "ap304_rank_last_model_state_dict.pt",
+      "sha256": "ea51ea4ba902ee6887c1156c56f09e29c4a4cac991baccae4d0ce3659b638447",
+      "source_checkpoint": "runs/ap304_full_raw_rank_seed43_20261027/checkpoints/last.pt",
+      "source_checkpoint_sha256": "08fb14d0eb21e4f8d17e0351d71d4d39ade42857df3a9e10ccfb5024f86ef945",
+      "global_update": 113303,
+      "human_epoch": 3,
+      "epoch_fraction": 0.5000110324132301,
+      "state_tensors": 245,
+      "parameter_count": 18357945,
+      "optimizer_exported": false,
+      "rng_exported": false,
+      "output_units": "dimensionless_ranking_score"
+    }
+  }
+}
