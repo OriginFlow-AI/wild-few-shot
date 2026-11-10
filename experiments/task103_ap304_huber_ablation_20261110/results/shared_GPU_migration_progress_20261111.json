@@ -1,0 +1,44 @@
+{
+  "status": "PASS_REAL_SAME_PROTOCOL_GPU_MIGRATION_AND_PROGRESS",
+  "observed_unix": 1794334730.6899743,
+  "migration_archive": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/archive/gpu_migrations/20261110T181556Z",
+  "branches": {
+    "raw_original": {
+      "new_PID": 3493898,
+      "actual_GPU_uuid": "GPU-9df7ed40-b904-5368-4465-d9b01045d895",
+      "new_GPU_index": 1,
+      "resume_global_update": 2825,
+      "first_resumed_global_update": 2826,
+      "verified_latest_saved_global_update": 2875,
+      "observed_new_updates": 60,
+      "unsaved_updates_replayed": 11,
+      "before_windows_per_second": 49.44518045370605,
+      "after_last20_windows_per_second": 93.28276532345762,
+      "exact_archived_resume_sha256": "c84851b5eeef1670bc9244d57528dccaa1f3d1432e1b65703df0c46385bda53d",
+      "binding_unchanged": true,
+      "all_parameters_finite": true,
+      "all_Adam_steps_equal_global_update": true
+    },
+    "calibrated_huber": {
+      "new_PID": 3493899,
+      "actual_GPU_uuid": "GPU-2ef1ea90-b4b3-783e-e482-fe1c6f8b4fc7",
+      "new_GPU_index": 2,
+      "resume_global_update": 3975,
+      "first_resumed_global_update": 3976,
+      "verified_latest_saved_global_update": 4025,
+      "observed_new_updates": 59,
+      "unsaved_updates_replayed": 16,
+      "before_windows_per_second": 46.7814029120803,
+      "after_last20_windows_per_second": 91.68864138808455,
+      "exact_archived_resume_sha256": "4430b378fd8a078396ff09883fa39fb2345b59d3f0a7ce4fee5dd1d2014d354b",
+      "binding_unchanged": true,
+      "all_parameters_finite": true,
+      "all_Adam_steps_equal_global_update": true
+    }
+  },
+  "raw_huber_PID_unchanged": true,
+  "controller_adopted_all_three_verified_PIDs": true,
+  "dataset_sha256": "4676f20b9fc0faae28032f401ddd9627262ff47da2ae170c39a440459a571219",
+  "training_algorithm_or_scoring_changed": false,
+  "test_metrics_read": false
+}

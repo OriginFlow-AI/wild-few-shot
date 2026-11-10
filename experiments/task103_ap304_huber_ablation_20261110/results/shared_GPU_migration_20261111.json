@@ -1,0 +1,212 @@
+{
+  "status": "LAUNCHED_FROM_EXACT_RESUME_AWAITING_PROGRESS",
+  "jobs": {
+    "raw_original": {
+      "old_receipt": {
+        "pid": 2795687,
+        "command": [
+          "/data/lr_data/force/contact/visualize/.venv/bin/python",
+          "-B",
+          "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/code/scripts/train.py",
+          "--root",
+          "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110",
+          "--branch",
+          "raw_original"
+        ],
+        "GPU": {
+          "index": 7,
+          "uuid": "GPU-bf699991-e975-69ca-5c04-4d494f240633",
+          "total_MiB": 143771,
+          "free_MiB": 21525,
+          "utilization": 100,
+          "minimum_free_MiB": 21525,
+          "mean_utilization": 100.0,
+          "process_memory_limit_GiB": 12,
+          "score": 15125.0
+        },
+        "smoke": false,
+        "log_offset": 0
+      },
+      "before_status": {
+        "phase": "training",
+        "branch": "raw_original",
+        "epoch": 2,
+        "epoch_update": 176,
+        "updates_per_epoch": 2660,
+        "global_update": 2836,
+        "loss": 0.4337499509228272,
+        "valid_points": 94082,
+        "gradient_norm": 0.678091287612915,
+        "microbatch": 16,
+        "peak_allocated_GiB": 7.169511795043945,
+        "elapsed_epoch_s": 912.9791273209266
+      },
+      "resume_sha256": "c84851b5eeef1670bc9244d57528dccaa1f3d1432e1b65703df0c46385bda53d",
+      "resume_state": {
+        "epoch": 1,
+        "next_update": 165,
+        "global_update": 2825,
+        "best": 1.315550807049214,
+        "early_reference": 1.315550807049214,
+        "bad_epochs": 0,
+        "history": [
+          {
+            "epoch": 1,
+            "val_loss": 1.315550807049214,
+            "global_update": 2660
+          }
+        ]
+      },
+      "unsaved_updates_replayed": 11,
+      "target_GPU": {
+        "index": 1,
+        "uuid": "GPU-9df7ed40-b904-5368-4465-d9b01045d895",
+        "total_MiB": 143771,
+        "free_MiB": 111773,
+        "utilization": 23,
+        "minimum_free_MiB": 111773,
+        "mean_utilization": 29.666666666666668,
+        "process_memory_limit_GiB": 32,
+        "selection": "three fresh low-utilization/headroom samples"
+      },
+      "new_receipt": {
+        "pid": 3493898,
+        "command": [
+          "/data/lr_data/force/contact/visualize/.venv/bin/python",
+          "-B",
+          "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/code/scripts/train.py",
+          "--root",
+          "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110",
+          "--branch",
+          "raw_original"
+        ],
+        "GPU": {
+          "index": 1,
+          "uuid": "GPU-9df7ed40-b904-5368-4465-d9b01045d895",
+          "total_MiB": 143771,
+          "free_MiB": 111773,
+          "utilization": 23,
+          "minimum_free_MiB": 111773,
+          "mean_utilization": 29.666666666666668,
+          "process_memory_limit_GiB": 32,
+          "selection": "three fresh low-utilization/headroom samples"
+        },
+        "smoke": false,
+        "log_offset": 0,
+        "migration_archive": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/archive/gpu_migrations/20261110T181556Z"
+      }
+    },
+    "calibrated_huber": {
+      "old_receipt": {
+        "pid": 2795243,
+        "command": [
+          "/data/lr_data/force/contact/visualize/.venv/bin/python",
+          "-B",
+          "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/code/scripts/train.py",
+          "--root",
+          "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110",
+          "--branch",
+          "calibrated_huber"
+        ],
+        "GPU": {
+          "index": 6,
+          "uuid": "GPU-63b0e9e5-ec55-d328-a9e4-ba3eb5de54fb",
+          "total_MiB": 143771,
+          "free_MiB": 29739,
+          "utilization": 100,
+          "minimum_free_MiB": 29739,
+          "mean_utilization": 100.0,
+          "process_memory_limit_GiB": 20,
+          "score": 23339.0
+        },
+        "smoke": false,
+        "log_offset": 0
+      },
+      "before_status": {
+        "phase": "training",
+        "branch": "calibrated_huber",
+        "epoch": 2,
+        "epoch_update": 1331,
+        "updates_per_epoch": 2660,
+        "global_update": 3991,
+        "loss": 0.4153799661331412,
+        "valid_points": 95533,
+        "gradient_norm": 0.48819786310195923,
+        "microbatch": 16,
+        "peak_allocated_GiB": 7.169511795043945,
+        "elapsed_epoch_s": 8000.268274759874
+      },
+      "resume_sha256": "4430b378fd8a078396ff09883fa39fb2345b59d3f0a7ce4fee5dd1d2014d354b",
+      "resume_state": {
+        "epoch": 1,
+        "next_update": 1315,
+        "global_update": 3975,
+        "best": 7.375427957466372,
+        "early_reference": 7.375427957466372,
+        "bad_epochs": 0,
+        "history": [
+          {
+            "epoch": 1,
+            "val_loss": 7.375427957466372,
+            "global_update": 2660
+          }
+        ]
+      },
+      "unsaved_updates_replayed": 16,
+      "target_GPU": {
+        "index": 2,
+        "uuid": "GPU-2ef1ea90-b4b3-783e-e482-fe1c6f8b4fc7",
+        "total_MiB": 143771,
+        "free_MiB": 111771,
+        "utilization": 49,
+        "minimum_free_MiB": 111771,
+        "mean_utilization": 47.0,
+        "process_memory_limit_GiB": 32,
+        "selection": "three fresh low-utilization/headroom samples"
+      },
+      "new_receipt": {
+        "pid": 3493899,
+        "command": [
+          "/data/lr_data/force/contact/visualize/.venv/bin/python",
+          "-B",
+          "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/code/scripts/train.py",
+          "--root",
+          "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110",
+          "--branch",
+          "calibrated_huber"
+        ],
+        "GPU": {
+          "index": 2,
+          "uuid": "GPU-2ef1ea90-b4b3-783e-e482-fe1c6f8b4fc7",
+          "total_MiB": 143771,
+          "free_MiB": 111771,
+          "utilization": 49,
+          "minimum_free_MiB": 111771,
+          "mean_utilization": 47.0,
+          "process_memory_limit_GiB": 32,
+          "selection": "three fresh low-utilization/headroom samples"
+        },
+        "smoke": false,
+        "log_offset": 0,
+        "migration_archive": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/archive/gpu_migrations/20261110T181556Z"
+      }
+    }
+  },
+  "launcher": {
+    "pid": 3493900,
+    "command": [
+      "/data/lr_data/force/contact/visualize/.venv/bin/python",
+      "-B",
+      "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/code/scripts/pipeline.py",
+      "--root",
+      "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110",
+      "--workers",
+      "32"
+    ],
+    "tmp_directory": "/pub_data/zjl/.t103h_4e3bd68a",
+    "migration_archive": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/archive/gpu_migrations/20261110T181556Z"
+  },
+  "data_or_training_algorithm_changed": false,
+  "third_branch_restarted": false,
+  "epoch_archiver_restarted": false
+}
