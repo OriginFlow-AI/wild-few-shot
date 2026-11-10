@@ -7,7 +7,7 @@
   "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
   "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
   "gpu_memory_limit_GiB": 32,
-  "gpu_free_reserve_GiB": 8,
+  "gpu_free_reserve_GiB": 4,
   "gpu_selection": "three observations; prioritize free memory, then utilization; shared GPU authorized",
   "concurrent_training_branches": 3,
   "microbatch": "16 frozen for all branches after real-data 8/16/32/64 benchmark; three-GPU makespan priority",
@@ -60,7 +60,7 @@
   "force_label_preprocessing": "native CMCU/BSQ units and timestamps; no extra force lowpass, MA7, clipping or post-hoc time shifting",
   "calibration": "first eligible complete test5 press per finger; in-domain monotone PAVA; no future source, no fallback",
   "scoring": "test5 scoring presses exclude all calibration fit points; test7 nonthumb routing; common calibrated-domain/finite mask across experiments",
-  "gpu_memory_policy": "per-process ceiling=min(32 GiB, round_down_to_4GiB(observed_free_GiB-8GiB external reserve-2GiB CUDA overhead))",
+  "gpu_memory_policy": "per-process ceiling=min(32 GiB, round_down_to_4GiB(observed_free_GiB-4GiB external reserve-2GiB CUDA overhead))",
   "common_microbatch": 16,
   "target_deadline_Asia_Shanghai": "2026-11-11T08:00:00+08:00",
   "deadline_policy": "best effort; preserve max10 epochs/patience3 and complete evaluation; never fake completion or cut budget to meet wall clock"

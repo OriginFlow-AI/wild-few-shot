@@ -1,0 +1,42 @@
+{
+  "status": "CAPACITY_SNAPSHOT_NOT_A_RESERVATION",
+  "currently_schedulable_separate_GPUs": [
+    {
+      "index": 0,
+      "uuid": "GPU-22405d43-a60f-6aec-2735-5b39deeef0cd",
+      "total_MiB": 143771,
+      "free_MiB": 17404,
+      "utilization": 51,
+      "minimum_free_MiB": 17404,
+      "mean_utilization": 75.0,
+      "process_memory_limit_GiB": 8,
+      "score": 12604.0
+    },
+    {
+      "index": 7,
+      "uuid": "GPU-bf699991-e975-69ca-5c04-4d494f240633",
+      "total_MiB": 143771,
+      "free_MiB": 18551,
+      "utilization": 100,
+      "minimum_free_MiB": 18551,
+      "mean_utilization": 88.33333333333333,
+      "process_memory_limit_GiB": 12,
+      "score": 12897.666666666668
+    },
+    {
+      "index": 6,
+      "uuid": "GPU-63b0e9e5-ec55-d328-a9e4-ba3eb5de54fb",
+      "total_MiB": 143771,
+      "free_MiB": 17351,
+      "utilization": 97,
+      "minimum_free_MiB": 17351,
+      "mean_utilization": 99.0,
+      "process_memory_limit_GiB": 8,
+      "score": 11015.0
+    }
+  ],
+  "common_microbatch": 16,
+  "external_reserve_GiB": 4,
+  "CUDA_overhead_reserve_GiB": 2,
+  "target_deadline_Asia_Shanghai": "2026-11-11T08:00:00+08:00"
+}
