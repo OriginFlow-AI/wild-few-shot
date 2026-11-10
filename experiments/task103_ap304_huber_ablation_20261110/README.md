@@ -95,3 +95,5 @@ raw_original第1轮完整Val覆盖全部983条记录，trial-equal原始loss=1.3
 03:27前，两路Huber均完成第2轮全部983条Val并进入第3轮：calibrated_huber的trial-equal目标loss为6.704771246797424（第1轮7.375427957466372），raw_huber为10.842374263981393（第1轮11.25892579844423）。两路第2轮best均为global update5320、bad_epochs=0。`analysis/audit_selected_validation.py`验证真实第2轮候选与新best的model/Adam/CPU-CUDA RNG逐项相等、Adam step与global update一致、参数有限、实际数据/配置/源码绑定不变，以及完整Val记录和计分点数一致。逐记录结果与审计在`results/validation/*_epoch002_val.json`和`results/*_epoch002_Val_and_state_audit.json`；仍未读取最终Test指标。
 
 迁移后约93–96窗/秒，单轮约2小时。两路第2轮仍刷新best，依patience3至少还需3轮才可能早停；按03:27的实测吞吐，08:00前完成全部训练及最终评测已不现实。保留既定训练政策并继续完成；资源有实质改善时再更新估计。
+
+04:15，raw_original也完成第2轮全部983条Val，原始目标loss为1.2639655736797213（第1轮1.315550807049214），保存global update5320的新best、bad_epochs=0并进入第3轮。`results/raw_original_epoch002_Val_and_state_audit.json`验证真实轮末候选与新best的model/Adam/CPU-CUDA RNG逐项相等，Adam step与global update一致、参数有限、完整Val记录和计分点数一致、实际数据/配置/源码绑定不变。逐记录指标在`results/validation/raw_original_epoch002_val.json`。三套第2轮best均已验收；最终Test仍待正常训练结束，不以这些不同目标的Val loss推断标定收益。

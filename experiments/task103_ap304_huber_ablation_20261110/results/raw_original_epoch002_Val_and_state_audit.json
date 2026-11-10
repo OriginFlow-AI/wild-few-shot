@@ -1,0 +1,33 @@
+{
+  "status": "PASS_REAL_COMPLETE_VAL_NEW_BEST_AND_STATE_PRESERVATION",
+  "branch": "raw_original",
+  "epoch": 2,
+  "global_update": 5320,
+  "Val_recordings": 983,
+  "prepared_Val_record_set_exactly_covered": true,
+  "trial_equal_validation_loss": 1.2639655736797213,
+  "objective": "(1-Corr)+0.3*MAPE+0.03*MAE",
+  "selected_best_epoch": 2,
+  "selected_best_sha256": "f6c336ca094a160f2201278e7135dff3227099513c6f623261e3db3e35b32f80",
+  "pre_Val_candidate_sha256": "a693982c59aaaf2e974a40db7670461b36b310af8b822db0f1cd71bb959e2774",
+  "model_optimizer_CPU_CUDA_RNG_unchanged_by_full_Val": true,
+  "all_three_first_Val_record_sets_and_target_point_counts_identical": true,
+  "Adam_steps_match_global_update": true,
+  "all_model_tensors_finite": true,
+  "validation_history": [
+    {
+      "epoch": 1,
+      "val_loss": 1.315550807049214,
+      "global_update": 2660
+    },
+    {
+      "epoch": 2,
+      "val_loss": 1.2639655736797213,
+      "global_update": 5320
+    }
+  ],
+  "bad_epochs": 0,
+  "dataset_sha256": "4676f20b9fc0faae28032f401ddd9627262ff47da2ae170c39a440459a571219",
+  "test_metrics_read": false,
+  "scoring_source_policy": "self_test5_nearest_test5_for_other_stages_v1"
+}
