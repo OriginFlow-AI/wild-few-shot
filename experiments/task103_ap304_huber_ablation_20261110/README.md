@@ -25,13 +25,13 @@
 
 ### 完整标定与评估范围
 
-每条test5每指的**全部完整、可明确路由的按压**都用于拟合该次标定。普通stage使用最近整次test5；目标test5自身计分时强制排除自身，使用另一条最近test5的曲线。三个模型从未把test5的EMG窗口放进Train。
+每条test5每指的**全部完整、可明确路由的按压**都用于拟合该次标定。普通stage使用最近整次test5；目标test5自身计分时强制排除自身，使用另一条最近test5的曲线。本轮三套二阶段训练都未把test5的EMG窗口放进Train。
 
 这里的BSQ是提供给离线个体标定的输入：某条test5虽然被分配为神经网络Val/Test，其BSQ仍可用于为其他记录生成标定CMCU标签。因此不能声称BSQ真值完全未参与过标定，也不等于跨人或未见标定数据泛化。第2/3/4组是在这个共同的现场标定数据条件下，用相同BSQ计分点比较。
 
 最初实现额外采用“首压拟合、其余计分”和“只取前次”，已在正式训练前纠正。首压方案会压缩部分高力和AD范围：与完整test5比较，16,274个共同通道中3,623个参考力上界增加超过1N，5,351个AD上界扩大。原有方案和清单保留在服务器`archive/first_press_prior_only`，不混入当前实验结果。
 
-逐指标定使用median-per-AD + count-weighted PAVA，只在标定AD域内预测，不夹端点、不域外外推。每指需至少20个有效点、8个不同AD、AD跨度100、Spearman>=0.2、拟合力跨度>=1N。规则固定，不按神经网络Test误差挑选或剔除。
+逐指标定使用median-per-AD + count-weighted PAVA，只在标定AD域内预测，不夹端点、不域外外推。每指需至少20个有效点、8个不同AD、AD跨度100、Spearman>=0.2、拟合力跨度>=1N；另屏蔽源拟合残差P90同时>10N且>拟合力范围50%的明显不一致指通道。规则固定，不按神经网络Test误差挑选或剔除。
 
 缺少指、域外点、弱/歧义手指身份、时钟异常、BSQ异常和缺帧分别记录与屏蔽；不把缺缓存直接判成硬件故障。原有严重异常及待复核案例见 `manifests/cached_calibration_review_flags.csv`；新运行的完整依据为 `checks/calibration_quality.json`、`prepared/dataset.json` 中的exclusions。
 
@@ -89,4 +89,8 @@ python "$EXP/scripts/pipeline.py" --root "$ROOT" --workers 8
 
 完整模型/Adam/RNG的真实Train断点往返验证见`results/checkpoint_roundtrip.json`；报告生成和不等计分点拒绝检查见`results/report_software_test.json`。无活动点的诊断MAPE记为null并报告有效人数；训练/选模的原loss仍沿用MAPE=0的有限约定。
 
-完整test5 v2协议的三种目标均通过256窗真实Train梯度累积更新；`results/protocol_v2_val_forward.json`还验证了v2试跑子集的完整Val前向及原生BSQ对齐，未读取Test指标。`results/allocator8_real_smoke.json`验证micro16在8GiB allocator下可完成一次256窗更新；正式运行仍按实时空闲显存动态给予8–32GiB预算，8GiB不是固定上限。早期首压/前次方案的检查仅归档于`results/archive/first_press_prior_only`。`manifests/inventory_summary.json`中旧路由计数也是元数据审计快照，不代替当前`plan.json`。
+完整test5协议的三种目标均通过256窗真实Train梯度累积更新；v2试跑子集的完整Val前向及原生BSQ对齐检查保留在`results/archive/whole_test5_v2_pre_gross_qc/protocol_v2_val_forward.json`，未读取Test指标。`results/allocator8_real_smoke.json`验证micro16在8GiB allocator下可完成一次256窗更新；正式运行仍按实时空闲显存动态给予8–32GiB预算，8GiB不是固定上限。早期首压/前次方案的检查仅归档于`results/archive/first_press_prior_only`。`manifests/inventory_summary.json`中旧路由计数也是元数据审计快照，不代替当前`plan.json`。
+
+正式训练前的源曲线残差复核识别88个明显失配指通道：相近AD对应相差数十N的BSQ。最终v3协议逐指屏蔽上述严重残差，同时保留其他合格指。该规则仅使用提供的标定输入，未读取神经网络Test误差；较轻复核标记不改变mask。v2诊断和示例保留于`results/archive/whole_test5_v2_pre_gross_qc`，不可当作最终v3覆盖统计。
+
+最终v3保留16,307条可拟合指曲线；1,966条test5至少有一个可用指，1,124条为部分指可用。源拟合残差复核仍给4,040条较轻可疑曲线加标记，详见`results/accepted_calibration_diagnostics.csv`；这类标记不自动剔除，也不代表独立精度验证。`results/protocol_v3_val_forward.json`和三个`*_real_GPU_smoke.json`记录最终协议试跑检查。`analysis/export_models.py`在三套最终评测及同点核对完成后导出纯state_dict与推理归一化参数，不上传Adam/RNG大断点。

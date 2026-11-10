@@ -200,5 +200,5 @@
     "No model trained, no data copied to .1, no filter applied by this audit."
   ],
   "audit_stage": "Archived metadata-only preceding-source audit; inventory counts remain valid, route_status_by_stage is not the final routing policy",
-  "current_protocol_note": "Final whole-test5-absolute-nearest-v2 plan uses the nearest other test5 before or after, with all eligible complete presses. Test5 BSQ is provided offline calibration input for other recordings; it is not an untouched-BSQ benchmark. Runtime plan.json and prepared/dataset.json are authoritative for routing and coverage."
+  "current_protocol_note": "Final whole-test5-absolute-nearest-v3-gross-fit-qc plan uses the nearest other test5 before or after, with all eligible complete presses. Test5 BSQ is provided offline calibration input for other recordings; it is not an untouched-BSQ benchmark. Runtime plan.json and prepared/dataset.json are authoritative for routing and coverage."
 }

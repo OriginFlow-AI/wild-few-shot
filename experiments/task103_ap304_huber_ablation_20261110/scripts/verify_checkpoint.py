@@ -18,7 +18,9 @@ def main(root):
     torch.cuda.set_per_process_memory_fraction(gpu['process_memory_limit_GiB']*2**30/torch.cuda.get_device_properties(0).total_memory,0)
     torch.manual_seed(43);torch.cuda.manual_seed(43)
     net=network();net.load_state_dict(torch.load(root/'assets/common_stage2_initial_state_dict.pt',map_location='cpu',weights_only=True));net.cuda()
-    c=settings();opt=optimizer(net,c);ds=Windows(root/'real_data_smoke','train','calibrated_huber')
+    c=settings();opt=optimizer(net,c)
+    data_root=root/'protocol_v3_smoke' if (root/'protocol_v3_smoke/prepared/dataset.json').exists() else root
+    ds=Windows(data_root,'train','calibrated_huber')
     batch=[ds[i] for i in range(min(16,len(ds)))];x=torch.from_numpy(np.stack([r[0] for r in batch])).cuda()
     y=torch.from_numpy(np.stack([r[1] for r in batch])).cuda();valid=torch.from_numpy(np.stack([r[2] for r in batch])).cuda()
     norm=ds.data['force_norm']['cal'];mean=torch.tensor(norm['mean'],device='cuda',dtype=torch.float32)[None,:,None]

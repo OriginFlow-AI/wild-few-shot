@@ -4,17 +4,17 @@
     "index": 6,
     "uuid": "GPU-63b0e9e5-ec55-d328-a9e4-ba3eb5de54fb",
     "total_MiB": 143771,
-    "free_MiB": 17351,
+    "free_MiB": 33005,
     "utilization": 100,
-    "minimum_free_MiB": 17351,
+    "minimum_free_MiB": 33005,
     "mean_utilization": 100.0,
-    "process_memory_limit_GiB": 8,
-    "score": 10951.0
+    "process_memory_limit_GiB": 24,
+    "score": 26605.0
   },
   "microbatch": 16,
   "valid_points": 7120,
-  "loss": 0.008074885234236717,
-  "checkpoint_bytes": 220650297,
+  "loss": 0.09911433607339859,
+  "checkpoint_bytes": 220650361,
   "common_initial_model_unchanged": true,
   "Test_metrics_read": false,
   "disposable_checkpoint_deleted": true

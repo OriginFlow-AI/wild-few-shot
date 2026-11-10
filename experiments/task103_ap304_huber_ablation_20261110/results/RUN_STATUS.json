@@ -2,7 +2,7 @@
   "phase": "extracting_ordinary_streams",
   "records": 5714,
   "smoke": false,
-  "snapshot_Asia_Shanghai": "2026-11-10T21:18:10.024574+08:00",
+  "snapshot_Asia_Shanghai": "2026-11-10T21:31:50.185096+08:00",
   "server": "10.20.20.1",
   "run_root": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110",
   "final_results_available": false,
@@ -10,6 +10,6 @@
   "target_deadline_Asia_Shanghai": "2026-11-11T08:00:00+08:00",
   "concurrent_training_branches": 3,
   "common_microbatch": 16,
-  "calibration_version": "whole-test5-absolute-nearest-v2",
+  "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
   "note": "Committed progress snapshot; runtime STATUS.json is authoritative. Deadline is best effort without reducing normal training or evaluation."
 }

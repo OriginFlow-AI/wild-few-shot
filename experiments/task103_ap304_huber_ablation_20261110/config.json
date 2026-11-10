@@ -64,8 +64,9 @@
   "common_microbatch": 16,
   "target_deadline_Asia_Shanghai": "2026-11-11T08:00:00+08:00",
   "deadline_policy": "best effort; preserve max10 epochs/patience3 and complete evaluation; never fake completion or cut budget to meet wall clock",
-  "calibration_version": "whole-test5-absolute-nearest-v2",
+  "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
   "nearest_source": "minimum absolute recording-center time distance, same subject/date/PC/boot; before or after; exclude same recording",
   "evaluation_scope": "Offline calibration-assisted within-person evaluation. Test5 BSQ is provided calibration input to labels for other recordings, not an untouched-BSQ test benchmark.",
-  "microbatch_selection": "16 frozen for all branches after real-data 8/16/32/64 benchmark; three-GPU makespan priority"
+  "microbatch_selection": "16 frozen for all branches after real-data 8/16/32/64 benchmark; three-GPU makespan priority",
+  "gross_calibration_rejection": "source-fit absolute residual P90 >10 N AND >50% fitted force span; calibration-only fixed rule before formal training"
 }

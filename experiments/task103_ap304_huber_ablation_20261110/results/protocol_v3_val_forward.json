@@ -1,0 +1,20 @@
+{
+  "status": "PASS_REAL_VAL_ONLY",
+  "scope": "Complete Val of six-record smoke subset; initial common model, not trained model accuracy",
+  "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
+  "reference_sampling": "native_BSQ_linear_at_token_query_v1",
+  "seconds": 66.49159468105063,
+  "branches": {
+    "calibrated_huber": {
+      "records": 2,
+      "loss": 4.865901029740407,
+      "points": 6497
+    },
+    "raw_huber": {
+      "records": 2,
+      "loss": 10.240807907240134,
+      "points": 6497
+    }
+  },
+  "test_metrics_read": false
+}

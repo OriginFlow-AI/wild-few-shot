@@ -1,6 +1,6 @@
 {
   "calibration_versions": [
-    "whole-test5-absolute-nearest-v2"
+    "whole-test5-absolute-nearest-v3-gross-fit-qc"
   ],
   "records": 2411,
   "statuses": {
@@ -9,9 +9,10 @@
   },
   "test5": 1977,
   "usable_test5": 1966,
-  "accepted_finger_models": 16395,
-  "partial_test5": 1104,
+  "accepted_finger_models": 16307,
+  "partial_test5": 1124,
   "channel_failures": {
+    "gross_source_fit_residual_P90_above_10N_and_half_range": 88,
     "nonpositive_or_weak_calibration_monotonicity": 239,
     "collapsed_calibration_force_range": 2
   },

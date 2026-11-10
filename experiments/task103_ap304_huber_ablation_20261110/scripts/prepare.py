@@ -10,7 +10,7 @@ from scipy.stats import spearmanr
 from common import EXPERIMENT, SIDES, atomic, group, interpolate, load, nearest, sha, windows, source_binding
 from routing import fixed_bsq_zero, route_press_events, routed_labels, runs
 
-CALIBRATION_VERSION='whole-test5-absolute-nearest-v2'
+CALIBRATION_VERSION='whole-test5-absolute-nearest-v3-gross-fit-qc'
 
 def wall_center(row):
     return (datetime.datetime.fromisoformat(row['start'])-datetime.datetime(1970,1,1)).total_seconds()/2 + (datetime.datetime.fromisoformat(row['end'])-datetime.datetime(1970,1,1)).total_seconds()/2
@@ -146,8 +146,11 @@ def prepare_routes(root, rows):
                     xx,yy=fit(x,y)
                     if np.ptp(yy)<1:
                         problems[str(j)]='collapsed_calibration_force_range';continue
+                    residual_p90=float(np.quantile(abs(np.interp(x,xx,yy)-y),.9))
+                    if residual_p90>10 and residual_p90>.5*np.ptp(yy):
+                        problems[str(j)]='gross_source_fit_residual_P90_above_10N_and_half_range';continue
                     models[str(j)]=dict(x=xx.tolist(),y=yy.tolist(),press=presses[0]['event'],presses=[e['event'] for e in presses],points=len(ix),
-                        spearman=rho,AD_min=float(xx[0]),AD_max=float(xx[-1]),reference_max_N=float(y.max()))
+                        spearman=rho,source_fit_p90_N=residual_p90,AD_min=float(xx[0]),AD_max=float(xx[-1]),reference_max_N=float(y.max()))
             score=np.zeros(len(ref),bool)
             for e in events:
                 if e['eligible']:

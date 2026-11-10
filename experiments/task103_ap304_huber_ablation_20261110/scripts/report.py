@@ -41,7 +41,12 @@ def quality_summary(root):
         # Progress files carry counters, final extraction files carry errors.
         a=load(p)
         if isinstance(a.get('errors'),list):extraction_errors.extend(a['errors'])
+    diagnostics=root/'analysis_output/accepted_calibration_diagnostics.json'
+    diagnostics=load(diagnostics) if diagnostics.exists() else None
+    if diagnostics and diagnostics['calibration_version']!=load(root/'plan.json')['calibration_version']:
+        raise ValueError('Stale source calibration diagnostics')
     return dict(selection=selection,channel_QC_failures=dict(problems),record_QC_failures=failures,
+        accepted_curve_review_diagnostics=diagnostics,
         test5_without_any_valid_channel=zero,extraction_errors=extraction_errors,
         dataset_exclusion_reasons=dict(collections.Counter(r['reason'] for r in dataset['exclusions'])),
         partial_test5_records=sum(r['stage']=='mix-test-5' and 0<len(r['channels'])<10 for r in quality),
@@ -50,6 +55,7 @@ def quality_summary(root):
             '最大AD不一定是受测指，test7的支撑拇指尤其容易抢占；歧义指身份应屏蔽。',
             'BSQ零点应固定在姿态稳定空载段；整段均值、翻转前首秒都可能引入系统偏差。',
             '没有完整按压、AD变化不足、单调性弱和拟合力范围坍缩分别记录；缺指不等于整条硬件损坏。',
+            '同一AD下参考力明显不一致时，单调相关也可能通过。源拟合残差P90同时超过10N和拟合力范围50%的指通道已屏蔽；较轻残差复核仅作标记，通过基础规则不等于独立精度合格。',
             '单调拟合不能解决饱和、迟滞、佩戴变化或域外数据。域外点必须计入覆盖限制，不能静默夹端点。',
             '目标test5计分使用另一条记录的曲线，不用同条自拟合误差冒充独立精度；本方案允许现场BSQ作为其他记录的标定输入，不是BSQ完全未参与过标定的评估。',
             '不按模型Test误差挑源或改剔除阈值；最近源失效不静默回退。'])
@@ -152,7 +158,9 @@ def main(root):
         +html.escape(json.dumps(quality['selection'],ensure_ascii=False,indent=2))+'</pre>'
         '<h2>标定检查经验</h2><ul>'+experiences+'</ul><pre>'
         +html.escape(json.dumps({k:v for k,v in quality.items() if k in ['channel_QC_failures','dataset_exclusion_reasons','partial_test5_records']},ensure_ascii=False,indent=2))
-        +'</pre><p>完整统计见 FINAL_REPORT.json、by_stage.csv、by_finger.csv、by_force_band.csv 和 paired_person_differences.csv。未用Test反向挑选曲线或调整阈值。</p></html>')
+        +'</pre><h2>已接受源曲线的残差复核</h2><pre>'
+        +html.escape(json.dumps(quality['accepted_curve_review_diagnostics'],ensure_ascii=False,indent=2))
+        +'</pre><p>源拟合残差不是独立精度；复核标记不改变训练mask。完整统计见 FINAL_REPORT.json、by_stage.csv、by_finger.csv、by_force_band.csv 和 paired_person_differences.csv。未用神经网络Test误差反向挑选曲线或调整阈值。</p></html>')
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--root',required=True);main(p.parse_args().root)

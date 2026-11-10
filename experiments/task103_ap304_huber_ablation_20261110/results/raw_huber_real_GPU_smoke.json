@@ -10,9 +10,9 @@
   "gradient_norm": 1.3949353694915771,
   "microbatch": 16,
   "peak_allocated_GiB": 7.024379730224609,
-  "elapsed_epoch_s": 5.674320622347295,
+  "elapsed_epoch_s": 3.776005649007857,
   "test_metrics_read": false,
-  "calibration_version": "whole-test5-absolute-nearest-v2",
+  "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
   "smoke_windows": 256,
   "scope": "real Train-only optimizer update, not final model accuracy"
 }
