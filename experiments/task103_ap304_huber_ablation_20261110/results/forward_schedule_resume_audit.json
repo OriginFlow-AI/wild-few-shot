@@ -1,0 +1,53 @@
+{
+  "status": "PASS_REAL_PREFIX_RESUME_BEFORE_COMMON_EPOCH4_SWITCH",
+  "observed_unix": 1794343842.447682,
+  "branches": [
+    {
+      "branch": "calibrated_huber",
+      "PID": 63213,
+      "resume_global_update": 7225,
+      "first_actual_resume_update": 7226,
+      "verified_saved_global_update": 7300,
+      "actual_logical_loss_group": 16,
+      "actual_physical_forward": 16,
+      "all_Adam_steps_match_global_update": true,
+      "history_and_best_prefix_unchanged": true,
+      "all_parameters_and_logged_loss_gradient_finite": true,
+      "CUDA_RNG_seed_preserved": true,
+      "CUDA_RNG_advance_matches_original_physical16_exactly": true
+    },
+    {
+      "branch": "raw_huber",
+      "PID": 63214,
+      "resume_global_update": 7050,
+      "first_actual_resume_update": 7051,
+      "verified_saved_global_update": 7125,
+      "actual_logical_loss_group": 16,
+      "actual_physical_forward": 16,
+      "all_Adam_steps_match_global_update": true,
+      "history_and_best_prefix_unchanged": true,
+      "all_parameters_and_logged_loss_gradient_finite": true,
+      "CUDA_RNG_seed_preserved": true,
+      "CUDA_RNG_advance_matches_original_physical16_exactly": true
+    },
+    {
+      "branch": "raw_original",
+      "PID": 63215,
+      "resume_global_update": 5975,
+      "first_actual_resume_update": 5976,
+      "verified_saved_global_update": 6050,
+      "actual_logical_loss_group": 16,
+      "actual_physical_forward": 16,
+      "all_Adam_steps_match_global_update": true,
+      "history_and_best_prefix_unchanged": true,
+      "all_parameters_and_logged_loss_gradient_finite": true,
+      "CUDA_RNG_seed_preserved": true,
+      "CUDA_RNG_advance_matches_original_physical16_exactly": true
+    }
+  ],
+  "common_first_compute64_optimizer_update": 7981,
+  "original_physical16_full256_CUDA_RNG_increment": 66091328,
+  "data_and_all_splits_labels_norm_indices_unchanged": true,
+  "source_binding_verified": true,
+  "test_metrics_read": false
+}

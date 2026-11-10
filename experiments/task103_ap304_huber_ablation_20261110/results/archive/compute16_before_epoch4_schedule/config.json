@@ -1,0 +1,73 @@
+{
+  "schema": "task103-ap304-four-way-v1",
+  "seed": 43,
+  "model": "AP304 width304 encoder9 decoder4",
+  "stage1_export_sha256": "f6dfe88f7e25d5be934ee0b065ae76d94aa89edc88340164244ecd149fa89928",
+  "common_initial_sha256": "f1fb53b6abeaecbabfea746a27a6cc41a831c5153a902f67a031aab394c8675b",
+  "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+  "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+  "gpu_memory_limit_GiB": 32,
+  "gpu_free_reserve_GiB": 4,
+  "gpu_selection": "three observations; prioritize free memory, then utilization; shared GPU authorized",
+  "concurrent_training_branches": 3,
+  "microbatch": 16,
+  "global_batch": 256,
+  "train_workers": 2,
+  "max_epochs": 10,
+  "patience": 3,
+  "min_delta": 0.0001,
+  "lr_body": 2e-05,
+  "lr_head": 0.0001,
+  "weight_decay": 0.0001,
+  "warmup_updates": 1000,
+  "scheduler": "cosine to 0.1 peak over 10 epochs",
+  "save_every_updates": 25,
+  "huber_delta_N": 1.0,
+  "objective_domain": "physical N after output denormalization",
+  "train_reduction": "valid-scalar-weighted microbatch objectives, accumulated to 256 windows; Corr is per microbatch",
+  "validation_selection": "complete-trial equal average of branch objective",
+  "experiments": [
+    {
+      "id": 1,
+      "branch": "calibrated_huber",
+      "train_val": "calibrated_CMCU_N",
+      "test": "calibrated_CMCU_N",
+      "loss": "pure_Huber_delta1N"
+    },
+    {
+      "id": 2,
+      "branch": "calibrated_huber",
+      "train_val": "calibrated_CMCU_N",
+      "test": "BSQ_N",
+      "loss": "pure_Huber_delta1N"
+    },
+    {
+      "id": 3,
+      "branch": "raw_huber",
+      "train_val": "original_CMCU_N",
+      "test": "BSQ_N",
+      "loss": "pure_Huber_delta1N"
+    },
+    {
+      "id": 4,
+      "branch": "raw_original",
+      "train_val": "original_CMCU_N",
+      "test": "BSQ_N",
+      "loss": "(1-Corr)+0.3*MAPE+0.03*MAE"
+    }
+  ],
+  "mape_activity": "abs(GT)>=0.5N; fraction in objective",
+  "force_label_preprocessing": "native CMCU/BSQ units and timestamps; no extra force lowpass, MA7, clipping or post-hoc time shifting",
+  "calibration": "all eligible complete presses of nearest whole test5; test5 includes itself, other stages use absolute-nearest test5; in-domain PAVA; no silent bad-source fallback",
+  "scoring": "all eligible target presses; own complete test5 curve for test5, nearest test5 for ordinary stages/test7; common in-domain/finite/sync/EMG-valid mask across experiments",
+  "gpu_memory_policy": "per-process ceiling=min(32 GiB, round_down_to_4GiB(observed_free_GiB-4GiB external reserve-2GiB CUDA overhead))",
+  "common_microbatch": 16,
+  "target_deadline_Asia_Shanghai": "2026-11-11T08:00:00+08:00",
+  "deadline_policy": "best effort; preserve max10 epochs/patience3 and complete evaluation; never fake completion or cut budget to meet wall clock",
+  "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
+  "nearest_source": "test5 itself for test5; otherwise minimum absolute recording-center distance within same subject/date/PC/boot, before or after",
+  "evaluation_scope": "Offline calibration-assisted within-person evaluation. Test5 BSQ is provided input to calibration of itself and other recordings, not an untouched-BSQ test benchmark. Self-fit curve agreement is not independent curve accuracy.",
+  "microbatch_selection": "16 frozen for all branches after real-data 8/16/32/64 benchmark; three-GPU makespan priority",
+  "gross_calibration_rejection": "source-fit absolute residual P90 >10 N AND >50% fitted force span; calibration-only fixed rule before formal training",
+  "scoring_source_policy": "self_test5_nearest_test5_for_other_stages_v1"
+}

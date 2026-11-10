@@ -1,0 +1,150 @@
+{
+  "status": "PASS_REAL_TRAIN_GPU_BENCHMARK",
+  "chosen": {
+    "microbatch": 16,
+    "windows_per_second": 101.4193408873027,
+    "peak_allocated_GiB": 27.18798828125,
+    "physical_forward_schedule": [
+      {
+        "start_global_update": 0,
+        "windows": 16
+      },
+      {
+        "start_global_update": 7980,
+        "windows": 64
+      }
+    ]
+  },
+  "attempts": [
+    {
+      "branch": "calibrated_huber",
+      "microbatch": 8,
+      "peak_allocated_GiB": 3.7244997024536133,
+      "windows_per_second": 63.82711817115085,
+      "step_seconds": [
+        1.0033026947639883,
+        0.12044982379302382,
+        0.13022732501849532
+      ],
+      "loss": 0.008679121732711792
+    },
+    {
+      "branch": "raw_huber",
+      "microbatch": 8,
+      "peak_allocated_GiB": 3.7244997024536133,
+      "windows_per_second": 64.46451607838793,
+      "step_seconds": [
+        0.16094556311145425,
+        0.1261589080095291,
+        0.12203965103253722
+      ],
+      "loss": 0.04292037710547447
+    },
+    {
+      "branch": "raw_original",
+      "microbatch": 8,
+      "peak_allocated_GiB": 3.7244997024536133,
+      "windows_per_second": 61.548623502471045,
+      "step_seconds": [
+        0.1810669838450849,
+        0.12618096685037017,
+        0.13377610594034195
+      ],
+      "loss": 1.1622679233551025
+    },
+    {
+      "branch": "calibrated_huber",
+      "microbatch": 16,
+      "peak_allocated_GiB": 7.1117377281188965,
+      "windows_per_second": 117.40549962197687,
+      "step_seconds": [
+        0.2765623847953975,
+        0.12920317612588406,
+        0.14335645781829953
+      ],
+      "loss": 0.007448666729032993
+    },
+    {
+      "branch": "raw_huber",
+      "microbatch": 16,
+      "peak_allocated_GiB": 7.1117377281188965,
+      "windows_per_second": 105.58407388185672,
+      "step_seconds": [
+        0.19125449564307928,
+        0.14622270688414574,
+        0.15685330471023917
+      ],
+      "loss": 0.039750490337610245
+    },
+    {
+      "branch": "raw_original",
+      "microbatch": 16,
+      "peak_allocated_GiB": 7.1117377281188965,
+      "windows_per_second": 101.4193408873027,
+      "step_seconds": [
+        0.1878585792146623,
+        0.1655475706793368,
+        0.14997410122305155
+      ],
+      "loss": 1.1757932901382446
+    },
+    {
+      "branch": "calibrated_huber",
+      "microbatch": 32,
+      "peak_allocated_GiB": 13.864617824554443,
+      "windows_per_second": 137.4585730715931,
+      "step_seconds": [
+        0.36422621086239815,
+        0.25614111591130495,
+        0.2094537070952356
+      ],
+      "loss": 0.011461892165243626
+    },
+    {
+      "branch": "raw_huber",
+      "microbatch": 32,
+      "peak_allocated_GiB": 13.864617824554443,
+      "windows_per_second": 138.82390629544463,
+      "step_seconds": [
+        0.2672440023161471,
+        0.2117697256617248,
+        0.2492459719069302
+      ],
+      "loss": 0.05035379156470299
+    },
+    {
+      "branch": "raw_original",
+      "microbatch": 32,
+      "peak_allocated_GiB": 13.864617824554443,
+      "windows_per_second": 148.34048519694937,
+      "step_seconds": [
+        0.26072265300899744,
+        0.22278172336518764,
+        0.20865814900025725
+      ],
+      "loss": 1.1121066808700562
+    },
+    {
+      "branch": "calibrated_huber",
+      "microbatch": 64,
+      "status": "OOM"
+    }
+  ],
+  "process_memory_limit_GiB": 24.0,
+  "GPU": "NVIDIA H200",
+  "formal_weights_changed": false,
+  "test_metrics_read": false,
+  "note": "Probe optimizer steps are disposable. All formal branches start from the common initial state. Frozen from a real Train subset before full training.",
+  "benchmark_root": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/real_data_smoke",
+  "fastest_single_GPU_candidate": {
+    "microbatch": 32,
+    "windows_per_second": 137.4585730715931,
+    "peak_allocated_GiB": 13.864617824554443
+  },
+  "selection_reason": "Reserve measured peak for scheduled compute64; logical objective groups16 and global256 fixed",
+  "historical_logical16_chosen": {
+    "microbatch": 16,
+    "windows_per_second": 101.4193408873027,
+    "peak_allocated_GiB": 7.1117377281188965
+  }
+}

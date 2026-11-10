@@ -75,10 +75,12 @@ ROOT=/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110
 EXP=experiments/task103_ap304_huber_ablation_20261110
 python "$EXP/scripts/bootstrap.py" --root "$ROOT"
 python "$EXP/scripts/verify_protocol.py"
+mkdir -p "$ROOT/checks"
+cp "$EXP/results/compute64_capacity_policy.json" "$ROOT/checks/gpu_tuning.json"
 python "$EXP/scripts/pipeline.py" --root "$ROOT" --workers 32
 ```
 
-进度看`STATUS.json`、`runs/<branch>/STATUS.json`、`checks/epoch_archive_status.json`。最终为三个`runs/<branch>/DONE.json`及`results/FINAL_REPORT.json`、四组CSV、逐stage/指/力段/人差异、质量统计、PNG和HTML；未核验这些不能视为完成。
+上面的复现命令使用已验证的H200容量策略，将未来64窗前向的峰值纳入选卡，最低allocator额度28GiB；只依据初始16窗峰值选卡不足以覆盖第4轮后的计算调度。进度看`STATUS.json`、`runs/<branch>/STATUS.json`、`checks/epoch_archive_status.json`。最终为三个`runs/<branch>/DONE.json`及`results/FINAL_REPORT.json`、四组CSV、逐stage/指/力段/人差异、质量统计、PNG和HTML；未核验这些不能视为完成。
 
 目标北京时间2026-11-11 08:00前，属于尽力目标。启动共享负载下三路约94/44/47窗每秒，raw分支单轮约4小时；不因截止时间缩减既定max10/patience3、完整Val或最终Test。Goal保持active直至完整结果与Git上传验收。
 
@@ -98,4 +100,6 @@ raw_original第1轮完整Val覆盖全部983条记录，trial-equal原始loss=1.3
 
 04:15，raw_original也完成第2轮全部983条Val，原始目标loss为1.2639655736797213（第1轮1.315550807049214），保存global update5320的新best、bad_epochs=0并进入第3轮。`results/raw_original_epoch002_Val_and_state_audit.json`验证真实轮末候选与新best的model/Adam/CPU-CUDA RNG逐项相等，Adam step与global update一致、参数有限、完整Val记录和计分点数一致、实际数据/配置/源码绑定不变。逐记录指标在`results/validation/raw_original_epoch002_val.json`。三套第2轮best均已验收；最终Test仍待正常训练结束，不以这些不同目标的Val loss推断标定收益。
 
-更大显存余量下准备共同计算调度：三路都在完成global update7980（第3轮末）后，首次于optimizer update7981改用64窗物理前向，仍分成每16窗计算原目标并累积到256窗。`analysis/bench_forward_grouping.py`使用独立Train探针，在共享GPU0上测得约67.18→97.58窗/秒、峰值27.36GiB；无dropout的BF16分组比较中预测最大差约0.0201N、梯度相对L2差约0.154%。合批改变具体dropout掩码及随机数推进，因此按三路共同更新点切换，不按各自墙钟时刻即时切换。架构、dropout率、loss组、数据、norm、优化器、LR和预算不变，Val/Test计算方式不变。独立候选runtime的三种真实Train GPU smoke均通过（峰值27.19GiB），CPU目标/掩码/来源检查及边界7980/7981检查通过；未读Test指标。正式上线与完整保存前缀证明以`forward_schedule_migration`审计为准。
+更大显存余量下使用共同计算调度：三路都在完成global update7980（第3轮末）后，首次于optimizer update7981改用64窗物理前向，仍分成每16窗计算原目标并累积到256窗。`analysis/bench_forward_grouping.py`使用独立Train探针，在共享GPU0上测得约67.18→97.58窗/秒、峰值27.36GiB；无dropout的BF16分组比较中预测最大差约0.0201N、梯度相对L2差约0.154%。合批改变具体dropout掩码及随机数推进，因此按三路共同更新点切换，不按各自墙钟时刻即时切换。架构、dropout率、loss组、数据、norm、优化器、LR和预算不变，Val/Test计算方式不变。独立候选runtime的三种真实Train GPU smoke均通过（峰值27.19GiB），CPU目标/掩码/来源检查及边界7980/7981检查通过；未读Test指标。
+
+04:46，`analysis/migrate_forward_schedule.py`保存原始last/best、代码、配置和数据清单，只停止经过PID/命令/UID/启动时刻核对的自身进程；新绑定逐项重载证明全部6个checkpoint的model/Adam/游标/history/CPU-CUDA RNG精确保留。三路分别从global update7225/7050/5975续跑，当前第3轮仍用16窗物理前向。`results/forward_schedule_migration.json`记录共同未来调度、所有split的entries/标签哈希/norm/窗口索引完全不变，以及loss/evaluate/optimizer等函数AST不变。`results/forward_schedule_resume_audit.json`核对了真实首个恢复更新、后续已保存更新、有限参数/梯度、Adam step与global update一致、best/history未变，且CUDA RNG推进量与原16窗方式逐位一致。容量选择按候选测得的27.19GiB峰值预留，未来进程至少需要28GiB allocator额度，当前三路上限32GiB。原始产物在服务器`archive/forward_schedule64/20261110T204612Z`，原数据清单/配置在Git的`results/archive/compute16_before_epoch4_schedule`；现数据清单只有源码/配置绑定元数据变化（SHA `fe63d951874c8f89c0300f199a3337ec150fe389535ac9a2ecf8b971812e2db5`）。正式64窗阶段的吞吐与正常评测仍需后续运行核验。

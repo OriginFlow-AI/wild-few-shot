@@ -27,57 +27,60 @@
       "status": {
         "phase": "training",
         "branch": "calibrated_huber",
-        "epoch": 1,
-        "epoch_update": 2643,
+        "epoch": 3,
+        "epoch_update": 1945,
         "updates_per_epoch": 2660,
-        "global_update": 2643,
-        "loss": 0.3593266651029401,
-        "valid_points": 96244,
-        "gradient_norm": 0.29469576478004456,
+        "global_update": 7265,
+        "loss": 0.40741525909666587,
+        "valid_points": 96778,
+        "gradient_norm": 0.5799891352653503,
         "microbatch": 16,
+        "physical_forward_windows": 16,
         "peak_allocated_GiB": 7.169511795043945,
-        "elapsed_epoch_s": 373.63215199206024
+        "elapsed_epoch_s": 116.60649371193722
       },
-      "checkpoint_bytes": 220624278,
-      "contract_sha256": "0f1ad7229732313b4acc979394b50197daae394dc176e57670d3bc45bbab55c7"
+      "checkpoint_bytes": 220624534,
+      "contract_sha256": "9cf1420cbf130fc16bae8b5399ef34fd061edee5312317077041cebd15e6b05a"
     },
     {
       "branch": "raw_huber",
       "status": {
         "phase": "training",
         "branch": "raw_huber",
-        "epoch": 1,
-        "epoch_update": 1412,
+        "epoch": 3,
+        "epoch_update": 1770,
         "updates_per_epoch": 2660,
-        "global_update": 1412,
-        "loss": 0.4626588606643241,
-        "valid_points": 93661,
-        "gradient_norm": 0.3392251431941986,
+        "global_update": 7090,
+        "loss": 0.42075717847528327,
+        "valid_points": 98548,
+        "gradient_norm": 0.7166277766227722,
         "microbatch": 16,
+        "physical_forward_windows": 16,
         "peak_allocated_GiB": 7.169511795043945,
-        "elapsed_epoch_s": 376.05766431009397
+        "elapsed_epoch_s": 115.8162906691432
       },
-      "checkpoint_bytes": 220624278,
-      "contract_sha256": "56be8b8b87f6b938ab852838a64b17e4647c1aafe1560b5e9135729ca876a812"
+      "checkpoint_bytes": 220624534,
+      "contract_sha256": "e5b21a4ea3c52ff16ebbb293999911bdd23de48a1b70f03b5407086d8f8f1a20"
     },
     {
       "branch": "raw_original",
       "status": {
         "phase": "training",
         "branch": "raw_original",
-        "epoch": 1,
-        "epoch_update": 1446,
+        "epoch": 3,
+        "epoch_update": 695,
         "updates_per_epoch": 2660,
-        "global_update": 1446,
-        "loss": 0.5178250792843684,
-        "valid_points": 94899,
-        "gradient_norm": 0.6494162082672119,
+        "global_update": 6015,
+        "loss": 0.42887830486408124,
+        "valid_points": 96822,
+        "gradient_norm": 0.6777521371841431,
         "microbatch": 16,
+        "physical_forward_windows": 16,
         "peak_allocated_GiB": 7.169511795043945,
-        "elapsed_epoch_s": 370.8525555632077
+        "elapsed_epoch_s": 114.19761902093887
       },
-      "checkpoint_bytes": 220624278,
-      "contract_sha256": "6a19471850f3e8ed248004d9ff43fec85e91e2ea223c82a3474f4ff15a49ced9"
+      "checkpoint_bytes": 220624534,
+      "contract_sha256": "553bc09b417c2f6af63c3043d888399697c20846e1ec0e483bb43ad899e1946d"
     }
   ],
   "empty_window_recordings": [

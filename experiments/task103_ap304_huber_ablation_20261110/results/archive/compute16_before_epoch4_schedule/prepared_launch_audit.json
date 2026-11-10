@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "indices": {
+    "train": {
+      "windows": 680815,
+      "recordings": 5702,
+      "sha256": "a57edb1bb3b542b0648dbbdb23761499d217f24cd6a3dae5e97392f7ac626731"
+    },
+    "val": {
+      "windows": 40447,
+      "recordings": 983,
+      "sha256": "f9035e9472c5d4462b40a89ad68663713ad5f9dd4e4b536d2213a3d9ce11a56d"
+    },
+    "test": {
+      "windows": 53421,
+      "recordings": 1406,
+      "sha256": "66f2b4dcdd22bd08dba33d3ec74ba65777d6ff9c5d6e719b35fd525be0b74b5c"
+    }
+  },
+  "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
+  "source_binding_verified": true,
+  "record_splits_disjoint": true,
+  "common_initialization_and_data_verified": true,
+  "branches": [
+    {
+      "branch": "calibrated_huber",
+      "status": {
+        "phase": "training",
+        "branch": "calibrated_huber",
+        "epoch": 1,
+        "epoch_update": 2643,
+        "updates_per_epoch": 2660,
+        "global_update": 2643,
+        "loss": 0.3593266651029401,
+        "valid_points": 96244,
+        "gradient_norm": 0.29469576478004456,
+        "microbatch": 16,
+        "peak_allocated_GiB": 7.169511795043945,
+        "elapsed_epoch_s": 373.63215199206024
+      },
+      "checkpoint_bytes": 220624278,
+      "contract_sha256": "0f1ad7229732313b4acc979394b50197daae394dc176e57670d3bc45bbab55c7"
+    },
+    {
+      "branch": "raw_huber",
+      "status": {
+        "phase": "training",
+        "branch": "raw_huber",
+        "epoch": 1,
+        "epoch_update": 1412,
+        "updates_per_epoch": 2660,
+        "global_update": 1412,
+        "loss": 0.4626588606643241,
+        "valid_points": 93661,
+        "gradient_norm": 0.3392251431941986,
+        "microbatch": 16,
+        "peak_allocated_GiB": 7.169511795043945,
+        "elapsed_epoch_s": 376.05766431009397
+      },
+      "checkpoint_bytes": 220624278,
+      "contract_sha256": "56be8b8b87f6b938ab852838a64b17e4647c1aafe1560b5e9135729ca876a812"
+    },
+    {
+      "branch": "raw_original",
+      "status": {
+        "phase": "training",
+        "branch": "raw_original",
+        "epoch": 1,
+        "epoch_update": 1446,
+        "updates_per_epoch": 2660,
+        "global_update": 1446,
+        "loss": 0.5178250792843684,
+        "valid_points": 94899,
+        "gradient_norm": 0.6494162082672119,
+        "microbatch": 16,
+        "peak_allocated_GiB": 7.169511795043945,
+        "elapsed_epoch_s": 370.8525555632077
+      },
+      "checkpoint_bytes": 220624278,
+      "contract_sha256": "6a19471850f3e8ed248004d9ff43fec85e91e2ea223c82a3474f4ff15a49ced9"
+    }
+  ],
+  "empty_window_recordings": [
+    {
+      "id": "6ff1d3b73734613b0bf4",
+      "subject": "wy10204452",
+      "split": "test",
+      "reason": "no_common_native_force_points",
+      "hands": {
+        "left": {
+          "native_common_force_points": 0,
+          "full_EMG_valid_windows": 60
+        },
+        "right": {
+          "native_common_force_points": 0,
+          "full_EMG_valid_windows": 60
+        }
+      }
+    }
+  ],
+  "exceptions": 86,
+  "empty_window_reason_counts": {
+    "no_common_native_force_points": 1
+  },
+  "note": "Startup/data audit only. Final-model completion and Test accuracy are not claimed. Test5 BSQ is provided offline calibration input to other records, not untouched truth."
+}
