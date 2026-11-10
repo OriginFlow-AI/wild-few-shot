@@ -40,7 +40,7 @@ def main(root):
                 source_fit_bias_N=float(np.mean(error)),review_flags=';'.join(flags)))
     out=root/'analysis_output';out.mkdir(exist_ok=True)
     with (out/'accepted_calibration_diagnostics.csv').open('w',newline='') as f:
-        w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+        w=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');w.writeheader();w.writerows(rows)
     distributions={}
     for key in ['Spearman','fit_range_N','source_fit_MAE_N','source_fit_p90_N','presses']:
         distributions[key]={str(q):float(np.quantile([r[key] for r in rows],q)) for q in [0,.1,.5,.9,.99,1]}

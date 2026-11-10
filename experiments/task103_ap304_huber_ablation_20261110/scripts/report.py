@@ -113,7 +113,7 @@ def main(root):
     for name,rr in [('four_experiments.csv',rows),('paired_person_differences.csv',paired),
                     ('by_stage.csv',by_stage),('by_finger.csv',by_finger),('by_force_band.csv',by_band)]:
         with (out/name).open('w',newline='') as f:
-            w=csv.DictWriter(f,fieldnames=list(rr[0]));w.writeheader();w.writerows(rr)
+            w=csv.DictWriter(f,fieldnames=list(rr[0]),lineterminator='\n');w.writeheader();w.writerows(rr)
     quality=quality_summary(root);atomic(out/'calibration_quality_summary.json',quality)
     sensor_summary={label:aggregate_by_subject(rr) for label,rr in sensor_baselines.items()}
     atomic(out/'FINAL_REPORT.json',dict(status='COMPLETE',experiments=rows,per_person=people,
