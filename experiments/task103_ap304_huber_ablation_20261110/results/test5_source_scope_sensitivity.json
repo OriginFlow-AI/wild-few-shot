@@ -1,0 +1,38 @@
+{
+  "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
+  "checked_test5_records": 1973,
+  "unavailable": [
+    {
+      "id": "85f7455157a41b54d87d",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/routes/85f7455157a41b54d87d.npz'"
+    },
+    {
+      "id": "a3f698914701e1d10da4",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/routes/a3f698914701e1d10da4.npz'"
+    },
+    {
+      "id": "ec5ac57400c473f7e610",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/native/ec5ac57400c473f7e610.npz'"
+    },
+    {
+      "id": "71c92fe0a1e90a808570",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/native/71c92fe0a1e90a808570.npz'"
+    }
+  ],
+  "totals": {
+    "base_points": 6372615,
+    "self_curve_points": 6241396,
+    "other_curve_points": 5132086,
+    "common_points": 5054379
+  },
+  "records_with_self_curve": 1966,
+  "records_with_other_curve": 1949,
+  "metrics": {
+    "subject_equal_self_curve_MAE_on_common_N": 0.7922896601130548,
+    "subject_equal_other_curve_MAE_on_common_N": 1.913469995731352,
+    "subject_equal_curve_difference_MAE_on_common_N": 1.6362754528192462
+  },
+  "scope": "Calibration-input sensitivity only, at native BSQ paired times with fixed routing and raw-force/QC guards. No EMG/token screening or neural outputs. Self-fit agreement is not independent accuracy. The current model training/labels/selection remain unchanged; source policy awaits user clarification.",
+  "training_artifacts_modified": false,
+  "neural_Test_metrics_read": false
+}

@@ -104,3 +104,5 @@ python "$EXP/scripts/pipeline.py" --root "$ROOT" --workers 8
 `analysis/archive_epoch_candidates.py`独立监视每轮完整更新边界，复制完整model/Adam/RNG候选断点至运行目录`archive/epoch_candidates/<branch>/<dataset_sha256前缀>/epochNNN.pt`，不改训练进程及输入。复制使用同一已打开文件描述符，避免原子替换造成更新混淆。候选以完整epoch/global_update一致性验证后留存；模型训练完成不等于Goal已完成，仍需完整评测与报告核对。
 
 Val/Test中test5目前采用“最近另一条test5”的曲线；这一排除自身的条件是实现额外加入的约束。已在首轮完整Val之前向用户核准是否按原始“最近test5标定全部”的字面口径改用自身本次曲线。普通stage训练数据不受这项口径影响。当前训练继续，候选断点将用于确认口径后的完整Val复核；最终报告需要明确实际采用的口径。
+
+口径敏感性见`results/test5_source_scope_sensitivity.json/csv`：在当前基础QC、指路由、raw-force守卫下，原生BSQ配对时刻共6,372,615个可观察受测指点；自身曲线覆盖6,241,396点（97.94%），另一条曲线覆盖5,132,086点（80.53%）。这些统计没有EMG/token筛选，不是模型Test指标；自身拟合符合度不能当作独立准确度。分析仅用于说明待核准口径的覆盖与标签差异，当前训练输入和选模规则尚未改变。

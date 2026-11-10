@@ -1,0 +1,9 @@
+{
+  "observed_unix_time": 1794324315.1976757,
+  "current_test5_curve": "nearest other recording",
+  "question": "Whether Val/Test test5 should instead use its own complete calibration curve under the original nearest-test5 wording",
+  "user_confirmation_pending": true,
+  "full_Val_results_at_question": 0,
+  "ordinary_stage_training_data_unchanged": true,
+  "epoch_candidate_archive": "archive/epoch_candidates/<branch>/<dataset_sha256_prefix>/epochNNN.pt"
+}
