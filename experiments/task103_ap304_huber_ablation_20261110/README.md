@@ -91,3 +91,7 @@ raw_original第1轮完整Val覆盖全部983条记录，trial-equal原始loss=1.3
 北京时间11月11日02:16，GPU1/2三次新采样有足够显存且利用率低于60%，将raw_original从GPU7移至GPU1、calibrated_huber从GPU6移至GPU2。`analysis/migrate_shared_gpus.py`只操作与原始receipt、命令、UID、进程启动时刻一致的自身控制器/训练进程及其子进程；保留原始断点文件，分别从global update2825/3975的model/Adam/CPU-CUDA RNG和游标恢复，重放11/16个尚未保存更新。raw_huber原PID不变。真实GPU UUID、续跑更新、Adam step、参数有限性和训练绑定审计通过；短时吞吐约49.45→93.28及46.78→91.69窗/秒，后续仍受共享负载影响。证据为`results/shared_GPU_migration_20261111.json`与`results/shared_GPU_migration_progress_20261111.json`；微批16、global256、数据、loss、norm和max10/patience3均不变。
 
 02:20，GPU3也通过三次新采样，将raw_huber从GPU4迁至GPU3，从global update3925的完整断点续跑，重放15个未保存更新；另两路不中断。`analysis/audit_gpu_migration.py`验证实际GPU UUID、首个恢复更新3926、后续已保存更新3950、全部Adam step与global update一致、参数和loss/梯度有限、数据和训练源码绑定不变，短时吞吐53.48→94.86窗/秒。证据为`results/raw_huber_GPU_migration_20261111.json`及`results/raw_huber_GPU_migration_progress_20261111.json`。三路当前分占GPU1/2/3，allocator上限32GiB，仍与既有任务共卡。
+
+03:27前，两路Huber均完成第2轮全部983条Val并进入第3轮：calibrated_huber的trial-equal目标loss为6.704771246797424（第1轮7.375427957466372），raw_huber为10.842374263981393（第1轮11.25892579844423）。两路第2轮best均为global update5320、bad_epochs=0。`analysis/audit_selected_validation.py`验证真实第2轮候选与新best的model/Adam/CPU-CUDA RNG逐项相等、Adam step与global update一致、参数有限、实际数据/配置/源码绑定不变，以及完整Val记录和计分点数一致。逐记录结果与审计在`results/validation/*_epoch002_val.json`和`results/*_epoch002_Val_and_state_audit.json`；仍未读取最终Test指标。
+
+迁移后约93–96窗/秒，单轮约2小时。两路第2轮仍刷新best，依patience3至少还需3轮才可能早停；按03:27的实测吞吐，08:00前完成全部训练及最终评测已不现实。保留既定训练政策并继续完成；资源有实质改善时再更新估计。
