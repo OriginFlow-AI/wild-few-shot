@@ -1,0 +1,38 @@
+{
+  "status": "PASS_REAL_COMPLETE_VAL_NEW_BEST_AND_STATE_PRESERVATION",
+  "branch": "calibrated_huber",
+  "epoch": 3,
+  "global_update": 7980,
+  "Val_recordings": 983,
+  "prepared_Val_record_set_exactly_covered": true,
+  "trial_equal_validation_loss": 6.420644991832571,
+  "objective": "Huber_delta_1N",
+  "selected_best_epoch": 3,
+  "selected_best_sha256": "afe726aede294afb3a3549af4f0a79c4799d735df6dd68ead53f2217a56cfd8b",
+  "pre_Val_candidate_sha256": "90da848f25357945454e3bd3a1b7348293f28576b33a0805a98bc7b8b45a1a06",
+  "model_optimizer_CPU_CUDA_RNG_unchanged_by_full_Val": true,
+  "all_three_first_Val_record_sets_and_target_point_counts_identical": true,
+  "Adam_steps_match_global_update": true,
+  "all_model_tensors_finite": true,
+  "validation_history": [
+    {
+      "epoch": 1,
+      "val_loss": 7.375427957466372,
+      "global_update": 2660
+    },
+    {
+      "epoch": 2,
+      "val_loss": 6.704771246797424,
+      "global_update": 5320
+    },
+    {
+      "epoch": 3,
+      "val_loss": 6.420644991832571,
+      "global_update": 7980
+    }
+  ],
+  "bad_epochs": 0,
+  "dataset_sha256": "fe63d951874c8f89c0300f199a3337ec150fe389535ac9a2ecf8b971812e2db5",
+  "test_metrics_read": false,
+  "scoring_source_policy": "self_test5_nearest_test5_for_other_stages_v1"
+}
