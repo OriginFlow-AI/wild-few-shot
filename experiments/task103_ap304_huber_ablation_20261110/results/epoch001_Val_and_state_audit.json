@@ -1,0 +1,15 @@
+{
+  "status": "PASS_REAL_COMPLETE_VAL_AND_STATE_PRESERVATION",
+  "branch": "calibrated_huber",
+  "epoch": 1,
+  "global_update": 2660,
+  "Val_recordings": 983,
+  "prepared_Val_record_set_exactly_covered": true,
+  "trial_equal_Huber_N2": 7.375427957466372,
+  "selected_best_epoch": 1,
+  "selected_best_sha256": "402f43d062ed183ec988df241f57f7c4e4e155337ff64a15782d2030bcd267ad",
+  "pre_Val_candidate_sha256": "0cd5fd519a813ec28c39c38c7167638063475711dbf29c1382e964a23b494d82",
+  "model_optimizer_CPU_CUDA_RNG_unchanged_by_full_Val": true,
+  "test_metrics_read": false,
+  "scoring_source_policy": "self_test5_nearest_test5_for_other_stages_v1"
+}

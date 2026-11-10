@@ -81,3 +81,5 @@ python "$EXP/scripts/pipeline.py" --root "$ROOT" --workers 32
 进度看`STATUS.json`、`runs/<branch>/STATUS.json`、`checks/epoch_archive_status.json`。最终为三个`runs/<branch>/DONE.json`及`results/FINAL_REPORT.json`、四组CSV、逐stage/指/力段/人差异、质量统计、PNG和HTML；未核验这些不能视为完成。
 
 目标北京时间2026-11-11 08:00前，属于尽力目标。启动共享负载下三路约94/44/47窗每秒，raw分支单轮约4小时；不因截止时间缩减既定max10/patience3、完整Val或最终Test。Goal保持active直至完整结果与Git上传验收。
+
+首个真实完整Val已完成：calibrated_huber第1轮覆盖全部983条Val记录，trial-equal Huber loss=7.375427957466372，保存第1轮best后进入第2轮。`results/epoch001_Val_and_state_audit.json`核对了完整记录集合、真实epoch候选与best，并验证完整Val前后model/Adam/CPU-CUDA RNG逐项不变。对应逐记录指标在`results/validation/calibrated_huber_epoch001_val.json`；这是Val检查，最终Test和四组对比仍未完成。
