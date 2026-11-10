@@ -4,17 +4,17 @@
     "train": {
       "windows": 680815,
       "recordings": 5702,
-      "sha256": "f92ba31ad6df6bfe71bc450f20085043c23d397aca8dc854e236838c7e00877c"
+      "sha256": "a57edb1bb3b542b0648dbbdb23761499d217f24cd6a3dae5e97392f7ac626731"
     },
     "val": {
-      "windows": 37762,
-      "recordings": 977,
-      "sha256": "6cef60ec741b3c876b1d9ede2fc8767ef814d1ae33407d0e34ff9806e5ecf919"
+      "windows": 40447,
+      "recordings": 983,
+      "sha256": "f9035e9472c5d4462b40a89ad68663713ad5f9dd4e4b536d2213a3d9ce11a56d"
     },
     "test": {
-      "windows": 50550,
-      "recordings": 1395,
-      "sha256": "3391f86f0d832dbb0a15ac6ff3e5606c207b204861850d5d2305a1e1aa22f883"
+      "windows": 53421,
+      "recordings": 1406,
+      "sha256": "66f2b4dcdd22bd08dba33d3ec74ba65777d6ff9c5d6e719b35fd525be0b74b5c"
     }
   },
   "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
@@ -28,18 +28,18 @@
         "phase": "training",
         "branch": "calibrated_huber",
         "epoch": 1,
-        "epoch_update": 182,
+        "epoch_update": 2643,
         "updates_per_epoch": 2660,
-        "global_update": 182,
-        "loss": 0.6336462257250908,
-        "valid_points": 95843,
-        "gradient_norm": 0.24213159084320068,
+        "global_update": 2643,
+        "loss": 0.3593266651029401,
+        "valid_points": 96244,
+        "gradient_norm": 0.29469576478004456,
         "microbatch": 16,
-        "peak_allocated_GiB": 7.16569709777832,
-        "elapsed_epoch_s": 503.9979778989218
+        "peak_allocated_GiB": 7.169511795043945,
+        "elapsed_epoch_s": 373.63215199206024
       },
       "checkpoint_bytes": 220624278,
-      "contract_sha256": "4f6b7f98bae8fc01dc46af9060cc124bc6bd7d2f8f470fa7d76ecb17dafbcd08"
+      "contract_sha256": "0f1ad7229732313b4acc979394b50197daae394dc176e57670d3bc45bbab55c7"
     },
     {
       "branch": "raw_huber",
@@ -47,18 +47,18 @@
         "phase": "training",
         "branch": "raw_huber",
         "epoch": 1,
-        "epoch_update": 89,
+        "epoch_update": 1412,
         "updates_per_epoch": 2660,
-        "global_update": 89,
-        "loss": 0.9681377338194681,
-        "valid_points": 94211,
-        "gradient_norm": 1.0327733755111694,
+        "global_update": 1412,
+        "loss": 0.4626588606643241,
+        "valid_points": 93661,
+        "gradient_norm": 0.3392251431941986,
         "microbatch": 16,
-        "peak_allocated_GiB": 7.16569709777832,
-        "elapsed_epoch_s": 496.13891998212785
+        "peak_allocated_GiB": 7.169511795043945,
+        "elapsed_epoch_s": 376.05766431009397
       },
       "checkpoint_bytes": 220624278,
-      "contract_sha256": "e19d6ed295a18cfe093ba417e2f0bc1366123eda0ae547bd7fbc4854820ca3dd"
+      "contract_sha256": "56be8b8b87f6b938ab852838a64b17e4647c1aafe1560b5e9135729ca876a812"
     },
     {
       "branch": "raw_original",
@@ -66,37 +66,21 @@
         "phase": "training",
         "branch": "raw_original",
         "epoch": 1,
-        "epoch_update": 95,
+        "epoch_update": 1446,
         "updates_per_epoch": 2660,
-        "global_update": 95,
-        "loss": 0.9252775440244467,
-        "valid_points": 96201,
-        "gradient_norm": 1.3846468925476074,
+        "global_update": 1446,
+        "loss": 0.5178250792843684,
+        "valid_points": 94899,
+        "gradient_norm": 0.6494162082672119,
         "microbatch": 16,
-        "peak_allocated_GiB": 7.16569709777832,
-        "elapsed_epoch_s": 496.55038165533915
+        "peak_allocated_GiB": 7.169511795043945,
+        "elapsed_epoch_s": 370.8525555632077
       },
       "checkpoint_bytes": 220624278,
-      "contract_sha256": "7c2996ebdc6b23a79c162a48049d1054f82ee6a3e6a59f2ba79178137ef5bb0c"
+      "contract_sha256": "6a19471850f3e8ed248004d9ff43fec85e91e2ea223c82a3474f4ff15a49ced9"
     }
   ],
   "empty_window_recordings": [
-    {
-      "id": "7acd28ef6dd54e2a08ab",
-      "subject": "fyx01094176",
-      "split": "val",
-      "reason": "no_common_native_force_points",
-      "hands": {
-        "left": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 59
-        },
-        "right": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        }
-      }
-    },
     {
       "id": "6ff1d3b73734613b0bf4",
       "subject": "wy10204452",
@@ -112,107 +96,11 @@
           "full_EMG_valid_windows": 60
         }
       }
-    },
-    {
-      "id": "558a03381adc68cd07a2",
-      "subject": "wy10204452",
-      "split": "test",
-      "reason": "no_common_native_force_points",
-      "hands": {
-        "left": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        },
-        "right": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        }
-      }
-    },
-    {
-      "id": "bcbc65c6dcfa8c65896d",
-      "subject": "hfh05014636",
-      "split": "test",
-      "reason": "no_common_native_force_points",
-      "hands": {
-        "left": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        },
-        "right": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        }
-      }
-    },
-    {
-      "id": "eb25b5f3b25e32dfd01b",
-      "subject": "jxd10133591",
-      "split": "val",
-      "reason": "no_common_native_force_points",
-      "hands": {
-        "left": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        },
-        "right": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        }
-      }
-    },
-    {
-      "id": "30821473cc15cfa3a7a7",
-      "subject": "hfh05014636",
-      "split": "val",
-      "reason": "no_common_native_force_points",
-      "hands": {
-        "left": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 58
-        },
-        "right": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        }
-      }
-    },
-    {
-      "id": "1ad1f33547df62c93e84",
-      "subject": "ln11294643",
-      "split": "val",
-      "reason": "no_common_native_force_points",
-      "hands": {
-        "left": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        },
-        "right": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        }
-      }
-    },
-    {
-      "id": "69741622c7f579e029eb",
-      "subject": "wsd01244685",
-      "split": "test",
-      "reason": "no_common_native_force_points",
-      "hands": {
-        "left": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        },
-        "right": {
-          "native_common_force_points": 0,
-          "full_EMG_valid_windows": 60
-        }
-      }
     }
   ],
-  "exceptions": 96,
+  "exceptions": 86,
   "empty_window_reason_counts": {
-    "no_common_native_force_points": 8
+    "no_common_native_force_points": 1
   },
   "note": "Startup/data audit only. Final-model completion and Test accuracy are not claimed. Test5 BSQ is provided offline calibration input to other records, not untouched truth."
 }

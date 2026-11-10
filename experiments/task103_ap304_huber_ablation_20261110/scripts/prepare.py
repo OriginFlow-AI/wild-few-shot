@@ -11,6 +11,7 @@ from common import EXPERIMENT, SIDES, atomic, group, interpolate, load, nearest,
 from routing import fixed_bsq_zero, route_press_events, routed_labels, runs
 
 CALIBRATION_VERSION='whole-test5-absolute-nearest-v3-gross-fit-qc'
+SCORING_SOURCE_POLICY='self_test5_nearest_test5_for_other_stages_v1'
 
 def wall_center(row):
     return (datetime.datetime.fromisoformat(row['start'])-datetime.datetime(1970,1,1)).total_seconds()/2 + (datetime.datetime.fromisoformat(row['end'])-datetime.datetime(1970,1,1)).total_seconds()/2
@@ -20,7 +21,9 @@ def freeze_plan(root):
     if path.exists():
         plan = load(path)
         if plan['source_sha256'] != sha(EXPERIMENT/'manifests/sources.json'): raise ValueError('Changed source manifest')
-        if plan.get('calibration_version')==CALIBRATION_VERSION:return plan
+        if plan.get('calibration_version')==CALIBRATION_VERSION and plan.get('scoring_source_policy')==SCORING_SOURCE_POLICY:return plan
+        if plan.get('calibration_version')==CALIBRATION_VERSION:
+            atomic(root/'archive/nearest_other_test5_before_self_correction/plan.json',plan)
         archive=root/'checks/plan_first_press_prior_only_archive.json'
         if not archive.exists():atomic(archive,plan)
     rows = load(EXPERIMENT/'manifests/sources.json')
@@ -38,23 +41,24 @@ def freeze_plan(root):
     val.update(r['id'] for r in sorted(odd, key=rank)[:target-len(val)])
     for r in rows:
         rr = [q for q in groups[group(r)] if q['id']!=r['id']]
-        source = min(rr,key=lambda q:(abs(wall_center(q)-wall_center(r)),q['id'])) if rr else None
+        source = r if r['stage']=='mix-test-5' else min(rr,key=lambda q:(abs(wall_center(q)-wall_center(r)),q['id'])) if rr else None
         status = 'no_other_test5_same_domain'
         if source:
             age = ((r['start_ns']+r['end_ns'])-(source['start_ns']+source['end_ns']))/2e9
             wall = wall_center(r)-wall_center(source)
             status = 'candidate' if abs(age-wall) <= 5 else 'clock_discontinuity'
         r['source_distance_seconds']=abs(wall_center(r)-wall_center(source)) if source else None
-        r['source_direction']='before' if source and wall_center(source)<wall_center(r) else 'after' if source else None
+        r['source_direction']='self' if source and source['id']==r['id'] else 'before' if source and wall_center(source)<wall_center(r) else 'after' if source else None
         r['source_id'] = source['id'] if source else None; r['route_status'] = status
         r['split'] = ('val' if r['id'] in val else 'test') if r['stage']=='mix-test-5' else 'test' if r['stage']=='mix-test-7' else 'train'
         r['active'] = r['stage']=='mix-test-5' or status=='candidate'
     plan = dict(source_sha256=sha(EXPERIMENT/'manifests/sources.json'), rows=rows,
                 calibration_version=CALIBRATION_VERSION,
+                scoring_source_policy=SCORING_SOURCE_POLICY,
                 split_seed=43, test5_val=len(val), test5_test=sum(len(rr) for rr in groups.values())-len(val),
                 calibration_role='all eligible complete presses in the nearest whole test5; provided offline BSQ calibration inputs',
-                nearest_source_policy='minimum absolute recording-center wall-time distance; same subject/date/PC/boot; exclude own recording; no silent bad-source fallback',
-                test5_scoring='all eligible presses; labels from another nearest test5, never own-record mapping',
+                nearest_source_policy='test5 uses its own complete calibration; other stages use minimum absolute recording-center wall-time distance within subject/date/PC/boot; no silent bad-source fallback',
+                test5_scoring='all eligible presses; own complete test5 curve as provided calibration input; self-fit agreement is not independent curve accuracy',
                 evaluation_scope='Calibration-assisted within-person offline evaluation. Test5 BSQ is available calibration input for other recordings; not an untouched-BSQ generalization benchmark.')
     atomic(path, plan); return plan
 
@@ -178,9 +182,9 @@ def get_model(path): return load(path)['channels']
 def labels_one(root, r):
     root=Path(root); out=root/'cache/labels'/(r['id']+'.npz')
     label_receipt=out.with_suffix('.json')
-    if r['source_id']==r['id']:raise ValueError('Own-record calibration is forbidden for scoring')
+    if r['source_id']==r['id'] and r['stage']!='mix-test-5':raise ValueError('Only a test5 recording may use its own calibration curve')
     source=root/'cache/calibration'/(str(r['source_id'])+'.json')
-    if r['route_status']!='candidate' or not source.exists(): raise ValueError('No eligible other-record nearest calibration source')
+    if r['route_status']!='candidate' or not source.exists(): raise ValueError('No eligible nearest calibration source')
     binding=dict(source_id=r['source_id'],source_model_sha256=sha(source),calibration_version=CALIBRATION_VERSION,
                  reference_sampling='native_BSQ_linear_at_token_query_v1')
     if out.exists() and label_receipt.exists() and load(label_receipt)==binding:return

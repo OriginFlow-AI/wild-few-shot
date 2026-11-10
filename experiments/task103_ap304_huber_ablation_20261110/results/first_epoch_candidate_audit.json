@@ -1,0 +1,11 @@
+{
+  "status": "PASS_REAL_COMPLETE_EPOCH_CANDIDATE",
+  "branch": "calibrated_huber",
+  "global_update": 2660,
+  "dataset_sha256": "4676f20b9fc0faae28032f401ddd9627262ff47da2ae170c39a440459a571219",
+  "checkpoint_sha256": "0cd5fd519a813ec28c39c38c7167638063475711dbf29c1382e964a23b494d82",
+  "all_model_tensors_finite": true,
+  "optimizer_parameter_states": 244,
+  "validation_history_at_capture": [],
+  "candidate_created_before_complete_Val": true
+}

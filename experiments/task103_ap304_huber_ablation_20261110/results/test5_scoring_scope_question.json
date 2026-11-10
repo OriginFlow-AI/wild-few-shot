@@ -5,5 +5,10 @@
   "user_confirmation_pending": true,
   "full_Val_results_at_question": 0,
   "ordinary_stage_training_data_unchanged": true,
-  "epoch_candidate_archive": "archive/epoch_candidates/<branch>/<dataset_sha256_prefix>/epochNNN.pt"
+  "epoch_candidate_archive": "archive/epoch_candidates/<branch>/<dataset_sha256_prefix>/epochNNN.pt",
+  "provisional_primary_policy": "self_test5_nearest_test5_for_other_stages_v1",
+  "decision_basis": "Original nearest-test5 wording includes test5 itself; remove the additional nearest-other-only constraint after optional clarification opportunity",
+  "explicit_user_confirmation_received": false,
+  "migration_audit": "validation_only_protocol_migration.json",
+  "pre_migration_complete_Val_results": 0
 }

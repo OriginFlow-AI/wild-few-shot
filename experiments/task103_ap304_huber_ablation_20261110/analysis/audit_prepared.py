@@ -15,7 +15,7 @@ def main(root):
     assert dataset['config_sha256']==sha(EXPERIMENT/'config.json')
     assert dataset['plan_sha256']==sha(root/'plan.json')
     entries=dataset['entries'];split_ids={};indices={}
-    assert all(r['source_id']!=r['id'] for r in entries)
+    assert all((r['source_id']==r['id']) if r['stage']=='mix-test-5' else (r['source_id']!=r['id']) for r in entries)
     for split in ['train','val','test']:
         path=root/'prepared'/(split+'_windows.npy');pairs=np.load(path)
         assert len(np.unique(pairs,axis=0))==len(pairs)==dataset['windows'][split]

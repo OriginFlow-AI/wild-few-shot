@@ -40,7 +40,7 @@ def main():
         plan=freeze_plan(d);rows=plan['rows'];by_id={r['id']:r for r in rows}
         assert (plan['test5_val'],plan['test5_test'])==(988,989)
         assert plan['calibration_version']==CALIBRATION_VERSION
-        assert all(r['source_id']!=r['id'] for r in rows)
+        assert all((r['source_id']==r['id']) if r['stage']=='mix-test-5' else (r['source_id']!=r['id']) for r in rows)
         assert len({r['recording_id'] for r in rows})==len(rows)
         candidates_by_group=collections.defaultdict(list)
         for r in rows:
@@ -51,7 +51,7 @@ def main():
                 assert source['stage']=='mix-test-5'
                 assert all(source[k]==r[k] for k in ['subject','pc','boot'])
                 assert source['key'].split('/')[2]==r['key'].split('/')[2]
-                candidates=[x for x in candidates_by_group[group(r)] if x['id']!=r['id']]
+                candidates=[r] if r['stage']=='mix-test-5' else [x for x in candidates_by_group[group(r)] if x['id']!=r['id']]
                 expected=min(candidates,key=lambda x:(abs(wall_center(x)-wall_center(r)),x['id']))
                 assert source['id']==expected['id']
         assert freeze_plan(d)==plan

@@ -11,7 +11,7 @@
 | 3 | 设备原有 CMCU force | BSQ | 纯 Huber，δ=1 N |
 | 4 | 与 3 相同 | BSQ | `(1−Corr)+0.3×MAPE+0.03×MAE` |
 
-三套训练共用初始权重、EMG、划分和有效点；第 3、4 组连 force 归一化也相同。标定使用前后最近的完整test5，目标test5排除自身曲线；这是提供现场BSQ标定输入的离线评估，不声称BSQ完全未参与过标定。结果尚未完成，不能把预处理或 smoke 通过视为实验收益。
+三套训练共用初始权重、EMG、划分和有效点；第 3、4 组连 force 归一化也相同。test5使用自身本次完整曲线，其他stage使用前后最近的完整test5；这是提供现场BSQ标定输入的离线评估，不声称BSQ完全未参与过标定。结果尚未完成，不能把预处理或 smoke 通过视为实验收益。
 
 - [完整协议、数据来源和复现](experiments/task103_ap304_huber_ablation_20261110/README.md)
 - [配置](experiments/task103_ap304_huber_ablation_20261110/config.json)

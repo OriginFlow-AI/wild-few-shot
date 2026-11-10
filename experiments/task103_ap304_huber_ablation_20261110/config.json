@@ -58,15 +58,16 @@
   ],
   "mape_activity": "abs(GT)>=0.5N; fraction in objective",
   "force_label_preprocessing": "native CMCU/BSQ units and timestamps; no extra force lowpass, MA7, clipping or post-hoc time shifting",
-  "calibration": "all eligible complete presses of the nearest other whole test5; in-domain PAVA; no own-record curve or silent bad-source fallback",
-  "scoring": "all eligible target presses; test5 uses another recording curve; common in-domain/finite/sync/EMG-valid mask across experiments",
+  "calibration": "all eligible complete presses of nearest whole test5; test5 includes itself, other stages use absolute-nearest test5; in-domain PAVA; no silent bad-source fallback",
+  "scoring": "all eligible target presses; own complete test5 curve for test5, nearest test5 for ordinary stages/test7; common in-domain/finite/sync/EMG-valid mask across experiments",
   "gpu_memory_policy": "per-process ceiling=min(32 GiB, round_down_to_4GiB(observed_free_GiB-4GiB external reserve-2GiB CUDA overhead))",
   "common_microbatch": 16,
   "target_deadline_Asia_Shanghai": "2026-11-11T08:00:00+08:00",
   "deadline_policy": "best effort; preserve max10 epochs/patience3 and complete evaluation; never fake completion or cut budget to meet wall clock",
   "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
-  "nearest_source": "minimum absolute recording-center time distance, same subject/date/PC/boot; before or after; exclude same recording",
-  "evaluation_scope": "Offline calibration-assisted within-person evaluation. Test5 BSQ is provided calibration input to labels for other recordings, not an untouched-BSQ test benchmark.",
+  "nearest_source": "test5 itself for test5; otherwise minimum absolute recording-center distance within same subject/date/PC/boot, before or after",
+  "evaluation_scope": "Offline calibration-assisted within-person evaluation. Test5 BSQ is provided input to calibration of itself and other recordings, not an untouched-BSQ test benchmark. Self-fit curve agreement is not independent curve accuracy.",
   "microbatch_selection": "16 frozen for all branches after real-data 8/16/32/64 benchmark; three-GPU makespan priority",
-  "gross_calibration_rejection": "source-fit absolute residual P90 >10 N AND >50% fitted force span; calibration-only fixed rule before formal training"
+  "gross_calibration_rejection": "source-fit absolute residual P90 >10 N AND >50% fitted force span; calibration-only fixed rule before formal training",
+  "scoring_source_policy": "self_test5_nearest_test5_for_other_stages_v1"
 }

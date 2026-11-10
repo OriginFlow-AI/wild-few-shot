@@ -32,7 +32,7 @@
     "subject_equal_other_curve_MAE_on_common_N": 1.913469995731352,
     "subject_equal_curve_difference_MAE_on_common_N": 1.6362754528192462
   },
-  "scope": "Calibration-input sensitivity only, at native BSQ paired times with fixed routing and raw-force/QC guards. No EMG/token screening or neural outputs. Self-fit agreement is not independent accuracy. The current model training/labels/selection remain unchanged; source policy awaits user clarification.",
+  "scope": "Calibration-input sensitivity only, at native BSQ paired times with fixed routing and raw-force/QC guards. No EMG/token screening or neural outputs. Self-fit agreement is not independent accuracy. Explicitly contrast self with the nearest other test5, regardless of primary plan policy. This analysis does not modify training, labels or selection.",
   "training_artifacts_modified": false,
   "neural_Test_metrics_read": false
 }

@@ -10,9 +10,12 @@ import numpy as np
 def main(root):
     root=Path(root)
     sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
-    from common import atomic,load
-    from prepare import pair,CALIBRATION_VERSION
+    from common import atomic,load,group
+    from prepare import pair,CALIBRATION_VERSION,wall_center
     plan=load(root/'plan.json');assert plan['calibration_version']==CALIBRATION_VERSION
+    domains=collections.defaultdict(list)
+    for record in plan['rows']:
+        if record['stage']=='mix-test-5':domains[group(record)].append(record)
     rows=[];unavailable=[]
     def predict(ad,models):
         out=np.full(ad.shape,np.nan)
@@ -28,8 +31,11 @@ def main(root):
             with np.load(root/'cache/routes'/(r['id']+'.npz')) as a:route={k:a[k].copy() for k in ['t','identity','score','sync','reference']}
             assert np.array_equal(route['t'],paired['sync_ts_ns'])
             self_model=load(root/'cache/calibration'/(r['id']+'.json'))['channels']
-            other_path=root/'cache/calibration'/(str(r['source_id'])+'.json')
-            other_model=load(other_path)['channels'] if r['route_status']=='candidate' and other_path.exists() else {}
+            candidates=[x for x in domains[group(r)] if x['id']!=r['id']]
+            nearest=min(candidates,key=lambda x:(abs(wall_center(x)-wall_center(r)),x['id'])) if candidates else None
+            clock_ok=nearest is not None and abs(((r['start_ns']+r['end_ns'])-(nearest['start_ns']+nearest['end_ns']))/2e9-(wall_center(r)-wall_center(nearest)))<=5
+            other_path=root/'cache/calibration'/((nearest['id'] if nearest else 'None')+'.json')
+            other_model=load(other_path)['channels'] if clock_ok and other_path.exists() else {}
             own=predict(paired['cmcu_ad'],self_model);other=predict(paired['cmcu_ad'],other_model)
             raw=paired['cmcu_force_N'];target=np.repeat(route['reference'][:,None],10,axis=1)
             base=(route['identity'][:,None]==np.arange(10)[None,:])&route['score'][:,None]&route['sync']
@@ -57,7 +63,7 @@ def main(root):
     summary=dict(calibration_version=CALIBRATION_VERSION,checked_test5_records=len(rows),unavailable=unavailable,
         totals=totals,records_with_self_curve=sum(r['self_curve_points']>0 for r in rows),
         records_with_other_curve=sum(r['other_curve_points']>0 for r in rows),metrics=metrics,
-        scope='Calibration-input sensitivity only, at native BSQ paired times with fixed routing and raw-force/QC guards. No EMG/token screening or neural outputs. Self-fit agreement is not independent accuracy. The current model training/labels/selection remain unchanged; source policy awaits user clarification.',
+        scope='Calibration-input sensitivity only, at native BSQ paired times with fixed routing and raw-force/QC guards. No EMG/token screening or neural outputs. Self-fit agreement is not independent accuracy. Explicitly contrast self with the nearest other test5, regardless of primary plan policy. This analysis does not modify training, labels or selection.',
         training_artifacts_modified=False,neural_Test_metrics_read=False)
     atomic(output/'test5_source_scope_sensitivity.json',summary)
     print(totals,metrics,flush=True)

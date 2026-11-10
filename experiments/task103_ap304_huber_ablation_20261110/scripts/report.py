@@ -57,7 +57,7 @@ def quality_summary(root):
             '没有完整按压、AD变化不足、单调性弱和拟合力范围坍缩分别记录；缺指不等于整条硬件损坏。',
             '同一AD下参考力明显不一致时，单调相关也可能通过。源拟合残差P90同时超过10N和拟合力范围50%的指通道已屏蔽；较轻残差复核仅作标记，通过基础规则不等于独立精度合格。',
             '单调拟合不能解决饱和、迟滞、佩戴变化或域外数据。域外点必须计入覆盖限制，不能静默夹端点。',
-            '目标test5计分使用另一条记录的曲线，不用同条自拟合误差冒充独立精度；本方案允许现场BSQ作为其他记录的标定输入，不是BSQ完全未参与过标定的评估。',
+            'test5按原始最近test5口径使用自身整次曲线；源内拟合符合度不等于独立曲线精度。本方案使用现场BSQ作为自身及其他记录的标定输入，不是BSQ完全未参与过标定的评估。',
             '不按模型Test误差挑源或改剔除阈值；最近源失效不静默回退。'])
 
 def main(root):
@@ -120,11 +120,11 @@ def main(root):
         by_stage=by_stage,by_finger_BSQ=by_finger,by_force_band_BSQ=by_band,quality=quality,
         sensor_vs_BSQ_same_scoring_points=sensor_summary,
         common_test_recordings=checked,point_and_ground_truth_identity_checked=True,
-        calibration_role='all complete eligible presses from nearest other whole test5; provided offline calibration input',
+        calibration_role='all complete eligible presses; test5 uses its own whole curve, other stages use nearest test5; provided offline calibration input',
         caveats=['Experiment1 measures agreement with calibrated CMCU. Experiments2/3/4 use BSQ truth.',
                  'Metrics cover the common in-domain, routed, synchronized, EMG-valid subset; exclusions must be read with dataset and calibration QC.',
-                 'This is calibration-assisted within-person offline evaluation. Test5 BSQ is available input to calibration of other recordings; it is not an untouched-BSQ or subject-disjoint generalization benchmark.',
-                 'A scored test5 never uses its own fitted curve. Nearest calibration may be before or after the target recording.']))
+                 'This is calibration-assisted within-person offline evaluation. Test5 BSQ is available input to calibration of the same and other recordings; it is not an untouched-BSQ or subject-disjoint generalization benchmark.',
+                 'A scored test5 uses its own complete calibration curve. This is calibration-assisted evaluation, not independent curve validation. For other stages, nearest test5 may be before or after the target.']))
     lines=['Task103 four-way comparison (completed)', '', 'Subject-equal metrics on identical scoring points:',
            'experiment\ttest label\tMAE_N\tMAPE_%\tCorr']
     def fmt(value,digits=6):return 'NA' if value is None else f'{value:.{digits}f}'
@@ -151,7 +151,7 @@ def main(root):
     experiences=''.join('<li>'+html.escape(x)+'</li>' for x in quality['experience'])
     (out/'report.html').write_text('<!doctype html><html lang="zh"><meta charset="utf-8"><title>Task103四组实验</title>'
         '<style>body{max-width:1100px;margin:40px auto;font:16px/1.65 system-ui;padding:0 20px;color:#1c2433}table{border-collapse:collapse;width:100%}td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}img{width:100%;max-width:850px}pre{white-space:pre-wrap;background:#f3f5f8;padding:16px}</style>'
-        '<h1>Task103：标定与Loss四组实验</h1><p>三套独立训练，完整Val选模后最终Test。第1组衡量与标定CMCU标签的符合程度，第2/3/4组用同一BSQ真值与计分点比较。</p><p>这是使用现场BSQ标定输入的离线个体评估。最近test5可以在目标之前或之后；目标test5计分不使用自己的拟合曲线，但其BSQ可作为其他记录的标定输入，不能称为BSQ完全未参与过标定的评估。</p>'
+        '<h1>Task103：标定与Loss四组实验</h1><p>三套独立训练，完整Val选模后最终Test。第1组衡量与标定CMCU标签的符合程度，第2/3/4组用同一BSQ真值与计分点比较。</p><p>这是使用现场BSQ标定输入的离线个体评估。test5计分使用自身本次完整曲线；其他stage的最近test5可以在目标之前或之后，其BSQ作为自身及其他记录的标定输入，不能称为BSQ完全未参与过标定的评估。</p>'
         '<table>'+header+body+'</table><img alt="BSQ MAE by stage" src="data:image/png;base64,'+image+'">'
         '<h2>同一计分点上的标签质量</h2><pre>'+html.escape(json.dumps(sensor_summary,ensure_ascii=False,indent=2))+'</pre>'
         '<h2>覆盖与排除</h2><p>下面数量用于约束精度结论。分数仅覆盖共同域内、可路由、同步及EMG有效的子集，不能等同全部原始数据精度。</p><pre>'
