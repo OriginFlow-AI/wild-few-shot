@@ -1,0 +1,32 @@
+{
+  "status": "PASS_REAL_SAME_PROTOCOL_GPU_MIGRATION_AND_PROGRESS",
+  "observed_unix": 1794334897.9275062,
+  "migration_archive": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/archive/gpu_migrations/20261110T181943Z",
+  "branches": {
+    "raw_huber": {
+      "new_PID": 3513122,
+      "actual_GPU_uuid": "GPU-cff680fd-0699-5d89-dd1b-adb456b7c506",
+      "new_GPU_index": 3,
+      "resume_global_update": 3925,
+      "first_resumed_global_update": 3926,
+      "verified_latest_saved_global_update": 3950,
+      "observed_new_updates": 39,
+      "unsaved_updates_replayed": 15,
+      "before_windows_per_second": 53.47955890611347,
+      "after_last20_windows_per_second": 94.85741025935982,
+      "exact_archived_resume_sha256": "4e4053af6b6cdb0e0b5ac6f5956ac74fec15b01625b963c56f95119efb0a0836",
+      "binding_unchanged": true,
+      "all_parameters_finite": true,
+      "all_Adam_steps_equal_global_update": true
+    }
+  },
+  "controller_adopted_all_three_verified_PIDs": true,
+  "current_PIDs": {
+    "calibrated_huber": 3493899,
+    "raw_huber": 3513122,
+    "raw_original": 3493898
+  },
+  "dataset_sha256": "4676f20b9fc0faae28032f401ddd9627262ff47da2ae170c39a440459a571219",
+  "training_algorithm_or_scoring_changed": false,
+  "test_metrics_read": false
+}
