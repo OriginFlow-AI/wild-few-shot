@@ -1,0 +1,6 @@
+{
+  "status": "PASS_REAL_VAL_CPU_FORWARD_AND_SCORING",
+  "records": 1,
+  "loss": 3.071762658361393,
+  "Test_metrics_read": false
+}

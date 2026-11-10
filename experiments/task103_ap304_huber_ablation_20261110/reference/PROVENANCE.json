@@ -1,0 +1,20 @@
+{
+  "source_host": "10.20.20.21",
+  "source_root": "/data/zzy_data/emg2force_k2_stage_training_ap304_ex45",
+  "stage1_checkpoint_sha256": "85445c11c7b20764ddb04bbf7e4baedfb6ff269ac0c3ff608b84e6e7be15d22a",
+  "stage1_export_sha256": "f6dfe88f7e25d5be934ee0b065ae76d94aa89edc88340164244ecd149fa89928",
+  "common_initial_sha256": "f1fb53b6abeaecbabfea746a27a6cc41a831c5153a902f67a031aab394c8675b",
+  "sources": {
+    "vendor/force_losses.py": "390ee876acfb3ef1a0840ca935acc520b86882ed59a88b8a8435bab83b988876",
+    "vendor/mcap_io.py": "a62ed3773faeb7651738011619437633c8b91842afe812147e82d9b4bf4cb584",
+    "vendor/model_source.py": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+    "vendor/routing.py": "c8d4d06db2eb1a14858e3198e78167344f8c68737eadb7d43d5be98928ec95c2",
+    "reference/stage1_MODEL_SELECTION.json": "591772002f6c65311493ddb6b19d11d6473c2ecdbb119a3ddbdb9f7f103345b4",
+    "reference/stage1_WEIGHTS_PROVENANCE.json": "7227ec3bd1a048111539c0d6fb7d7ef23352bb98ac9e8929fa39e190b787123d",
+    "reference/stage1_emg_train_norm.npz": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+    "reference/stage2_besttau_resolved_config.yaml": "0e15aa269bd706fd22ca44fd23a797f9b6b89729a7908ba709a5b1b26a90da95",
+    "reference/stage2_pure_huber_initialization_receipt.json": "80b2d3002ed7fa1b4ee7cd8b833e4b6b2437a1b067bd86283b8d5203bae9da56",
+    "reference/stage2_pure_huber_resolved_config.yaml": "73b8a06c39dd208d733f7faea226fb54c1b370ea1a463b77fb8377947fb246df"
+  },
+  "user_supplied_zip_sha256": "9b7694905fd45020a1660313809028aa9e6ad7fbb243b737b7e3f6e056e1bb0b"
+}

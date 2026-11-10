@@ -1,0 +1,11 @@
+{
+  "phase": "extracting_calibration_and_holdout_streams",
+  "records": 2398,
+  "smoke": false,
+  "snapshot_Asia_Shanghai": "2026-11-10T20:09:03.123064+08:00",
+  "server": "10.20.20.1",
+  "run_root": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110",
+  "final_results_available": false,
+  "pipeline": "Full preprocessing/calibration then automatic shared-GPU training and four-way scoring",
+  "note": "A committed snapshot, not live status. Read remote STATUS.json for current phase."
+}

@@ -1,0 +1,202 @@
+{
+  "scope": "Union of existing frozen inventories, not a fresh live object-store listing; stages read from MCAP metadata, not filenames.",
+  "manifests": [
+    {
+      "path": "/data/lr_data/zjl/task103_ap304_recalibration_20261105/metadata.json",
+      "modified_unix": 1793851078.0898757,
+      "records": 5567,
+      "errors": 29
+    },
+    {
+      "path": "/data/lr_data/zjl/task103_all_cal_plots_20261106/metadata.json",
+      "modified_unix": 1793943582.8684366,
+      "records": 93,
+      "errors": 0
+    },
+    {
+      "path": "/data/lr_data/zjl/task103_rest_zero_20261105/metadata.json",
+      "modified_unix": 1793844856.4617107,
+      "records": 138,
+      "errors": 0
+    },
+    {
+      "path": "/data/lr_data/zjl/task103_new_review_20261104/metadata.json",
+      "modified_unix": 1793796308.4169111,
+      "records": 616,
+      "errors": 0
+    },
+    {
+      "path": "/data/lr_data/zjl/task103_group_review_20261109/metadata.json",
+      "modified_unix": 1794207214.7176187,
+      "records": 812,
+      "errors": 0
+    },
+    {
+      "path": "/data/lr_data/zjl/task103_refresh_1107_1109_20261109/metadata.json",
+      "modified_unix": 1794219807.3512053,
+      "records": 3173,
+      "errors": 0
+    },
+    {
+      "path": "/data/lr_data/zjl/task103_wearing_1110_20261110/metadata.json",
+      "modified_unix": 1794305938.1976793,
+      "records": 1743,
+      "errors": 0
+    }
+  ],
+  "recordings": 10576,
+  "subjects": 109,
+  "subject_days": 110,
+  "dates": [
+    "2026-10-19",
+    "2026-10-20",
+    "2026-10-21",
+    "2026-10-22",
+    "2026-10-23",
+    "2026-10-27",
+    "2026-10-28",
+    "2026-10-29",
+    "2026-10-30",
+    "2026-10-31",
+    "2026-11-02",
+    "2026-11-03",
+    "2026-11-04",
+    "2026-11-05",
+    "2026-11-06",
+    "2026-11-07",
+    "2026-11-09",
+    "2026-11-10"
+  ],
+  "stage_counts": {
+    "mix-6": 239,
+    "mix-3": 329,
+    "mix-2": 726,
+    "mix-7": 211,
+    "mix-5": 723,
+    "mix-1": 309,
+    "mix-8": 639,
+    "mix-11": 91,
+    "mix-4": 750,
+    "mix-9": 188,
+    "mix-10": 179,
+    "mix-16": 594,
+    "mix-12": 451,
+    "mix-14": 495,
+    "mix-15": 562,
+    "mix-18": 535,
+    "mix-13": 574,
+    "mix-17": 568,
+    "mix-test-5": 1977,
+    "mix-test-7": 436
+  },
+  "stage_conflicts": [],
+  "unresolved_metadata_errors": 29,
+  "listed_objects": 10605,
+  "listed_bytes": 1141133052150,
+  "objects_without_successful_metadata": 29,
+  "total_recording_hours": 352.3770904820469,
+  "raw_mcap_bytes": 1138371041056,
+  "estimated_EMG_float32_bytes_at_2000Hz_16ch_two_hands": 324750726588.25446,
+  "estimated_10ch_force_float32_bytes_at_2000Hz": 101484602058.82951,
+  "route_status_by_stage": {
+    "mix-1": {
+      "no_prior_same_domain": 309
+    },
+    "mix-10": {
+      "no_prior_same_domain": 104,
+      "candidate_pending_signal_QC": 75
+    },
+    "mix-11": {
+      "no_prior_same_domain": 91
+    },
+    "mix-12": {
+      "no_prior_same_domain": 83,
+      "candidate_pending_signal_QC": 368
+    },
+    "mix-13": {
+      "no_prior_same_domain": 76,
+      "candidate_pending_signal_QC": 496,
+      "clock_discontinuity": 2
+    },
+    "mix-14": {
+      "no_prior_same_domain": 73,
+      "candidate_pending_signal_QC": 419,
+      "clock_discontinuity": 3
+    },
+    "mix-15": {
+      "no_prior_same_domain": 66,
+      "candidate_pending_signal_QC": 493,
+      "clock_discontinuity": 3
+    },
+    "mix-16": {
+      "no_prior_same_domain": 67,
+      "candidate_pending_signal_QC": 526,
+      "clock_discontinuity": 1
+    },
+    "mix-17": {
+      "no_prior_same_domain": 62,
+      "candidate_pending_signal_QC": 501,
+      "clock_discontinuity": 5
+    },
+    "mix-18": {
+      "no_prior_same_domain": 53,
+      "candidate_pending_signal_QC": 480,
+      "clock_discontinuity": 2
+    },
+    "mix-2": {
+      "no_prior_same_domain": 271,
+      "candidate_pending_signal_QC": 454,
+      "clock_discontinuity": 1
+    },
+    "mix-3": {
+      "no_prior_same_domain": 244,
+      "candidate_pending_signal_QC": 84,
+      "clock_discontinuity": 1
+    },
+    "mix-4": {
+      "no_prior_same_domain": 217,
+      "candidate_pending_signal_QC": 529,
+      "clock_discontinuity": 4
+    },
+    "mix-5": {
+      "no_prior_same_domain": 188,
+      "candidate_pending_signal_QC": 530,
+      "clock_discontinuity": 5
+    },
+    "mix-6": {
+      "no_prior_same_domain": 157,
+      "candidate_pending_signal_QC": 81,
+      "clock_discontinuity": 1
+    },
+    "mix-7": {
+      "no_prior_same_domain": 132,
+      "candidate_pending_signal_QC": 78,
+      "clock_discontinuity": 1
+    },
+    "mix-8": {
+      "no_prior_same_domain": 131,
+      "candidate_pending_signal_QC": 504,
+      "clock_discontinuity": 4
+    },
+    "mix-9": {
+      "no_prior_same_domain": 115,
+      "candidate_pending_signal_QC": 73
+    },
+    "mix-test-5": {
+      "candidate_pending_signal_QC": 1866,
+      "no_prior_same_domain": 96,
+      "clock_discontinuity": 15
+    },
+    "mix-test-7": {
+      "candidate_pending_signal_QC": 421,
+      "no_prior_same_domain": 11,
+      "clock_discontinuity": 4
+    }
+  },
+  "caveats": [
+    "Nearest completed preceding test5, same subject/date/PC/boot. Quality not checked by this metadata-only audit.",
+    "No fallback around failed calibration. No same-record self-calibration. PC/boot is only a hardware-continuity proxy.",
+    "All test5 BSQ cannot simultaneously be calibration-fit truth and untouched held-out truth. Reserve independent calibration presses/records and purge them from scoring.",
+    "No model trained, no data copied to .1, no filter applied by this audit."
+  ]
+}

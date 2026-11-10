@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+work/
+*.mcap
+*.mp4
+.env
+.env.*
+*access.json
+*credentials*

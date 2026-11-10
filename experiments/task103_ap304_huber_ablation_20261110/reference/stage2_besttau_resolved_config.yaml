@@ -1,0 +1,84 @@
+schema: ap304-calibrated-stage2-v1
+seed: 43
+run_root: /data/zzy_data/emg2force_k2_stage_training_ap304_ex45/runs/ap304_full_calibrated_stage2_besttau_lambda0_six_seed43_20261029
+index: /data/zzy_data/emg2force_k2_stage_training_ap304_ex45/runs/ap304_full_calibrated_stage2_besttau_lambda0_six_seed43_20261029/inputs/split.json
+index_sha256: d08938dee5fd15dec0662fe292208b72d6f46f70d9036cbb73ea9aee6727aa3c
+cache_root: /data/syh_data/emg_force
+expected_trials:
+  train: 188777
+  val: 10890
+  test: 11130
+model_source: /data/zzy_data/emg2force_k2_stage_training_ap304_ex45/runs/ap304_full_calibrated_stage2_besttau_lambda0_six_seed43_20261029/source_snapshot/model_source.py
+model_source_sha256: fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a
+emg_norm: /data/zzy_data/emg2force_k2_stage_training_ap304_ex45/runs/ap304_full_calibrated_stage2_besttau_lambda0_six_seed43_20261029/inputs/emg_train_norm.npz
+emg_norm_sha256: 7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6
+calibration_package: /data/zzy_data/emg2force_k2_stage_training_ap304_ex45/runs/ap304_full_calibrated_stage2_besttau_lambda0_six_seed43_20261029/inputs/calibration
+calibration_tools_sha256: 4c50ac438b25a17de59cdca4aeb2e5f7475f4462a50b6b5a2b7a8a82156578c7
+ranking_prepared: /data/zzy_data/emg2force_k2_stage_training_ap304_ex45/runs/ap304_full_raw_rank_seed43_20261027/prepared
+source_checkpoint: /data/zzy_data/emg2force_k2_stage_training_ap304_ex45/runs/ap304_full_calibrated_stage2_besttau_lambda0_six_seed43_20261029/inputs/ranking_best.pt
+source_checkpoint_sha256: 85445c11c7b20764ddb04bbf7e4baedfb6ff269ac0c3ff608b84e6e7be15d22a
+lambda_ord: 0.0
+score_l2_weight: 0.0
+corr_weight: 1.0
+mape_weight: 0.3
+mae_weight: 0.03
+mape_threshold_n: 0.5
+optimizer: AdamW
+lr_backbone: 2.0e-05
+lr_output_head: 0.0001
+weight_decay: 0.0001
+warmup_updates: 1000
+minimum_lr_ratio: 0.1
+gradient_clip: 1.0
+devices: 8
+gpu_ids:
+- 0
+- 1
+- 2
+- 3
+- 4
+- 5
+- 6
+- 7
+microbatch: 8
+accumulate: 4
+global_batch: 256
+precision: bf16_mixed
+max_epochs: 10
+patience: 3
+early_stop_min_delta: 0.0001
+max_open_trials_per_worker: 8
+train_workers: 4
+eval_batch: 8
+gpu_memory_fraction: 0.28
+log_every_updates: 20
+save_every_updates: 1000
+prepare_workers: 32
+expected_train_windows: 11422364
+expected_val_windows: 654478
+expected_test_windows: 678346
+validation_selection: trial_equal_mean_L_std
+initialization: best_stage1_Val_tau_checkpoint_except_reinitialized_output_head
+train_all_parameters: true
+force_statistics_scope: complete_train_arrays_once_per_raw_sample
+test_during_training: false
+force_norm_sha256: aac3e006003c91cd4dfcf6b9de78b15436d1edc061ad27fc154a154398274d34
+source_checkpoint_state:
+  epoch: 1
+  next_update: 22661
+  global_update: 67982
+experiment_id: ap304_full_calibrated_stage2_besttau_lambda0_six_seed43_20261029
+evaluation_aggregation_methods:
+  1_trial_equal: 所有trial等权
+  2_stage_trial_equal: stage内trial等权，再stage等权
+  3_subject_trial_equal: 每人内部trial等权，再逐人等权
+  4_subject_stage_trial_equal: 每人内部stage等权，再逐人等权（stage内trial等权）
+  5_subject_pooled: 每人合并全部trial后计算，再逐人等权
+  6_subject_stage_pooled: 每人按stage合并后计算，再stage等权、逐人等权
+reporting_primary_finger_rule: pool all five fingers; separate per-finger alternative
+  also saved
+reporting_undefined_metrics: null/exclude with counts; legacy trial-equal selection
+  loss unchanged
+checkpoint_policy: every epoch before validation and after validation, plus best and
+  periodic last
+replaced_experiment: /data/zzy_data/emg2force_k2_stage_training_ap304_ex45/runs/ap304_full_calibrated_stage2_lambda0_seed43_20261028

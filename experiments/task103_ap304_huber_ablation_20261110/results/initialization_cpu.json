@@ -1,0 +1,58 @@
+{
+  "status": "PASS_CPU_INITIALIZATION_AND_SYNTHETIC_GRADIENT_CHECK",
+  "GPU_used": false,
+  "real_task103_waveforms_used": false,
+  "torch": "2.8.0+cu128",
+  "parameters": 18357945,
+  "retained_non_head_tensors": 243,
+  "output_head_reinitialized": true,
+  "gate_bias": 4.0,
+  "all_parameters_trainable": true,
+  "common_initial_state_sha256": "f1fb53b6abeaecbabfea746a27a6cc41a831c5153a902f67a031aab394c8675b",
+  "stage1_export_sha256": "f6dfe88f7e25d5be934ee0b065ae76d94aa89edc88340164244ecd149fa89928",
+  "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+  "emg_norm_fields": {
+    "emg_mean": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "emg_std": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "n_samples": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "n_trials": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "source_split_sha256": {
+      "shape": [],
+      "dtype": "<U64"
+    },
+    "fit_role": {
+      "shape": [],
+      "dtype": "<U10"
+    }
+  },
+  "output_shape": [
+    1,
+    5,
+    89
+  ],
+  "huber_domain": "physical_N_after_denormalization",
+  "huber_delta_n": 1.0,
+  "masked_nonfinite_labels_excluded_before_objective": true,
+  "gradient_l1_by_block": {
+    "encoder": 407.80051922117127,
+    "decoder": 425.91150316316634,
+    "head": 25.715901389718056
+  },
+  "limitations": "Synthetic CPU check only. Not a real-data integration, GPU memory, throughput or model accuracy result."
+}
