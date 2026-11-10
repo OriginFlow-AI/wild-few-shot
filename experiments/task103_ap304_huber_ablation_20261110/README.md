@@ -94,3 +94,7 @@ python "$EXP/scripts/pipeline.py" --root "$ROOT" --workers 8
 正式训练前的源曲线残差复核识别88个明显失配指通道：相近AD对应相差数十N的BSQ。最终v3协议逐指屏蔽上述严重残差，同时保留其他合格指。该规则仅使用提供的标定输入，未读取神经网络Test误差；较轻复核标记不改变mask。v2诊断和示例保留于`results/archive/whole_test5_v2_pre_gross_qc`，不可当作最终v3覆盖统计。
 
 最终v3保留16,307条可拟合指曲线；1,966条test5至少有一个可用指，1,124条为部分指可用。源拟合残差复核仍给4,040条较轻可疑曲线加标记，详见`results/accepted_calibration_diagnostics.csv`；这类标记不自动剔除，也不代表独立精度验证。`results/protocol_v3_val_forward.json`和三个`*_real_GPU_smoke.json`记录最终协议试跑检查。`analysis/export_models.py`在三套最终评测及同点核对完成后导出纯state_dict与推理归一化参数，不上传Adam/RNG大断点。
+
+正式数据共680,815个Train窗、37,762个Val窗、50,550个Test窗，分别覆盖5,702/977/1,395条记录。真实窗口索引与逐记录哈希保存在`results/window_indices`和`results/dataset_manifest.json`。启动审计见`results/prepared_launch_audit.json`：三套合同共用初始化/数据/掩码，记录划分互斥；另8条记录因全部原生力点不在共同有效域而没有窗口，已补充列出，不能误称为硬件损坏。
+
+北京时间2026-11-10约21:40三路正式训练已启动。启动阶段实际吞吐约94/44/47窗每秒，后两者单轮训练约4小时；在其他任务占用未下降时，全部于次日08:00前完成不太可能。目标保持active，保留正常max10/patience3及完整评测；本目录启动快照不是完成报告。

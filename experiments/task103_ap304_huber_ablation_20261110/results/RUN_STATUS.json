@@ -1,15 +1,99 @@
 {
-  "phase": "extracting_ordinary_streams",
-  "records": 5714,
-  "smoke": false,
-  "snapshot_Asia_Shanghai": "2026-11-10T21:31:50.185096+08:00",
+  "phase": "parallel_training_or_waiting_for_capacity",
+  "active": {
+    "calibrated_huber": {
+      "pid": 2188511,
+      "GPU": {
+        "index": 4,
+        "uuid": "GPU-1df1fb2f-e6e6-3ab9-66b8-a6a71db49def",
+        "total_MiB": 143771,
+        "free_MiB": 25230,
+        "utilization": 19,
+        "minimum_free_MiB": 25230,
+        "mean_utilization": 34.666666666666664,
+        "process_memory_limit_GiB": 16,
+        "score": 23011.333333333332
+      },
+      "training": {
+        "phase": "training",
+        "branch": "calibrated_huber",
+        "epoch": 1,
+        "epoch_update": 199,
+        "updates_per_epoch": 2660,
+        "global_update": 199,
+        "loss": 0.6327732424829815,
+        "valid_points": 91613,
+        "gradient_norm": 0.21755285561084747,
+        "microbatch": 16,
+        "peak_allocated_GiB": 7.16569709777832,
+        "elapsed_epoch_s": 551.6879955981858
+      }
+    },
+    "raw_huber": {
+      "pid": 2188644,
+      "GPU": {
+        "index": 6,
+        "uuid": "GPU-63b0e9e5-ec55-d328-a9e4-ba3eb5de54fb",
+        "total_MiB": 143771,
+        "free_MiB": 27887,
+        "utilization": 100,
+        "minimum_free_MiB": 27887,
+        "mean_utilization": 100.0,
+        "process_memory_limit_GiB": 20,
+        "score": 21487.0
+      },
+      "training": {
+        "phase": "training",
+        "branch": "raw_huber",
+        "epoch": 1,
+        "epoch_update": 98,
+        "updates_per_epoch": 2660,
+        "global_update": 98,
+        "loss": 0.7474495831961643,
+        "valid_points": 97653,
+        "gradient_norm": 1.0927202701568604,
+        "microbatch": 16,
+        "peak_allocated_GiB": 7.16569709777832,
+        "elapsed_epoch_s": 545.448533364106
+      }
+    },
+    "raw_original": {
+      "pid": 2188873,
+      "GPU": {
+        "index": 7,
+        "uuid": "GPU-bf699991-e975-69ca-5c04-4d494f240633",
+        "total_MiB": 143771,
+        "free_MiB": 26811,
+        "utilization": 100,
+        "minimum_free_MiB": 26811,
+        "mean_utilization": 100.0,
+        "process_memory_limit_GiB": 20,
+        "score": 20411.0
+      },
+      "training": {
+        "phase": "training",
+        "branch": "raw_original",
+        "epoch": 1,
+        "epoch_update": 104,
+        "updates_per_epoch": 2660,
+        "global_update": 104,
+        "loss": 0.8980942753338051,
+        "valid_points": 94525,
+        "gradient_norm": 0.9252921342849731,
+        "microbatch": 16,
+        "peak_allocated_GiB": 7.16569709777832,
+        "elapsed_epoch_s": 542.6762821101584
+      }
+    }
+  },
+  "pending": [],
+  "configured_parallel_branches": 3,
+  "common_microbatch": 16,
+  "target_deadline_Asia_Shanghai": "2026-11-11T08:00:00+08:00",
+  "snapshot_Asia_Shanghai": "2026-11-10T21:49:46.185562+08:00",
   "server": "10.20.20.1",
   "run_root": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110",
   "final_results_available": false,
   "goal_status": "active",
-  "target_deadline_Asia_Shanghai": "2026-11-11T08:00:00+08:00",
-  "concurrent_training_branches": 3,
-  "common_microbatch": 16,
-  "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
-  "note": "Committed progress snapshot; runtime STATUS.json is authoritative. Deadline is best effort without reducing normal training or evaluation."
+  "note": "Formal training is running. At observed throughput, completion by08:00 is unlikely for raw branches; preserve full training and evaluation."
 }
