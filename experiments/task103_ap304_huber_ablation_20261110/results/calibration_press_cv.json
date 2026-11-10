@@ -1,0 +1,41 @@
+{
+  "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
+  "accepted_curves": 16307,
+  "single_press_curves": 3095,
+  "repeat_curves": 13212,
+  "scored_repeat_curves": 13206,
+  "fold_outcomes": {
+    "scored_in_domain": 32655,
+    "remaining_presses_weak_monotonicity": 201,
+    "held_press_entirely_outside_remaining_AD_domain": 16,
+    "remaining_presses_gross_fit_inconsistency": 37
+  },
+  "quantiles": {
+    "coverage": {
+      "0": 0.0,
+      "0.1": 0.5230912121933794,
+      "0.5": 0.8125,
+      "0.9": 0.9744245524296675,
+      "0.99": 0.9970501474926253,
+      "1": 1.0
+    },
+    "point_equal_MAE_N": {
+      "0": 0.09626213244835537,
+      "0.1": 0.48036598095784344,
+      "0.5": 1.4407035877459764,
+      "0.9": 4.517069292810646,
+      "0.99": 11.257216297749837,
+      "1": 27.849662238242164
+    }
+  },
+  "repeat_reference_points": 5021821,
+  "repeat_scored_points": 3977297,
+  "scored_subjects": 81,
+  "reference_point_coverage": 0.7920029407659094,
+  "subject_equal_curve_MAE_N": 1.9531040575689407,
+  "pooled_point_MAE_N": 2.126266978505752,
+  "scope": "Leave one complete press out within the same test5 and finger. Fit other presses with the frozen calibration QC; score only held core points inside their AD domain. This is conditional on whole-source channel acceptance and fixed finger routing. Whole-record fixed tare is shared. It measures repeated-press consistency, not subject-disjoint, cross-session or neural-model Test accuracy.",
+  "interpretation": "Report coverage with error: high-force held presses may exceed the AD range of remaining presses. One-press channels have no independent repetition check. Fit residual and repetition error can both miss shared reference scale or finger-routing errors.",
+  "neural_Test_metrics_read": false,
+  "training_or_label_artifacts_changed": false
+}
