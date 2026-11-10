@@ -3,13 +3,16 @@
   "branch": "raw_original",
   "epoch": 1,
   "epoch_update": 1,
-  "updates_per_epoch": 1,
+  "updates_per_epoch": 2,
   "global_update": 1,
-  "loss": 0.9585023522377014,
-  "valid_points": 7120,
-  "gradient_norm": 2.4928884506225586,
+  "loss": 1.0411757395820502,
+  "valid_points": 110592,
+  "gradient_norm": 0.8047837018966675,
   "microbatch": 16,
-  "peak_allocated_GiB": 6.995265960693359,
-  "elapsed_epoch_s": 1.3839387730695307,
-  "test_metrics_read": false
+  "peak_allocated_GiB": 7.024379730224609,
+  "elapsed_epoch_s": 6.112982008140534,
+  "test_metrics_read": false,
+  "calibration_version": "whole-test5-absolute-nearest-v2",
+  "smoke_windows": 256,
+  "scope": "real Train-only optimizer update, not final model accuracy"
 }

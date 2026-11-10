@@ -1,0 +1,25 @@
+[
+  {
+    "id": "a3f698914701e1d10da4",
+    "reason": "BSQ median above100N",
+    "min_N": -29.419950485229492,
+    "median_N": 529.55908203125,
+    "max_N": 1814.230224609375
+  },
+  {
+    "id": "eb25b5f3b25e32dfd01b",
+    "reason": "No BSQ variation; cannot obtain calibration truth",
+    "BSQ_value_N": 0.19613300263881683
+  },
+  {
+    "id": "0013360f9c16da7ce471",
+    "finger": "left_thumb",
+    "presses": [
+      8,
+      19,
+      29,
+      39
+    ],
+    "scope": "complete source test5 calibration inputs; no model-Test accuracy feedback"
+  }
+]

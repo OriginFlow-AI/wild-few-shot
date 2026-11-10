@@ -37,6 +37,7 @@ class Windows(Dataset):
             a=np.load(self.root/'cache/emg'/r['id']/(r['side']+'.npy'),mmap_mode='r')
             with np.load(self.root/'cache/labels'/(r['id']+'.npz')) as z:
                 label={k:z[r['side']+'_'+k].copy() for k in ['t','raw','cal','bsq','valid']}
+                for k in ['reference_t','reference_N','reference_valid']:label[k]=z[k].copy()
             self.cache[key]=(a,label)
             if len(self.cache)>8:self.cache.popitem(last=False)
         else:self.cache.move_to_end(key)
@@ -67,7 +68,8 @@ def measures(p,y,valid):
     e=x-t;corr=float(np.corrcoef(x,t)[0,1]) if np.ptp(x)>0 and np.ptp(t)>0 else None
     active=abs(t)>=.5;mape=float(np.mean(abs(e[active])/abs(t[active]))) if active.any() else 0.
     huber=float(np.mean(np.where(abs(e)<=1,.5*e**2,abs(e)-.5)))
-    return dict(points=len(x),mae_N=float(abs(e).mean()),mape_percent=100*mape,corr=corr,
+    return dict(points=len(x),mae_N=float(abs(e).mean()),mape_percent=100*mape if active.any() else None,
+                mape_points=int(active.sum()),corr=corr,
                 huber_N2=huber,original_loss=1-(corr if corr is not None else 0.)+.3*mape+.03*float(abs(e).mean()))
 
 @torch.no_grad()
@@ -88,6 +90,9 @@ def evaluate(net,root,branch,split,mean,std,device,batch_size,save_predictions=F
                 offsets=start+470+40*np.arange(89,dtype=np.int64);keep=offsets>last
                 query=r['start_ns']+offsets*500000
                 outputs={k:interpolate(label['t'],label[k],label['valid'],query) for k in ['raw','cal','bsq']}
+                h=0 if r['side']=='left' else 5
+                outputs['bsq']=interpolate(label['reference_t'],np.repeat(label['reference_N'][:,None],5,axis=1),
+                    label['reference_valid'][:,h:h+5],query)
                 valid=outputs['raw'][1]&outputs['cal'][1]&outputs['bsq'][1]
                 parts['pred'].append(prediction[keep]);parts['mask'].append(valid[keep])
                 for k in ['raw','cal','bsq']:parts[k].append(outputs[k][0][keep])
@@ -139,6 +144,8 @@ def save(path,net,opt,state,binding):
 
 def run(root,branch,smoke=False):
     root=Path(root);c=settings();torch.set_num_threads(2)
+    for key,name in [('CUDA_CACHE_PATH','cuda_kernels'),('TORCH_HOME','torch'),('XDG_CACHE_HOME','xdg')]:
+        path=root/'cache'/name;path.mkdir(parents=True,exist_ok=True);os.environ[key]=str(path)
     if not torch.cuda.is_available():raise RuntimeError('GPU required for actual trainer')
     device=torch.device('cuda:0')
     total=torch.cuda.get_device_properties(device).total_memory
@@ -170,9 +177,11 @@ def run(root,branch,smoke=False):
         torch.set_rng_state(ck['torch_rng']);torch.cuda.set_rng_state(ck['cuda_rng']);del ck
     updates=math.ceil(len(ds)/c['global_batch']);total_updates=updates*c['max_epochs']
     for epoch in range(state['epoch'],c['max_epochs']):
+        # A retry during final Test must not restart training after early stop.
+        if state['bad_epochs']>=c['patience']:break
         order=np.random.default_rng(c['seed']+epoch).permutation(len(ds))
         sampler=order[state['next_update']*c['global_batch']:].tolist()
-        if smoke:sampler=sampler[:micro]
+        if smoke:sampler=sampler[:int(os.environ.get('TASK103_SMOKE_WINDOWS',micro))]
         loader=DataLoader(ds,batch_size=c['global_batch'],sampler=sampler,num_workers=c['train_workers'],pin_memory=True,
                           timeout=120 if c['train_workers'] else 0)
         tick=time.monotonic();net.train()
@@ -209,8 +218,10 @@ def run(root,branch,smoke=False):
         state['history'].append(dict(epoch=epoch+1,val_loss=loss,global_update=state['global_update']))
         atomic(out/f'epoch{epoch+1:03d}_val.json',result)
         state.update(epoch=epoch+1,next_update=0)
-        save(last,net,opt,state,binding)
         if is_best:save(best,net,opt,state,binding)
+        # Persist best before the epoch-advanced resume state, so interruption
+        # cannot claim a new minimum whose weights were never saved.
+        save(last,net,opt,state,binding)
         if state['bad_epochs']>=c['patience']:break
     checkpoint=torch.load(best,map_location='cpu',weights_only=True);net.load_state_dict(checkpoint['model']);del checkpoint
     atomic(out/'STATUS.json',dict(phase='final_test',branch=branch,selected_checkpoint_sha256=sha(best)))

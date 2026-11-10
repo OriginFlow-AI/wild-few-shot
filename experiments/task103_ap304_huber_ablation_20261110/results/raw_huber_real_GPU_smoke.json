@@ -3,13 +3,16 @@
   "branch": "raw_huber",
   "epoch": 1,
   "epoch_update": 1,
-  "updates_per_epoch": 1,
+  "updates_per_epoch": 2,
   "global_update": 1,
-  "loss": 0.08919630944728851,
-  "valid_points": 7120,
-  "gradient_norm": 0.25212422013282776,
+  "loss": 0.8881963624643738,
+  "valid_points": 110592,
+  "gradient_norm": 1.3949353694915771,
   "microbatch": 16,
-  "peak_allocated_GiB": 6.995265960693359,
-  "elapsed_epoch_s": 1.316356536000967,
-  "test_metrics_read": false
+  "peak_allocated_GiB": 7.024379730224609,
+  "elapsed_epoch_s": 5.674320622347295,
+  "test_metrics_read": false,
+  "calibration_version": "whole-test5-absolute-nearest-v2",
+  "smoke_windows": 256,
+  "scope": "real Train-only optimizer update, not final model accuracy"
 }

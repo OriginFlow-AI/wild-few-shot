@@ -10,12 +10,19 @@ from scipy.stats import spearmanr
 from common import EXPERIMENT, SIDES, atomic, group, interpolate, load, nearest, sha, windows, source_binding
 from routing import fixed_bsq_zero, route_press_events, routed_labels, runs
 
+CALIBRATION_VERSION='whole-test5-absolute-nearest-v2'
+
+def wall_center(row):
+    return (datetime.datetime.fromisoformat(row['start'])-datetime.datetime(1970,1,1)).total_seconds()/2 + (datetime.datetime.fromisoformat(row['end'])-datetime.datetime(1970,1,1)).total_seconds()/2
+
 def freeze_plan(root):
     root = Path(root); path = root/'plan.json'
     if path.exists():
         plan = load(path)
         if plan['source_sha256'] != sha(EXPERIMENT/'manifests/sources.json'): raise ValueError('Changed source manifest')
-        return plan
+        if plan.get('calibration_version')==CALIBRATION_VERSION:return plan
+        archive=root/'checks/plan_first_press_prior_only_archive.json'
+        if not archive.exists():atomic(archive,plan)
     rows = load(EXPERIMENT/'manifests/sources.json')
     assert len({r['recording_id'] for r in rows}) == len(rows)
     groups = collections.defaultdict(list)
@@ -30,21 +37,25 @@ def freeze_plan(root):
     target = sum(len(rr) for rr in groups.values())//2
     val.update(r['id'] for r in sorted(odd, key=rank)[:target-len(val)])
     for r in rows:
-        rr = [q for q in groups[group(r)] if q['end_ns'] < r['start_ns']]
-        source = rr[-1] if rr else None
-        status = 'no_prior_same_domain'
+        rr = [q for q in groups[group(r)] if q['id']!=r['id']]
+        source = min(rr,key=lambda q:(abs(wall_center(q)-wall_center(r)),q['id'])) if rr else None
+        status = 'no_other_test5_same_domain'
         if source:
-            age = (r['start_ns']-source['end_ns'])/1e9
-            wall = (datetime.datetime.fromisoformat(r['start'])-datetime.datetime.fromisoformat(source['end'])).total_seconds()
+            age = ((r['start_ns']+r['end_ns'])-(source['start_ns']+source['end_ns']))/2e9
+            wall = wall_center(r)-wall_center(source)
             status = 'candidate' if abs(age-wall) <= 5 else 'clock_discontinuity'
+        r['source_distance_seconds']=abs(wall_center(r)-wall_center(source)) if source else None
+        r['source_direction']='before' if source and wall_center(source)<wall_center(r) else 'after' if source else None
         r['source_id'] = source['id'] if source else None; r['route_status'] = status
         r['split'] = ('val' if r['id'] in val else 'test') if r['stage']=='mix-test-5' else 'test' if r['stage']=='mix-test-7' else 'train'
         r['active'] = r['stage']=='mix-test-5' or status=='candidate'
     plan = dict(source_sha256=sha(EXPERIMENT/'manifests/sources.json'), rows=rows,
+                calibration_version=CALIBRATION_VERSION,
                 split_seed=43, test5_val=len(val), test5_test=sum(len(rr) for rr in groups.values())-len(val),
-                calibration_role='first complete eligible press per finger within every test5; its points are never scored',
-                nearest_source_policy='completed preceding test5, same subject/date/PC/boot; no fallback',
-                test5_scoring='remaining eligible presses; use previous completed test5 calibration, never own-record mapping')
+                calibration_role='all eligible complete presses in the nearest whole test5; provided offline BSQ calibration inputs',
+                nearest_source_policy='minimum absolute recording-center wall-time distance; same subject/date/PC/boot; exclude own recording; no silent bad-source fallback',
+                test5_scoring='all eligible presses; labels from another nearest test5, never own-record mapping',
+                evaluation_scope='Calibration-assisted within-person offline evaluation. Test5 BSQ is available calibration input for other recordings; not an untouched-BSQ generalization benchmark.')
     atomic(path, plan); return plan
 
 def pair(a):
@@ -108,8 +119,9 @@ def prepare_routes(root, rows):
     for nr,r in enumerate(rows):
         dest=root/'cache/routes'/(r['id']+'.npz'); model_file=root/'cache/calibration'/(r['id']+'.json')
         receipt=root/'cache/routes'/(r['id']+'.json')
-        if receipt.exists(): summary.append(load(receipt)); continue
-        d=dict(id=r['id'],stage=r['stage'],subject=r['subject'],status='unavailable',channels={},events=0)
+        if receipt.exists() and load(receipt).get('calibration_version')==CALIBRATION_VERSION:
+            summary.append(load(receipt)); continue
+        d=dict(id=r['id'],stage=r['stage'],subject=r['subject'],status='unavailable',channels={},events=0,calibration_version=CALIBRATION_VERSION)
         try:
             meta=load(root/'cache/emg'/r['id']/'done.json')
             if not meta['clock_ok']: raise ValueError('Force receive/sync offset disagreement')
@@ -117,13 +129,12 @@ def prepare_routes(root, rows):
             zero,method=stable_zero(paired,r);ref=paired['bsq_force_N']-zero
             events=stage7_events(paired,zero) if r['stage']=='mix-test-7' else route_press_events(paired,{},zero)
             identity,event,core,sync=routed_labels(paired,events)
-            reserve=np.zeros(len(ref),bool);chosen={};models={};problems={}
+            reserve=np.zeros(len(ref),bool);models={};problems={}
             if r['stage']=='mix-test-5':
-                for e in events:
-                    j=e['target_index']
-                    if not e['eligible'] or j in chosen: continue
-                    chosen[j]=e['event']
-                    ix=np.unique(np.r_[json.loads(e['quiet_indices']),np.arange(e['start_idx'],e['end_idx'])]).astype(int)
+                for j in range(10):
+                    presses=[e for e in events if e['eligible'] and e['target_index']==j]
+                    if not presses:continue
+                    ix=np.unique(np.concatenate([np.r_[json.loads(e['quiet_indices']),np.arange(e['start_idx'],e['end_idx'])] for e in presses])).astype(int)
                     reserve[ix]=True
                     good=sync[ix,j]&np.isfinite(ref[ix])&(ref[ix]>=-.2)&(ref[ix]<=100)
                     ix=ix[good];x=paired['cmcu_ad'][ix,j];y=ref[ix]
@@ -135,19 +146,18 @@ def prepare_routes(root, rows):
                     xx,yy=fit(x,y)
                     if np.ptp(yy)<1:
                         problems[str(j)]='collapsed_calibration_force_range';continue
-                    models[str(j)]=dict(x=xx.tolist(),y=yy.tolist(),press=e['event'],points=len(ix),
+                    models[str(j)]=dict(x=xx.tolist(),y=yy.tolist(),press=presses[0]['event'],presses=[e['event'] for e in presses],points=len(ix),
                         spearman=rho,AD_min=float(xx[0]),AD_max=float(xx[-1]),reference_max_N=float(y.max()))
             score=np.zeros(len(ref),bool)
             for e in events:
-                if e['eligible'] and chosen.get(e['target_index'])!=e['event']:
+                if e['eligible']:
                     score[e['context_start_idx']:e['context_end_idx']]=True
-            score &= ~reserve
             dest.parent.mkdir(parents=True,exist_ok=True)
             np.savez_compressed(dest,t=paired['sync_ts_ns'],reference=ref,identity=identity,score=score,
                                 calibration=reserve,sync=sync,event=event)
-            atomic(model_file,dict(id=r['id'],channels=models,problems=problems,zero_N=zero,zero_method=method))
+            atomic(model_file,dict(id=r['id'],channels=models,problems=problems,zero_N=zero,zero_method=method,calibration_version=CALIBRATION_VERSION))
             d.update(status='prepared',channels={j:{k:v for k,v in m.items() if k not in ['x','y']} for j,m in models.items()},
-                     events=len(events),scoring_points=int(score.sum()),reserved_points=int(reserve.sum()),
+                     events=len(events),scoring_points=int(score.sum()),calibration_input_points=int(reserve.sum()),
                      rejected_event_reasons=dict(collections.Counter(e['reason'] for e in events if not e['eligible'])),
                      problems=problems,zero_N=zero,zero_method=method)
             d['orientation']=load(EXPERIMENT/'manifests/test7_tare_anchors.json').get(r['id'],{}).get('orientation','not_reviewed') if r['stage']=='mix-test-7' else 'standard_test5'
@@ -164,9 +174,13 @@ def get_model(path): return load(path)['channels']
 
 def labels_one(root, r):
     root=Path(root); out=root/'cache/labels'/(r['id']+'.npz')
-    if out.exists(): return
+    label_receipt=out.with_suffix('.json')
+    if r['source_id']==r['id']:raise ValueError('Own-record calibration is forbidden for scoring')
     source=root/'cache/calibration'/(str(r['source_id'])+'.json')
-    if r['route_status']!='candidate' or not source.exists(): raise ValueError('No eligible previous calibration source')
+    if r['route_status']!='candidate' or not source.exists(): raise ValueError('No eligible other-record nearest calibration source')
+    binding=dict(source_id=r['source_id'],source_model_sha256=sha(source),calibration_version=CALIBRATION_VERSION,
+                 reference_sampling='native_BSQ_linear_at_token_query_v1')
+    if out.exists() and label_receipt.exists() and load(label_receipt)==binding:return
     models=get_model(str(source))
     if not models: raise ValueError('Nearest calibration has no valid channels; no fallback')
     meta=load(root/'cache/emg'/r['id']/'done.json')
@@ -177,6 +191,11 @@ def labels_one(root, r):
         if not route_path.exists(): raise ValueError('Missing reference/finger route')
         route=dict(np.load(route_path))
     output={}
+    if route is not None:
+        output['reference_t']=route['t'];output['reference_N']=route['reference']
+        output['reference_valid']=(route['identity'][:,None]==np.arange(10)[None,:])&route['score'][:,None]&route['sync']&np.isfinite(route['reference'])[:,None]
+    else:
+        output['reference_t']=np.empty(0,np.int64);output['reference_N']=np.empty(0,float);output['reference_valid']=np.empty((0,10),bool)
     with np.load(root/'cache/native'/(r['id']+'.npz')) as a:
         for h,side in enumerate(SIDES):
             t=a[side+'_t'];ad=a[side+'_ad'];raw=a[side+'_force'];cal=np.full_like(raw,np.nan)
@@ -197,6 +216,7 @@ def labels_one(root, r):
             output.update({side+'_t':t,side+'_raw':raw.astype(np.float32),side+'_cal':np.nan_to_num(cal).astype(np.float32),
                            side+'_valid':valid,side+'_bsq':bsq.astype(np.float32)})
     out.parent.mkdir(parents=True,exist_ok=True);np.savez_compressed(out,**output)
+    atomic(label_receipt,binding)
 
 def build_dataset(root, rows):
     root=Path(root);entries=[];exclusions=[];window_index={s:[] for s in ['train','val','test']}

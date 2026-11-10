@@ -1,0 +1,15 @@
+{
+  "phase": "real_data_GPU_smoke_passed",
+  "branch": "raw_original",
+  "epoch": 1,
+  "epoch_update": 1,
+  "updates_per_epoch": 1,
+  "global_update": 1,
+  "loss": 0.9585023522377014,
+  "valid_points": 7120,
+  "gradient_norm": 2.4928884506225586,
+  "microbatch": 16,
+  "peak_allocated_GiB": 6.995265960693359,
+  "elapsed_epoch_s": 1.3839387730695307,
+  "test_metrics_read": false
+}

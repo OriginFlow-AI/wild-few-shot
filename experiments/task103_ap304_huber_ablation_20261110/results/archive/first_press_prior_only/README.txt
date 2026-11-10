@@ -1,0 +1,1 @@
+Pre-training software checks using the earlier first-press/prior-only pilot data. These are not final-model or final-protocol results. Initialization and GPU kernel capacity checks are independent of this data policy. Current whole-test5 v2 checks are in the parent results directory.

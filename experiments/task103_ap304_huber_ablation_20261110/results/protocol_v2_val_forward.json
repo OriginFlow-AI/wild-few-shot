@@ -1,0 +1,23 @@
+{
+  "status": "PASS_REAL_VAL_ONLY",
+  "reference_sampling": "native_BSQ_linear_at_token_query_v1",
+  "seconds": 102.29851697385311,
+  "branches": {
+    "calibrated_huber": {
+      "records": 2,
+      "loss": 4.865901029740407,
+      "points": 6497
+    },
+    "raw_huber": {
+      "records": 2,
+      "loss": 10.240807907240134,
+      "points": 6497
+    },
+    "raw_original": {
+      "records": 2,
+      "loss": 1.4304939491076376,
+      "points": 6497
+    }
+  },
+  "test_metrics_read": false
+}

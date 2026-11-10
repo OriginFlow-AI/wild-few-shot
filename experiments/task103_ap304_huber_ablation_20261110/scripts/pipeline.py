@@ -55,7 +55,8 @@ def train_shared(root,smoke=False):
                  OMP_NUM_THREADS='2',MKL_NUM_THREADS='2',OPENBLAS_NUM_THREADS='2',TMPDIR=os.environ.get('TMPDIR',str(root/'tmp')),
                  TASK103_MICROBATCH=str(tune['microbatch']),TASK103_GPU_MEMORY_GIB=str(gpu['process_memory_limit_GiB']))
         command=[sys.executable,'-B',str(scripts/'train.py'),'--root',str(root),'--branch',branch]
-        if smoke:command.append('--smoke')
+        if smoke:
+            command.append('--smoke');env['TASK103_SMOKE_WINDOWS']=str(c['global_batch'])
         with log.open('a') as f:
             p=subprocess.Popen(command,env=env,stdout=f,stderr=subprocess.STDOUT)
             atomic(root/'checks'/('process_'+branch+'.json'),dict(pid=p.pid,command=command,GPU=gpu,smoke=smoke))

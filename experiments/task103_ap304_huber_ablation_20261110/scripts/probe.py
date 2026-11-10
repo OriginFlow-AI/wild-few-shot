@@ -34,6 +34,8 @@ def attempt(root,branch,micro,limit):
 
 def main(root,limit):
     root=Path(root);torch.set_num_threads(2);out=root/'checks/gpu_tuning.json'
+    for key,name in [('CUDA_CACHE_PATH','cuda_kernels'),('TORCH_HOME','torch'),('XDG_CACHE_HOME','xdg')]:
+        path=root/'cache'/name;path.mkdir(parents=True,exist_ok=True);os.environ[key]=str(path)
     if out.exists():return
     rows=[];valid=[]
     for micro in [8,16,32,64]:

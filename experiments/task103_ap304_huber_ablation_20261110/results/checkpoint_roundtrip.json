@@ -1,0 +1,21 @@
+{
+  "status": "PASS_REAL_TRAIN_MODEL_ADAM_RNG_CHECKPOINT_ROUNDTRIP",
+  "GPU": {
+    "index": 6,
+    "uuid": "GPU-63b0e9e5-ec55-d328-a9e4-ba3eb5de54fb",
+    "total_MiB": 143771,
+    "free_MiB": 17351,
+    "utilization": 100,
+    "minimum_free_MiB": 17351,
+    "mean_utilization": 100.0,
+    "process_memory_limit_GiB": 8,
+    "score": 10951.0
+  },
+  "microbatch": 16,
+  "valid_points": 7120,
+  "loss": 0.008074885234236717,
+  "checkpoint_bytes": 220650297,
+  "common_initial_model_unchanged": true,
+  "Test_metrics_read": false,
+  "disposable_checkpoint_deleted": true
+}
