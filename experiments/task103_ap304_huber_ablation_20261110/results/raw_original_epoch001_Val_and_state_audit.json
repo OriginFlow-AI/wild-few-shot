@@ -1,0 +1,19 @@
+{
+  "status": "PASS_REAL_COMPLETE_VAL_AND_STATE_PRESERVATION",
+  "branch": "raw_original",
+  "epoch": 1,
+  "global_update": 2660,
+  "Val_recordings": 983,
+  "prepared_Val_record_set_exactly_covered": true,
+  "trial_equal_validation_loss": 1.315550807049214,
+  "objective": "(1-Corr)+0.3*MAPE+0.03*MAE",
+  "selected_best_epoch": 1,
+  "selected_best_sha256": "72c5c2d1edb73426946bbb2f32ab355b2194ca4bf5b248fc9ca9ecab6aede465",
+  "pre_Val_candidate_sha256": "4c5533d26c0669e83852c93386f14ff17850cb8557caafee8df6aaf985712511",
+  "model_optimizer_CPU_CUDA_RNG_unchanged_by_full_Val": true,
+  "all_three_Val_record_sets_and_target_point_counts_identical": true,
+  "all_three_common_initial_sha256": "f1fb53b6abeaecbabfea746a27a6cc41a831c5153a902f67a031aab394c8675b",
+  "dataset_sha256": "4676f20b9fc0faae28032f401ddd9627262ff47da2ae170c39a440459a571219",
+  "test_metrics_read": false,
+  "scoring_source_policy": "self_test5_nearest_test5_for_other_stages_v1"
+}

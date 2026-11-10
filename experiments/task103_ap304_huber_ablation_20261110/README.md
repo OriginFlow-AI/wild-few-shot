@@ -85,3 +85,5 @@ python "$EXP/scripts/pipeline.py" --root "$ROOT" --workers 32
 首个真实完整Val已完成：calibrated_huber第1轮覆盖全部983条Val记录，trial-equal Huber loss=7.375427957466372，保存第1轮best后进入第2轮。`results/epoch001_Val_and_state_audit.json`核对了完整记录集合、真实epoch候选与best，并验证完整Val前后model/Adam/CPU-CUDA RNG逐项不变。对应逐记录指标在`results/validation/calibrated_huber_epoch001_val.json`；这是Val检查，最终Test和四组对比仍未完成。
 
 raw_huber第1轮完整Val也已完成：全部983条记录，raw标签trial-equal Huber loss=11.25892579844423，保存best并进入第2轮。`results/raw_huber_epoch001_Val_and_state_audit.json`核对完整记录集合、真实候选/best、有限参数，以及完整Val前后model/Adam/CPU-CUDA RNG不变；两个Huber分支逐记录计分点数一致。Val目标标签不同，不能直接把两个Val loss之差当作标定收益；最终收益比较使用同点BSQ Test。
+
+raw_original第1轮完整Val覆盖全部983条记录，trial-equal原始loss=1.315550807049214，保存第1轮best。`analysis/audit_first_validation.py`在真实候选和best之间逐项核对model/Adam/CPU-CUDA RNG不变、参数有限，并确认三路完整Val记录集合及raw/cal/BSQ逐记录计分点数、MAPE有效点数全部一致。证据为`results/raw_original_epoch001_Val_and_state_audit.json`，逐记录指标在`results/validation/raw_original_epoch001_val.json`。原始loss与Huber数值单位不同，不能直接比较大小；三套最终Test均仍待训练结束。
