@@ -51,9 +51,9 @@ Huber按有效点数归一化。第4组Corr在每个microbatch的五指与时间
 
 ## GPU共用及续跑
 
-每次只运行一个训练分支，三次采样GPU显存/利用率。先保留至少8GiB外部余量，再将剩余空间的65%向下取4GiB档作为本进程上限，最高32GiB；GPU基准至少要求16GiB预算。torch allocator限制和额外预留降低干扰，不能保证其他任务后续显存突增时绝无OOM。
+最多三个实验分支并行，各占一张可与已有任务共用的GPU。三次采样显存/利用率，保留8GiB外部余量及2GiB CUDA额外开销后，将剩余空间向下取4GiB档作为本进程allocator上限，最高32GiB。torch allocator限制和预留降低干扰，不能保证其他任务后续显存突增时绝无OOM。
 
-用真实Train窗对8/16/32/64微批依次测试三种目标，选择共同通过且最低分支吞吐最高的一档。记录各档时间和峰值显存；测试优化器更新为一次性检查，不改变正式初始模型。每个正式分支重新选择有足够余量的GPU，使用同一档microbatch。
+用真实Train窗对8/16/32/64微批依次测试三种目标，保存各档时间和峰值显存。单卡最快为32（最慢目标约137窗/秒、峰值13.9GiB）；为在当前空余显存下同时安排三张卡，固定三套训练共用microbatch16（最慢目标约101窗/秒、峰值7.1GiB）。这优先缩短三个实验全部完成的时间；不是各自选择不同微批。测试更新为一次性检查，不改变正式初始模型。
 
 保存完整model/Adam/RNG/epoch/update，默认每25更新last、每轮完整Val与best。恢复绑定配置、数据集和共同初始化哈希。按各分支完整Val的trial-equal目标选best，只在该分支训练完成后评一次最终Test。三套训练完成后严格核对预测文件的时间、指、GT和mask一致，再生成四组结果。
 
@@ -80,5 +80,7 @@ python "$EXP/scripts/pipeline.py" --root "$ROOT" --workers 8
 也可用 `TASK103_CREDENTIAL_FILE` 指向权限允许的**库外**三行 `endpoint: ... / ak: ... / sk: ...`文件。密钥不放Git，不复制到本实验配置。
 
 检查进度：`STATUS.json`、`checks/extraction_progress.json`、`checks/gpu_tuning.json`、`runs/<branch>/STATUS.json`。正式结果为 `results/FINAL_REPORT.json`、`four_experiments.csv`、`paired_person_differences.csv`及`REPORT.txt`；未出现完成凭据不能视为完成。
+
+目标为北京时间2026-11-11 08:00前完成，属于尽力目标。保留既定max10/patience3、完整Val选模和最终Test，不按截止时间伪装完成或临时削减训练预算。进度预测要以全量有效窗口数及实际并行吞吐为准。
 
 准备阶段默认保留100GiB磁盘余量。错误记录、质量掩码和运行缓存仅落运行目录，Git只保存可复现源码、冻结清单、源权重与紧凑检查结果。

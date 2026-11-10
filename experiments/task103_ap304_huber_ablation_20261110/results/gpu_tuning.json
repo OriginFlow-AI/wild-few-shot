@@ -1,9 +1,9 @@
 {
   "status": "PASS_REAL_TRAIN_GPU_BENCHMARK",
   "chosen": {
-    "microbatch": 32,
-    "windows_per_second": 137.4585730715931,
-    "peak_allocated_GiB": 13.864617824554443
+    "microbatch": 16,
+    "windows_per_second": 101.4193408873027,
+    "peak_allocated_GiB": 7.1117377281188965
   },
   "attempts": [
     {
@@ -124,6 +124,11 @@
   "GPU": "NVIDIA H200",
   "formal_weights_changed": false,
   "test_metrics_read": false,
-  "note": "Probe optimizer steps are disposable. All formal branches start from the common initial state. Frozen from a real Train subset before full training.",
-  "benchmark_root": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/real_data_smoke"
+  "note": "Probe optimizer steps are disposable. All formal branches start from the common initial state.",
+  "fastest_single_GPU_candidate": {
+    "microbatch": 32,
+    "windows_per_second": 137.4585730715931,
+    "peak_allocated_GiB": 13.864617824554443
+  },
+  "selection_reason": "Three independent GPUs and common microbatch prioritize experiment makespan before requested deadline"
 }

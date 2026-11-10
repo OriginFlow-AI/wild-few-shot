@@ -18,7 +18,9 @@ def choose(limit_GiB=32.,reserve_GiB=8.,exclude=(),minimum_limit_GiB=8.):
     for latest in observations[-1]:
         index=latest['index'];samples=[next(r for r in s if r['index']==index) for s in observations]
         minimum=min(r['free_MiB'] for r in samples)
-        budget=min(limit_GiB, int(max(0., minimum/1024-reserve_GiB)*.65)//4*4)
+        # Reserve 2 GiB for CUDA/NCCL outside the PyTorch allocator, in addition
+        # to the external workload reserve. Do not double-reserve by a fraction.
+        budget=min(limit_GiB, int(max(0., minimum/1024-reserve_GiB-2.))//4*4)
         if budget<minimum_limit_GiB or index in exclude:continue
         row=dict(latest,minimum_free_MiB=minimum,mean_utilization=sum(r['utilization'] for r in samples)/len(samples))
         row['process_memory_limit_GiB']=budget

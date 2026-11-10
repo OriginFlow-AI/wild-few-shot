@@ -18,6 +18,6 @@
 - [运行检查与阶段状态](experiments/task103_ap304_huber_ablation_20261110/results/)
 - [一阶段权重与共同二阶段初始化](models/ap304_stage1/)（Git LFS）
 
-`.1` 运行目录为 `/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110`。GPU 按剩余显存和利用率自动选择，允许与已有任务共用；真实 Train 微批基准决定三套训练共用的 microbatch。
+`.1` 运行目录为 `/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110`。GPU 按剩余显存和利用率自动选择，允许与已有任务共用；已按真实 Train 基准冻结三套训练共用microbatch16，最多三张卡并行不同实验，尽量于北京时间11月11日08:00前完成。
 
 原始 MCAP、EMG、视频、访问密钥和运行缓存不入库。

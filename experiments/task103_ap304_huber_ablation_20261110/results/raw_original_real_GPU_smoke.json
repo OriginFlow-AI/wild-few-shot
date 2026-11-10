@@ -5,11 +5,11 @@
   "epoch_update": 1,
   "updates_per_epoch": 1,
   "global_update": 1,
-  "loss": 0.9231425523757935,
-  "valid_points": 14240,
-  "gradient_norm": 2.2532660961151123,
-  "microbatch": 32,
-  "peak_allocated_GiB": 13.733642578125,
-  "elapsed_epoch_s": 1.18639832502231,
+  "loss": 0.9585023522377014,
+  "valid_points": 7120,
+  "gradient_norm": 2.4928884506225586,
+  "microbatch": 16,
+  "peak_allocated_GiB": 6.995265960693359,
+  "elapsed_epoch_s": 1.3839387730695307,
   "test_metrics_read": false
 }
