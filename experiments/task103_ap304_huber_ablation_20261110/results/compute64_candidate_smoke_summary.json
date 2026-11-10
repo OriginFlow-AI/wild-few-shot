@@ -1,0 +1,110 @@
+{
+  "status": "PASS_ALL_THREE_TRAIN_ONLY_COMPUTE64_SMOKES",
+  "cases": [
+    {
+      "branch": "calibrated_huber",
+      "passed": {
+        "phase": "real_data_GPU_smoke_passed",
+        "branch": "calibrated_huber",
+        "epoch": 1,
+        "epoch_update": 1,
+        "updates_per_epoch": 2660,
+        "global_update": 1,
+        "loss": 0.732515811920166,
+        "valid_points": 95011,
+        "gradient_norm": 1.4627236127853394,
+        "microbatch": 16,
+        "physical_forward_windows": 64,
+        "peak_allocated_GiB": 27.18798828125,
+        "elapsed_epoch_s": 3.723721313290298,
+        "test_metrics_read": false
+      },
+      "contract_sha256": "865e68c5749e3d20bd28b0ac3774d8329a4d603574aea24c8764d11c3ec12a6f"
+    },
+    {
+      "branch": "raw_huber",
+      "passed": {
+        "phase": "real_data_GPU_smoke_passed",
+        "branch": "raw_huber",
+        "epoch": 1,
+        "epoch_update": 1,
+        "updates_per_epoch": 2660,
+        "global_update": 1,
+        "loss": 0.9571150988340378,
+        "valid_points": 95011,
+        "gradient_norm": 1.7885639667510986,
+        "microbatch": 16,
+        "physical_forward_windows": 64,
+        "peak_allocated_GiB": 27.18798828125,
+        "elapsed_epoch_s": 3.66931439563632,
+        "test_metrics_read": false
+      },
+      "contract_sha256": "a72a91957e6fa3d670f40fea4bd0032e331f91ed67b4ca99a76c8d43460d2447"
+    },
+    {
+      "branch": "raw_original",
+      "passed": {
+        "phase": "real_data_GPU_smoke_passed",
+        "branch": "raw_original",
+        "epoch": 1,
+        "epoch_update": 1,
+        "updates_per_epoch": 2660,
+        "global_update": 1,
+        "loss": 1.0330137610435486,
+        "valid_points": 95011,
+        "gradient_norm": 1.1756806373596191,
+        "microbatch": 16,
+        "physical_forward_windows": 64,
+        "peak_allocated_GiB": 27.18798828125,
+        "elapsed_epoch_s": 3.9540640581399202,
+        "test_metrics_read": false
+      },
+      "contract_sha256": "966bab17e3c594a0de4f2996cc4aaed71ec18d201645e48ebf351f671e1198ce"
+    }
+  ],
+  "candidate_code": "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/compute64_candidate_20261111/code",
+  "GPU_samples": [
+    {
+      "uuid": "GPU-22405d43-a60f-6aec-2735-5b39deeef0cd",
+      "free_MiB": 74468,
+      "utilization": 27
+    },
+    {
+      "uuid": "GPU-22405d43-a60f-6aec-2735-5b39deeef0cd",
+      "free_MiB": 74468,
+      "utilization": 21
+    },
+    {
+      "uuid": "GPU-22405d43-a60f-6aec-2735-5b39deeef0cd",
+      "free_MiB": 74468,
+      "utilization": 48
+    }
+  ],
+  "candidate_source_code": {
+    "scripts/bootstrap.py": "8e02972fe137f9b7eb85d6f56840948771e7c53981bee478829fb0064a84df2b",
+    "scripts/common.py": "a6411e6c24c155ccf89175543df58803d422f11f3b08e2d0d4b2cd5e266cff3b",
+    "scripts/extract.py": "eb7297437fd5ef03bfe7baf1ad8ae8bc3da411d7b4c3507e570aeb4fcc19248c",
+    "scripts/gpu_selector.py": "88ba2e80ec15f12567cde23b5d059565f550e310471437464a2d72e2ff1e86e2",
+    "scripts/launch.py": "f65666a6319353ca065d11d3d989d7403f4b2f7041c96eb8f7955532030145c5",
+    "scripts/pipeline.py": "a258e3a38cd45cb352cf7ead670729ea3f9bc9a55770291682cdd781a917d7b6",
+    "scripts/prepare.py": "fd16dee9fc3c1a9731e7874ad42b0dc1f4d1639326deb3bcbf8ad36b3065aa53",
+    "scripts/preprocessing.py": "d6d5e53e722846e010300ae434180a24f03d03751b438a495b83e06baf29ba68",
+    "scripts/probe.py": "47071caeb5103e5763d261aadbd9f67f366c91638b1fd2e8e040895d75d88915",
+    "scripts/report.py": "1fb52fe553fe4a8db7f03d7ad287b0d5333131e639379f04b67021f5e07aaedd",
+    "scripts/train.py": "d8dcb7d1d1057701014f9e2412ec4dc69aec34f4cdaebfd48eafe7f0d303c1ae",
+    "scripts/verify_checkpoint.py": "d694c08eff97a5ef7adba32886bbdaa38ac672e08b9532898260c5cd87ab1656",
+    "scripts/verify_protocol.py": "840d0bc6499f198cb2ffa2ede04f289f45230e9ef02074db3519e814c5ca4f19",
+    "scripts/verify_report.py": "c7a972e5a3f0baf1bb18a9f32a598f7c02d82a22ad16dde503335bc73963746f",
+    "vendor/force_losses.py": "390ee876acfb3ef1a0840ca935acc520b86882ed59a88b8a8435bab83b988876",
+    "vendor/mcap_io.py": "a62ed3773faeb7651738011619437633c8b91842afe812147e82d9b4bf4cb584",
+    "vendor/model_source.py": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+    "vendor/routing.py": "c8d4d06db2eb1a14858e3198e78167344f8c68737eadb7d43d5be98928ec95c2"
+  },
+  "max_peak_allocated_GiB": 27.18798828125,
+  "original_dataset_sha256": "4676f20b9fc0faae28032f401ddd9627262ff47da2ae170c39a440459a571219",
+  "original_train_source_sha256": "36eb32c8be81e876980652017f5cf83df1312fbc8fd157c71cdc36e8c580aefb",
+  "original_config_sha256": "01c6792106c30d0013d143292d0e0c28e724e3c48e5b4ce8cbcc902a10adc3bc",
+  "data_entries_labels_norm_and_windows_unchanged": true,
+  "formal_training_source_and_configuration_unchanged": true,
+  "test_metrics_read": false
+}

@@ -1,0 +1,78 @@
+{
+  "status": "DISPOSABLE_TRAIN_ONLY_PROBE_COMPLETE",
+  "attempts": [
+    {
+      "physical_forward": 16,
+      "logical_loss_group": 16,
+      "global_batch": 256,
+      "windows_per_second": 67.1821747234558,
+      "step_seconds": [
+        4.559350632596761,
+        3.8347034687176347,
+        3.7863656929694116
+      ],
+      "peak_allocated_GiB": 7.231466293334961,
+      "train_loss": 1.0133984722197056,
+      "unclipped_gradient_norm": 1.7072601318359375,
+      "full256_after_first_update_cuda_rng": "2b000000000000004079f00300000000",
+      "full256_after_three_updates_cuda_rng": "2b00000000000000c06bd10b00000000",
+      "tail111_cuda_rng": "2b000000000000005844b50100000000",
+      "tail111_loss": 1.1934422999620438,
+      "deterministic_eval_mode_loss": 1.0506953671574593,
+      "deterministic_prediction_max_abs_difference_N": 0.0,
+      "deterministic_gradient_relative_l2": 0.0,
+      "cuda_rng_matches_physical16": true
+    },
+    {
+      "physical_forward": 32,
+      "logical_loss_group": 16,
+      "global_batch": 256,
+      "windows_per_second": 80.03237509615538,
+      "step_seconds": [
+        3.286225451156497,
+        3.1975341350771487,
+        3.199876904953271
+      ],
+      "peak_allocated_GiB": 13.985750675201416,
+      "train_loss": 1.01332176476717,
+      "unclipped_gradient_norm": 1.7009676694869995,
+      "full256_after_first_update_cuda_rng": "2b00000000000000e075f00300000000",
+      "full256_after_three_updates_cuda_rng": "2b00000000000000a061d10b00000000",
+      "tail111_cuda_rng": "2b000000000000001443b50100000000",
+      "tail111_loss": 1.1950029730796814,
+      "deterministic_eval_mode_loss": 1.0506187677383423,
+      "deterministic_prediction_max_abs_difference_N": 0.02006208896636963,
+      "deterministic_gradient_relative_l2": 0.0015729974566818128,
+      "cuda_rng_matches_physical16": false
+    },
+    {
+      "physical_forward": 64,
+      "logical_loss_group": 16,
+      "global_batch": 256,
+      "windows_per_second": 97.5803766221465,
+      "step_seconds": [
+        2.921652603894472,
+        2.8506778832525015,
+        2.396278704982251
+      ],
+      "peak_allocated_GiB": 27.358092308044434,
+      "train_loss": 1.013072356581688,
+      "unclipped_gradient_norm": 1.7038886547088623,
+      "full256_after_first_update_cuda_rng": "2b000000000000003074f00300000000",
+      "full256_after_three_updates_cuda_rng": "2b00000000000000905cd10b00000000",
+      "tail111_cuda_rng": "2b00000000000000a842b50100000000",
+      "tail111_loss": 1.193643569946289,
+      "deterministic_eval_mode_loss": 1.050654947757721,
+      "deterministic_prediction_max_abs_difference_N": 0.020062029361724854,
+      "deterministic_gradient_relative_l2": 0.001541332483648234,
+      "cuda_rng_matches_physical16": false
+    }
+  ],
+  "memory_limit_GiB": 32.0,
+  "GPU": "NVIDIA H200",
+  "common_initial_sha256": "f1fb53b6abeaecbabfea746a27a6cc41a831c5153a902f67a031aab394c8675b",
+  "dataset_sha256": "4676f20b9fc0faae28032f401ddd9627262ff47da2ae170c39a440459a571219",
+  "formal_training_changed": false,
+  "test_metrics_read": false,
+  "caveat": "Eval-mode comparison tests deterministic grouping only. Train-mode dropout masks may differ even when RNG advancement matches; no equivalence or formal adoption is assumed."
+}

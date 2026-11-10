@@ -142,6 +142,14 @@ def save(path,net,opt,state,binding):
                  torch_rng=torch.get_rng_state(),cuda_rng=torch.cuda.get_rng_state())
     tmp=path.with_suffix('.partial.pt');torch.save(payload,tmp);os.replace(tmp,path)
 
+def physical_forward_windows(c,global_update,logical_microbatch):
+    schedule=c.get('physical_forward_schedule',[dict(start_global_update=0,windows=logical_microbatch)])
+    starts=[s['start_global_update'] for s in schedule]
+    if starts!=sorted(set(starts)) or starts[0]!=0:raise ValueError('Invalid common forward schedule')
+    if any(s['windows']<logical_microbatch or s['windows']%logical_microbatch for s in schedule):
+        raise ValueError('Physical forwards must preserve complete logical loss groups')
+    return next(s['windows'] for s in reversed(schedule) if global_update>=s['start_global_update'])
+
 def run(root,branch,smoke=False):
     root=Path(root);c=settings();torch.set_num_threads(2)
     for key,name in [('CUDA_CACHE_PATH','cuda_kernels'),('TORCH_HOME','torch'),('XDG_CACHE_HOME','xdg')]:
@@ -163,10 +171,12 @@ def run(root,branch,smoke=False):
     out=root/'runs'/branch;out.mkdir(parents=True,exist_ok=True)
     if smoke:out=root/'checks'/('smoke_'+branch);out.mkdir(parents=True,exist_ok=True)
     micro=int(os.environ.get('TASK103_MICROBATCH',c['microbatch']))
+    if micro!=c['common_microbatch']:raise ValueError('All branches require the fixed common logical loss group')
     binding=dict(config_sha256=sha(EXPERIMENT/'config.json'),dataset_sha256=sha(root/'prepared/dataset.json'),
                  source_code=source_binding(),
                  common_initial_sha256=sha(init),branch=branch,force_norm=norm,
-                 effective_microbatch=micro,EMG_norm_sha256=sha(EXPERIMENT/'reference/stage1_emg_train_norm.npz'))
+                 effective_microbatch=micro,EMG_norm_sha256=sha(EXPERIMENT/'reference/stage1_emg_train_norm.npz'),
+                 physical_forward_schedule=c.get('physical_forward_schedule',[dict(start_global_update=0,windows=micro)]))
     atomic(out/'CONTRACT.json',dict(**binding,configuration=c))
     opt=optimizer(net,c);state=dict(epoch=0,next_update=0,global_update=0,best=None,early_reference=None,bad_epochs=0,history=[])
     last=out/'last.pt';best=out/'best.pt'
@@ -187,13 +197,25 @@ def run(root,branch,smoke=False):
         tick=time.monotonic();net.train()
         for u,batch in enumerate(loader,start=state['next_update']):
             x,y,valid=batch;den=int(valid.sum());opt.zero_grad(set_to_none=True);value=0.
-            for start in range(0,len(x),micro):
-                xx=x[start:start+micro].to(device,non_blocking=True);yy=y[start:start+micro].to(device,non_blocking=True)
-                mask=valid[start:start+micro].to(device,non_blocking=True)
+            physical=physical_forward_windows(c,state['global_update'],micro)
+            for start in range(0,len(x),physical):
+                xx=x[start:start+physical].to(device,non_blocking=True);yy=y[start:start+physical].to(device,non_blocking=True)
+                mask=valid[start:start+physical].to(device,non_blocking=True)
                 with torch.autocast('cuda',dtype=torch.bfloat16):z=net(xx)
-                pred=z.float()*std+mean;loss,count=objective(pred,yy,mask,branch)
-                if not torch.isfinite(loss):raise ValueError('Nonfinite loss')
-                (loss*(count/max(1,den))).backward();value+=float(loss.detach())*count/max(1,den)
+                pred=z.float()*std+mean
+                if physical==micro:
+                    # Keep the original operation/RNG order through the common
+                    # epoch-3 boundary, including exact prefix resume semantics.
+                    loss,count=objective(pred,yy,mask,branch)
+                    if not torch.isfinite(loss):raise ValueError('Nonfinite loss')
+                    (loss*(count/max(1,den))).backward();value+=float(loss.detach())*count/max(1,den)
+                else:
+                    terms=[]
+                    for lo in range(0,len(xx),micro):
+                        loss,count=objective(pred[lo:lo+micro],yy[lo:lo+micro],mask[lo:lo+micro],branch)
+                        if not torch.isfinite(loss):raise ValueError('Nonfinite loss')
+                        terms.append(loss*(count/max(1,den)))
+                    combined=sum(terms);combined.backward();value+=float(combined.detach())
             step=state['global_update'];warm=c['warmup_updates']
             factor=(step+1)/warm if step<warm else .1+.9*(1+math.cos(math.pi*min(1.,(step-warm)/max(1,total_updates-warm-1))))/2
             for g in opt.param_groups:g['lr']=g['base_lr']*factor
@@ -201,6 +223,7 @@ def run(root,branch,smoke=False):
             state.update(next_update=u+1,global_update=step+1)
             status=dict(phase='training',branch=branch,epoch=epoch+1,epoch_update=u+1,updates_per_epoch=updates,
                 global_update=step+1,loss=value,valid_points=den,gradient_norm=grad,microbatch=micro,
+                physical_forward_windows=physical,
                 peak_allocated_GiB=torch.cuda.max_memory_allocated()/2**30,elapsed_epoch_s=time.monotonic()-tick)
             atomic(out/'STATUS.json',status)
             with (out/'metrics.jsonl').open('a') as f:f.write(json.dumps(status)+'\n')

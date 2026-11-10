@@ -1,0 +1,19 @@
+{
+  "status": "PASS_CPU_PROTOCOL_AND_COMMON_COMPUTE_BOUNDARY",
+  "CPU_result": "PASS: physical-N Huber, original formula, masked gradients, gap masks and frozen recording/source isolation",
+  "before_update_cursors": [
+    0,
+    7979,
+    7980,
+    26600
+  ],
+  "physical_forward_windows": [
+    16,
+    16,
+    64,
+    64
+  ],
+  "first_compute64_optimizer_update": 7981,
+  "evaluation_loss_group": 16,
+  "test_metrics_read": false
+}

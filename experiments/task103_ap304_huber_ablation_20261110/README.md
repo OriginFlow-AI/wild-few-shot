@@ -17,7 +17,7 @@ AP304 width304、9 encoder、4 decoder，18,357,945参数，原生输出`[B,5,89
 
 EMG沿用一期norm（SHA `7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6`）；raw/cal force分别在共同有效的Train原生点上统计mean/std，原始loss与raw-Huber共享raw统计。Huber在输出反归一化后的N域计算，δ=1N；MAPE只取`abs(GT)>=0.5N`，在loss里使用比例值。无活动点的诊断MAPE记null；原loss训练/选模保留MAPE=0的有限约定。
 
-AdamW：body2e-5、head1e-4，weight_decay1e-4，bias/norm不衰减；warmup1000 updates，10epoch跨度cosine到0.1倍，BF16前向、FP32 loss、clip1、global batch256。三套固定microbatch16，按有效标量点数累积；原loss的Corr在每个microbatch五指和时间点一起计算，不等于对256窗计算一次全局Corr。max10 epochs、Val patience3、min_delta1e-4，每轮完整Val按trial-equal分支目标选best，训练结束后最终Test。
+AdamW：body2e-5、head1e-4，weight_decay1e-4，bias/norm不衰减；warmup1000 updates，10epoch跨度cosine到0.1倍，BF16前向、FP32 loss、clip1、global batch256。三套固定逻辑loss组16，按有效标量点数累积；原loss的Corr在每个16窗组的五指和时间点一起计算，不等于对256窗计算一次全局Corr。max10 epochs、Val patience3、min_delta1e-4，每轮完整Val按trial-equal分支目标选best，训练结束后最终Test。共同前向计算调度为前3轮16窗、第4轮起64窗；合批后仍分别计算每个16窗loss，Val/Test前向保持16窗。计算调度的上线证据见后文。
 
 ZIP的pure-Huber旧对照固定1epoch；本实验沿用主二阶段max10/patience3政策，三套预算一致。`reference/PROVENANCE.json`保存来源及各loss追溯。
 
@@ -53,7 +53,7 @@ EMG重采样2000Hz，每个连续有效段一次50Hz谐波陷波Q30、四阶40�
 
 ## GPU、续跑与口径修正审计
 
-最多三路独立实验并行，按三次显存/利用率观测自动选共享卡。保留4GiB外部余量、2GiB CUDA开销后向下取4GiB档，allocator上限最高32GiB；固定8GiB上限已取消。真实Train benchmark：micro16最慢目标约101窗/秒、峰值7.1GiB；micro32约137窗/秒、峰值13.9GiB。当前可用卡条件优先三路同时运行，三套冻结micro16。共享余量不能保证外部任务后续突增时完全无OOM；控制器保存完整model/Adam/RNG，每25更新last，支持重试和恢复。
+最多三路独立实验并行，按三次显存/利用率观测自动选共享卡。保留4GiB外部余量、2GiB CUDA开销后向下取4GiB档，allocator上限最高32GiB；固定8GiB上限已取消。初始真实Train benchmark：micro16最慢目标约101窗/秒、峰值7.1GiB；micro32约137窗/秒、峰值13.9GiB。初期可用卡条件优先三路同时运行，三套冻结逻辑loss组16。共享余量不能保证外部任务后续突增时完全无OOM；控制器保存完整model/Adam/RNG，每25更新last，支持重试和恢复。
 
 正式训练最初给test5额外用了“最近另一条”的曲线。该约束不是原始“最近test5标定全部”的必要条件；已在首次完整Val之前纠正为自身曲线。修正前模型/Adam/游标/CPU-CUDA RNG完整保存；`analysis/migrate_validation_only_binding.py`要求普通stage的全部逻辑Train窗、输入/标签哈希、norm和训练算法**完全一致**后才重绑Val/Test数据与配置。修正保留2,575/1,275/1,375次已保存更新，不从一期重训。证据为`results/validation_only_protocol_migration.json`；原方案归档于服务器`archive/nearest_other_test5_before_self_correction`。
 
@@ -97,3 +97,5 @@ raw_original第1轮完整Val覆盖全部983条记录，trial-equal原始loss=1.3
 迁移后约93–96窗/秒，单轮约2小时。两路第2轮仍刷新best，依patience3至少还需3轮才可能早停；按03:27的实测吞吐，08:00前完成全部训练及最终评测已不现实。保留既定训练政策并继续完成；资源有实质改善时再更新估计。
 
 04:15，raw_original也完成第2轮全部983条Val，原始目标loss为1.2639655736797213（第1轮1.315550807049214），保存global update5320的新best、bad_epochs=0并进入第3轮。`results/raw_original_epoch002_Val_and_state_audit.json`验证真实轮末候选与新best的model/Adam/CPU-CUDA RNG逐项相等，Adam step与global update一致、参数有限、完整Val记录和计分点数一致、实际数据/配置/源码绑定不变。逐记录指标在`results/validation/raw_original_epoch002_val.json`。三套第2轮best均已验收；最终Test仍待正常训练结束，不以这些不同目标的Val loss推断标定收益。
+
+更大显存余量下准备共同计算调度：三路都在完成global update7980（第3轮末）后，首次于optimizer update7981改用64窗物理前向，仍分成每16窗计算原目标并累积到256窗。`analysis/bench_forward_grouping.py`使用独立Train探针，在共享GPU0上测得约67.18→97.58窗/秒、峰值27.36GiB；无dropout的BF16分组比较中预测最大差约0.0201N、梯度相对L2差约0.154%。合批改变具体dropout掩码及随机数推进，因此按三路共同更新点切换，不按各自墙钟时刻即时切换。架构、dropout率、loss组、数据、norm、优化器、LR和预算不变，Val/Test计算方式不变。独立候选runtime的三种真实Train GPU smoke均通过（峰值27.19GiB），CPU目标/掩码/来源检查及边界7980/7981检查通过；未读Test指标。正式上线与完整保存前缀证明以`forward_schedule_migration`审计为准。
