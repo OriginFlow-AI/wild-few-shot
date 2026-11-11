@@ -5,3 +5,4 @@
 # 实验
 
 - [codex/task103-cmcu-calibration-20261109](codex/task103-cmcu-calibration-20261109.md)：固定 AP304，比较是否先用 BSQ 重标定 CMCU；test7 用 BSQ 真值评价，MAE 6.53→3.26 N（降低 50%）。
+- [zss/model_ref_1111](zss/model_ref_1111.md)：Chord 3.6 ep005 的架构、训练、K2 对照、姿态推理和五指力迁移示例。
