@@ -1,0 +1,169 @@
+{
+  "calibration_versions": [
+    "whole-test5-absolute-nearest-v3-gross-fit-qc"
+  ],
+  "records": 2411,
+  "statuses": {
+    "prepared": 2404,
+    "unavailable": 7
+  },
+  "test5": 1977,
+  "usable_test5": 1966,
+  "accepted_finger_models": 16307,
+  "partial_test5": 1124,
+  "channel_failures": {
+    "gross_source_fit_residual_P90_above_10N_and_half_range": 88,
+    "nonpositive_or_weak_calibration_monotonicity": 239,
+    "collapsed_calibration_force_range": 2
+  },
+  "unavailable": [
+    {
+      "id": "85f7455157a41b54d87d",
+      "subject": "fyf02074188",
+      "stage": "mix-test-5",
+      "reason": "Force receive/sync offset disagreement"
+    },
+    {
+      "id": "a3f698914701e1d10da4",
+      "subject": "glm05234375",
+      "stage": "mix-test-5",
+      "reason": "BSQ median above100N or nonfinite"
+    },
+    {
+      "id": "e2e012db154ac81930de",
+      "subject": "ms09194462",
+      "stage": "mix-test-7",
+      "reason": "No stable post-positioning BSQ tare segment"
+    },
+    {
+      "id": "b97db15e8e873da8e95c",
+      "subject": "ln11294643",
+      "stage": "mix-test-7",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/b97db15e8e873da8e95c/done.json'"
+    },
+    {
+      "id": "ec5ac57400c473f7e610",
+      "subject": "ls05014634",
+      "stage": "mix-test-5",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/ec5ac57400c473f7e610/done.json'"
+    },
+    {
+      "id": "1bc5b4c2f45009b5ba55",
+      "subject": "yjy11214734",
+      "stage": "mix-test-7",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/1bc5b4c2f45009b5ba55/done.json'"
+    },
+    {
+      "id": "71c92fe0a1e90a808570",
+      "subject": "lrj08054761",
+      "stage": "mix-test-5",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/71c92fe0a1e90a808570/done.json'"
+    }
+  ],
+  "zero_channel_test5": [
+    {
+      "id": "85f7455157a41b54d87d",
+      "subject": "fyf02074188",
+      "reason": "Force receive/sync offset disagreement",
+      "events": 0,
+      "problems": null,
+      "rejected_event_reasons": null
+    },
+    {
+      "id": "7acd28ef6dd54e2a08ab",
+      "subject": "fyx01094176",
+      "reason": null,
+      "events": 27,
+      "problems": {},
+      "rejected_event_reasons": {
+        "peak_below3N_cannot_confirm_finger": 21,
+        "no_local_quiet_for_AD_identity": 5,
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "a3f698914701e1d10da4",
+      "subject": "glm05234375",
+      "reason": "BSQ median above100N or nonfinite",
+      "events": 0,
+      "problems": null,
+      "rejected_event_reasons": null
+    },
+    {
+      "id": "558a03381adc68cd07a2",
+      "subject": "wy10204452",
+      "reason": null,
+      "events": 41,
+      "problems": {},
+      "rejected_event_reasons": {
+        "peak_below3N_cannot_confirm_finger": 40,
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "bcbc65c6dcfa8c65896d",
+      "subject": "hfh05014636",
+      "reason": null,
+      "events": 1,
+      "problems": {},
+      "rejected_event_reasons": {
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "eb25b5f3b25e32dfd01b",
+      "subject": "jxd10133591",
+      "reason": null,
+      "events": 0,
+      "problems": {},
+      "rejected_event_reasons": {}
+    },
+    {
+      "id": "30821473cc15cfa3a7a7",
+      "subject": "hfh05014636",
+      "reason": null,
+      "events": 3,
+      "problems": {},
+      "rejected_event_reasons": {
+        "peak_below3N_cannot_confirm_finger": 2,
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "ec5ac57400c473f7e610",
+      "subject": "ls05014634",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/ec5ac57400c473f7e610/done.json'",
+      "events": 0,
+      "problems": null,
+      "rejected_event_reasons": null
+    },
+    {
+      "id": "1ad1f33547df62c93e84",
+      "subject": "ln11294643",
+      "reason": null,
+      "events": 1,
+      "problems": {},
+      "rejected_event_reasons": {
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "69741622c7f579e029eb",
+      "subject": "wsd01244685",
+      "reason": null,
+      "events": 1,
+      "problems": {},
+      "rejected_event_reasons": {
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "71c92fe0a1e90a808570",
+      "subject": "lrj08054761",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/71c92fe0a1e90a808570/done.json'",
+      "events": 0,
+      "problems": null,
+      "rejected_event_reasons": null
+    }
+  ]
+}
