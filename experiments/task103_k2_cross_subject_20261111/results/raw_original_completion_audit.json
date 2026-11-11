@@ -1,0 +1,19 @@
+{
+  "status": "PASS_COMPLETED_K2_BRANCH",
+  "branch": "raw_original",
+  "selection": {
+    "epochs": 4,
+    "best_epoch": 2,
+    "best_val_loss": 1.2218948874842064,
+    "best_sha256": "20cff8fb198522ef8d93531a22b9e00a3ee7d87eb41ddbb78ddb6c892e4d6305",
+    "stop_reason": "val_patience",
+    "test_recordings": 240
+  },
+  "expected_Test_arrays_match": true,
+  "BSQ_metrics_recomputed": true,
+  "points_by_stage": {
+    "mix-test-5": 557913,
+    "mix-test-7": 96722
+  },
+  "final_test_sha256": "8d801eea9e819af2f1b22824363ea688e8f50c53b9b8df1b1cb0f0c1d097af00"
+}

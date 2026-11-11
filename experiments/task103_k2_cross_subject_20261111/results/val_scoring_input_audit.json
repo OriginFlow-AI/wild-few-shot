@@ -7,9 +7,9 @@
     "recordings": 293,
     "points": 724829,
     "complete_epochs": {
-      "calibrated_huber": 1,
-      "raw_huber": 1,
-      "raw_original": 1
+      "calibrated_huber": 3,
+      "raw_huber": 4,
+      "raw_original": 4
     }
   },
   "status": "PASS_VAL_SCORING_INPUTS"

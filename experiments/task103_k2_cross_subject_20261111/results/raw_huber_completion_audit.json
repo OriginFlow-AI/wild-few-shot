@@ -1,0 +1,19 @@
+{
+  "status": "PASS_COMPLETED_K2_BRANCH",
+  "branch": "raw_huber",
+  "selection": {
+    "epochs": 4,
+    "best_epoch": 2,
+    "best_val_loss": 10.890537514452085,
+    "best_sha256": "9b0ec1a32f18e5bf5fcffd6ca5237bbaf0540697ed355352f20651b4565f5574",
+    "stop_reason": "val_patience",
+    "test_recordings": 240
+  },
+  "expected_Test_arrays_match": true,
+  "BSQ_metrics_recomputed": true,
+  "points_by_stage": {
+    "mix-test-5": 557913,
+    "mix-test-7": 96722
+  },
+  "final_test_sha256": "e443ce7ccf9a7f6718794040e84c6f6749fd5ebf166ef77c2087ff496f612ab5"
+}

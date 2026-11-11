@@ -1,0 +1,26 @@
+{
+  "status": "PASS_MATCHED_EXPERIMENTS_3_AND_4",
+  "dataset_sha256": "13fb9acacecc99c925e01237ea22a521a525f79aa25069576816337e59262560",
+  "recordings": 240,
+  "test_people": 12,
+  "points_by_stage": {
+    "mix-test-5": 557913,
+    "mix-test-7": 96722
+  },
+  "subject_equal": {
+    "raw_huber": {
+      "corr": 0.40482336499014077,
+      "mae_N": 7.1506129746357905,
+      "mae_below_1N": 0.502768306420282,
+      "mape_ge_0p5N_percent": 75.87224252320992,
+      "mape_ge_1N_percent": 75.68690202589214
+    },
+    "raw_original": {
+      "corr": 0.4398904958680096,
+      "mae_N": 7.5879908826652205,
+      "mae_below_1N": 0.7386804547739945,
+      "mape_ge_0p5N_percent": 77.4252755925737,
+      "mape_ge_1N_percent": 78.11616549200546
+    }
+  }
+}
