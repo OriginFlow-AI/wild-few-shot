@@ -1,0 +1,8 @@
+{
+  "phase": "complete",
+  "branch": "raw_original",
+  "checkpoint_epoch": 9,
+  "epoch_candidate_sha256": "d903b2f95283506e75c6363c8e3348a1c6abf5d585c02da018f624b550f257be",
+  "selected_checkpoint_sha256": "8b7ae6b12ed90975e4589f6f1afe59d63d559fdccdc58e78c0144f49a7c3ad50",
+  "test_recordings": 1406
+}
