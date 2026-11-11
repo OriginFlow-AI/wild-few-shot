@@ -1,0 +1,53 @@
+{
+  "status": "PASS_REAL_COMPLETE_VAL_NEW_BEST_AND_STATE_PRESERVATION",
+  "branch": "raw_huber",
+  "epoch": 6,
+  "global_update": 15960,
+  "Val_recordings": 983,
+  "prepared_Val_record_set_exactly_covered": true,
+  "trial_equal_validation_loss": 10.088489528421752,
+  "objective": "Huber_delta_1N",
+  "selected_best_epoch": 6,
+  "selected_best_sha256": "d8021193f80cc3fafb050b18e5d81848748b9d6fc85de3fa1d513cc988ebe81a",
+  "pre_Val_candidate_sha256": "aec18f8b445677380fa191bfe12530377953d9942edd62166823a2e89bb0bbf9",
+  "model_optimizer_CPU_CUDA_RNG_unchanged_by_full_Val": true,
+  "all_three_first_Val_record_sets_and_target_point_counts_identical": true,
+  "Adam_steps_match_global_update": true,
+  "all_model_tensors_finite": true,
+  "validation_history": [
+    {
+      "epoch": 1,
+      "val_loss": 11.25892579844423,
+      "global_update": 2660
+    },
+    {
+      "epoch": 2,
+      "val_loss": 10.842374263981393,
+      "global_update": 5320
+    },
+    {
+      "epoch": 3,
+      "val_loss": 10.481181230149009,
+      "global_update": 7980
+    },
+    {
+      "epoch": 4,
+      "val_loss": 10.292466394330336,
+      "global_update": 10640
+    },
+    {
+      "epoch": 5,
+      "val_loss": 10.344813682285952,
+      "global_update": 13300
+    },
+    {
+      "epoch": 6,
+      "val_loss": 10.088489528421752,
+      "global_update": 15960
+    }
+  ],
+  "bad_epochs": 0,
+  "dataset_sha256": "fe63d951874c8f89c0300f199a3337ec150fe389535ac9a2ecf8b971812e2db5",
+  "test_metrics_read": false,
+  "scoring_source_policy": "self_test5_nearest_test5_for_other_stages_v1"
+}
