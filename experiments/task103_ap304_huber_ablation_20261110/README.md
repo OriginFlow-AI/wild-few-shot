@@ -1,6 +1,13 @@
 # Task103 AP304 四组实验
 
-三套二阶段训练覆盖四组比较。正式结果以三个训练分支的完整Val选模、最终Test和同点核对全部完成为准；进度快照不代表完成。
+三套二阶段训练与四组正式 Test 已于北京时间 2026-11-11 17:57 完成。完整 Val 选出的模型轮次依次为 6、6、9。两路 Huber 在第 9 轮按 patience=3 正常早停，原损失组跑满第 10 轮。各次完整 Val 均覆盖 983 条记录。最终 Test 逐点核对了 1,406 条记录、82 人、3,533,247 个共同计分点。
+
+[最终指标表](results/force_threshold_metrics.md)同时列出 Train、Val、Test 标签和 Pearson Corr、全量 MAE、低于 1 N 的 MAE、至少 0.5 N 和至少 1 N 的 MAPE。正式评测的五项指标与[截至第 9 轮的中间结果](results/interim_epoch009/force_threshold_metrics.md)逐项相等。原损失组的两次 Test 逐记录 JSON 的 SHA256 也一致。
+
+- 实验 2 对 3，标定 Huber 的 BSQ 人员等权 MAE 从 6.135 N 降至 5.989 N，Corr 从 0.426 升至 0.464。test5 的 MAE 降 0.380 N，test7 升 0.337 N。
+- 实验 4 对 3，使用原损失的两档 MAPE 分别下降 6.28 和 5.58 个百分点，全量 MAE 接近，低力段 MAE 从 0.343 N 升至 0.675 N。
+
+[完整报告](results/report.html)提供标定质检、分 stage、分指及力段结果，另见[完成核验](results/final_run_audit.json)和[三套推理权重](../../models/task103_ap304_huber_ablation_20261110)。完整报告于 17:57 生成，超过 08:00 尽力目标。
 
 | 实验 | Train/Val标签 | Test真值 | 训练loss | 分支 |
 |---|---|---|---|---|

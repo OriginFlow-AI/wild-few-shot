@@ -1,0 +1,11 @@
+Task103 four-way comparison (completed)
+
+Subject-equal metrics on identical scoring points:
+experiment	test label	MAE_N	MAPE_%	Corr
+1	cal	5.420967	61.848088	0.4369616485374464
+2	bsq	5.988515	62.254556	0.4643306778602133
+3	bsq	6.134698	65.290808	0.4263723560155086
+4	bsq	6.130868	59.008681	0.4402655798406512
+
+See FINAL_REPORT.json and paired_person_differences.csv.
+Read calibration_quality.json and dataset exclusions before interpreting retained-point accuracy.

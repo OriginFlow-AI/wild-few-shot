@@ -1,0 +1,686 @@
+{
+  "selection": {
+    "train": {
+      "all_recordings": 8163,
+      "metadata_active": 5767,
+      "prepared_recordings": 5702,
+      "windows": 680815
+    },
+    "val": {
+      "all_recordings": 988,
+      "metadata_active": 988,
+      "prepared_recordings": 983,
+      "windows": 40447
+    },
+    "test": {
+      "all_recordings": 1425,
+      "metadata_active": 1423,
+      "prepared_recordings": 1406,
+      "windows": 53421
+    }
+  },
+  "channel_QC_failures": {
+    "gross_source_fit_residual_P90_above_10N_and_half_range": 88,
+    "nonpositive_or_weak_calibration_monotonicity": 239,
+    "collapsed_calibration_force_range": 2
+  },
+  "record_QC_failures": [
+    {
+      "id": "85f7455157a41b54d87d",
+      "subject": "fyf02074188",
+      "stage": "mix-test-5",
+      "reason": "Force receive/sync offset disagreement"
+    },
+    {
+      "id": "a3f698914701e1d10da4",
+      "subject": "glm05234375",
+      "stage": "mix-test-5",
+      "reason": "BSQ median above100N or nonfinite"
+    },
+    {
+      "id": "e2e012db154ac81930de",
+      "subject": "ms09194462",
+      "stage": "mix-test-7",
+      "reason": "No stable post-positioning BSQ tare segment"
+    },
+    {
+      "id": "b97db15e8e873da8e95c",
+      "subject": "ln11294643",
+      "stage": "mix-test-7",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/b97db15e8e873da8e95c/done.json'"
+    },
+    {
+      "id": "ec5ac57400c473f7e610",
+      "subject": "ls05014634",
+      "stage": "mix-test-5",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/ec5ac57400c473f7e610/done.json'"
+    },
+    {
+      "id": "1bc5b4c2f45009b5ba55",
+      "subject": "yjy11214734",
+      "stage": "mix-test-7",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/1bc5b4c2f45009b5ba55/done.json'"
+    },
+    {
+      "id": "71c92fe0a1e90a808570",
+      "subject": "lrj08054761",
+      "stage": "mix-test-5",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/71c92fe0a1e90a808570/done.json'"
+    }
+  ],
+  "accepted_curve_review_diagnostics": {
+    "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
+    "accepted_curves": 16307,
+    "flagged_curves": 4040,
+    "review_flags": {
+      "source_fit_p90_above_3N_and_20pct_range_review": 1773,
+      "source_Spearman_below_0.8_review": 3372
+    },
+    "distributions": {
+      "Spearman": {
+        "0": 0.2015366346358502,
+        "0.1": 0.6721604820753694,
+        "0.5": 0.9299550336316181,
+        "0.9": 0.9851284748614871,
+        "0.99": 0.9942887890046991,
+        "1": 0.9981468826189994
+      },
+      "fit_range_N": {
+        "0": 1.1165815889835358,
+        "0.1": 7.126165621479352,
+        "0.5": 15.298373699188232,
+        "0.9": 28.047019344568252,
+        "0.99": 47.0660345306397,
+        "1": 98.36069869995117
+      },
+      "source_fit_MAE_N": {
+        "0": 0.017824665461696167,
+        "0.1": 0.15103640545179797,
+        "0.5": 0.4884584641699566,
+        "0.9": 1.6937238038576687,
+        "0.99": 3.683050458792611,
+        "1": 9.822557080388366
+      },
+      "source_fit_p90_N": {
+        "0": 0.049033284187316895,
+        "0.1": 0.38169194965481956,
+        "0.5": 1.2258311152458197,
+        "0.9": 4.146127350898252,
+        "0.99": 9.259099607317506,
+        "1": 24.45615097681681
+      },
+      "presses": {
+        "0": 1.0,
+        "0.1": 1.0,
+        "0.5": 2.0,
+        "0.9": 3.0,
+        "0.99": 5.0,
+        "1": 9.0
+      }
+    },
+    "worst_p90_examples": [
+      {
+        "id": "7b996bc33e9c1e5ace01",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 2,
+        "points": 178,
+        "Spearman": 0.8202517495504694,
+        "AD_min": 1.0,
+        "AD_max": 21329.0,
+        "fit_range_N": 53.663623650868736,
+        "reference_max_N": 81.10099792480469,
+        "source_fit_MAE_N": 7.863327195741788,
+        "source_fit_p90_N": 24.45615097681681,
+        "source_fit_bias_N": -0.0005509354006701153,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "00e338ffaa00438f25f4",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 3,
+        "points": 254,
+        "Spearman": 0.8512807880548223,
+        "AD_min": 26.0,
+        "AD_max": 21215.0,
+        "fit_range_N": 69.48011779785156,
+        "reference_max_N": 79.53192901611328,
+        "source_fit_MAE_N": 9.088026186073163,
+        "source_fit_p90_N": 24.05851464952742,
+        "source_fit_bias_N": -0.14208059986745275,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "f7df804b12df17fab8d0",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 2,
+        "points": 206,
+        "Spearman": 0.7830236122740565,
+        "AD_min": 472.0,
+        "AD_max": 30047.0,
+        "fit_range_N": 51.028395915853565,
+        "reference_max_N": 69.92141723632812,
+        "source_fit_MAE_N": 7.830605046029406,
+        "source_fit_p90_N": 23.793383526802064,
+        "source_fit_bias_N": -0.00047605097727909554,
+        "review_flags": "source_Spearman_below_0.8_review;source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "ab5db49679508f6d2433",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 0,
+        "presses": 3,
+        "points": 310,
+        "Spearman": 0.8668723124874002,
+        "AD_min": 0.0,
+        "AD_max": 61003.0,
+        "fit_range_N": 78.45320129394531,
+        "reference_max_N": 78.45320129394531,
+        "source_fit_MAE_N": 6.724429309592151,
+        "source_fit_p90_N": 22.151306668723507,
+        "source_fit_bias_N": -5.500976018787873e-16,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "eef6d16497b3dd20486d",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 2,
+        "points": 197,
+        "Spearman": 0.7209743440891098,
+        "AD_min": 862.0,
+        "AD_max": 25577.0,
+        "fit_range_N": 55.7344601949056,
+        "reference_max_N": 66.68521881103516,
+        "source_fit_MAE_N": 8.460499623824289,
+        "source_fit_p90_N": 21.69270549735638,
+        "source_fit_bias_N": -7.21363183512792e-17,
+        "review_flags": "source_Spearman_below_0.8_review;source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "e72ce6919d1781b3dd64",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 0,
+        "presses": 3,
+        "points": 571,
+        "Spearman": 0.3897664024878367,
+        "AD_min": 21.0,
+        "AD_max": 50039.0,
+        "fit_range_N": 42.42749057769775,
+        "reference_max_N": 61.19349670410156,
+        "source_fit_MAE_N": 9.822557080388366,
+        "source_fit_p90_N": 20.51853102781834,
+        "source_fit_bias_N": 0.04602771632099279,
+        "review_flags": "source_Spearman_below_0.8_review;source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "62509ce97c7e338e5c96",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 0,
+        "presses": 3,
+        "points": 303,
+        "Spearman": 0.8640940642265573,
+        "AD_min": 0.0,
+        "AD_max": 56277.0,
+        "fit_range_N": 51.760131097609,
+        "reference_max_N": 67.9600830078125,
+        "source_fit_MAE_N": 7.067348581208706,
+        "source_fit_p90_N": 20.090216614649847,
+        "source_fit_bias_N": -0.0025892147530037607,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "ab5db49679508f6d2433",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 1,
+        "points": 82,
+        "Spearman": 0.8931890023799498,
+        "AD_min": 40.0,
+        "AD_max": 368.0,
+        "fit_range_N": 61.97802734375,
+        "reference_max_N": 67.37168884277344,
+        "source_fit_MAE_N": 5.193288810975184,
+        "source_fit_p90_N": 19.72484822273257,
+        "source_fit_bias_N": 0.06577624344244244,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "7b996bc33e9c1e5ace01",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 1,
+        "presses": 3,
+        "points": 207,
+        "Spearman": 0.7688733407215858,
+        "AD_min": 0.0,
+        "AD_max": 54722.0,
+        "fit_range_N": 40.711899081865944,
+        "reference_max_N": 53.2501106262207,
+        "source_fit_MAE_N": 6.516114006618944,
+        "source_fit_p90_N": 19.709059776979334,
+        "source_fit_bias_N": 0.021792576580806685,
+        "review_flags": "source_Spearman_below_0.8_review;source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "62509ce97c7e338e5c96",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 2,
+        "points": 178,
+        "Spearman": 0.8800162720189201,
+        "AD_min": 234.0,
+        "AD_max": 16661.0,
+        "fit_range_N": 56.939277830578035,
+        "reference_max_N": 67.76395416259766,
+        "source_fit_MAE_N": 5.165290960003914,
+        "source_fit_p90_N": 19.23574506269561,
+        "source_fit_bias_N": -0.0033056123203102947,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "c7633cba5285f846effb",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 0,
+        "presses": 2,
+        "points": 234,
+        "Spearman": 0.9347889554231377,
+        "AD_min": 1.0,
+        "AD_max": 59427.0,
+        "fit_range_N": 74.04020690917969,
+        "reference_max_N": 77.27640533447266,
+        "source_fit_MAE_N": 4.737120874426757,
+        "source_fit_p90_N": 19.07407027218077,
+        "source_fit_bias_N": -0.0020954380942210956,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "16cd773f83e1daf29564",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 0,
+        "presses": 2,
+        "points": 243,
+        "Spearman": 0.8585165420762205,
+        "AD_min": 0.0,
+        "AD_max": 59175.0,
+        "fit_range_N": 81.39519500732422,
+        "reference_max_N": 88.65211486816406,
+        "source_fit_MAE_N": 5.596290996001495,
+        "source_fit_p90_N": 19.00903649236642,
+        "source_fit_bias_N": -0.004439224431543356,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "b713152f0a7e5495a92d",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 3,
+        "points": 302,
+        "Spearman": 0.8210014749177206,
+        "AD_min": 460.0,
+        "AD_max": 26758.0,
+        "fit_range_N": 44.881768544514976,
+        "reference_max_N": 66.48908996582031,
+        "source_fit_MAE_N": 5.945304863985025,
+        "source_fit_p90_N": 18.44467399915059,
+        "source_fit_bias_N": -7.528929650438148e-16,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "fdf51d726b1beb97db3d",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 2,
+        "points": 221,
+        "Spearman": 0.628175891067291,
+        "AD_min": 215.0,
+        "AD_max": 4658.0,
+        "fit_range_N": 38.33913863000791,
+        "reference_max_N": 60.899295806884766,
+        "source_fit_MAE_N": 6.982765340824152,
+        "source_fit_p90_N": 18.039373996829198,
+        "source_fit_bias_N": -0.1575276323033666,
+        "review_flags": "source_Spearman_below_0.8_review;source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "0d1dbb513d7a93468c5d",
+        "subject": "zjy07124625",
+        "date": "2026-11-07",
+        "finger_index": 5,
+        "presses": 3,
+        "points": 539,
+        "Spearman": 0.9491420873902323,
+        "AD_min": 0.0,
+        "AD_max": 60372.0,
+        "fit_range_N": 84.97462446242571,
+        "reference_max_N": 85.80819112807512,
+        "source_fit_MAE_N": 6.070615849215938,
+        "source_fit_p90_N": 17.466301185578452,
+        "source_fit_bias_N": 0.2130535617608971,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "6c9be3ece12737a7ba57",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 1,
+        "points": 82,
+        "Spearman": 0.8918580053352602,
+        "AD_min": 672.0,
+        "AD_max": 9812.0,
+        "fit_range_N": 59.09843930331144,
+        "reference_max_N": 68.15621948242188,
+        "source_fit_MAE_N": 5.659024075370435,
+        "source_fit_p90_N": 17.256761660840787,
+        "source_fit_bias_N": 5.199093188488538e-16,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "b713152f0a7e5495a92d",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 0,
+        "presses": 3,
+        "points": 372,
+        "Spearman": 0.875036453719402,
+        "AD_min": 0.0,
+        "AD_max": 55457.0,
+        "fit_range_N": 60.21886567335862,
+        "reference_max_N": 70.41175079345703,
+        "source_fit_MAE_N": 6.2960127895105344,
+        "source_fit_p90_N": 17.169781287241793,
+        "source_fit_bias_N": 0.00606327031248344,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "8a26921f3b93d6b236eb",
+        "subject": "wy11274712",
+        "date": "2026-11-09",
+        "finger_index": 2,
+        "presses": 1,
+        "points": 191,
+        "Spearman": 0.6895909075161497,
+        "AD_min": 30.0,
+        "AD_max": 37332.0,
+        "fit_range_N": 44.84907913208008,
+        "reference_max_N": 50.50424575805664,
+        "source_fit_MAE_N": 7.287862785242082,
+        "source_fit_p90_N": 16.757833003997803,
+        "source_fit_bias_N": -0.0005134371796830642,
+        "review_flags": "source_Spearman_below_0.8_review;source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "b994adab2acc0cb51c92",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 4,
+        "points": 802,
+        "Spearman": 0.6893321906696164,
+        "AD_min": 0.0,
+        "AD_max": 59390.0,
+        "fit_range_N": 45.03704071044922,
+        "reference_max_N": 47.366119384765625,
+        "source_fit_MAE_N": 6.554298038433763,
+        "source_fit_p90_N": 16.615900591623568,
+        "source_fit_bias_N": -0.009170812858906047,
+        "review_flags": "source_Spearman_below_0.8_review;source_fit_p90_above_3N_and_20pct_range_review"
+      },
+      {
+        "id": "13fd1a986490a405ce60",
+        "subject": "fy02083996",
+        "date": "2026-10-29",
+        "finger_index": 5,
+        "presses": 1,
+        "points": 108,
+        "Spearman": 0.8697646096144667,
+        "AD_min": 20.0,
+        "AD_max": 347.0,
+        "fit_range_N": 71.74937377929687,
+        "reference_max_N": 78.84546661376953,
+        "source_fit_MAE_N": 6.385013108761223,
+        "source_fit_p90_N": 16.287212263743083,
+        "source_fit_bias_N": 1.5999366707271998,
+        "review_flags": "source_fit_p90_above_3N_and_20pct_range_review"
+      }
+    ],
+    "scope": "Descriptive source calibration fit residuals, not independent accuracy or neural Test errors. Review flags do not alter source selection, masks, or model training.",
+    "interpretation": "Low residual cannot rule out shared scale error, wrong reference units or drift. Large residual may indicate hysteresis, inconsistent repeated presses, incorrect finger routing or reference faults; inspect traces before attributing a cause.",
+    "leave_one_press_out": {
+      "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
+      "accepted_curves": 16307,
+      "single_press_curves": 3095,
+      "repeat_curves": 13212,
+      "scored_repeat_curves": 13206,
+      "fold_outcomes": {
+        "scored_in_domain": 32655,
+        "remaining_presses_weak_monotonicity": 201,
+        "held_press_entirely_outside_remaining_AD_domain": 16,
+        "remaining_presses_gross_fit_inconsistency": 37
+      },
+      "quantiles": {
+        "coverage": {
+          "0": 0.0,
+          "0.1": 0.5230912121933794,
+          "0.5": 0.8125,
+          "0.9": 0.9744245524296675,
+          "0.99": 0.9970501474926253,
+          "1": 1.0
+        },
+        "point_equal_MAE_N": {
+          "0": 0.09626213244835537,
+          "0.1": 0.48036598095784344,
+          "0.5": 1.4407035877459764,
+          "0.9": 4.517069292810646,
+          "0.99": 11.257216297749837,
+          "1": 27.849662238242164
+        }
+      },
+      "repeat_reference_points": 5021821,
+      "repeat_scored_points": 3977297,
+      "scored_subjects": 81,
+      "reference_point_coverage": 0.7920029407659094,
+      "subject_equal_curve_MAE_N": 1.9531040575689407,
+      "pooled_point_MAE_N": 2.126266978505752,
+      "scope": "Leave one complete press out within the same test5 and finger. Fit other presses with the frozen calibration QC; score only held core points inside their AD domain. This is conditional on whole-source channel acceptance and fixed finger routing. Whole-record fixed tare is shared. It measures repeated-press consistency, not subject-disjoint, cross-session or neural-model Test accuracy.",
+      "interpretation": "Report coverage with error: high-force held presses may exceed the AD range of remaining presses. One-press channels have no independent repetition check. Fit residual and repetition error can both miss shared reference scale or finger-routing errors.",
+      "neural_Test_metrics_read": false,
+      "training_or_label_artifacts_changed": false
+    }
+  },
+  "test5_without_any_valid_channel": [
+    {
+      "id": "7acd28ef6dd54e2a08ab",
+      "subject": "fyx01094176",
+      "stage": "mix-test-5",
+      "events": 27,
+      "reasons": {
+        "peak_below3N_cannot_confirm_finger": 21,
+        "no_local_quiet_for_AD_identity": 5,
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "558a03381adc68cd07a2",
+      "subject": "wy10204452",
+      "stage": "mix-test-5",
+      "events": 41,
+      "reasons": {
+        "peak_below3N_cannot_confirm_finger": 40,
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "bcbc65c6dcfa8c65896d",
+      "subject": "hfh05014636",
+      "stage": "mix-test-5",
+      "events": 1,
+      "reasons": {
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "eb25b5f3b25e32dfd01b",
+      "subject": "jxd10133591",
+      "stage": "mix-test-5",
+      "events": 0,
+      "reasons": {}
+    },
+    {
+      "id": "30821473cc15cfa3a7a7",
+      "subject": "hfh05014636",
+      "stage": "mix-test-5",
+      "events": 3,
+      "reasons": {
+        "peak_below3N_cannot_confirm_finger": 2,
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "1ad1f33547df62c93e84",
+      "subject": "ln11294643",
+      "stage": "mix-test-5",
+      "events": 1,
+      "reasons": {
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "69741622c7f579e029eb",
+      "subject": "wsd01244685",
+      "stage": "mix-test-5",
+      "events": 1,
+      "reasons": {
+        "incomplete_press_at_boundary": 1
+      }
+    }
+  ],
+  "extraction_errors": [
+    {
+      "id": "b97db15e8e873da8e95c",
+      "key": "raw/103/2026-11-07/ln11294643/PC7CCF0F3B1168/DTS-103-20261107-d439f17421914121-20261107144841-1_h265.mcap",
+      "error": "Nonmonotone force sync clock: bsq"
+    },
+    {
+      "id": "1bc5b4c2f45009b5ba55",
+      "key": "raw/103/2026-11-09/yjy11214734/PC7CCF0F3B0F28/DTS-103-20261109-2ef546600bdd42fc-20261109141844-4_h265.mcap",
+      "error": "Nonmonotone force sync clock: bsq"
+    },
+    {
+      "id": "71c92fe0a1e90a808570",
+      "key": "raw/103/2026-11-10/lrj08054761/PC7CCF0F4F5C14/DTS-103-20261110-7bcd4845b11e4ea8-20261110163106-3_h265.mcap",
+      "error": "Nonmonotone force sync clock: bsq"
+    },
+    {
+      "id": "ec5ac57400c473f7e610",
+      "key": "raw/103/2026-11-07/ls05014634/PC7CCF0F3B0F28/DTS-103-20261107-09980acc3d604b0c-20261107150258-2_h265.mcap",
+      "error": "Nonmonotone force sync clock: bsq"
+    },
+    {
+      "id": "c968f0ffbbfc50b765c1",
+      "key": "raw/103/2026-10-28/gwh05152821/PC7CCF0F4F6402/DTS-103-20261028-81c0db63ca0c4021-20261028143757-3_h265.mcap",
+      "error": "decompression error: Data corruption detected"
+    },
+    {
+      "id": "ff657651fc680658b744",
+      "key": "raw/103/2026-11-07/lgx11284629/PC7CCF0F3B0E9E/DTS-103-20261107-a2516b03672f4d4f-20261107160724-5_h265.mcap",
+      "error": "Nonmonotone force sync clock: bsq"
+    },
+    {
+      "id": "fab0b55678e83751eb4d",
+      "key": "raw/103/2026-11-07/bfj05184639/PC7CCF0F3B0CC0/DTS-103-20261107-27c4961ad91545d4-20261107163829-1_h265.mcap",
+      "error": "Nonmonotone force sync clock: bsq"
+    },
+    {
+      "id": "1afd8db55258b0d11d92",
+      "key": "raw/103/2026-11-02/wf04044318/PC7CCF0F3B0A60/DTS-103-20261102-02615ea73e6f4d7f-20261102144211-4.mcap",
+      "error": "Nonmonotone force sync clock: bsq"
+    },
+    {
+      "id": "cd86f7f094d4f8f14393",
+      "key": "raw/103/2026-11-09/lh06064715/PC7CCF0F3B0CCC/DTS-103-20261109-704f6b8078394d69-20261109143142-1_h265.mcap",
+      "error": "Nonmonotone force sync clock: left"
+    },
+    {
+      "id": "185f6ddb8b2e8ddcdfa6",
+      "key": "raw/103/2026-11-09/sas06124716/PC7CCF0F3B0CC0/DTS-103-20261109-c70ca39a7b4043ef-20261109142244-5_h265.mcap",
+      "error": "Nonmonotone force sync clock: bsq"
+    },
+    {
+      "id": "ac8f141c6bf0afbb359a",
+      "key": "raw/103/2026-11-03/llt09124363/PC7CCF0F3B0A60/DTS-103-20261103-361ec74b901d4a7e-20261103161212-1_h265.mcap",
+      "error": "Nonmonotone EMG sync clock"
+    },
+    {
+      "id": "d9f76d076095dec8b3de",
+      "key": "raw/103/2026-11-09/ll10314735/PC7CCF0F3B0A60/DTS-103-20261109-a7cd9f8aa1af41c2-20261109163442-2_h265.mcap",
+      "error": "Nonmonotone force sync clock: bsq"
+    },
+    {
+      "id": "6942ab6ade5b7e4b7fcd",
+      "key": "raw/103/2026-11-06/hyf03074558/PC7CCF0F3B0A60/DTS-103-20261106-fc26c61f54564f62-20261106105343-4_h265.mcap",
+      "error": "Nonmonotone EMG sync clock"
+    },
+    {
+      "id": "bbf5d81de8c0accbe246",
+      "key": "raw/103/2026-11-09/sas06124716/PC7CCF0F3B0CC0/DTS-103-20261109-c70ca39a7b4043ef-20261109143524-1_h265.mcap",
+      "error": "Nonmonotone force sync clock: left"
+    },
+    {
+      "id": "6902ddd88ae8bf6df7bb",
+      "key": "raw/103/2026-10-29/fy02083996/PC7CCF0F4F5C14/DTS-103-20261029-e6c4f877ba544ba5-20261029154115-4_h265.mcap",
+      "error": "Nonmonotone force sync clock: bsq"
+    },
+    {
+      "id": "23dea10db5583bf69c3a",
+      "key": "raw/103/2026-10-29/lhy03073995/PC7CCF0F3B0A60/DTS-103-20261029-2fe9bb8a4cad46cc-20261029142202-4_h265.mcap",
+      "error": "Nonmonotone force sync clock: left"
+    }
+  ],
+  "dataset_exclusion_reasons": {
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/c968f0ffbbfc50b765c1/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/23dea10db5583bf69c3a/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/6902ddd88ae8bf6df7bb/done.json'": 1,
+    "No eligible nearest calibration source": 23,
+    "Nearest calibration has no valid channels; no fallback": 48,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/1afd8db55258b0d11d92/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/ac8f141c6bf0afbb359a/done.json'": 1,
+    "Missing reference/finger route": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/6942ab6ade5b7e4b7fcd/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/b97db15e8e873da8e95c/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/ff657651fc680658b744/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/fab0b55678e83751eb4d/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/1bc5b4c2f45009b5ba55/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/cd86f7f094d4f8f14393/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/185f6ddb8b2e8ddcdfa6/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/bbf5d81de8c0accbe246/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/d9f76d076095dec8b3de/done.json'": 1
+  },
+  "partial_test5_records": 1124,
+  "experience": [
+    "先核实BSQ的N、CMCU的mN及同步时钟；不要排序时间戳后掩盖逆序或跨时钟异常。",
+    "最大AD不一定是受测指，test7的支撑拇指尤其容易抢占；歧义指身份应屏蔽。",
+    "BSQ零点应固定在姿态稳定空载段；整段均值、翻转前首秒都可能引入系统偏差。",
+    "没有完整按压、AD变化不足、单调性弱和拟合力范围坍缩分别记录；缺指不等于整条硬件损坏。",
+    "同一AD下参考力明显不一致时，单调相关也可能通过。源拟合残差P90同时超过10N和拟合力范围50%的指通道已屏蔽；较轻残差复核仅作标记，通过基础规则不等于独立精度合格。",
+    "单调拟合不能解决饱和、迟滞、佩戴变化或域外数据。域外点必须计入覆盖限制，不能静默夹端点。",
+    "test5按原始最近test5口径使用自身整次曲线；源内拟合符合度不等于独立曲线精度。本方案使用现场BSQ作为自身及其他记录的标定输入，不是BSQ完全未参与过标定的评估。",
+    "不按模型Test误差挑源或改剔除阈值；最近源失效不静默回退。"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "status": "PASS_MATCHED_BSQ_EXPERIMENTS_2_AND_3",
+  "recordings": 1406,
+  "points_by_stage": {
+    "mix-test-5": 2755629,
+    "mix-test-7": 777618
+  },
+  "MAE_subject_equal_N": {
+    "all": {
+      "calibrated_huber": 5.988515370705598,
+      "raw_huber": 6.134697610847001
+    },
+    "mix-test-5": {
+      "calibrated_huber": 6.304754230934914,
+      "raw_huber": 6.684348100382097
+    },
+    "mix-test-7": {
+      "calibrated_huber": 5.324039910169164,
+      "raw_huber": 4.987184305010573
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "status": "COMPLETE",
+  "models": [
+    {
+      "branch": "calibrated_huber",
+      "weights_sha256": "77a7b8c07c0e28b2496465dedbfb9087936445c6cfe80050ef8a6b3e87152016",
+      "bytes": 73542543,
+      "selected_epoch": 6
+    },
+    {
+      "branch": "raw_huber",
+      "weights_sha256": "39b35fffd066de4a39cf3361c0c8a3e25a966cb13299df025197e66605890138",
+      "bytes": 73542543,
+      "selected_epoch": 6
+    },
+    {
+      "branch": "raw_original",
+      "weights_sha256": "fa6c03e8c83325cceef067e7e6c388b8633f9ad68ef1bfb50160c7a2bfc8455a",
+      "bytes": 73542543,
+      "selected_epoch": 9
+    }
+  ],
+  "final_report_sha256": "eeb3d687d938acf9b11144864cbe879cb4c2365814d51a77b6c3ac4cd888892f",
+  "point_identity_verified": true
+}
