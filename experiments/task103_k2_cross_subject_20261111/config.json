@@ -1,0 +1,75 @@
+{
+  "schema": "task103-k2-5p56m-four-way-subject-disjoint-v1",
+  "seed": 42,
+  "model": "k2_ring_transformer_affine_5p56m",
+  "gpu_memory_limit_GiB": 32,
+  "gpu_free_reserve_GiB": 4,
+  "gpu_selection": "three observations; prioritize free memory, then utilization; shared GPU authorized",
+  "concurrent_training_branches": 3,
+  "microbatch": 16,
+  "global_batch": 256,
+  "train_workers": 3,
+  "max_epochs": 5,
+  "patience": 2,
+  "min_delta": 0.0001,
+  "lr_body": 0.0003,
+  "lr_head": 0.0003,
+  "weight_decay": 0.0001,
+  "warmup_updates": 1000,
+  "scheduler": "linear warmup followed by cosine to 0.1 peak over 5 epochs",
+  "save_every_updates": 50,
+  "huber_delta_N": 1.0,
+  "objective_domain": "physical N after output denormalization",
+  "train_reduction": "valid-scalar-weighted microbatch objectives, accumulated to 256 windows; Corr is per microbatch",
+  "validation_selection": "complete-trial equal average of branch objective",
+  "experiments": [
+    {
+      "id": 1,
+      "branch": "calibrated_huber",
+      "train_val": "calibrated_CMCU_N",
+      "test": "calibrated_CMCU_N",
+      "loss": "pure_Huber_delta1N"
+    },
+    {
+      "id": 2,
+      "branch": "calibrated_huber",
+      "train_val": "calibrated_CMCU_N",
+      "test": "BSQ_N",
+      "loss": "pure_Huber_delta1N"
+    },
+    {
+      "id": 3,
+      "branch": "raw_huber",
+      "train_val": "original_CMCU_N",
+      "test": "BSQ_N",
+      "loss": "pure_Huber_delta1N"
+    },
+    {
+      "id": 4,
+      "branch": "raw_original",
+      "train_val": "original_CMCU_N",
+      "test": "BSQ_N",
+      "loss": "(1-Corr)+0.3*MAPE+0.03*MAE"
+    }
+  ],
+  "mape_activity": "abs(GT)>=0.5N; fraction in objective",
+  "force_label_preprocessing": "native CMCU/BSQ units and timestamps; no extra force lowpass, MA7, clipping or post-hoc time shifting",
+  "calibration": "all eligible complete presses of nearest whole test5; test5 includes itself, other stages use absolute-nearest test5; in-domain PAVA; no silent bad-source fallback",
+  "scoring": "all eligible target presses; own complete test5 curve for test5, nearest test5 for ordinary stages/test7; common in-domain/finite/sync/EMG-valid mask across experiments",
+  "gpu_memory_policy": "per-process ceiling=min(32 GiB, round_down_to_4GiB(observed_free_GiB-4GiB external reserve-2GiB CUDA overhead))",
+  "common_microbatch": 16,
+  "physical_forward_schedule": [
+    {
+      "start_global_update": 0,
+      "windows": 64
+    }
+  ],
+  "calibration_version": "whole-test5-absolute-nearest-v3-gross-fit-qc",
+  "nearest_source": "test5 itself for test5; otherwise minimum absolute recording-center distance within same subject/date/PC/boot, before or after",
+  "evaluation_scope": "Person-disjoint model evaluation with provided offline per-record calibration. Test5 uses its own complete calibration and test7 uses same-person nearest test5. No held-out person enters training or normalization.",
+  "gross_calibration_rejection": "source-fit absolute residual P90 >10 N AND >50% fitted force span; calibration-only fixed rule before formal training",
+  "scoring_source_policy": "self_test5_nearest_test5_for_other_stages_v1",
+  "parameter_count": 5562617,
+  "split_seed": 43,
+  "initialization": "common seed-42 random initialization from exact K2-5p56M architecture; no pretraining"
+}

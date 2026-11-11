@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "parameter_count": 5562617,
+  "dataset_sha256": "13fb9acacecc99c925e01237ea22a521a525f79aa25069576816337e59262560",
+  "subject_split_sha256": "38c9033a50a38fe19b30bd16b646771a258e6841aacbd8a5e019948e37a1bcdc",
+  "common_initial_sha256": "25d0e271d7fe9fe9c3948a02f03fbf42048bbe1bec2f7f789df90c92dd778729",
+  "emg_norm_sha256": "35a30e638f278b37457b01e212a0dac2dddfb0196543c86a0f67c8c38854bf42",
+  "window_indices_sha256": {
+    "train": "e5416a638f5c69f1ebf7ed2a26a046581f76285a13b6087b6ed198a20b8deae4",
+    "val": "b7e4a6d87aaa140f4b6d1464f3ac46edf74b42cdfdce4a20c52b568902ed43fd",
+    "test": "9142259bd83f3a4c41fbcb7fb62608843f7a6fa1ed48263479e2d6e302e468ac"
+  },
+  "original_retained_window_arrays_match_exactly": true,
+  "selected_people_disjoint": true,
+  "seeded_cpu_initialization_exact": true,
+  "three_gpu_smokes_passed": true,
+  "training_order_covers_every_window": true,
+  "Test_read": false,
+  "split": {
+    "train": {
+      "people": 58,
+      "recordings": 4160,
+      "hands": 8302,
+      "windows": 496726,
+      "by_stage": {
+        "mix-4": 390,
+        "mix-18": 351,
+        "mix-2": 324,
+        "mix-5": 388,
+        "mix-15": 360,
+        "mix-16": 384,
+        "mix-13": 357,
+        "mix-17": 371,
+        "mix-3": 68,
+        "mix-8": 370,
+        "mix-14": 301,
+        "mix-9": 57,
+        "mix-12": 256,
+        "mix-7": 61,
+        "mix-10": 60,
+        "mix-6": 62
+      }
+    },
+    "val": {
+      "people": 12,
+      "recordings": 293,
+      "hands": 584,
+      "windows": 10753,
+      "by_stage": {
+        "mix-test-5": 293
+      }
+    },
+    "test": {
+      "people": 12,
+      "recordings": 240,
+      "hands": 477,
+      "windows": 9554,
+      "by_stage": {
+        "mix-test-5": 188,
+        "mix-test-7": 52
+      }
+    }
+  }
+}
