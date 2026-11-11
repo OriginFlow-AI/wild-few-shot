@@ -1,0 +1,28 @@
+{
+  "status": "PASS_REAL_COMPLETE_VAL_NEW_BEST_AND_STATE_PRESERVATION",
+  "branch": "raw_original",
+  "epoch": 1,
+  "global_update": 1941,
+  "Val_recordings": 293,
+  "prepared_Val_record_set_exactly_covered": true,
+  "trial_equal_validation_loss": 1.2503301150336732,
+  "objective": "(1-Corr)+0.3*MAPE+0.03*MAE",
+  "selected_best_epoch": 1,
+  "selected_best_sha256": "bf7a15eac094b856b0105c71bb60de45464f314c94d32bbd53e92afbb55daa32",
+  "pre_Val_candidate_sha256": "fc96aa852bbdc417f15b5187358911d268f590349ef2f6eefa3a46cea5d61c4c",
+  "model_optimizer_CPU_CUDA_RNG_unchanged_by_full_Val": true,
+  "all_three_first_Val_record_sets_and_target_point_counts_identical": true,
+  "Adam_steps_match_global_update": true,
+  "all_model_tensors_finite": true,
+  "validation_history": [
+    {
+      "epoch": 1,
+      "val_loss": 1.2503301150336732,
+      "global_update": 1941
+    }
+  ],
+  "bad_epochs": 0,
+  "dataset_sha256": "13fb9acacecc99c925e01237ea22a521a525f79aa25069576816337e59262560",
+  "test_metrics_read": false,
+  "scoring_source_policy": "self_test5_nearest_test5_for_other_stages_v1"
+}

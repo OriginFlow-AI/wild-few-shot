@@ -1,0 +1,16 @@
+{
+  "dataset_sha256": "13fb9acacecc99c925e01237ea22a521a525f79aa25069576816337e59262560",
+  "subject_split_sha256": "38c9033a50a38fe19b30bd16b646771a258e6841aacbd8a5e019948e37a1bcdc",
+  "people_disjoint": true,
+  "record_and_calibration_sources_disjoint": true,
+  "validation": {
+    "recordings": 293,
+    "points": 724829,
+    "complete_epochs": {
+      "calibrated_huber": 1,
+      "raw_huber": 1,
+      "raw_original": 1
+    }
+  },
+  "status": "PASS_VAL_SCORING_INPUTS"
+}

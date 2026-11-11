@@ -28,3 +28,5 @@ python -B code/launch_parallel.py --root "$K2_RUN_ROOT" --source "$AP304_RUN_ROO
 ```
 
 启动器根据三次显存和利用率采样选共享 GPU，逐分支实际跑一批验证显存，再并行训练。训练状态见 `STATUS.json` 与各分支的 `runs/*/STATUS.json`，所有最终指标、同点核验、权重导出就绪后标记完成。
+
+共享负载变化后，未标定 Huber 在第 1,500 步保存 checkpoint，随后从 GPU 6 迁到 GPU 2，并从第 1,501 步继续。迁移后短时实测约 285 窗／秒，迁移前约 137 窗／秒。启动器通过 PID 和命令识别并继续监控另外两路运行中的进程。证据见 [迁移核验](results/raw_huber_gpu_migration_audit.json)。

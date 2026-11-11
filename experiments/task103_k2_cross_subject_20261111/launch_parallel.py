@@ -59,24 +59,64 @@ def invoke(path, *args):
     subprocess.run([sys.executable, "-B", str(CODE / path), *map(str, args)], check=True)
 
 
-def train_all(root):
+class AdoptedTrainer:
+    """Observe an existing trainer using its original PID and command."""
+
+    def __init__(self, receipt, done):
+        self.pid = receipt["pid"]
+        self.command = receipt["command"]
+        self.done = done
+
+    def poll(self):
+        process = Path("/proc") / str(self.pid)
+        try:
+            command = (process / "cmdline").read_bytes().rstrip(b"\0").decode().split("\0")
+            state = (process / "stat").read_text().rsplit(")", 1)[1].split()[0]
+            if command == self.command and state not in ("Z", "X"):
+                return None
+        except (FileNotFoundError, ProcessLookupError):
+            pass
+        return 0 if self.done.is_file() else 1
+
+
+def train_all(root, adopt_running=False, prefer_gpu=None):
     remaining = [branch for branch in BRANCHES if not (root / "runs" / branch / "DONE.json").exists()]
     if not remaining:
         return
-    cards = gpu_candidates()
-    if len(cards) < len(remaining):
-        raise RuntimeError(f"Only {len(cards)} GPUs with sufficient memory for {len(remaining)} branches")
-    chosen = dict(zip(remaining, cards))
-    smoke = {branch: start(root, branch, chosen[branch], True, 1) for branch in remaining}
+    running, chosen = {}, {}
+    attempts = dict.fromkeys(remaining, 1)
+    for branch in remaining:
+        path = root / "checks" / f"train_process_{branch}.json"
+        if not path.is_file():
+            continue
+        receipt = load(path)
+        child = AdoptedTrainer(receipt, root / "runs" / branch / "DONE.json")
+        if child.poll() is None:
+            if not adopt_running:
+                raise RuntimeError(f"Trainer already live for {branch}; use --adopt-running")
+            chosen[branch] = receipt["gpu"]
+            running[branch] = (child, Path(receipt["log"]))
+            attempts[branch] = receipt["attempt"]
+            print(f"Adopt {branch}: PID {child.pid}, GPU {chosen[branch]['index']}", flush=True)
+        else:
+            attempts[branch] = receipt["attempt"] + 1
+    fresh = [branch for branch in remaining if branch not in running
+             and not (root / "runs" / branch / "DONE.json").is_file()]
+    used = {gpu["uuid"] for gpu in chosen.values()}
+    cards = [gpu for gpu in gpu_candidates() if gpu["uuid"] not in used] if fresh else []
+    if prefer_gpu is not None:
+        cards.sort(key=lambda gpu: gpu["index"] != prefer_gpu)
+    if len(cards) < len(fresh):
+        raise RuntimeError(f"Only {len(cards)} GPUs with sufficient memory for {len(fresh)} branches")
+    chosen.update(zip(fresh, cards))
+    smoke = {branch: start(root, branch, chosen[branch], True, attempts[branch]) for branch in fresh}
     smoke_codes = {branch: child.wait() for branch, (child, _) in smoke.items()}
     if any(smoke_codes.values()):
         raise RuntimeError(f"GPU smoke failed: {smoke_codes}")
 
-    running = {}
     failed = {}
-    attempts = dict.fromkeys(remaining, 1)
-    for branch in remaining:
-        running[branch] = start(root, branch, chosen[branch], False, 1)
+    for branch in fresh:
+        running[branch] = start(root, branch, chosen[branch], False, attempts[branch])
     while running:
         atomic(root / "STATUS.json", dict(phase="training_or_evaluating", active=list(running), failed=failed))
         for branch, (process, log) in list(running.items()):
@@ -105,7 +145,7 @@ def train_all(root):
         raise RuntimeError(f"Failed branches: {failed}")
 
 
-def main(root, source, prepare_only):
+def main(root, source, prepare_only, adopt_running=False, prefer_gpu=None):
     (root / "logs").mkdir(parents=True, exist_ok=True)
     with (root / "launcher.lock").open("a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -116,7 +156,7 @@ def main(root, source, prepare_only):
                 invoke("scripts/prepare_cross_subject.py", "--source", source, "--root", root)
             if prepare_only:
                 return
-            train_all(root)
+            train_all(root, adopt_running, prefer_gpu)
             atomic(root / "STATUS.json", dict(phase="generating_report"))
             invoke("scripts/report.py", "--root", root)
             atomic(root / "STATUS.json", dict(phase="report_ready"))
@@ -135,5 +175,7 @@ if __name__ == "__main__":
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--prepare-only", action="store_true")
+    parser.add_argument("--adopt-running", action="store_true")
+    parser.add_argument("--prefer-gpu", type=int)
     args = parser.parse_args()
-    main(args.root, args.source, args.prepare_only)
+    main(args.root, args.source, args.prepare_only, args.adopt_running, args.prefer_gpu)

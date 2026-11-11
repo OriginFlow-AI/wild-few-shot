@@ -1,0 +1,93 @@
+{
+  "status": "PASS_RAW_HUBER_EXACT_CHECKPOINT_MIGRATION",
+  "raw_before": {
+    "pid": 1377467,
+    "command": [
+      "/data/lr_data/force/contact/visualize/.venv/bin/python",
+      "-B",
+      "/pub_data/zjl/task103_k2_cross_subject_20261111/code/scripts/train.py",
+      "--root",
+      "/pub_data/zjl/task103_k2_cross_subject_20261111",
+      "--branch",
+      "raw_huber"
+    ],
+    "gpu": {
+      "index": 6,
+      "uuid": "GPU-63b0e9e5-ec55-d328-a9e4-ba3eb5de54fb",
+      "min_free_mib": 51222,
+      "mean_utilization": 100.0,
+      "process_memory_limit_GiB": 32
+    },
+    "log": "/pub_data/zjl/task103_k2_cross_subject_20261111/logs/train_raw_huber_1.log",
+    "attempt": 1
+  },
+  "old_launcher": {
+    "pid": 1375387,
+    "argv": [
+      "code/launch_parallel.py",
+      "--root",
+      "/pub_data/zjl/task103_k2_cross_subject_20261111",
+      "--source",
+      "/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110"
+    ]
+  },
+  "adopted_trainers": {
+    "calibrated_huber": {
+      "pid": 1377465,
+      "command": [
+        "/data/lr_data/force/contact/visualize/.venv/bin/python",
+        "-B",
+        "/pub_data/zjl/task103_k2_cross_subject_20261111/code/scripts/train.py",
+        "--root",
+        "/pub_data/zjl/task103_k2_cross_subject_20261111",
+        "--branch",
+        "calibrated_huber"
+      ],
+      "gpu": {
+        "index": 7,
+        "uuid": "GPU-bf699991-e975-69ca-5c04-4d494f240633",
+        "min_free_mib": 55626,
+        "mean_utilization": 100.0,
+        "process_memory_limit_GiB": 32
+      },
+      "log": "/pub_data/zjl/task103_k2_cross_subject_20261111/logs/train_calibrated_huber_1.log",
+      "attempt": 1
+    },
+    "raw_original": {
+      "pid": 1377468,
+      "command": [
+        "/data/lr_data/force/contact/visualize/.venv/bin/python",
+        "-B",
+        "/pub_data/zjl/task103_k2_cross_subject_20261111/code/scripts/train.py",
+        "--root",
+        "/pub_data/zjl/task103_k2_cross_subject_20261111",
+        "--branch",
+        "raw_original"
+      ],
+      "gpu": {
+        "index": 4,
+        "uuid": "GPU-1df1fb2f-e6e6-3ab9-66b8-a6a71db49def",
+        "min_free_mib": 43598,
+        "mean_utilization": 100.0,
+        "process_memory_limit_GiB": 32
+      },
+      "log": "/pub_data/zjl/task103_k2_cross_subject_20261111/logs/train_raw_original_1.log",
+      "attempt": 1
+    }
+  },
+  "saved_global_update": 1500,
+  "observed_global_update_before_stop": 1500,
+  "unsaved_updates_to_replay": 0,
+  "requested_gpu": 2,
+  "gpu6_recent_windows_per_second": 136.69830417063815,
+  "benchmark_gpu2_windows_per_second": 304.08114823477484,
+  "benchmark_gpu3_windows_per_second": 246.3597111976252,
+  "dataset_sha256": "13fb9acacecc99c925e01237ea22a521a525f79aa25069576816337e59262560",
+  "resumed_gpu": 2,
+  "resumed_pid": 1571986,
+  "first_resumed_update": 1501,
+  "verified_saved_update": 1600,
+  "measured_resumed_windows_per_second": 285.32240852094225,
+  "resume_checkpoint_sha256": "d5f7943031846ed83dfda029099c30b237f757e1c27194e548c83993088b8972",
+  "other_trainers_continuous": true
+}
