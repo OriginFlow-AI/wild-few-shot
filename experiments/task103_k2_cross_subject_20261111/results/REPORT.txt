@@ -1,0 +1,11 @@
+Task103 K2 5.56M person-disjoint four-way comparison
+
+Subject-equal metrics on identical scoring points:
+experiment	test label	MAE_N	MAPE_%	Corr
+1	cal	6.658946	75.829312	0.3295252164578377
+2	bsq	7.095438	76.410720	0.3491996025540587
+3	bsq	7.150613	75.872243	0.40482336499014077
+4	bsq	7.587991	77.425276	0.4398904958680096
+
+See FINAL_REPORT.json and paired_person_differences.csv.
+Read calibration_quality.json and dataset exclusions before interpreting retained-point accuracy.

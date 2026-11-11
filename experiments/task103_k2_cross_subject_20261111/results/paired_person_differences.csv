@@ -1,0 +1,25 @@
+comparison,subject,mae_difference_N
+calibration: experiment2 minus3,ch06204561,-0.07958788828239172
+calibration: experiment2 minus3,fgd01024468,0.917844838755471
+calibration: experiment2 minus3,glm05234375,0.14055995442624258
+calibration: experiment2 minus3,lc04284276,0.26730349598794856
+calibration: experiment2 minus3,lh06064715,-0.3195363939986926
+calibration: experiment2 minus3,llt09124363,-0.22037047697796197
+calibration: experiment2 minus3,ln11294643,0.02208496013254635
+calibration: experiment2 minus3,mgz12104755,-0.5134023739008251
+calibration: experiment2 minus3,wmm02102133,-0.7745900080142922
+calibration: experiment2 minus3,wzy10304191,0.11479606053143776
+calibration: experiment2 minus3,ze06094707,-0.1718396142766565
+calibration: experiment2 minus3,zhj06294749,-0.04536101441854967
+loss: experiment3 minus4,ch06204561,-0.8293136350756711
+loss: experiment3 minus4,fgd01024468,-0.5353544967089379
+loss: experiment3 minus4,glm05234375,-0.7155880225692082
+loss: experiment3 minus4,lc04284276,-0.9104399125486493
+loss: experiment3 minus4,lh06064715,-0.5196174074960886
+loss: experiment3 minus4,llt09124363,-0.5971805411924436
+loss: experiment3 minus4,ln11294643,-0.08878451904974494
+loss: experiment3 minus4,mgz12104755,-0.5388620373548321
+loss: experiment3 minus4,wmm02102133,-0.1917947092711687
+loss: experiment3 minus4,wzy10304191,-0.22692410753426007
+loss: experiment3 minus4,ze06094707,-0.41390515606932876
+loss: experiment3 minus4,zhj06294749,0.31922964851717595

@@ -1,0 +1,62 @@
+{
+  "dataset_sha256": "13fb9acacecc99c925e01237ea22a521a525f79aa25069576816337e59262560",
+  "subject_split_sha256": "38c9033a50a38fe19b30bd16b646771a258e6841aacbd8a5e019948e37a1bcdc",
+  "people_disjoint": true,
+  "record_and_calibration_sources_disjoint": true,
+  "validation": {
+    "recordings": 293,
+    "points": 724829,
+    "complete_epochs": {
+      "calibrated_huber": 5,
+      "raw_huber": 4,
+      "raw_original": 4
+    }
+  },
+  "status": "PASS_FINAL_RUN",
+  "models": {
+    "calibrated_huber": {
+      "epochs": 5,
+      "best_epoch": 3,
+      "best_val_loss": 7.141944293139114,
+      "best_sha256": "050f8dee627175e70006a3a3da1e50a188083c0538275d338a43a480b28db47f",
+      "stop_reason": "max_epochs",
+      "test_recordings": 240
+    },
+    "raw_huber": {
+      "epochs": 4,
+      "best_epoch": 2,
+      "best_val_loss": 10.890537514452085,
+      "best_sha256": "9b0ec1a32f18e5bf5fcffd6ca5237bbaf0540697ed355352f20651b4565f5574",
+      "stop_reason": "val_patience",
+      "test_recordings": 240
+    },
+    "raw_original": {
+      "epochs": 4,
+      "best_epoch": 2,
+      "best_val_loss": 1.2218948874842064,
+      "best_sha256": "20cff8fb198522ef8d93531a22b9e00a3ee7d87eb41ddbb78ddb6c892e4d6305",
+      "stop_reason": "val_patience",
+      "test_recordings": 240
+    }
+  },
+  "test": {
+    "recordings": 240,
+    "points": 654635,
+    "points_by_stage": {
+      "mix-test-5": 557913,
+      "mix-test-7": 96722
+    }
+  },
+  "report_sha256": {
+    "FINAL_REPORT.json": "a8a195e8f648f552a70556f483e43be6836e8b06831e91868afd6497b85d8e7f",
+    "four_experiments.csv": "0d4b00b67e1a13fd274aa64333ff52602a0f086a82da04b706d4ee5b6f245be5",
+    "by_stage.csv": "24d96182cd9719f0c143a13d54cc03adbb3df0b39b2f67721080910ac0206592",
+    "by_finger.csv": "5e06f009156c23bb5542ea476a88f93ff7070f21e33e20738ad54e104191a9f8",
+    "by_force_band.csv": "be41ae6129f68271efa85adfd117d0aedcc2b31f7f68d34dfd1ab0f5b8fb1edb",
+    "paired_person_differences.csv": "7e020a6d23ec8f4749f8053f39c4e4f31ed201c013b28611da8273719d4663c8",
+    "calibration_quality_summary.json": "4787d3456a6143f6d4ee57e46d17b36e72cc242c80214ab9a5577504cfa993de",
+    "REPORT.txt": "d6b5f15d06899fec4f2dedeab33fd68bb51cffbe14ec56a044dc473236c8d780",
+    "BSQ_MAE_by_stage.png": "26020379795a8fd4d16e9375310b6a41778f7fc5607d830827bfaf1c20a07d3a",
+    "report.html": "eacb4a5644424bcaa8983fd21d176528fb27fbb512adebffd0da6b7edf0b9a77"
+  }
+}

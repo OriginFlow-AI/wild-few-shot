@@ -1,0 +1,170 @@
+{
+  "selection": {
+    "train": {
+      "all_recordings": 4347,
+      "metadata_active": 4160,
+      "prepared_recordings": 4160,
+      "windows": 496726
+    },
+    "val": {
+      "all_recordings": 296,
+      "metadata_active": 293,
+      "prepared_recordings": 293,
+      "windows": 10753
+    },
+    "test": {
+      "all_recordings": 245,
+      "metadata_active": 240,
+      "prepared_recordings": 240,
+      "windows": 9554
+    }
+  },
+  "channel_QC_failures": {
+    "gross_source_fit_residual_P90_above_10N_and_half_range": 88,
+    "nonpositive_or_weak_calibration_monotonicity": 239,
+    "collapsed_calibration_force_range": 2
+  },
+  "record_QC_failures": [
+    {
+      "id": "85f7455157a41b54d87d",
+      "subject": "fyf02074188",
+      "stage": "mix-test-5",
+      "reason": "Force receive/sync offset disagreement"
+    },
+    {
+      "id": "a3f698914701e1d10da4",
+      "subject": "glm05234375",
+      "stage": "mix-test-5",
+      "reason": "BSQ median above100N or nonfinite"
+    },
+    {
+      "id": "e2e012db154ac81930de",
+      "subject": "ms09194462",
+      "stage": "mix-test-7",
+      "reason": "No stable post-positioning BSQ tare segment"
+    },
+    {
+      "id": "b97db15e8e873da8e95c",
+      "subject": "ln11294643",
+      "stage": "mix-test-7",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/b97db15e8e873da8e95c/done.json'"
+    },
+    {
+      "id": "ec5ac57400c473f7e610",
+      "subject": "ls05014634",
+      "stage": "mix-test-5",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/ec5ac57400c473f7e610/done.json'"
+    },
+    {
+      "id": "1bc5b4c2f45009b5ba55",
+      "subject": "yjy11214734",
+      "stage": "mix-test-7",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/1bc5b4c2f45009b5ba55/done.json'"
+    },
+    {
+      "id": "71c92fe0a1e90a808570",
+      "subject": "lrj08054761",
+      "stage": "mix-test-5",
+      "reason": "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/71c92fe0a1e90a808570/done.json'"
+    }
+  ],
+  "accepted_curve_review_diagnostics": null,
+  "test5_without_any_valid_channel": [
+    {
+      "id": "7acd28ef6dd54e2a08ab",
+      "subject": "fyx01094176",
+      "stage": "mix-test-5",
+      "events": 27,
+      "reasons": {
+        "peak_below3N_cannot_confirm_finger": 21,
+        "no_local_quiet_for_AD_identity": 5,
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "558a03381adc68cd07a2",
+      "subject": "wy10204452",
+      "stage": "mix-test-5",
+      "events": 41,
+      "reasons": {
+        "peak_below3N_cannot_confirm_finger": 40,
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "bcbc65c6dcfa8c65896d",
+      "subject": "hfh05014636",
+      "stage": "mix-test-5",
+      "events": 1,
+      "reasons": {
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "eb25b5f3b25e32dfd01b",
+      "subject": "jxd10133591",
+      "stage": "mix-test-5",
+      "events": 0,
+      "reasons": {}
+    },
+    {
+      "id": "30821473cc15cfa3a7a7",
+      "subject": "hfh05014636",
+      "stage": "mix-test-5",
+      "events": 3,
+      "reasons": {
+        "peak_below3N_cannot_confirm_finger": 2,
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "1ad1f33547df62c93e84",
+      "subject": "ln11294643",
+      "stage": "mix-test-5",
+      "events": 1,
+      "reasons": {
+        "incomplete_press_at_boundary": 1
+      }
+    },
+    {
+      "id": "69741622c7f579e029eb",
+      "subject": "wsd01244685",
+      "stage": "mix-test-5",
+      "events": 1,
+      "reasons": {
+        "incomplete_press_at_boundary": 1
+      }
+    }
+  ],
+  "extraction_errors": [],
+  "dataset_exclusion_reasons": {
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/c968f0ffbbfc50b765c1/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/23dea10db5583bf69c3a/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/6902ddd88ae8bf6df7bb/done.json'": 1,
+    "No eligible nearest calibration source": 23,
+    "Nearest calibration has no valid channels; no fallback": 48,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/1afd8db55258b0d11d92/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/ac8f141c6bf0afbb359a/done.json'": 1,
+    "Missing reference/finger route": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/6942ab6ade5b7e4b7fcd/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/b97db15e8e873da8e95c/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/ff657651fc680658b744/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/fab0b55678e83751eb4d/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/1bc5b4c2f45009b5ba55/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/cd86f7f094d4f8f14393/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/185f6ddb8b2e8ddcdfa6/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/bbf5d81de8c0accbe246/done.json'": 1,
+    "[Errno 2] No such file or directory: '/pub_data/zjl/task103_ap304_huber_calibration_ablation_20261110/cache/emg/d9f76d076095dec8b3de/done.json'": 1
+  },
+  "partial_test5_records": 1124,
+  "experience": [
+    "先核实BSQ的N、CMCU的mN及同步时钟；不要排序时间戳后掩盖逆序或跨时钟异常。",
+    "最大AD不一定是受测指，test7的支撑拇指尤其容易抢占；歧义指身份应屏蔽。",
+    "BSQ零点应固定在姿态稳定空载段；整段均值、翻转前首秒都可能引入系统偏差。",
+    "没有完整按压、AD变化不足、单调性弱和拟合力范围坍缩分别记录；缺指不等于整条硬件损坏。",
+    "同一AD下参考力明显不一致时，单调相关也可能通过。源拟合残差P90同时超过10N和拟合力范围50%的指通道已屏蔽；较轻残差复核仅作标记，通过基础规则不等于独立精度合格。",
+    "单调拟合不能解决饱和、迟滞、佩戴变化或域外数据。域外点必须计入覆盖限制，不能静默夹端点。",
+    "test5按原始最近test5口径使用自身整次曲线；源内拟合符合度不等于独立曲线精度。本方案使用现场BSQ作为自身及其他记录的标定输入，不是BSQ完全未参与过标定的评估。",
+    "不按模型Test误差挑源或改剔除阈值；最近源失效不静默回退。"
+  ]
+}

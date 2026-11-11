@@ -1,0 +1,80 @@
+{
+  "phase": "complete",
+  "branch": "calibrated_huber",
+  "best_sha256": "050f8dee627175e70006a3a3da1e50a188083c0538275d338a43a480b28db47f",
+  "history": [
+    {
+      "epoch": 1,
+      "val_loss": 7.84304729662266,
+      "global_update": 1941
+    },
+    {
+      "epoch": 2,
+      "val_loss": 7.741531789943402,
+      "global_update": 3882
+    },
+    {
+      "epoch": 3,
+      "val_loss": 7.141944293139114,
+      "global_update": 5823
+    },
+    {
+      "epoch": 4,
+      "val_loss": 7.36400092589549,
+      "global_update": 7764
+    },
+    {
+      "epoch": 5,
+      "val_loss": 7.529069658988726,
+      "global_update": 9705
+    }
+  ],
+  "test_recordings": 240,
+  "test_not_used_for_selection": true,
+  "binding": {
+    "config_sha256": "aec19f18536d6ebfc88586a886d3ebc09b6d5b412675ae86098b7214cf5f08ec",
+    "dataset_sha256": "13fb9acacecc99c925e01237ea22a521a525f79aa25069576816337e59262560",
+    "source_code": {
+      "scripts/common.py": "e857ebe8ef1b4539680aa44a5c8256c663716ab7ad600675ad1fe36be5aa3d41",
+      "scripts/prepare_cross_subject.py": "1cce48caf90093769d3f5132d6a0f790f072a4892e5b4a1816428127fea6d882",
+      "scripts/report.py": "820575051d0dd2e147a80fd4cee9d99dd6fc523732aec31d85a319928313cdb4",
+      "scripts/train.py": "adb194f4b4ac0f00c7272dd64498e7a8224f2dcb5531111aa3381a9655e9841d",
+      "vendor/force_losses.py": "390ee876acfb3ef1a0840ca935acc520b86882ed59a88b8a8435bab83b988876",
+      "vendor/model_source.py": "a6cd8f939c87e20776aa77acb2c20e0e00d5c323f5c479b9bffe5e0de5d9e38d"
+    },
+    "common_initial_sha256": "25d0e271d7fe9fe9c3948a02f03fbf42048bbe1bec2f7f789df90c92dd778729",
+    "branch": "calibrated_huber",
+    "force_norm": {
+      "mean": [
+        1.3730054959531703,
+        0.932793182735958,
+        0.667207615394988,
+        0.4742342212946638,
+        0.24637774353722788
+      ],
+      "std": [
+        3.113179294380905,
+        2.212814397477034,
+        1.7879451943671447,
+        1.4558784301005272,
+        0.9655716742420065
+      ],
+      "count": [
+        94377886,
+        93221170,
+        79901161,
+        73424959,
+        76874230
+      ]
+    },
+    "effective_microbatch": 16,
+    "EMG_norm_sha256": "35a30e638f278b37457b01e212a0dac2dddfb0196543c86a0f67c8c38854bf42",
+    "subject_split_sha256": "38c9033a50a38fe19b30bd16b646771a258e6841aacbd8a5e019948e37a1bcdc",
+    "physical_forward_schedule": [
+      {
+        "start_global_update": 0,
+        "windows": 64
+      }
+    ]
+  }
+}

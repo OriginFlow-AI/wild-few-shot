@@ -1,0 +1,15 @@
+{
+  "phase": "complete",
+  "model": "k2_ring_transformer_affine_5p56m",
+  "training_branches": [
+    "calibrated_huber",
+    "raw_huber",
+    "raw_original"
+  ],
+  "experiments": [
+    1,
+    2,
+    3,
+    4
+  ]
+}

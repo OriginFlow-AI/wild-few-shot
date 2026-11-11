@@ -1,5 +1,11 @@
 # Task103 K2 5.56M 跨人四组实验
 
+四组正式 Test 与核验已于北京时间 2026-11-12 01:53 完成。标定 Huber 跑满 5 轮并选第 3 轮，两套未标定模型按 patience=2 在第 4 轮结束并各选第 2 轮。全部 Val 使用同一批 293 条记录、724,829 个有效点。四组 Test 使用 12 位留出人员的 240 条记录、654,635 个共同有效点。
+
+[最终指标表](results/force_threshold_metrics.md)给出人员等权 Corr、MAE、MAE <1 N 和两档 MAPE。[分 stage 明细](results/by_stage.csv)、[完整报告](results/report.html)、[核验记录](results/final_run_audit.json)和[推理权重](../../models/task103_k2_cross_subject_20261111)一并保存。
+
+在这次 Test 划分上，标定 Huber 相比未标定 Huber 的 BSQ MAE 低 0.055 N，Corr 低 0.056，两档 MAPE 分别高 0.54 和 0.74 个百分点。原损失相比未标定 Huber 的 Corr 高 0.035，MAE 高 0.437 N，两档 MAPE 分别高 1.55 和 2.43 个百分点。
+
 模型为历史训练代码 `k2_cross_subject_dg_v1/model.py` 中的 `k2_ring_transformer_affine_5p56m`。宽度 224、8 个注意力头、5 层 encoder、2 层 decoder，共 5,562,617 个参数。已逐类和逐函数对比网络 AST。历史模型源 SHA256 为 `6df60f9aba00223753997b9a81a5d2b613bae040b64571be3331a036d72b45db`，本目录的独立网络去掉了旧训练框架的包装。输入为每手 16 通道、2 kHz、4,000 点窗口，输出为五指各 89 个力点。
 
 | 实验 | Train 和 Val 标签 | Test 标签 | 训练损失 |
