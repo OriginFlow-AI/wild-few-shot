@@ -16,11 +16,11 @@ from score_force_thresholds import METRICS
 from train import network
 
 
-def summarize(rows, split):
+def summarize(rows, split, kind='raw'):
     scopes = defaultdict(lambda: defaultdict(list))
     for row in rows.values():
         for stage in ('all', row['stage']):
-            scopes[stage][row['subject']].append(row['metrics']['raw'])
+            scopes[stage][row['subject']].append(row['metrics'][kind])
     table = []
     for stage, subjects in sorted(scopes.items()):
         metrics = [m for person in subjects.values() for m in person]
@@ -38,7 +38,7 @@ def summarize(rows, split):
 def main(root, branch='raw_original', output=None):
     data_path = root / 'prepared/dataset.json'
     data = load(data_path)
-    assert data['target'] == 'native_CMCU_N'
+    kind = {'native_CMCU_N': 'raw', 'calibrated_CMCU_N': 'cal'}[data['target']]
     run = root / 'runs' / branch
     done = load(run / 'DONE.json')
     assert done['phase'] == 'complete' and done['test_not_used_for_selection']
@@ -61,7 +61,7 @@ def main(root, branch='raw_original', output=None):
                    for rid, row in rows.items())
         if split == 'val':
             assert receipt['loss'] == selected['val_loss']
-        table = summarize(rows, split)
+        table = summarize(rows, split, kind)
         by_stage = {row['stage']: row['recordings'] for row in table if row['stage'] != 'all'}
         assert by_stage == data['split_recordings'][split]['by_stage']
         tables.extend(table)
@@ -75,6 +75,7 @@ def main(root, branch='raw_original', output=None):
            selected_checkpoint_sha256=done['best_sha256'], history=done['history'],
            dataset_sha256=done['binding']['dataset_sha256'],
            shared_k2_dataset_sha256=data.get('shared_k2_dataset_sha256'),
+           force_loss=load(run/'CONTRACT.json')['configuration'].get('force_loss'),
            aggregation='Per recording, then mean per person, then equal weight across people.',
            coverage=data['split_recordings'], metrics=tables))
     export = root / 'exported_models' / branch
@@ -96,7 +97,7 @@ def main(root, branch='raw_original', output=None):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, required=True)
-    parser.add_argument('--branch', choices=('raw_original', 'raw_huber'), default='raw_original')
+    parser.add_argument('--branch', choices=('raw_original', 'raw_huber', 'calibrated_original'), default='raw_original')
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()
     main(args.root, args.branch, args.output)

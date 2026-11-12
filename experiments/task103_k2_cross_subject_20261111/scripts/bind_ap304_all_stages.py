@@ -18,25 +18,8 @@ def link(source, target):
         target.symlink_to(source, target_is_directory=source.is_dir())
 
 
-def main(root, dataset_root, previous_ap304):
-    root, dataset_root, previous_ap304 = (path.resolve() for path in (root, dataset_root, previous_ap304))
-    source = dataset_root / 'prepared/dataset.json'
-    data = load(source)
+def bind_initialization(root, previous_ap304):
     config = settings()
-    assert data['target'] == config['target'] == 'native_CMCU_N'
-    assert load(dataset_root / 'prepared/subject_split.json')['all_stages_per_split']
-    for folder in ('prepared', 'assets', 'checks', 'cache'):
-        (root / folder).mkdir(parents=True, exist_ok=True)
-    for name in ('emg', 'labels'):
-        link(dataset_root / 'cache' / name, root / 'cache' / name)
-    manifest = dataset_root / 'prepared/subject_split.json'
-    assert sha(manifest) == data['subject_split_sha256']
-    assert sha(dataset_root / 'prepared/recording_split.csv') == load(manifest)['recording_split_sha256']
-    for name, digest in data['window_indices_sha256'].items():
-        assert sha(dataset_root / f'prepared/{name}_windows.npy') == digest
-        link(dataset_root / f'prepared/{name}_windows.npy', root / f'prepared/{name}_windows.npy')
-    for name in ('subject_split.json', 'recording_split.csv', 'exclusions.json'):
-        link(dataset_root / 'prepared' / name, root / 'prepared' / name)
     inputs = {
         'common_initial_sha256': previous_ap304 / 'assets/common_stage2_initial_state_dict.pt',
         'stage1_export_sha256': previous_ap304 / 'assets/ap304_rank_best_model_state_dict.pt',
@@ -59,11 +42,34 @@ def main(root, dataset_root, previous_ap304):
     with np.load(norm) as n:
         assert np.isfinite(n['emg_mean']).all() and np.all(np.isfinite(n['emg_std']) & (n['emg_std'] > 0))
         emg = {key: n[f'emg_{key}'].tolist() for key in ('mean', 'std')}
+    return emg, len(backbone)
+
+
+def main(root, dataset_root, previous_ap304):
+    root, dataset_root, previous_ap304 = (path.resolve() for path in (root, dataset_root, previous_ap304))
+    source = dataset_root / 'prepared/dataset.json'
+    data = load(source)
+    config = settings()
+    assert data['target'] == config['target'] == 'native_CMCU_N'
+    assert load(dataset_root / 'prepared/subject_split.json')['all_stages_per_split']
+    for folder in ('prepared', 'assets', 'checks', 'cache'):
+        (root / folder).mkdir(parents=True, exist_ok=True)
+    for name in ('emg', 'labels'):
+        link(dataset_root / 'cache' / name, root / 'cache' / name)
+    manifest = dataset_root / 'prepared/subject_split.json'
+    assert sha(manifest) == data['subject_split_sha256']
+    assert sha(dataset_root / 'prepared/recording_split.csv') == load(manifest)['recording_split_sha256']
+    for name, digest in data['window_indices_sha256'].items():
+        assert sha(dataset_root / f'prepared/{name}_windows.npy') == digest
+        link(dataset_root / f'prepared/{name}_windows.npy', root / f'prepared/{name}_windows.npy')
+    for name in ('subject_split.json', 'recording_split.csv', 'exclusions.json'):
+        link(dataset_root / 'prepared' / name, root / 'prepared' / name)
+    emg, backbone_count = bind_initialization(root, previous_ap304)
     receipt = dict(k2_dataset_sha256=sha(source), subject_split_sha256=data['subject_split_sha256'],
                    window_indices_sha256=data['window_indices_sha256'],
                    recording_split_sha256=sha(dataset_root / 'prepared/recording_split.csv'),
                    raw_force_norm=data['force_norm']['raw'], target=data['target'],
-                   backbone_tensors_verified=len(backbone),
+                   backbone_tensors_verified=backbone_count,
                    initialization_sha256=config['common_initial_sha256'],
                    stage1_export_sha256=config['stage1_export_sha256'],
                    emg_norm_sha256=config['emg_norm_sha256'])

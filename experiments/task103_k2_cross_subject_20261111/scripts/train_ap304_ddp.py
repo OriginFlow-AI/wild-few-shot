@@ -37,7 +37,7 @@ def save(path, net, opt, state, binding, rank, world):
 
 
 @torch.no_grad()
-def evaluate(net, root, split, branch, mean, std, device, rank, world):
+def evaluate(net, root, split, branch, mean, std, device, rank, world, force_loss):
     ds = Windows(root, split, branch)
     ids = sorted({row['id'] for row in ds.data['entries'] if row['split'] == split})
     local_ids = set(ids[rank::world])
@@ -47,7 +47,7 @@ def evaluate(net, root, split, branch, mean, std, device, rank, world):
         if int(index) in local_entries:
             by_entry[int(index)].append(int(start))
     net.eval()
-    result = evaluate_native(net, ds, by_entry, branch, mean, std, device)
+    result = evaluate_native(net, ds, by_entry, branch, mean, std, device, force_loss)
     gathered = [None] * world
     dist.all_gather_object(gathered, result['rows'])
     rows = sorted((row for group in gathered for row in group), key=lambda row: row['id'])
@@ -59,6 +59,9 @@ def train(root, branch, smoke, rank, world, device):
     c = settings()
     ds = PaddedWindows(root, 'train', branch)
     data = ds.data
+    force_loss = c.get('force_loss')
+    if branch == 'calibrated_original':
+        assert force_loss is not None and data['target'] == 'calibrated_CMCU_N'
     init = root / 'assets/common_stage2_initial_state_dict.pt'
     norm_path = root / 'prepared/emg_train_norm.npz'
     assert ds.native_only and data['source_code'] == source_binding()
@@ -75,7 +78,7 @@ def train(root, branch, smoke, rank, world, device):
                    shared_k2_dataset_sha256=data['shared_k2_dataset_sha256'],
                    common_initial_sha256=data['common_initial_sha256'], source_code=data['source_code'],
                    subject_split_sha256=data['subject_split_sha256'], EMG_norm_sha256=data['emg_norm_sha256'],
-                   branch=branch, force_norm=data['force_norm']['raw'], world_size=world)
+                   branch=branch, force_norm=data['force_norm'][ds.kind], world_size=world)
     norm = binding['force_norm']
     mean, std = (torch.tensor(norm[k], dtype=torch.float32, device=device)[None, :, None] for k in ('mean', 'std'))
     folder = root / ('checks' if smoke else 'runs') / (f'smoke_{branch}' if smoke else branch)
@@ -138,7 +141,7 @@ def train(root, branch, smoke, rank, world, device):
                     combined = pred.sum() * 0
                     for lo in range(0, len(xx), micro):
                         window = slice(lo, lo + micro)
-                        loss, count = objective(pred[window], yy[window], mask[window], branch)
+                        loss, count = objective(pred[window], yy[window], mask[window], branch, force_loss)
                         combined = combined + loss * count
                     combined = combined / den
                     if not torch.isfinite(combined):
@@ -175,7 +178,7 @@ def train(root, branch, smoke, rank, world, device):
         if rank == 0:
             atomic(folder / 'STATUS.json', dict(phase='validation', epoch=epoch + 1,
                                               global_update=state['global_update']))
-        val = evaluate(net, root, 'val', branch, mean, std, device, rank, world)
+        val = evaluate(net, root, 'val', branch, mean, std, device, rank, world, force_loss)
         loss = val['loss']
         is_best = state['best'] is None or loss < state['best']
         if is_best:
@@ -197,7 +200,7 @@ def train(root, branch, smoke, rank, world, device):
     del checkpoint
     if rank == 0:
         atomic(folder / 'STATUS.json', dict(phase='final_test', branch=branch, selected_checkpoint_sha256=sha(best)))
-    test = evaluate(net, root, 'test', branch, mean, std, device, rank, world)
+    test = evaluate(net, root, 'test', branch, mean, std, device, rank, world, force_loss)
     if rank == 0:
         atomic(folder / 'final_test.json', test)
         done = dict(phase='complete', branch=branch, history=state['history'], test_recordings=test['records'],
@@ -209,7 +212,7 @@ def train(root, branch, smoke, rank, world, device):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, required=True)
-    parser.add_argument('--branch', choices=('raw_huber', 'raw_original'), required=True)
+    parser.add_argument('--branch', choices=('raw_huber', 'raw_original', 'calibrated_original'), required=True)
     parser.add_argument('--smoke', action='store_true')
     args = parser.parse_args()
     torch.set_num_threads(2)

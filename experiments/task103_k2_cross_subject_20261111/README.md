@@ -75,3 +75,17 @@ python -B code/launch_ap304_all_stages.py \
 ```
 
 最终汇总由 `analysis/collect_all_stage_results.py` 核验共享输入、选模凭据和逐 recording 计分点数后生成。
+
+### AP304 二阶段 · 标定力和调整后的原损失
+
+沿用全 stage 原始力实验的冻结人员划分和 EMG 窗口，在同一人的同日、同 PC、同启动会话内应用时间最近的 `test5` 逐指曲线。`test5` 用自身曲线。训练、Val 选模和 Test 评分使用标定 CMCU N，屏蔽缺曲线和 AD 域外点。每个划分有 18 个可用 stage，`mix-1` 和 `mix-11` 缺同会话来源。
+
+| 集合 | 可用人数 | Recording | 窗口 |
+|---|---:|---:|---:|
+| Train | 58 | 5,960 | 711,577 |
+| Val | 12 | 1,230 | 146,813 |
+| Test | 12 | 911 | 108,796 |
+
+AP304 使用相同一期 `best_tau` 初始化和 EMG 归一化，仅以标定 Train 计算输出力的归一化。四卡 DDP 保持 256 窗有效全局 batch，按每 16 窗单独计算 loss。优化目标为 `0.5 × (1−Pearson Corr) + 0.1 × MAPE + 0.15 × MAE`，MAPE 使用绝对参考力至少 0.5 N 的有效点，取比例值。按完整 Val recording 等权选最低 loss，至多 10 轮，patience 3。
+
+标定源逐条复拟合与目标覆盖见 [数据问题分支](https://github.com/OriginFlow-AI/wild-few-shot/tree/zjl/data_corner_case/data_quality/task103)。服务器目录为 `.1:/pub_data/zjl/task103_ap304_stage2_calibrated_person_split_20261112`，使用本目录的 `config_ap304_calibrated_subject.json` 作为运行配置。AP304 launcher 接受 `--calibration-refit` 指向已有 `quality_refit` 目录，自动应用曲线、准备数据、选卡训练和导出正式评测。

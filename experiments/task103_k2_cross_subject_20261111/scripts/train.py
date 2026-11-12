@@ -28,10 +28,11 @@ class Windows(Dataset):
     def __init__(self,root,split,branch):
         self.root=Path(root);self.data=load(self.root/'prepared/dataset.json')
         self.index=np.load(self.root/'prepared'/(split+'_windows.npy'),mmap_mode='r')
-        self.kind='cal' if branch=='calibrated_huber' else 'raw';self.cache=collections.OrderedDict()
-        self.native_only=self.data.get('target')=='native_CMCU_N'
-        if self.native_only and self.kind!='raw':
-            raise ValueError('Native CMCU dataset requires a raw-label branch')
+        self.kind='cal' if branch.startswith('calibrated_') else 'raw';self.cache=collections.OrderedDict()
+        target_kind={'native_CMCU_N':'raw', 'calibrated_CMCU_N':'cal'}.get(self.data.get('target'))
+        self.native_only=target_kind is not None
+        if self.native_only and self.kind!=target_kind:
+            raise ValueError(f'Dataset target requires {target_kind} labels, got {self.kind}')
         with np.load(self.root/'prepared/emg_train_norm.npz') as n:
             self.em=np.asarray(n['emg_mean'],np.float32);self.es=np.asarray(n['emg_std'],np.float32)
         if not np.isfinite(self.es).all() or not np.all(self.es>0):raise ValueError('Bad pretrained EMG norm')
@@ -41,9 +42,9 @@ class Windows(Dataset):
         if key not in self.cache:
             a=np.load(self.root/'cache/emg'/r['id']/(r['side']+'.npy'),mmap_mode='r')
             with np.load(self.root/'cache/labels'/(r['id']+'.npz')) as z:
-                label={k:z[r['side']+'_'+k] for k in ('t','raw','valid')}
+                label={k:z[r['side']+'_'+k] for k in ('t',self.kind,'valid')}
                 if not self.native_only:
-                    label.update({k:z[r['side']+'_'+k] for k in ('cal','bsq')})
+                    label.update({k:z[r['side']+'_'+k] for k in ('raw','cal','bsq')})
                     label.update({k:z[k] for k in ('reference_t','reference_N','reference_valid')})
             self.cache[key]=(a,label)
             if len(self.cache)>8:self.cache.popitem(last=False)
@@ -60,29 +61,33 @@ class Windows(Dataset):
     def __getitem__(self,i):
         entry,start=map(int,self.index[i]);return self.one(entry,start)
 
-def objective(p,y,mask,kind):
+def objective(p,y,mask,kind,force_loss=None):
     mask=mask & torch.isfinite(y) & torch.isfinite(p)
     # Nonfinite predictions are model failures, not silently excluded labels.
     if not torch.isfinite(p).all():raise ValueError('Nonfinite model output')
     count=int(mask.sum())
     if not count:return p.sum()*0,0
     a,b=p[mask],y[mask]
-    if kind=='raw_original':
-        loss=force_objective(a[None],b[None],corr_weight=1.,mape_weight=.3,mae_weight=.03,mape_threshold_n=.5)['loss']
+    if kind.endswith('_original'):
+        coefficients=force_loss or dict(corr_weight=1.,mape_weight=.3,mae_weight=.03)
+        loss=force_objective(a[None],b[None],**coefficients,mape_threshold_n=.5)['loss']
     else:loss=force_huber_loss(a,b,delta_n=1.)
     return loss,count
 
-def measures(p,y,valid):
+def measures(p,y,valid,force_loss=None):
     x=np.asarray(p,dtype=np.float64)[valid];t=np.asarray(y,dtype=np.float64)[valid]
     if not len(x):return None
     e=x-t;corr=float(np.corrcoef(x,t)[0,1]) if np.ptp(x)>0 and np.ptp(t)>0 else None
     active=abs(t)>=.5;mape=float(np.mean(abs(e[active])/abs(t[active]))) if active.any() else 0.
     huber=float(np.mean(np.where(abs(e)<=1,.5*e**2,abs(e)-.5)))
-    return dict(points=len(x),mae_N=float(abs(e).mean()),mape_percent=100*mape if active.any() else None,
+    mae=float(abs(e).mean())
+    coefficients=force_loss or dict(corr_weight=1.,mape_weight=.3,mae_weight=.03)
+    loss=coefficients['corr_weight']*(1-(corr if corr is not None else 0.)) + coefficients['mape_weight']*mape + coefficients['mae_weight']*mae
+    return dict(points=len(x),mae_N=mae,mape_percent=100*mape if active.any() else None,
                 mape_points=int(active.sum()),corr=corr,
-                huber_N2=huber,original_loss=1-(corr if corr is not None else 0.)+.3*mape+.03*float(abs(e).mean()))
+                huber_N2=huber,original_loss=loss)
 
-def evaluate_native(net, ds, by_entry, branch, mean, std, device):
+def evaluate_native(net, ds, by_entry, branch, mean, std, device, force_loss=None):
     records = collections.defaultdict(list)
     for entry, starts in sorted(by_entry.items()):
         meta = ds.data['entries'][entry]
@@ -91,7 +96,7 @@ def evaluate_native(net, ds, by_entry, branch, mean, std, device):
         offsets = (starts[:, None] + 470 + 40 * np.arange(89)).ravel()
         keep = np.r_[True, offsets[1:] > np.maximum.accumulate(offsets)[:-1]]
         query = meta['start_ns'] + offsets * 500000
-        target, mask = interpolate(label['t'], label['raw'], label['valid'], query)
+        target, mask = interpolate(label['t'], label[ds.kind], label['valid'], query)
         parts = []
         for chunk in np.array_split(starts, (len(starts) + 63) // 64):
             x = np.stack([((signal[s:s+4000] - ds.em) / ds.es).T for s in chunk])
@@ -112,7 +117,7 @@ def evaluate_native(net, ds, by_entry, branch, mean, std, device):
         target = np.concatenate([t for _, _, t in hands]).astype(np.float64)
         if not len(target):
             raise ValueError(f'No native scoring points for {record_id}')
-        metrics = measures(predicted, target, np.ones(len(target), dtype=bool))
+        metrics = measures(predicted, target, np.ones(len(target), dtype=bool), force_loss)
         abs_force = abs(target)
         error = abs(predicted - target)
         low, high = abs_force < 1, abs_force >= 1
@@ -121,9 +126,9 @@ def evaluate_native(net, ds, by_entry, branch, mean, std, device):
             mape_ge_0p5N_percent=metrics['mape_percent'],
             mape_ge_1N_percent=float(100 * np.mean(error[high] / abs_force[high])) if high.any() else None,
             points_below_1N=int(low.sum()), points_ge_1N=int(high.sum()))
-        loss = metrics['original_loss'] if branch == 'raw_original' else metrics['huber_N2']
+        loss = metrics['original_loss'] if branch.endswith('_original') else metrics['huber_N2']
         rows.append(dict(id=record_id, subject=meta['subject'], stage=meta['stage'], loss=loss,
-                         metrics={'raw': metrics}))
+                         metrics={ds.kind: metrics}))
     return dict(records=len(rows), loss=float(np.mean([row['loss'] for row in rows])), rows=rows)
 
 

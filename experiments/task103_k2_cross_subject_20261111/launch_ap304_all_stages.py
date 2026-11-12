@@ -16,9 +16,10 @@ def select_cards(dataset_root, reserved):
     if k2.is_file() and not done.exists():
         reserved = reserved | {load(k2)['gpu']['uuid']}
     cards = [c for c in gpu_candidates() if c['uuid'] not in reserved and c['process_memory_limit_GiB'] >= 32]
-    if len(cards) < 2:
-        raise RuntimeError('Two GPUs with a 32 GiB shared allowance are required for AP304')
-    return cards[:2]
+    devices = settings().get('ddp_devices', 2)
+    if len(cards) < devices:
+        raise RuntimeError(f'{devices} GPUs with a 32 GiB shared allowance are required for AP304')
+    return cards[:devices]
 
 
 def start(root, branch, cards, attempt, smoke):
@@ -86,13 +87,19 @@ def run_branches(root, dataset_root, branches):
         time.sleep(15)
 
 
-def main(root, dataset_root, previous_ap304):
+def main(root, dataset_root, previous_ap304, calibration_refit=None):
     (root / 'logs').mkdir(parents=True, exist_ok=True)
     with (root / 'launcher.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         try:
-            invoke('scripts/bind_ap304_all_stages.py', '--root', root, '--dataset-root', dataset_root,
-                   '--previous-ap304', previous_ap304)
+            if calibration_refit:
+                if not (root / 'prepared/dataset.json').is_file():
+                    invoke('scripts/prepare_calibrated_subject.py', '--root', root,
+                           '--dataset-root', dataset_root, '--previous-ap304', previous_ap304,
+                           '--calibration-refit', calibration_refit)
+            else:
+                invoke('scripts/bind_ap304_all_stages.py', '--root', root, '--dataset-root', dataset_root,
+                       '--previous-ap304', previous_ap304)
             branches = settings()['branches']
             run_branches(root, dataset_root, branches)
             atomic(root / 'STATUS.json', dict(phase='complete', branches=branches))
@@ -106,5 +113,6 @@ if __name__ == '__main__':
     parser.add_argument('--root', type=Path, required=True)
     parser.add_argument('--dataset-root', type=Path, required=True)
     parser.add_argument('--previous-ap304', type=Path, required=True)
+    parser.add_argument('--calibration-refit', type=Path)
     args = parser.parse_args()
-    main(args.root, args.dataset_root, args.previous_ap304)
+    main(args.root, args.dataset_root, args.previous_ap304, args.calibration_refit)

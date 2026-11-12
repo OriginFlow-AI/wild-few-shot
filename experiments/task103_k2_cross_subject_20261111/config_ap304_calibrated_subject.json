@@ -1,0 +1,46 @@
+{
+  "schema": "task103-ap304-stage2-calibrated-person-disjoint-v1",
+  "model": "k2_ring_transformer_affine_w304_e9_d4",
+  "parameter_count": 18357945,
+  "seed": 43,
+  "split_seed": 43,
+  "gpu_memory_limit_GiB": 32,
+  "microbatch": 16,
+  "common_microbatch": 16,
+  "physical_forward_schedule": [
+    {
+      "start_global_update": 0,
+      "windows": 64
+    }
+  ],
+  "global_batch": 256,
+  "train_workers": 3,
+  "max_epochs": 10,
+  "patience": 3,
+  "min_delta": 0.0001,
+  "lr_body": 2e-05,
+  "lr_head": 0.0001,
+  "weight_decay": 0.0001,
+  "warmup_updates": 1000,
+  "save_every_updates": 50,
+  "branches": [
+    "calibrated_original"
+  ],
+  "objectives": {
+    "calibrated_original": "0.5*(1-Corr)+0.1*MAPE+0.15*MAE"
+  },
+  "target": "calibrated_CMCU_N",
+  "mape_activity": "abs(GT)>=0.5N",
+  "validation_selection": "mean branch objective over complete validation recordings",
+  "initialization": "historical best_tau backbone and reset output head from Task103 stage2",
+  "common_initial_sha256": "f1fb53b6abeaecbabfea746a27a6cc41a831c5153a902f67a031aab394c8675b",
+  "stage1_export_sha256": "f6dfe88f7e25d5be934ee0b065ae76d94aa89edc88340164244ecd149fa89928",
+  "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+  "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+  "ddp_devices": 4,
+  "force_loss": {
+    "corr_weight": 0.5,
+    "mape_weight": 0.1,
+    "mae_weight": 0.15
+  }
+}
