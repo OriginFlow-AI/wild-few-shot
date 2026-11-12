@@ -78,6 +78,8 @@ python -B code/launch_ap304_all_stages.py \
 
 ### AP304 二阶段 · 标定力和调整后的原损失
 
+[正式 Val、Test 汇总](results/calibrated_subject/README.md)包含最佳轮次、五项指标和逐 stage 结果。
+
 沿用全 stage 原始力实验的冻结人员划分和 EMG 窗口，在同一人的同日、同 PC、同启动会话内应用时间最近的 `test5` 逐指曲线。`test5` 用自身曲线。训练、Val 选模和 Test 评分使用标定 CMCU N，屏蔽缺曲线和 AD 域外点。每个划分有 18 个可用 stage，`mix-1` 和 `mix-11` 缺同会话来源。
 
 | 集合 | 可用人数 | Recording | 窗口 |

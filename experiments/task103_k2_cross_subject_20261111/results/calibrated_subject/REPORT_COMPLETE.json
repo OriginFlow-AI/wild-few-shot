@@ -1,0 +1,7 @@
+{
+  "phase": "complete",
+  "branch": "calibrated_original",
+  "selected_epoch": 5,
+  "report_sha256": "ede92df03747ed7a7a6b7432397c96b411bdbdbe6919fd63e19898e0bd4fbe2c",
+  "model_state_sha256": "93e936cae4d5e0487bf2865d44da0553bff10664e5199e14360d66ba78b30b14"
+}
