@@ -1,0 +1,1090 @@
+{
+  "method": "Read MCAP Summary and inspect both CMCU05b protobuf descriptors.",
+  "recordings": 41,
+  "stage_counts": {
+    "mix-6": 4,
+    "mix-16": 1,
+    "mix-2": 5,
+    "mix-1": 5,
+    "mix-3": 4,
+    "mix-8": 3,
+    "mix-4": 4,
+    "mix-13": 1,
+    "mix-5": 4,
+    "mix-12": 1,
+    "mix-14": 1,
+    "mix-7": 4,
+    "mix-10": 1,
+    "mix-11": 1,
+    "mix-9": 1,
+    "mix-15": 1
+  },
+  "results": [
+    {
+      "id": "00e5c4e3fd52da09de85",
+      "recording_id": "rec_99a29a22e95e411e9afebcb38ce0c138",
+      "stage": "mix-6",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "00f7c9a3ae45ec037083",
+      "recording_id": "rec_b05811714c75479db606de91619373c6",
+      "stage": "mix-6",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "053b3ab95b8dc323a869",
+      "recording_id": "rec_ea0c367c277d42a0864f7f57a7561ed4",
+      "stage": "mix-16",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "0a2a5b7a9b58ccba99af",
+      "recording_id": "rec_5f2c57cfeb5a4e78a4cf54fc3f6e4767",
+      "stage": "mix-2",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "19fd956ba746dbe527ef",
+      "recording_id": "rec_f74c4ba1d71e439ba2ac07bfdbe1d29a",
+      "stage": "mix-1",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1d534893b4cc3d8c00ab",
+      "recording_id": "rec_f4985ad26c92428d85e1d1bfe56e740f",
+      "stage": "mix-3",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1e3ce332f65ec8c8dc00",
+      "recording_id": "rec_10659baa1cb64791a7fe8b4e1ebf5cd6",
+      "stage": "mix-8",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "1e7ad6ee360c679cd42e",
+      "recording_id": "rec_dff23ed85b7f42b5818a37acc3ea01cf",
+      "stage": "mix-1",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "23c931346eaf3a30a79f",
+      "recording_id": "rec_deced078c5c14a97ac231e4cda1f3c06",
+      "stage": "mix-4",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "259f441e909cb2b27f99",
+      "recording_id": "rec_c4447f6a19804437bd14662c7aeee8b2",
+      "stage": "mix-1",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "2ed26aac50082671bdda",
+      "recording_id": "rec_076ea1f5f2274d5baf2bba71d26298a5",
+      "stage": "mix-4",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "32d27ab94d4d1caff301",
+      "recording_id": "rec_3326222edae244bbab66132ff41618d8",
+      "stage": "mix-6",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "39d09dd7faea411d5066",
+      "recording_id": "rec_27942e49aeb7406d9b5f6782b7a5515b",
+      "stage": "mix-13",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "4247ea63b67b44c68f4f",
+      "recording_id": "rec_9e50d25cba154d6cb34f04123cd57c19",
+      "stage": "mix-6",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "52916b179b4ff4f459c3",
+      "recording_id": "rec_4a8c6fe311364815b5e33112914c53be",
+      "stage": "mix-5",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "5ecc4a95bea89a9e2689",
+      "recording_id": "rec_ea66c2395ce9485ab480e85bb2a50e41",
+      "stage": "mix-2",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "69370cd9ac1313ddfe5d",
+      "recording_id": "rec_42377798b76b4700a287ccf99bf169df",
+      "stage": "mix-4",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "7288dff438ef5d7c1bf1",
+      "recording_id": "rec_ce8fc4783065421194d6901b4db91aa0",
+      "stage": "mix-1",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "749b3a13c393e32e394d",
+      "recording_id": "rec_7438f008bc73425096fd01931ff1add3",
+      "stage": "mix-12",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "77c1d61b1add3a185d79",
+      "recording_id": "rec_2b5d028e1b2543ba9fed596909af29ae",
+      "stage": "mix-2",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "8721445393fdaabce9b1",
+      "recording_id": "rec_3c2a200f07334b1c8f2f5b32d7b498d2",
+      "stage": "mix-5",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "92e6b4df7379cbf53dec",
+      "recording_id": "rec_769834da7a704150b0d5d54dbd8f0daa",
+      "stage": "mix-14",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "97297930b93f3ceddce1",
+      "recording_id": "rec_fd41de5c2e184be4b06199c0c164cedf",
+      "stage": "mix-7",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9dcc90a0b07615990134",
+      "recording_id": "rec_a207e9975cfb49cda5aff158dbc19cea",
+      "stage": "mix-4",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "9ec7083273d70c6f280d",
+      "recording_id": "rec_4050535ef2b74e1fa89648ab1a10665c",
+      "stage": "mix-2",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "a8680cc9807c070831a4",
+      "recording_id": "rec_bdfad9b4fdd343acbc8838f85fd12a4f",
+      "stage": "mix-2",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "aa5d4f68e7096646c113",
+      "recording_id": "rec_b4ad6eede61d4b04844a99363a9615c5",
+      "stage": "mix-10",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ac8e4e33f222fc5fa348",
+      "recording_id": "rec_45bdd0dc42e94d8394d3d7a5c97a6838",
+      "stage": "mix-3",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b4da480a6376cf0178b8",
+      "recording_id": "rec_762a82db16df4fa1ae5c59c305197793",
+      "stage": "mix-5",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b68121b72504df43cf8b",
+      "recording_id": "rec_cd08ab274b864760988358682cfd1011",
+      "stage": "mix-3",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "b72a53353450b18c309a",
+      "recording_id": "rec_ab6950b28770458494b8517c60f45719",
+      "stage": "mix-7",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c48a4f7b102413602cdb",
+      "recording_id": "rec_9403bd92cbf245edb4b400cd368854e2",
+      "stage": "mix-8",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c561dc43a744d838279a",
+      "recording_id": "rec_02064c9663b241969c18929703716729",
+      "stage": "mix-7",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "c99d7a71dc066f0804a7",
+      "recording_id": "rec_92203157f24c4fc0888e3e0ce0220e40",
+      "stage": "mix-5",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ce2bb9147cbc9f2fa62c",
+      "recording_id": "rec_98cd0d7505a749468e5258702fdded13",
+      "stage": "mix-7",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "d841e26075039b4dc7e3",
+      "recording_id": "rec_7f148f0a634c46e1a4bf63946916eaa2",
+      "stage": "mix-11",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "eaf9901968da0455bb8a",
+      "recording_id": "rec_893a2ba5718b485b93e34faae9d9e92f",
+      "stage": "mix-1",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "eb2cbae30670a20c426c",
+      "recording_id": "rec_0634d02b891440fbaa7f8b58a0ca7f16",
+      "stage": "mix-9",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "f23bd38a1aacd95130a5",
+      "recording_id": "rec_f7f5239ac2a74f18a7dab90a5af2270a",
+      "stage": "mix-15",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "faf30df597859da328c5",
+      "recording_id": "rec_8e1d324a729c4dd3a97d139a99c21ee3",
+      "stage": "mix-8",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "fb25946528abfebfe317",
+      "recording_id": "rec_a9f56a3820954d5daae2ae78968df57a",
+      "stage": "mix-3",
+      "calibration_source_status": "no_other_test5_same_domain",
+      "channels": {
+        "/cmcu05b/left/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        },
+        "/cmcu05b/right/cmcu05b": {
+          "schema": "emg_true_system.proto.Cmcu05bSampleFrame",
+          "fields": [
+            "sync_ts_ns",
+            "recv_ts_ns",
+            "hw_ts_ns",
+            "pressures"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "sources_scanned": 1977,
+  "source_qc": {
+    "records_with_identical_refit_artifacts": 1973,
+    "unavailable_records": 4,
+    "usable_records": 1966,
+    "prepared_no_curve_records": 7,
+    "historical_review_curves": 4040,
+    "single_press_curves": 3095,
+    "no_scorable_repeat_curves": 6,
+    "repeat_coverage_below_half_curves": 1049,
+    "accepted_curves": 16307,
+    "rejected_curve_fit_attempts": 329,
+    "repeat_disagreement_review_curves": 647,
+    "new_review_curves": 264,
+    "sources_used": 1966,
+    "new_review_records": 237
+  },
+  "repeat_review_rule": "Held-press coverage >=0.5; held-press MAE > max(3 N, 0.2*fit span, 3*source fit MAE). Review only.",
+  "target_status": {
+    "no_other_test5_same_domain": 2339,
+    "retained": 8101,
+    "clock_discontinuity": 18,
+    "nearest_test5_no_valid_curve": 70
+  },
+  "retained_source_coverage": {
+    "raw_valid_points": 965752055,
+    "cal_valid_points": 801260265,
+    "missing_curve_points": 152227821,
+    "out_of_domain_points": 12263969,
+    "invalid_ad_points": 0
+  },
+  "target_findings": {
+    "no_other_test5_same_domain": 2339,
+    "retains_less_than_half_native_points": 856,
+    "over_20pct_AD_out_of_domain_on_available_channels": 59,
+    "clock_discontinuity": 18,
+    "nearest_test5_no_valid_curve": 70
+  },
+  "raw_extraction_status": {
+    "ad_values": 41,
+    "Nonmonotone force sync clock: left": 4,
+    "Nonmonotone EMG sync clock": 2,
+    "decompression error: Data corruption detected": 1
+  },
+  "calibrated_split": {
+    "train": {
+      "people": 58,
+      "recordings": 5960,
+      "windows": 711577,
+      "by_stage": {
+        "mix-test-5": 1485,
+        "mix-3": 68,
+        "mix-4": 390,
+        "mix-5": 388,
+        "mix-6": 62,
+        "mix-7": 61,
+        "mix-8": 370,
+        "mix-9": 57,
+        "mix-10": 60,
+        "mix-12": 258,
+        "mix-13": 357,
+        "mix-15": 361,
+        "mix-16": 384,
+        "mix-17": 371,
+        "mix-18": 352,
+        "mix-14": 301,
+        "mix-2": 325,
+        "mix-test-7": 310
+      },
+      "missing_stages": [
+        "mix-1",
+        "mix-11"
+      ]
+    },
+    "val": {
+      "people": 12,
+      "recordings": 1230,
+      "windows": 146813,
+      "by_stage": {
+        "mix-4": 81,
+        "mix-test-5": 293,
+        "mix-5": 80,
+        "mix-6": 13,
+        "mix-7": 12,
+        "mix-8": 77,
+        "mix-10": 11,
+        "mix-12": 66,
+        "mix-13": 73,
+        "mix-15": 76,
+        "mix-16": 81,
+        "mix-17": 76,
+        "mix-18": 74,
+        "mix-3": 11,
+        "mix-9": 10,
+        "mix-2": 70,
+        "mix-test-7": 64,
+        "mix-14": 62
+      },
+      "missing_stages": [
+        "mix-1",
+        "mix-11"
+      ]
+    },
+    "test": {
+      "people": 12,
+      "recordings": 911,
+      "windows": 108796,
+      "by_stage": {
+        "mix-test-5": 188,
+        "mix-3": 7,
+        "mix-4": 65,
+        "mix-5": 65,
+        "mix-6": 6,
+        "mix-7": 6,
+        "mix-8": 61,
+        "mix-9": 5,
+        "mix-10": 4,
+        "mix-13": 58,
+        "mix-15": 58,
+        "mix-16": 63,
+        "mix-18": 58,
+        "mix-12": 40,
+        "mix-17": 59,
+        "mix-test-7": 53,
+        "mix-14": 54,
+        "mix-2": 61
+      },
+      "missing_stages": [
+        "mix-1",
+        "mix-11"
+      ]
+    }
+  },
+  "stage_missing_reason": "No test5 in same person/date/PC/boot group",
+  "example_repeat_review": {
+    "id": "b994adab2acc0cb51c92",
+    "recording_id": "rec_0b09bfc8e38444598d09c9f29c9270db",
+    "object_key": "raw/103/2026-10-29/fy02083996/PC7CCF0F4F5C14/DTS-103-20261029-52a3c68d1ebd4df7-20261029151652-5_h265.mcap",
+    "finger_index": 0,
+    "presses": "2",
+    "scored_folds": "2",
+    "coverage": 0.5815602836879432,
+    "source_fit_mae_N": 4.676314598281088,
+    "held_press_mae_N": 22.346114053468035,
+    "fit_range_N": 55.113372802734375,
+    "old_review_flags": "",
+    "used_by_recordings": 3,
+    "disposition": "review"
+  },
+  "example_missing_channels": {
+    "id": "dedab4d14e39aab4069f",
+    "recording_id": "rec_49d3caaf26634fc7bf4fe683f1d1a913",
+    "object_key": "raw/103/2026-11-05/wy10204452/PC7CCF0F3B0A60/DTS-103-20261105-ed8c07b7509d433c-20261105094144-2_h265.mcap",
+    "subject": "wy10204452",
+    "split": "train",
+    "stage": "mix-2",
+    "calibration_source_id": "895b434d1bbb2dfd7464",
+    "status": "retained",
+    "raw_windows": "119",
+    "cal_windows": "60",
+    "raw_valid_points": "119920",
+    "cal_valid_points": "11516",
+    "missing_curve_points": "107928",
+    "invalid_ad_points": "0",
+    "out_of_domain_points": "476",
+    "retained_fraction": "0.09603068712474984",
+    "quality_finding": "retains_less_than_half_native_points"
+  },
+  "example_out_of_domain": {
+    "id": "6a6af567b7876828da2d",
+    "recording_id": "rec_efb1f90f6d9445539a0886b99883a358",
+    "object_key": "raw/103/2026-11-09/wy11274712/PC7CCF0F4F5B9C/DTS-103-20261109-bb0e706b030a4f45-20261109164649-1_h265.mcap",
+    "subject": "wy11274712",
+    "split": "train",
+    "stage": "mix-13",
+    "calibration_source_id": "bf1e83b9e66b27881b8b",
+    "status": "retained",
+    "raw_windows": "120",
+    "cal_windows": "120",
+    "raw_valid_points": "119915",
+    "cal_valid_points": "66278",
+    "missing_curve_points": "11991",
+    "invalid_ad_points": "0",
+    "out_of_domain_points": "41646",
+    "retained_fraction": "0.5527081682858691",
+    "quality_finding": "over_20pct_AD_out_of_domain_on_available_channels"
+  },
+  "retained_recordings": 8101
+}
