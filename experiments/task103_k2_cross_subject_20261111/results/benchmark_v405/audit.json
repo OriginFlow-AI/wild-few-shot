@@ -1,0 +1,249 @@
+{
+  "frozen_mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+  "frozen_index_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+  "trials": 109,
+  "subjects": 6,
+  "timepoints": 500040,
+  "models": [
+    {
+      "model": "A_ep1",
+      "family": "参考 Online W100",
+      "output_unit": "N",
+      "epoch": 1,
+      "weights_sha256": "e7110ae4922820a0d9c9fe51c90377aec1e28d9caac359fd28559c041d8fcc38",
+      "emg_norm_sha256": "aac3e006003c91cd4dfcf6b9de78b15436d1edc061ad27fc154a154398274d34",
+      "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "parameter_count": 18357945,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "ap304_within_person_calibrated_huber",
+      "family": "AP304 · Task103 同人划分",
+      "output_unit": "N",
+      "epoch": 6,
+      "weights_sha256": "77a7b8c07c0e28b2496465dedbfb9087936445c6cfe80050ef8a6b3e87152016",
+      "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+      "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "parameter_count": 18357945,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "ap304_within_person_raw_huber",
+      "family": "AP304 · Task103 同人划分",
+      "output_unit": "N",
+      "epoch": 6,
+      "weights_sha256": "39b35fffd066de4a39cf3361c0c8a3e25a966cb13299df025197e66605890138",
+      "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+      "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "parameter_count": 18357945,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "ap304_within_person_raw_original",
+      "family": "AP304 · Task103 同人划分",
+      "output_unit": "N",
+      "epoch": 9,
+      "weights_sha256": "fa6c03e8c83325cceef067e7e6c388b8633f9ad68ef1bfb50160c7a2bfc8455a",
+      "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+      "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "parameter_count": 18357945,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "k2_person_restricted_calibrated_huber",
+      "family": "K2 · Task103 跨人指定 stage",
+      "output_unit": "N",
+      "epoch": 3,
+      "weights_sha256": "6f4cabe67b029abaabd0b3dadde11c98af5188a86bb05f6fdf0f29df386ac984",
+      "emg_norm_sha256": "35a30e638f278b37457b01e212a0dac2dddfb0196543c86a0f67c8c38854bf42",
+      "model_source_sha256": "a6cd8f939c87e20776aa77acb2c20e0e00d5c323f5c479b9bffe5e0de5d9e38d",
+      "parameter_count": 5562617,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "k2_person_restricted_raw_huber",
+      "family": "K2 · Task103 跨人指定 stage",
+      "output_unit": "N",
+      "epoch": 2,
+      "weights_sha256": "eacd82195acd0b4ae857ede90cbcbcb258be4323fad5114f28db71f565210552",
+      "emg_norm_sha256": "35a30e638f278b37457b01e212a0dac2dddfb0196543c86a0f67c8c38854bf42",
+      "model_source_sha256": "a6cd8f939c87e20776aa77acb2c20e0e00d5c323f5c479b9bffe5e0de5d9e38d",
+      "parameter_count": 5562617,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "k2_person_restricted_raw_original",
+      "family": "K2 · Task103 跨人指定 stage",
+      "output_unit": "N",
+      "epoch": 2,
+      "weights_sha256": "ad47340fb5a85e35aa8a116e4b760a3f5852ffa3a46afc49a59f6c3b57569e25",
+      "emg_norm_sha256": "35a30e638f278b37457b01e212a0dac2dddfb0196543c86a0f67c8c38854bf42",
+      "model_source_sha256": "a6cd8f939c87e20776aa77acb2c20e0e00d5c323f5c479b9bffe5e0de5d9e38d",
+      "parameter_count": 5562617,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "k2_person_all_raw_original",
+      "family": "K2 · Task103 全 stage 跨人",
+      "output_unit": "N",
+      "epoch": 4,
+      "weights_sha256": "01b6b7d838006ffbff040c363e3d338ec9455aad321b4e0a619f8d03594db0ff",
+      "emg_norm_sha256": "24e7ab8724f3d57a8f74f758fecb2ca3d3108d4ce3aaf6c8d27060b0d009a531",
+      "model_source_sha256": "a6cd8f939c87e20776aa77acb2c20e0e00d5c323f5c479b9bffe5e0de5d9e38d",
+      "parameter_count": 5562617,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "ap304_person_all_raw_huber",
+      "family": "AP304 · Task103 全 stage 跨人",
+      "output_unit": "N",
+      "epoch": 1,
+      "weights_sha256": "ec7d085bb4cb4f29a2df692c93b8c6bb093bedc94d0100fd427321c9aee7a5f4",
+      "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+      "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "parameter_count": 18357945,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "ap304_person_all_raw_original",
+      "family": "AP304 · Task103 全 stage 跨人",
+      "output_unit": "N",
+      "epoch": 3,
+      "weights_sha256": "d58a463cf3c4da128ad6300bdc9652710e96f3c703cf489924af7acc683105b4",
+      "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+      "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "parameter_count": 18357945,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "ap304_person_cal_calibrated_original",
+      "family": "AP304 · Task103 标定力跨人",
+      "output_unit": "N",
+      "epoch": 5,
+      "weights_sha256": "93e936cae4d5e0487bf2865d44da0553bff10664e5199e14360d66ba78b30b14",
+      "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+      "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "parameter_count": 18357945,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    },
+    {
+      "model": "ap304_rank_best",
+      "family": "AP304 · Task103 一阶段排序",
+      "output_unit": "rank_score",
+      "epoch": null,
+      "weights_sha256": "f6dfe88f7e25d5be934ee0b065ae76d94aa89edc88340164244ecd149fa89928",
+      "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6",
+      "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "parameter_count": 18357945,
+      "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+      "mask_sha256": "9a12d14c19fd27bf4984ad8a4c1153281a81394fd8066c7a724b36f84b0cfe70",
+      "evaluation_token_identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+      "predictions": "Online W100 FP32; causal ZOH at 2 kHz, latest 50 Hz prediction held to native force time",
+      "force_reference": "CMCU first 5 channels, mN→N, official LUT applied once",
+      "qualifier": {
+        "window_4000_max_absolute_difference": 0.0,
+        "reset_bitwise_equal": true
+      },
+      "max_hold_s": 0.019999991000000605
+    }
+  ]
+}

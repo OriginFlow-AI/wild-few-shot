@@ -1,0 +1,37 @@
+{
+  "method": "Exact participant identifier; aliases were not available.",
+  "v405_subjects": 6,
+  "task103_finetuning": {
+    "task103_ap304_huber_calibration_ablation_20261110": {
+      "dataset_sha256": "fe63d951874c8f89c0300f199a3337ec150fe389535ac9a2ecf8b971812e2db5",
+      "train_subjects": 82,
+      "exact_test_subject_overlap": 0
+    },
+    "task103_k2_cross_subject_20261111": {
+      "dataset_sha256": "13fb9acacecc99c925e01237ea22a521a525f79aa25069576816337e59262560",
+      "train_subjects": 58,
+      "exact_test_subject_overlap": 0
+    },
+    "task103_k2_all_stages_cross_subject_20261112": {
+      "dataset_sha256": "d207ed5b73aea36a8607fc4226edcf057e69762729513951309314754b537563",
+      "train_subjects": 75,
+      "exact_test_subject_overlap": 0
+    },
+    "task103_ap304_stage2_all_stages_cross_subject_20261112": {
+      "dataset_sha256": "2a9a6c71c8a3cfa20ff226e1d90e83097a70f59c0d88ff95b814705aa488a48a",
+      "train_subjects": 75,
+      "exact_test_subject_overlap": 0
+    },
+    "task103_ap304_stage2_calibrated_person_split_20261112": {
+      "dataset_sha256": "cf9f7b25a1a82a396c15c7caf84268384ecc5c4b55c7efbe07b26f312d4add35",
+      "train_subjects": 58,
+      "exact_test_subject_overlap": 0
+    }
+  },
+  "ap304_rank_pretrain": {
+    "historical_split_sha256": "d08938dee5fd15dec0662fe292208b72d6f46f70d9036cbb73ea9aee6727aa3c",
+    "train_subjects": 681,
+    "exact_test_subject_overlap": 0
+  },
+  "reference_A_ep1": "Weight and normalization identities verified; full regression training split not independently verified."
+}

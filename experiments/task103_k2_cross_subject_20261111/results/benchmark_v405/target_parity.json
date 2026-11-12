@@ -1,0 +1,23 @@
+{
+  "historical_metrics": "/data/zjl/task46/emg_force_ex45_newcal_v405_20261028/run/metrics/test_step_000021566.json",
+  "historical_metrics_sha256": "9ae0deb91f4731802ff4e9806425e684693adf3bcfec375370cfdbad1069b765",
+  "signal_receipt_sha256": "33c54615730ac884c5eed0cbc568fe6357c2dbdde4469bb2c7f9c0ed915d5a2d",
+  "subjects": 6,
+  "subject_hands": 12,
+  "timepoints": 500040,
+  "identity_sha256": "42e6942376b0fe715820d779a143147c276b9fce9b0523e47b87f8249034e4ba",
+  "fields": [
+    "sum_target",
+    "sum_target_squared",
+    "sum_abs_target",
+    "active_count",
+    "count"
+  ],
+  "max_absolute_difference": {
+    "sum_target": 0.0,
+    "sum_target_squared": 1.1641532182693481e-09,
+    "sum_abs_target": 0.0,
+    "active_count": 0.0,
+    "count": 0.0
+  }
+}

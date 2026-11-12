@@ -24,7 +24,7 @@ DISPLAY={
 }
 
 
-def markdown(path, rows):
+def markdown(path, rows, participant_audit):
     lines=[
         '# Benchmark v4.05 Test · EMG-only',
         '',
@@ -48,6 +48,9 @@ def markdown(path, rows):
         values=['—' if r[k] is None else f'{r[k]:.2f}%' if 'mape' in k else f'{r[k]:.3f}' for k in fields]
         lines.append('| '+' | '.join([DISPLAY[r['model']],str(r['epoch'] or '—'),*values])+' |')
     lines.extend(['','[逐 stage 和两套指标口径](metrics.csv) · [权重和计分凭据](audit.json) · [标签复建核验](target_parity.json)',''])
+    if participant_audit:
+        lines.extend(['按人员标识核对，v4.05 六位 Test 受试者与本次 Task103 训练集和 AP304 一阶段历史 Train 的交集均为零。'
+                      'A_ep1 的完整回归训练划分未独立核验。[人员重叠核验](subject_overlap_audit.json)',''])
     path.write_text('\n'.join(lines),encoding='utf-8')
 
 
@@ -71,6 +74,8 @@ def main(root,registry,output):
         with (dest/'per_recording.csv').open(newline='') as f:
             records={r['trial_id']:(r['subject_id'],r['stage'],int(r['timepoints'])) for r in csv.DictReader(f)}
         assert records==expected
+        assert len(report['metrics'])==len({r[1] for r in expected.values()})+1
+        assert {r['stage'] for r in report['metrics']}=={'all',*(r[1] for r in expected.values())}
         for r in report['metrics']:
             scope=expected.values() if r['stage']=='all' else [v for v in expected.values() if v[1]==r['stage']]
             assert r['timepoints']==sum(v[2] for v in scope) and r['recordings']==len(scope)
@@ -85,7 +90,10 @@ def main(root,registry,output):
         frozen_mask_sha256=receipt['mask_sha256'],frozen_index_sha256=receipt['identity_sha256'],
         trials=109,subjects=6,timepoints=500040,models=proof))
     atomic(output/'target_parity.json',parity)
-    markdown(output/'README.md',rows)
+    participant_audit=root/'subject_overlap_audit.json'
+    if participant_audit.is_file():
+        atomic(output/participant_audit.name,read(participant_audit))
+    markdown(output/'README.md',rows,participant_audit.is_file())
     print((output/'README.md').read_text())
 
 
