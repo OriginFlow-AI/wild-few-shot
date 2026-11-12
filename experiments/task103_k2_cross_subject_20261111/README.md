@@ -43,6 +43,8 @@ python -B code/launch_parallel.py --root "$K2_RUN_ROOT" --source "$AP304_RUN_ROO
 
 ## 全 stage 跨人基线
 
+[正式 Val、Test 汇总](results/all_stages/README.md)包含五项总体指标和逐 stage 表。
+
 保留此前 82 人的划分，将剩余人员按 seed 43 排序后补进三个集合。划分以人为单位，每人的全部合格记录进入同一个集合。20 个 stage 均可参与 Train、Val、Test。全 stage 的共同参考是设备原始 CMCU force，单位为 N，测试数据也使用同一口径。
 
 沿用实验 4 的 K2 结构、相同的 seed 42 初始化、EMG 预处理、训练超参及 `(1−Corr)+0.3×MAPE+0.03×MAE`。在新 Train 数据上重算归一化，在完整 Val 上选模型，最后在 Test 上算五项指标。缺少标定、BSQ 或标定超出范围的记录可以进入原始 CMCU 基线。要求双手 CMCU 时钟一致、EMG 窗口有效，参与打分的 CMCU 点有限且位于 0–100 N。

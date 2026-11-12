@@ -1,0 +1,49 @@
+{
+  "dataset_sha256": "d207ed5b73aea36a8607fc4226edcf057e69762729513951309314754b537563",
+  "subject_split_sha256": "a0185b9a1d3a31314bd3928a5731841141e8d098839e1db256a83598164d6e20",
+  "window_indices_sha256": {
+    "train": "cfe7d1979057f30478645148440597a27ba77404bef8e9720a57ea600a83f7b9",
+    "val": "69d32d91b418e3713450db75d294d69e7805e1690a8f7b601a6d40e722f6946b",
+    "test": "5f62dbb68d176b2afb45163351892f0cae29863c42ec2cdf53feb16ae30da61f"
+  },
+  "val_test_label_set_sha256": "d3a85b93a91ca80744c92e11e552beff1d1d6a9f13627c778744b15771e427c9",
+  "recording_split_sha256": "f6f51eca65077d2df3bdfeb657638ae3ef77898c345ba19c09957e4be00241de",
+  "participant_disjoint": true,
+  "ap304_shared_labels_emg_windows": false,
+  "per_recording_scoring_counts_identical": true,
+  "models": {
+    "k2_raw_original": {
+      "selected_epoch": 4,
+      "checkpoint_sha256": "79622ed888580b15470e39393f85c18a37b61c4dd778a7bc94de21da30fe1e23",
+      "report_sha256": "50b41a924ea2dd6250bc8afe7cdbe2bff7b1571d3ace8327d3c7ce994fb711f8",
+      "runtime_dataset_sha256": "d207ed5b73aea36a8607fc4226edcf057e69762729513951309314754b537563",
+      "history": [
+        {
+          "epoch": 1,
+          "val_loss": 0.6966359971776301,
+          "global_update": 3582
+        },
+        {
+          "epoch": 2,
+          "val_loss": 0.6528816203502413,
+          "global_update": 7164
+        },
+        {
+          "epoch": 3,
+          "val_loss": 0.6370851205009866,
+          "global_update": 10746
+        },
+        {
+          "epoch": 4,
+          "val_loss": 0.6183031222756782,
+          "global_update": 14328
+        },
+        {
+          "epoch": 5,
+          "val_loss": 0.6262676744865852,
+          "global_update": 17910
+        }
+      ]
+    }
+  }
+}
