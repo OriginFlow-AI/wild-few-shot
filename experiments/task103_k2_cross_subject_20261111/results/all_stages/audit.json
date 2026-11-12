@@ -9,7 +9,7 @@
   "val_test_label_set_sha256": "d3a85b93a91ca80744c92e11e552beff1d1d6a9f13627c778744b15771e427c9",
   "recording_split_sha256": "f6f51eca65077d2df3bdfeb657638ae3ef77898c345ba19c09957e4be00241de",
   "participant_disjoint": true,
-  "ap304_shared_labels_emg_windows": false,
+  "ap304_shared_labels_emg_windows": true,
   "per_recording_scoring_counts_identical": true,
   "models": {
     "k2_raw_original": {
@@ -42,6 +42,72 @@
           "epoch": 5,
           "val_loss": 0.6262676744865852,
           "global_update": 17910
+        }
+      ]
+    },
+    "ap304_raw_huber": {
+      "selected_epoch": 1,
+      "checkpoint_sha256": "0cf11135b92dbf7483e23cde90b076eaa518cde4fd1de4e441e27362579a2bd8",
+      "report_sha256": "d92facf21047d942daab19abf325eb7f63e6f96cb83ed1b9763f0f18d9771e6f",
+      "runtime_dataset_sha256": "2a9a6c71c8a3cfa20ff226e1d90e83097a70f59c0d88ff95b814705aa488a48a",
+      "history": [
+        {
+          "epoch": 1,
+          "val_loss": 0.5649145737644865,
+          "global_update": 3582
+        },
+        {
+          "epoch": 2,
+          "val_loss": 0.5809841778251617,
+          "global_update": 7164
+        },
+        {
+          "epoch": 3,
+          "val_loss": 0.568174870573614,
+          "global_update": 10746
+        },
+        {
+          "epoch": 4,
+          "val_loss": 0.5708417763250756,
+          "global_update": 14328
+        }
+      ]
+    },
+    "ap304_raw_original": {
+      "selected_epoch": 3,
+      "checkpoint_sha256": "f5a75b22d6015858dcb94d284d49912849371858adf998b6c5fdc5c7b1cdcf2b",
+      "report_sha256": "4b165cb99b6f140002431acf53613d849d01edfc2d876a16853e9e15875ca1b0",
+      "runtime_dataset_sha256": "2a9a6c71c8a3cfa20ff226e1d90e83097a70f59c0d88ff95b814705aa488a48a",
+      "history": [
+        {
+          "epoch": 1,
+          "val_loss": 0.5699575623762004,
+          "global_update": 3582
+        },
+        {
+          "epoch": 2,
+          "val_loss": 0.5617861872106319,
+          "global_update": 7164
+        },
+        {
+          "epoch": 3,
+          "val_loss": 0.5610747531013138,
+          "global_update": 10746
+        },
+        {
+          "epoch": 4,
+          "val_loss": 0.5638121134111644,
+          "global_update": 14328
+        },
+        {
+          "epoch": 5,
+          "val_loss": 0.5683575309774722,
+          "global_update": 17910
+        },
+        {
+          "epoch": 6,
+          "val_loss": 0.5673446469051747,
+          "global_update": 21492
         }
       ]
     }
