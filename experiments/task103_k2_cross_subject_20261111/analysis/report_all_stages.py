@@ -35,11 +35,11 @@ def summarize(rows, split):
     return table
 
 
-def main(root):
+def main(root, branch='raw_original', output=None):
     data_path = root / 'prepared/dataset.json'
     data = load(data_path)
     assert data['target'] == 'native_CMCU_N'
-    run = root / 'runs/raw_original'
+    run = root / 'runs' / branch
     done = load(run / 'DONE.json')
     assert done['phase'] == 'complete' and done['test_not_used_for_selection']
     assert done['binding']['dataset_sha256'] == sha(data_path)
@@ -65,17 +65,19 @@ def main(root):
         by_stage = {row['stage']: row['recordings'] for row in table if row['stage'] != 'all'}
         assert by_stage == data['split_recordings'][split]['by_stage']
         tables.extend(table)
-    output = root / 'results'
-    output.mkdir(exist_ok=True)
-    with (output / 'all_stage_metrics.csv').open('w', newline='') as f:
+    report_root = output or root / 'results'
+    report_root.mkdir(parents=True, exist_ok=True)
+    with (report_root / 'all_stage_metrics.csv').open('w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=list(tables[0]), lineterminator='\n')
         writer.writeheader()
         writer.writerows(tables)
-    atomic(output / 'all_stage_metrics.json', dict(target=data['target'], checkpoint_epoch=epoch,
+    atomic(report_root / 'all_stage_metrics.json', dict(branch=branch, target=data['target'], checkpoint_epoch=epoch,
            selected_checkpoint_sha256=done['best_sha256'], history=done['history'],
+           dataset_sha256=done['binding']['dataset_sha256'],
+           shared_k2_dataset_sha256=data.get('shared_k2_dataset_sha256'),
            aggregation='Per recording, then mean per person, then equal weight across people.',
            coverage=data['split_recordings'], metrics=tables))
-    export = root / 'exported_models/raw_original'
+    export = root / 'exported_models' / branch
     export.mkdir(parents=True, exist_ok=True)
     weights = export / 'best_model_state_dict.pt'
     torch.save(state['model'], weights)
@@ -85,12 +87,16 @@ def main(root):
     atomic(export / 'inference_parameters.json', dict(selected_epoch=epoch,
            selected_training_checkpoint_sha256=done['best_sha256'], model_state_sha256=sha(weights),
            emg_norm_sha256=sha(emg_norm), force_norm=state['binding']['force_norm']))
-    atomic(root / 'STATUS.json', dict(phase='complete', branch='raw_original', selected_epoch=epoch,
-           report_sha256=sha(output / 'all_stage_metrics.json'), model_state_sha256=sha(weights)))
+    status = report_root / 'REPORT_COMPLETE.json' if output else root / 'STATUS.json'
+    atomic(status, dict(phase='complete', branch=branch, selected_epoch=epoch,
+           report_sha256=sha(report_root / 'all_stage_metrics.json'), model_state_sha256=sha(weights)))
     print([r for r in tables if r['stage'] == 'all'], flush=True)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, required=True)
-    main(parser.parse_args().root)
+    parser.add_argument('--branch', choices=('raw_original', 'raw_huber'), default='raw_original')
+    parser.add_argument('--output', type=Path)
+    args = parser.parse_args()
+    main(args.root, args.branch, args.output)

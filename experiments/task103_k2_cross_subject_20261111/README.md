@@ -55,3 +55,21 @@ python -B code/launch_all_stages.py \
 ```
 
 划分清单和排除理由保存在运行目录的 `prepared/`。启动器自动选择共享 GPU 并执行真实批次检查，评测完成后将指标写入 `results/all_stage_metrics.csv`，将推理权重和归一化参数写入 `exported_models/raw_original/`。
+
+实际可用数据为 Train 75 人、7,659 条 recording、916,855 窗，Val 15 人、1,405 条、168,100 窗，Test 16 人、1,464 条、175,390 窗。三组均覆盖 20 个 stage。原始清单里的另外三人没有通过数据准备的 recording。
+
+### 同数据的 AP304 二阶段
+
+AP304 18.36M 从历史 `best_tau` 保留 243 项主干张量，并复用前一次 Task103 二阶段重置输出头后的初始化。两个全参数微调分支分别使用 Huber δ=1 N 和 `(1−Corr)+0.3×MAPE+0.03×MAE`。AP304 沿用一期 EMG 归一化，三套模型共用逐手 recording、原始 CMCU N、有效窗口和 Train 力值归一化。历史一期和本次数据的人员标识交集见 [一期人员核对](results/all_stages/ap304_stage1_subject_audit.json)。
+
+AP304 每路使用两卡 DDP。物理前向 64 窗，按每 16 窗单独计算 loss，每次更新保留 256 个窗的有效点加权。末批空窗权重为零。学习率、warmup 和 10 轮／patience 3 沿用前次二阶段配置。完整 Val 按 recording 等权 loss 选模，最终报告按人与 recording 分层等权汇总五项指标。
+
+服务器运行目录为 `.1:/pub_data/zjl/task103_ap304_stage2_all_stages_cross_subject_20261112`。部署共享 `scripts/` 和 `analysis/`、两个 AP304 所需 launcher，以及前次 AP304 的 `vendor/model_source.py` 和 `vendor/force_losses.py`。将 `config_ap304_all_stages.json` 复制为 `code/config.json` 后运行。
+
+```sh
+python -B code/launch_ap304_all_stages.py \
+  --root "$AP304_ALL_STAGE_ROOT" --dataset-root "$K2_ALL_STAGE_ROOT" \
+  --previous-ap304 "$AP304_RUN_ROOT"
+```
+
+最终汇总由 `analysis/collect_all_stage_results.py` 核验共享输入、选模凭据和逐 recording 计分点数后生成。

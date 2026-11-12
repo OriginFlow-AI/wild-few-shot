@@ -1,0 +1,25 @@
+{
+  "source": ".21:/data/zzy_data/emg2force_k2_stage_training_ap304_ex45/data_splits/full/split.json",
+  "source_split_sha256": "d08938dee5fd15dec0662fe292208b72d6f46f70d9036cbb73ea9aee6727aa3c",
+  "historical_train_latest_session_date": "2026-09-10",
+  "task103_earliest_record_date": "2026-10-19",
+  "match_rule": "Exact subject identifier equality on Task103 recordings that survived data preparation. Historical identity aliases were unavailable.",
+  "k2_subject_split_sha256": "a0185b9a1d3a31314bd3928a5731841141e8d098839e1db256a83598164d6e20",
+  "exact_id_intersections": {
+    "val": {
+      "test": 0,
+      "train": 0,
+      "val": 0
+    },
+    "train": {
+      "test": 0,
+      "train": 0,
+      "val": 0
+    },
+    "test": {
+      "test": 0,
+      "train": 0,
+      "val": 0
+    }
+  }
+}
