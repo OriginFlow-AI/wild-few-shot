@@ -29,21 +29,29 @@ class Windows(Dataset):
         self.root=Path(root);self.data=load(self.root/'prepared/dataset.json')
         self.index=np.load(self.root/'prepared'/(split+'_windows.npy'),mmap_mode='r')
         self.kind='cal' if branch=='calibrated_huber' else 'raw';self.cache=collections.OrderedDict()
+        self.native_only=self.data.get('target')=='native_CMCU_N'
+        if self.native_only and self.kind!='raw':
+            raise ValueError('Native CMCU dataset requires a raw-label branch')
         with np.load(self.root/'prepared/emg_train_norm.npz') as n:
             self.em=np.asarray(n['emg_mean'],np.float32);self.es=np.asarray(n['emg_std'],np.float32)
         if not np.isfinite(self.es).all() or not np.all(self.es>0):raise ValueError('Bad pretrained EMG norm')
     def __len__(self):return len(self.index)
-    def one(self,entry,start):
+    def hand(self,entry):
         r=self.data['entries'][entry];key=(r['id'],r['side'])
         if key not in self.cache:
             a=np.load(self.root/'cache/emg'/r['id']/(r['side']+'.npy'),mmap_mode='r')
             with np.load(self.root/'cache/labels'/(r['id']+'.npz')) as z:
-                label={k:z[r['side']+'_'+k].copy() for k in ['t','raw','cal','bsq','valid']}
-                for k in ['reference_t','reference_N','reference_valid']:label[k]=z[k].copy()
+                label={k:z[r['side']+'_'+k] for k in ('t','raw','valid')}
+                if not self.native_only:
+                    label.update({k:z[r['side']+'_'+k] for k in ('cal','bsq')})
+                    label.update({k:z[k] for k in ('reference_t','reference_N','reference_valid')})
             self.cache[key]=(a,label)
             if len(self.cache)>8:self.cache.popitem(last=False)
         else:self.cache.move_to_end(key)
-        a,label=self.cache[key]
+        return self.cache[key]
+    def one(self,entry,start):
+        r=self.data['entries'][entry]
+        a,label=self.hand(entry)
         x=((a[start:start+4000]-self.em)/self.es).T.copy()
         query=r['start_ns']+(start+470+40*np.arange(89,dtype=np.int64))*500000
         target,valid=interpolate(label['t'],label[self.kind],label['valid'],query)
@@ -74,11 +82,60 @@ def measures(p,y,valid):
                 mape_points=int(active.sum()),corr=corr,
                 huber_N2=huber,original_loss=1-(corr if corr is not None else 0.)+.3*mape+.03*float(abs(e).mean()))
 
+def evaluate_native(net, ds, by_entry, branch, mean, std, device):
+    records = collections.defaultdict(list)
+    for entry, starts in sorted(by_entry.items()):
+        meta = ds.data['entries'][entry]
+        signal, label = ds.hand(entry)
+        starts = np.asarray(starts)
+        offsets = (starts[:, None] + 470 + 40 * np.arange(89)).ravel()
+        keep = np.r_[True, offsets[1:] > np.maximum.accumulate(offsets)[:-1]]
+        query = meta['start_ns'] + offsets * 500000
+        target, mask = interpolate(label['t'], label['raw'], label['valid'], query)
+        parts = []
+        for chunk in np.array_split(starts, (len(starts) + 63) // 64):
+            x = np.stack([((signal[s:s+4000] - ds.em) / ds.es).T for s in chunk])
+            if not np.isfinite(x).all():
+                raise ValueError('Nonfinite normalized EMG')
+            with torch.autocast('cuda', dtype=torch.bfloat16):
+                normalized = net(torch.from_numpy(x).to(device))
+            parts.append((normalized.float() * std + mean).transpose(1, 2).flatten(0, 1).cpu().numpy())
+        predicted = np.concatenate(parts)
+        if not np.isfinite(predicted).all():
+            raise ValueError('Nonfinite evaluation predictions')
+        valid = mask & keep[:, None]
+        records[meta['id']].append((meta, predicted[valid], target[valid]))
+    rows = []
+    for record_id, hands in records.items():
+        meta = hands[0][0]
+        predicted = np.concatenate([p for _, p, _ in hands]).astype(np.float64)
+        target = np.concatenate([t for _, _, t in hands]).astype(np.float64)
+        if not len(target):
+            raise ValueError(f'No native scoring points for {record_id}')
+        metrics = measures(predicted, target, np.ones(len(target), dtype=bool))
+        abs_force = abs(target)
+        error = abs(predicted - target)
+        low, high = abs_force < 1, abs_force >= 1
+        metrics.update(
+            mae_below_1N=float(error[low].mean()) if low.any() else None,
+            mape_ge_0p5N_percent=metrics['mape_percent'],
+            mape_ge_1N_percent=float(100 * np.mean(error[high] / abs_force[high])) if high.any() else None,
+            points_below_1N=int(low.sum()), points_ge_1N=int(high.sum()))
+        loss = metrics['original_loss'] if branch == 'raw_original' else metrics['huber_N2']
+        rows.append(dict(id=record_id, subject=meta['subject'], stage=meta['stage'], loss=loss,
+                         metrics={'raw': metrics}))
+    return dict(records=len(rows), loss=float(np.mean([row['loss'] for row in rows])), rows=rows)
+
+
 @torch.no_grad()
 def evaluate(net,root,branch,split,mean,std,device,batch_size,save_predictions=False):
     ds=Windows(root,split,branch);by_entry=collections.defaultdict(list)
     for entry,start in ds.index:by_entry[int(entry)].append(int(start))
     records={};net.eval()
+    if ds.native_only:
+        result=evaluate_native(net,ds,by_entry,branch,mean,std,device)
+        net.train()
+        return result
     for entry,starts in sorted(by_entry.items()):
         r=ds.data['entries'][entry];parts={k:[] for k in ['pred','raw','cal','bsq','mask','finger','t_ns']};last=-1
         for begin in range(0,len(starts),batch_size):

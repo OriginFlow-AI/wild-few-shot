@@ -15,7 +15,7 @@ from preprocessing import regularize
 TOPICS = ['/bsq/middle/force', '/cmcu05b/left/cmcu05b', '/cmcu05b/right/cmcu05b',
           '/band/left/sEMG', '/band/right/sEMG']
 
-def one(root, row):
+def one(root, row, require_bsq=True):
     root = Path(root); out = root/'cache/emg'/row['id']; out.mkdir(parents=True, exist_ok=True)
     native_file = root/'cache/native'/(row['id']+'.npz'); native_file.parent.mkdir(parents=True, exist_ok=True)
     done = out/'done.json'
@@ -47,6 +47,8 @@ def one(root, row):
     native, offsets, temporal = {}, {}, {}
     for name, topic in zip(['bsq', 'left', 'right'], TOPICS[:3]):
         rows = force[topic]
+        if name == 'bsq' and not require_bsq:
+            continue
         if not rows: raise ValueError('Missing force stream: '+name)
         raw_t = np.array([r[0] for r in rows], np.int64)
         temporal[name] = dict(backward_steps=int(np.sum(np.diff(raw_t)<0)), duplicates=int(len(raw_t)-len(np.unique(raw_t))))
@@ -79,6 +81,7 @@ def one(root, row):
     tmp = native_file.with_name(native_file.stem+'.partial.npz')
     np.savez_compressed(tmp, **native); os.replace(tmp, native_file)
     d = dict(id=row['id'], etag=row['etag'], version=VERSION, hands=hands, temporal=temporal,
+             bsq_required=require_bsq,
              clock_ok=max(offsets.values())-min(offsets.values()) <= 50e6, clock_offsets=offsets,
              native_sha256=sha(native_file), bytes_read=source.bytes_read,
              preprocessing='2000Hz; 50Hz harmonic notches Q30; order4 40-850Hz bandpass; causal per continuous segment; .5s warmup masked')

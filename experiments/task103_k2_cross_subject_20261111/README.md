@@ -36,3 +36,22 @@ python -B code/launch_parallel.py --root "$K2_RUN_ROOT" --source "$AP304_RUN_ROO
 启动器根据三次显存和利用率采样选共享 GPU，逐分支实际跑一批验证显存，再并行训练。训练状态见 `STATUS.json` 与各分支的 `runs/*/STATUS.json`，所有最终指标、同点核验、权重导出就绪后标记完成。
 
 共享负载变化后，未标定 Huber 在第 1,500 步保存 checkpoint，随后从 GPU 6 迁到 GPU 2，并从第 1,501 步继续。迁移后短时实测约 285 窗／秒，迁移前约 137 窗／秒。启动器通过 PID 和命令识别并继续监控另外两路运行中的进程。证据见 [迁移核验](results/raw_huber_gpu_migration_audit.json)。
+
+## 留出人员的普通 stage 补评
+
+[普通 stage 指标](results/ordinary_stages/ordinary_stage_metrics.csv)包括总体和逐 stage 的 Corr、MAE、MAE <1 N、MAPE ≥0.5 N、MAPE ≥1 N。正式导出的三份权重在上一轮 Val、Test 人员各自的 16 个普通 stage 上推理，分别对原始和标定 CMCU 打分。Val 有 872 条 recording，Test 有 670 条。每个集合在三份权重间共享时间点、手指、目标和掩码，逐点哈希一致。统计先逐条 recording，再按人等权。补评沿用冻结的成对有效窗和原有训练归一化。
+
+## 全 stage 跨人基线
+
+保留此前 82 人的划分，将剩余人员按 seed 43 排序后补进三个集合。划分以人为单位，每人的全部合格记录进入同一个集合。20 个 stage 均可参与 Train、Val、Test。全 stage 的共同参考是设备原始 CMCU force，单位为 N，测试数据也使用同一口径。
+
+沿用实验 4 的 K2 结构、相同的 seed 42 初始化、EMG 预处理、训练超参及 `(1−Corr)+0.3×MAPE+0.03×MAE`。在新 Train 数据上重算归一化，在完整 Val 上选模型，最后在 Test 上算五项指标。缺少标定、BSQ 或标定超出范围的记录可以进入原始 CMCU 基线。要求双手 CMCU 时钟一致、EMG 窗口有效，参与打分的 CMCU 点有限且位于 0–100 N。
+
+服务器运行目录为 `.1:/pub_data/zjl/task103_k2_all_stages_cross_subject_20261112`。将本目录的 `scripts/`、`analysis/`、`vendor/`、两个 launcher 放入运行目录的 `code/`，并将 `config_all_stages.json` 复制为 `code/config.json`。用 AP304 的 `scripts/fetch_missing_task103.py` 补取缺失的缓存后，运行以下命令。
+
+```sh
+python -B code/launch_all_stages.py \
+  --root "$K2_ALL_STAGE_ROOT" --source "$AP304_RUN_ROOT" --prior-root "$K2_PRIOR_ROOT"
+```
+
+划分清单和排除理由保存在运行目录的 `prepared/`。启动器自动选择共享 GPU 并执行真实批次检查，评测完成后将指标写入 `results/all_stage_metrics.csv`，将推理权重和归一化参数写入 `exported_models/raw_original/`。

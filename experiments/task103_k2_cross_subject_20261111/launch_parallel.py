@@ -79,8 +79,8 @@ class AdoptedTrainer:
         return 0 if self.done.is_file() else 1
 
 
-def train_all(root, adopt_running=False, prefer_gpu=None):
-    remaining = [branch for branch in BRANCHES if not (root / "runs" / branch / "DONE.json").exists()]
+def train_all(root, adopt_running=False, prefer_gpu=None, branches=BRANCHES):
+    remaining = [branch for branch in branches if not (root / "runs" / branch / "DONE.json").exists()]
     if not remaining:
         return
     running, chosen = {}, {}
