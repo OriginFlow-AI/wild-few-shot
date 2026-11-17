@@ -1,6 +1,6 @@
 # Task103 数据问题清单
 
-本目录记录 Task103 2026-10-19 至 2026-11-10 冻结清单中已排查的数据问题，供复核、回源和重采使用。证据来自 Task103 AP304 实验的原始流提取与标定质检，基准提交为 [309a98e](https://github.com/OriginFlow-AI/wild-few-shot/tree/309a98ed9d9a78ccba48824b3888ac0594231004/experiments/task103_ap304_huber_ablation_20261110)。
+主清单记录 Task103 2026-10-19 至 2026-11-10 冻结清单中已排查的数据问题，供复核、回源和重采使用。后续专项的覆盖范围见各节。主清单证据来自 Task103 AP304 实验的原始流提取与标定质检，基准提交为 [309a98e](https://github.com/OriginFlow-AI/wild-few-shot/tree/309a98ed9d9a78ccba48824b3888ac0594231004/experiments/task103_ap304_huber_ablation_20261110)。
 
 | 文件 | 使用方式 |
 |---|---|
@@ -43,3 +43,31 @@
 | [all_stage_raw_extraction_findings.csv](calibrated_subject_audit_20261112/all_stage_raw_extraction_findings.csv) | 全 stage 原始标签抽取的 48 条排除记录。 |
 | [raw_no_ad_schema_audit.json](calibrated_subject_audit_20261112/raw_no_ad_schema_audit.json) | 41 条缺 AD recording 的双手 CMCU schema 核验。 |
 | [calibrated_subject_data_audit.json](calibrated_subject_audit_20261112/calibrated_subject_data_audit.json) | 复查总数、覆盖统计、按 stage 的可用数据数和典型案例。 |
+
+## 2026-11-17 Test5 原始 AD 平台或弱响应
+
+在 2026-10-27 至 2026-11-17 的 3,275 条 Test5 中，3,256 条有时钟对齐通过且能分配到单指的完整按压。其余 19 条中，1 条时钟校验未通过，18 条缺可对齐的完整单指按压。在 61,789 次至少有 8 个同步点的按压中，34,855 次含符合下列 BSQ 条件的上升窗口。
+
+| 筛查条件 | 判定口径 |
+|---|---|
+| BSQ 确实在增力 | 在完整单指按压内搜索 0.3、0.5、1.0 秒窗口，每窗至少 8 个同步点，相邻样点间隔不超过 60 ms。BSQ 去零后，首尾各 3 点的中位数均在 4–25 N，且尾部比首部至少高 8 N。窗口按样点数分三段，分段中位数单调不降。3 点中值滤波后的最大回落不超过 0.75 N。 |
+| 原始 AD 近似平台 | 窗口内 AD 的 P90−P10、首尾各 3 点的中位数差的绝对值，均不超过该录制该指 AD 有效按压点 P95−P01 的 10%，且均不超过 3,000 计数。窗口 AD P90 不超过 50,000 计数，用来优先查看低到中段的弱响应。 |
+| 独立按压重复出现 | 每次按压只保留一个窗口，优先取 BSQ 增量最大者。同一录制的同一指至少两次按压命中才纳入复核清单。 |
+
+共列出 **227 条录制、260 个录制×手指、564 次按压**。把绝对 AD 阈值改为 2,000 或 4,000 计数，其他条件保持一致时，复核名单分别为 143 或 357 条录制。该阈值用于复核排序，命中数量会随阈值改变。
+
+`f40d854498b5d80e30f7` 右食指第 12、24 次按压命中。BSQ 分别从 **6.37 升到 15.79 N** 和从 **6.96 升到 15.30 N**，同期原始 AD 的 P90−P10 分别为 **2,895** 和 **2,740** 计数。该人同日相邻两条录制的右食指没有命中此规则。另抽看 9 条命中录制的波形，可见提前变平、低位弱响应后继续上升、窗口结束后短时掉值等不同形态。回看时检查实际用指、接触位置和传感器状态，清单状态为 `review`，原有排除记录与有效掩码保持原口径。
+
+| 文件 | 内容 |
+|---|---|
+| [ad_plateau_review.csv](ad_plateau_screen_20261117/ad_plateau_review.csv) | 逐个命中窗口，含 MCAP 对象路径、手指、按压编号、录制内秒数及 BSQ 与 AD 证据。编号沿用逐次按压路由，按整条录制计算。 |
+| [ad_plateau_examples.png](ad_plateau_screen_20261117/ad_plateau_examples.png) | 目标录制、其他命中和同人相邻录制的波形。 |
+| [ad_plateau_screen_summary.json](ad_plateau_screen_20261117/ad_plateau_screen_summary.json) | 完整筛查分母和三档阈值的命中数。 |
+| [screen_ad_plateaus.py](ad_plateau_screen_20261117/screen_ad_plateaus.py) | 筛查脚本，输入为已去皮、完成同步和单指按压路由的数据。 |
+
+复跑命令如下，依赖 NumPy。每条录制提供一个以 `record_id` 命名的 NPZ，包含等长一维数组 `t`（录制内秒数）、`x`（去皮 BSQ，N）、`ad`（匹配到 BSQ 时钟的原始计数）、`finger`（左手 0–4，右手 5–9，均从拇指至小指）、`press`（按压编号）。清单 JSON 是包含 `id` 和 MCAP 对象路径 `key` 的数组，NPZ 仅保留已完成路由的同步按压段。
+
+```sh
+python data_quality/task103/ad_plateau_screen_20261117/screen_ad_plateaus.py \
+  --aligned-dir /path/to/aligned_test5 --records /path/to/records.json --out /path/to/results
+```

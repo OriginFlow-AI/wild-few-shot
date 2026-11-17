@@ -1,0 +1,48 @@
+{
+  "inventory_recordings": 3275,
+  "scanned_recordings": 3256,
+  "routed_presses": 61789,
+  "presses_with_rising_window": 34855,
+  "thresholds": {
+    "durations_s": [
+      0.3,
+      0.5,
+      1.0
+    ],
+    "min_start_n": 4.0,
+    "min_rise_n": 8.0,
+    "max_end_n": 25.0,
+    "max_bsq_drawdown_n": 0.75,
+    "max_sample_gap_s": 0.06,
+    "max_ad_fraction": 0.1,
+    "max_window_ad_p90": 50000,
+    "review_cap": 3000,
+    "min_repeat_presses": 2
+  },
+  "profiles": {
+    "2000": {
+      "presses": 1135,
+      "recordings": 681,
+      "recording_fingers": 951,
+      "repeated_presses": 334,
+      "repeated_recordings": 143,
+      "repeated_recording_fingers": 150
+    },
+    "3000": {
+      "presses": 1827,
+      "recordings": 996,
+      "recording_fingers": 1523,
+      "repeated_presses": 564,
+      "repeated_recordings": 227,
+      "repeated_recording_fingers": 260
+    },
+    "4000": {
+      "presses": 2555,
+      "recordings": 1195,
+      "recording_fingers": 2037,
+      "repeated_presses": 950,
+      "repeated_recordings": 357,
+      "repeated_recording_fingers": 432
+    }
+  }
+}
