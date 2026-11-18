@@ -1,0 +1,28 @@
+{
+  "phase": "prepared",
+  "binding": {
+    "index_sha256": "d08938dee5fd15dec0662fe292208b72d6f46f70d9036cbb73ea9aee6727aa3c",
+    "calibration_tools_sha256": "4c50ac438b25a17de59cdca4aeb2e5f7475f4462a50b6b5a2b7a8a82156578c7",
+    "lut_sha256": "3ff7e7e67ebe2ce7b05ec1d32dcb418e0cf0a985b7a7c1bfdfcc8d751b7b5b77",
+    "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6"
+  },
+  "normalization_sha256": "aac3e006003c91cd4dfcf6b9de78b15436d1edc061ad27fc154a154398274d34",
+  "force_mean": [
+    1.1689147065805925,
+    0.8945853395934823,
+    0.7136838526616035,
+    0.41217386964347585,
+    0.2431074039929859
+  ],
+  "force_std": [
+    2.10001255979164,
+    1.5521811075743654,
+    1.4019895200411248,
+    1.0109142480610989,
+    0.7618829403356084
+  ],
+  "force_sample_count": 44990082249,
+  "raw_EMG_finite_check": "inherited only after exact file size/mtime match to prior full raw preparation",
+  "force_finite_and_calibration_validation": "complete train and val arrays",
+  "Test_signal_reads": false
+}

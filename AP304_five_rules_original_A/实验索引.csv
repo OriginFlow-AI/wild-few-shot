@@ -1,0 +1,4 @@
+﻿experiment,run,initialization,train_trials,corr_weight,mape_weight,mae_weight,seed,global_batch,lr_backbone,lr_output_head,max_epochs,validation_selection,recorded_updates,status
+filtered_original,ap304_filtered_original_seed43_20261114,best_stage1_Val_tau_checkpoint_except_reinitialized_output_head,93788,1.0,0.3,0.03,43,256,2e-05,0.0001,10,filtered Val trial-equal configured objective; full Val diagnostic only,88848,complete
+filtered_A,ap304_filtered_A_seed43_20261114,best_stage1_Val_tau_checkpoint_except_reinitialized_output_head,93788,0.5,0.1,0.15,43,256,2e-05,0.0001,10,filtered Val trial-equal configured objective; full Val diagnostic only,88848,complete
+filtered_A_scratch,ap304_filtered_A_scratch_finger_stage_subject_seed43_20261116,random_from_scratch_no_ranking_pretraining,93788,0.5,0.1,0.15,43,256,2e-05,0.0001,10,filtered Val: weighted objective from finger/stage/subject-equal metrics,155484,complete

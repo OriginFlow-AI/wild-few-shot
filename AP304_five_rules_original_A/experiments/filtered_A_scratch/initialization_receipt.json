@@ -1,0 +1,12 @@
+{
+  "source": null,
+  "source_sha256": null,
+  "source_state": null,
+  "initialization": "random_from_scratch_no_ranking_pretraining",
+  "pretrained_weights_loaded": false,
+  "retained_non_head_tensors": 0,
+  "gate_bias": 4.0,
+  "all_parameters_trainable": true,
+  "restored_optimizer_scheduler": false,
+  "output_domain": "normalized_calibrated_force"
+}

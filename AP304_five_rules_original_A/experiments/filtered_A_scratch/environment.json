@@ -1,0 +1,12 @@
+{
+  "torch": "2.11.0+cu130",
+  "numpy": "1.26.4",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "world_size": 8,
+  "parameters": 18357945,
+  "all_parameters_trainable": true,
+  "force_norm_sha256": "aac3e006003c91cd4dfcf6b9de78b15436d1edc061ad27fc154a154398274d34",
+  "updates_per_epoch": 22212,
+  "gpu_memory_fraction": 0.28,
+  "source_checkpoint_sha256": null
+}

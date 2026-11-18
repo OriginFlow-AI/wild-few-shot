@@ -1,0 +1,3 @@
+﻿experiment,run,initialization,train_trials,corr_weight,mape_weight,mae_weight,seed,global_batch,lr_backbone,lr_output_head,max_epochs,validation_selection,recorded_updates,status
+full_original_besttau,ap304_full_calibrated_stage2_besttau_lambda0_six_seed43_20261029,best_stage1_Val_tau_checkpoint_except_reinitialized_output_head,188777,1.0,0.3,0.03,43,256,2e-05,0.0001,10,trial_equal_mean_L_std,178476,complete
+full_A,ap304_stage2_reweight_corr0p5_seed43_20261102,best_stage1_Val_tau_checkpoint_except_reinitialized_output_head,188777,0.5,0.1,0.15,43,256,2e-05,0.0001,10,trial_equal_mean_configured_objective,,stopped_by_request

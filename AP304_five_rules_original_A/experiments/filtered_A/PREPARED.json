@@ -1,0 +1,10 @@
+{
+  "binding": {
+    "index_sha256": "631460dc78ef8b1cfc0ccab23b627eb28dea27174622ff2f9250a8858c1e5aa4",
+    "calibration_tools_sha256": "4c50ac438b25a17de59cdca4aeb2e5f7475f4462a50b6b5a2b7a8a82156578c7",
+    "lut_sha256": "3ff7e7e67ebe2ce7b05ec1d32dcb418e0cf0a985b7a7c1bfdfcc8d751b7b5b77",
+    "emg_norm_sha256": "7ee5781e253ca45c2f31176e11ec5f065fd529df8afd9dc80bde5e3fec9d2de6"
+  },
+  "normalization_sha256": "aac3e006003c91cd4dfcf6b9de78b15436d1edc061ad27fc154a154398274d34",
+  "method": "subset previously validated file identities; frozen normalization unchanged"
+}

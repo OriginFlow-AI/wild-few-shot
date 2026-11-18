@@ -1,0 +1,44 @@
+{
+  "source": "/data/zzy_data/emg2force_k2_stage_training_ap304_ex45/runs/ap304_full_calibrated_stage2_besttau_lambda0_six_seed43_20261029/inputs/ranking_best.pt",
+  "source_sha256": "85445c11c7b20764ddb04bbf7e4baedfb6ff269ac0c3ff608b84e6e7be15d22a",
+  "source_state": {
+    "epoch": 1,
+    "next_update": 22661,
+    "global_update": 67982,
+    "best_tau": 0.4342530491895346,
+    "early_stop_reference": 0.4342530491895346,
+    "rounds_without_improvement": 0,
+    "stop": false,
+    "epoch_statistics": [
+      847777.0095294835,
+      2687297.0,
+      1469026671.0,
+      1731056235.0,
+      978609014.0,
+      1131147716.0,
+      892250917.3799859,
+      2862203951.0,
+      -323565922.65213394,
+      16674540097.357422,
+      2541421255.0,
+      2900608.0,
+      9364816.401111351,
+      14916801.0,
+      1199152275.063078,
+      13375800.0,
+      13638494.0,
+      0.0,
+      628453218.0,
+      2541421255.0
+    ]
+  },
+  "retained_non_head_tensors": 243,
+  "reinitialized": [
+    "output_head.weight",
+    "output_head.bias"
+  ],
+  "gate_bias": 4.0,
+  "all_parameters_trainable": true,
+  "restored_optimizer_scheduler": false,
+  "output_domain": "normalized_calibrated_force"
+}
