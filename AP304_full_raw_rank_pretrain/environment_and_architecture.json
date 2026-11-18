@@ -1,0 +1,9 @@
+{
+  "torch": "2.11.0+cu130",
+  "numpy": "1.26.4",
+  "python": "3.10.21",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "world_size": 8,
+  "parameters": 18357945,
+  "encoder_frozen": false
+}

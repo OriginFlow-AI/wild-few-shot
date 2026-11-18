@@ -1,0 +1,33 @@
+{
+  "files": {
+    "code/src/emg2force/__init__.py": "29f5e19352d42211e821cc64785ea3f453711e3775cb45e497d05246114ca7d2",
+    "code/src/emg2force/config.py": "f5285bd909dee40b89e0d3bdc0032c8fc0484b76f28bfc08ec7847817dc27ccb",
+    "code/src/emg2force/ap304_rank_data.py": "4b70a916db49d4726759afe661e7f742b147c761008646ff3aeb026611eed282",
+    "code/src/emg2force/ap304_rank_loss.py": "b034face856dff43c3da79087da2826a2c72ae50e01dc138ea8a98101e07f953",
+    "code/src/emg2force/ap304_rank_train.py": "6fa66be1c54fe5239cf2bbb8992d0235f2d838370054bf01617286b66f5ff9f4",
+    "model_parameters/ap304_ex45/inference_share/ex45_eval_code/post_code/model_source.py": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+    "resolved_spec.yaml": "9dd9490cf673c56962c5e5966da7ecc16f357b0ab3b0021fcdd8d2d3d0c28671"
+  },
+  "index_sha256": "d08938dee5fd15dec0662fe292208b72d6f46f70d9036cbb73ea9aee6727aa3c",
+  "runtime_updates": [
+    {
+      "reason": "user requested epoch Corr and MAPE diagnostics",
+      "applied_utc": "2026-10-27T08:00:06.629900+00:00",
+      "phase": "preparing_raw",
+      "previous_train_source_sha256": "adc6b7d9fe7de26eb29489b1fd87419288c47d31b8b47b6671e63304473728cf",
+      "new_train_source_sha256": "33d45bd68a7fb027bb88d354fd130f25a64e8ff0844058876e6550dbcbde5138",
+      "raw_preparation_restarted": false
+    },
+    {
+      "reason": "full Train then train concurrently with remaining raw scans",
+      "applied_utc": "2026-10-27T08:25:33.858043+00:00",
+      "normalization_scope": "full_train_only_unchanged",
+      "initial_validation": false,
+      "previous_source_sha256": {
+        "ap304_rank_data.py": "80896cd9ce529e0bb9962742aaa9feb0c1db21006c69b15c0d8998560e786f6d",
+        "ap304_rank_train.py": "33d45bd68a7fb027bb88d354fd130f25a64e8ff0844058876e6550dbcbde5138"
+      },
+      "raw_scan_process_preserved": 3741382
+    }
+  ]
+}

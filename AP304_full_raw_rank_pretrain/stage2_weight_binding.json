@@ -1,0 +1,27 @@
+{
+  "original_checkpoint": "/data/zzy_data/emg2force_k2_stage_training_ap304_ex45/runs/ap304_full_raw_rank_seed43_20261027/checkpoints/best_tau.pt",
+  "checkpoint_sha256": "85445c11c7b20764ddb04bbf7e4baedfb6ff269ac0c3ff608b84e6e7be15d22a",
+  "state": {
+    "epoch": 1,
+    "next_update": 22661,
+    "global_update": 67982
+  },
+  "selected_by": "maximum full Val stage-macro trial-finger Kendall tau-b",
+  "validation": {
+    "epoch": "2",
+    "epoch_progress": "0.5000110324132301",
+    "global_update": "67982",
+    "split": "val",
+    "label": "update067982_val",
+    "corr": "0.5874638400728427",
+    "mape_score_vs_raw_percent": "88.6300138953772",
+    "tau_b": "0.4342530491895346",
+    "rank_objective": "0.31806463162379445",
+    "corr_count": "48938",
+    "mape_count": "47905",
+    "aggregation": "stage_macro_of_trial_finger_means",
+    "mape_min_raw_abs": "0.5",
+    "mape_is_physical_force_error": "False"
+  },
+  "original_history_sha256": "c8dc853cf1fc10e475c2040249318657921368c31e8f66c5a10cd6dbc01f1640"
+}
