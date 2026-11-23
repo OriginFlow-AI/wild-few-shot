@@ -7,3 +7,12 @@
 - [codex/task103-cmcu-calibration-20261109](codex/task103-cmcu-calibration-20261109.md)：固定 AP304，比较是否先用 BSQ 重标定 CMCU；test7 用 BSQ 真值评价，MAE 6.53→3.26 N（降低 50%）。
 
 - [AP304 原 loss 与 A-loss](codex/ap304-original-a-20261118.md)：全量排序预训练与 best_tau 选模记录、第二阶段原 loss 和 A-loss 训练包及薄膜评估口径。
+
+## 独立 CMCU 标定与质量过滤
+
+本分支的可运行入口、标定来源规则、斜率和滑窗过滤说明见 [CALIBRATION.md](CALIBRATION.md)。
+
+```bash
+python -m pip install -e '.[mcap]'
+python -m cmcu_calibration --manifest recordings.json --out work/calibration
+```
