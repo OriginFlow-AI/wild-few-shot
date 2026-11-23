@@ -1,2 +1,4 @@
 ring_rq/** text eol=lf
+ring_rq/assets/**/*.pt binary
+ring_rq/assets/**/*.npz binary
 .gitignore text eol=lf

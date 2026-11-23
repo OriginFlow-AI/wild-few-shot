@@ -1,11 +1,18 @@
 """Offline legacy Ring-RQ inference: independent two-second reset windows."""
+import os
+os.environ.setdefault('CUBLAS_WORKSPACE_CONFIG', ':4096:8')
 import argparse
 from pathlib import Path
 import numpy as np
 import torch
-from model import RingRQ
-from source.rq_model import assert_frozen
-from source.stable_interpolation import OrderedLinearBackward
+if __package__:
+    from .model import RingRQ
+    from .source.rq_model import assert_frozen
+    from .source.stable_interpolation import OrderedLinearBackward
+else:
+    from model import RingRQ
+    from source.rq_model import assert_frozen
+    from source.stable_interpolation import OrderedLinearBackward
 
 
 class RingRQInference:

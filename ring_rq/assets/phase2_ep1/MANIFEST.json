@@ -1,0 +1,26 @@
+{
+  "schema": "ring_rq_published_pretrained_v1",
+  "architecture": "Legacy ex45 W304/E9/D4 Ring-RQ",
+  "phase1_parent_epoch": 6,
+  "phase": 2,
+  "epoch": 1,
+  "global_step": 3263,
+  "selected_by": "minimum complete regular-stage reset2s dense3572 Validation A-loss; Test not used to select",
+  "selection_L_A": 0.2682736925405493,
+  "format": "weights-only snapshot plus matched Train-only norm and RQ; no Adam/RNG or private recording payloads",
+  "files": {
+    "best.pt": {
+      "bytes": 75150907,
+      "sha256": "3f2fe00f22d05e328e3ae21da760a6c6686fdbfbefa6ada632da693c0daaa416"
+    },
+    "norm.npz": {
+      "bytes": 1186,
+      "sha256": "2b961d7a90b33e9e5d63561add0a22f67ffde229fd42c822f1a8fac1e667ad18"
+    },
+    "RQ_FROZEN.pt": {
+      "bytes": 127108,
+      "sha256": "bea49219886588dd5592c77e97eb2d267d54b02baa45e05b9a85c1a4bf1b1ca6"
+    }
+  },
+  "evaluation": "../../EVALUATION.json"
+}

@@ -1,8 +1,29 @@
 # Ring-RQ 旧架构：训练、推理与本地数据读取
 
+## Test 与基线对比：同人口、同 W100
+
+固定权重为**标定 Ring-RQ：一期 EP6 → 二期 EP1**，由完整 Val A-loss 选出。基线为旧 **ex45 W304/E9/D4 Affine A-loss EP1**（权重SHA前缀 `e7110ae4`），不是尚无完整Val的新架构消融基线。
+
+| Test范围 | 模型 | 参考A-loss† ↓ | MAE N ↓ | MAPE % ↓ | Corr ↑ | Kendall τ_b ↑ | R²宏平均 ↑ |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Task43共同Test：1,395条 / 6人 | 旧 Affine A-loss EP1 | 0.20676 | 0.47048 | 46.82 | 0.82128 | 0.56109 | -1106.71 |
+| Task43共同Test：1,395条 / 6人 | **本分支 Ring-RQ 二期EP1** | 0.22416 | 0.53775 | 47.64 | 0.80829 | 0.55721 | -2249.25 |
+| Task83 Test：3,379条 / 33人 | 旧 Affine A-loss EP1 | 0.39471 | 0.39096 | 80.05 | 0.48797 | 0.29304 | -8809.85 |
+| Task83 Test：3,379条 / 33人 | **本分支 Ring-RQ 二期EP1** | 0.34148 | 0.38079 | 65.82 | 0.56292 | 0.37214 | -18154.04 |
+| 合计：4,774条 / 39人 | 旧 Affine A-loss EP1 | 0.36579 | 0.40319 | 74.94 | 0.53925 | 0.33428 | -7624.75 |
+| 合计：4,774条 / 39人 | **本分支 Ring-RQ 二期EP1** | 0.32343 | 0.40493 | 63.02 | 0.60067 | 0.40061 | -15707.15 |
+
+合计相对旧基线：Corr **+0.06142**、Kendall τ **+0.06633**、MAPE **降低11.916个百分点**；MAE **增加0.432%**，基本持平。Task43共同Test退步，Task83的MAE/MAPE/Corr/τ改善；R²宏平均受极端负值影响，原样保留。该模型没有在所有来源或指标上同时胜出。
+
+†参考A-loss是将本表宏Corr、MAPE比例、MAE代入 `0.5*(1-Corr)+0.1*MAPE_ratio+0.15*MAE_N`，**不是训练history的production L**。聚合为录制逐指 → 同人/stage/手/指内录制等权 → 有效手侧×手指等权 → stage等权 → 人等权；MAPE仅在 |GT|≥0.5N 计算，各指标独立排除null，不做力幅加权。τ使用完整录制逐指tau-b。
+
+Task43仅保留在旧权威split中同为Test的6人；Task83的33人在该旧索引中没有Train/Val登记。此曝光核验限于该冻结索引。两组人员无交集，合计中Task83占33/39人口权重。两模型训练人口及训练协议不同，这不是仅替换解码头的受控架构消融。
+
+以上均复用已经完成的固定权重评估，不重新读取Test，不用Test选权重或调参。[完整精度、分母与证据SHA](EVALUATION.json)。
+
 本目录整理原 Force3 标定版 **ex45 W304 / E9 / D4 Ring-RQ**，独立于正在开发的三视图架构。模型主体、损失、采样、读取和评估函数来自旧实验的实际执行源码；逐文件来源、原 SHA256 和整理改动见 [SOURCE_PROVENANCE.json](SOURCE_PROVENANCE.json)。
 
-本分支只发布代码。实际人员 split、逐条路径清单、录制时钟、标定表、norm、RQ 码本和训练权重需要通过项目授权渠道另行提供。这里的合成测试不代表已重跑真实数据训练或 Test。
+本分支包含代码及已授权发布的最佳权重、配套norm和RQ码本。实际人员split、路径清单、录制时钟、标定表和波形数据不在仓库内；真实训练数据仍需单独授权提供。
 
 ## 代码导航
 
@@ -18,6 +39,8 @@
 | `label_policy.py`, `label_calibration/` | 源域显式路由；膜式旧ex45 LUT恰好一次、gen3原Fz恒等 |
 | `dev_metrics.py`, `fast_metrics.py`, `val_pipeline.py` | 完整 Val、精确 Kendall tau-b、分力段/逐人/逐stage与原聚合 |
 | `infer.py` | 旧模型离线推理 API/CLI；独立2秒窗口 reset |
+| `infer_w100.py`, `streaming/` | 已发表Test所用W100连续状态、固定256 Encoder Graph和真实尾块 |
+| `assets/phase2_ep1/` | 最佳权重与配套norm/RQ，以及逐文件SHA清单 |
 
 ## 模型与时间合同
 
@@ -89,12 +112,64 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python controller.py all
 
 ```bash
 python ring_rq/infer.py \
-  --checkpoint /secure/best.pt \
-  --norm /secure/norm.npz --rq /secure/RQ_FROZEN.pt \
+  --checkpoint ring_rq/assets/phase2_ep1/best.pt \
+  --norm ring_rq/assets/phase2_ep1/norm.npz --rq ring_rq/assets/phase2_ep1/RQ_FROZEN.pt \
   --emg /secure/filtered_windows.npy \
   --output /scratch/force_predictions.npz --device cuda:0 --batch-size 1
 ```
 
 输入严格为 `float32 [B,4000,16]`，已经滤波、尚未标准化。输出 `native_normalized/native_N` 为 `[B,5,89]`，`dense_N` 为 `[B,5,3572]`，另带dense对应输入索引。API为 `RingRQInference(...).predict(emg)`。支持原完整断点和含`model`字段的独立权重；存在checkpoint norm/RQ绑定时会核验。只加载可信checkpoint。
 
-这是固定窗口离线回放接口；不声称逐token在线状态接口、跨窗连续KV缓存或历史ex45 Affine生产接口等价。
+上面是固定窗口离线回放接口，与下述W100连续推理分别保留。它不等价于历史ex45 Affine生产接口。
+
+## 固定权重的完整 Val / Test 表现
+
+这份权重已有独立的W100连续推理评估：Encoder递归状态连续，Decoder KV包含当前共100个token，绝对RoPE；每条录制或审计技术缺口reset，2秒评分块之间不reset。原生50Hz网格每个冻结2秒评分窗取89帧，位置为470+40j（j=0…88）。不使用MA7，不截负值。
+
+下表沿原评估器：人内拼接，再按人等权；Corr/MAPE为五指力幅加权。**与开头基线对照表的逐指层级聚合不同，不可直接混合比较。**
+
+| 范围 | 人数 / 录制数 | production A-loss ↓ | MAE N ↓ | MAPE % ↓ | Corr ↑ | R² ↑ | 窗口Kendall τ ↑ |
+|---|---|---:|---:|---:|---:|---:|---:|
+| W100 Val：常规24stage | 87 / 15154 | 0.25691 | 0.45680 | 53.99815 | 0.73122 | 0.02890 | 0.47711 |
+| W100 Test：常规24stage | 64 / 7557 | 0.25584 | 0.43469 | 54.77619 | 0.72828 | 0.30487 | 0.46349 |
+| W100 Test：全部29stage | 64 / 8613 | 0.26049 | 0.41874 | 55.54982 | 0.71573 | 0.33426 | 0.45713 |
+| W100 Test：留出5stage | 30 / 1056 | 0.29699 | 0.37769 | 64.37732 | 0.64807 | -3.58111 | 0.37721 |
+
+完整Val为87人/15,739条/929,029个评分窗；完整Test为64人/8,613条/505,633窗。留出Test的5个stage为mix-13/14/15/16/18，30人/1,056条；各范围人员可重叠，人数不能相加。完整结果的聚合与分母见[EVALUATION.json](EVALUATION.json)。
+
+选择该权重时使用的历史Val是每2秒reset、3572点dense评分：A=0.2682736925、MAE=0.481413N、MAPE=53.7106%、Corr=0.715298、R²=0.047662。它不是本表W100 Test的同模式Val，不能直接相减解释泛化差距。
+
+## 已发布权重与 W100 加载推理
+
+三个文件均直接随Git分支提供，无需Git LFS。克隆分支即可获得；`best.pt`是约75.15MB的独立模型权重，不包含Adam/RNG，不是训练恢复断点。
+
+```bash
+git clone --branch syh/structure/ring-rq --single-branch https://github.com/OriginFlow-AI/wild-few-shot.git
+cd wild-few-shot
+python -m pip install -r ring_rq/requirements.txt
+# 和Test相同的W100模式；输入为一条连续、已滤波但未norm的float32[T,16] EMG，单位uV。
+python -m ring_rq.infer_w100 --emg /path/filtered_segment.npy --output /path/force_w100.npz --device cuda:0
+```
+
+```python
+import numpy as np
+from ring_rq.infer_w100 import RingRQW100Inference
+
+model = RingRQW100Inference(device="cuda:0")  # 默认加载本分支配套三件套
+emg = np.load("filtered_segment.npy", allow_pickle=False)
+result = model.predict(emg)
+force_N = result["force_N"]                 # [有效原生帧数,5]，拇指到小指
+sample_indices = result["input_sample_indices"]  # 470+40*k，输入2kHz网格坐标
+```
+
+每次`predict`对应一条完整连续的录制/技术区间，调用之间reset；不要将连续录制拆成2秒重复调用。W100后端使用CUDA FP32、TF32关闭、固定256-token Encoder Graph、真实尾块和KV100；不需要FLA。输出所有有效原生帧，表中指标另按私有冻结评分清单选89点评分窗。原始录制有缺口时，应由上游按审计区间分开调用。预测仅反归一化，不应用标签LUT，不截负值。
+
+若只需要CPU或独立2秒窗口，可使用前节`infer.py`或`from ring_rq.infer import RingRQInference`，它返回native89和dense3572，**不用于复现上面的W100成绩**。
+
+| 文件 | 大小 | SHA256 |
+|---|---:|---|
+| [`best.pt`](assets/phase2_ep1/best.pt) | 75,150,907 bytes | `3f2fe00f22d05e328e3ae21da760a6c6686fdbfbefa6ada632da693c0daaa416` |
+| [`norm.npz`](assets/phase2_ep1/norm.npz) | 1,186 bytes | `2b961d7a90b33e9e5d63561add0a22f67ffde229fd42c822f1a8fac1e667ad18` |
+| [`RQ_FROZEN.pt`](assets/phase2_ep1/RQ_FROZEN.pt) | 127,108 bytes | `bea49219886588dd5592c77e97eb2d267d54b02baa45e05b9a85c1a4bf1b1ca6` |
+
+权重、norm和RQ必须成套使用；加载器核验checkpoint的norm/RQ绑定以及冻结readout与码本的一致性。[资产清单](assets/phase2_ep1/MANIFEST.json)。

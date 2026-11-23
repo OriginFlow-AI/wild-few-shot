@@ -168,6 +168,24 @@
       "changes": [
         "Preserve index, normalization, tokenizer fit and local-window validation functions; replace deployment-specific main by explicit non-overwriting asset-fit CLI."
       ]
+    },
+    {
+      "path": "streaming/stream.py",
+      "source": "research/force_full/experiments/force3_phase2_ep1_w100_eval_20261122_v1/code/stream.py",
+      "source_sha256": "d526482bb7bbd68e8a197affc704b1ee300379c9cbd3068b02288a15a05d2151",
+      "export_sha256": "0496f17589fddf0a3fc6c1ef8189a94f42584af2cc9ffe1a950388d224bbb17e",
+      "changes": [
+        "Normalize line endings and trailing blank lines only; streaming equations and graph generator unchanged."
+      ]
+    },
+    {
+      "path": "streaming/batch256.py",
+      "source": "research/force_full/experiments/force3_phase2_ep1_w100_eval_20261122_v1/code/batch256.py",
+      "source_sha256": "f6bbccbbf8be4cbf10483931cd605bd9c6fff67bcfda4fed1931ef6000005331",
+      "export_sha256": "5dfa3351265be6ac5b3c756fe6824cc77b32d1cc4e04f163ba1d006b756fb381",
+      "changes": [
+        "Normalize line endings and trailing blank lines only; streaming equations and graph generator unchanged."
+      ]
     }
   ]
 }
