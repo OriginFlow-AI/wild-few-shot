@@ -15,6 +15,25 @@ from ring_rq.infer_w100 import RingRQW100Inference, ASSETS
 
 
 class PublishedAssetsTests(unittest.TestCase):
+    def test_phase1_endpoint_lineage_shared_assets_and_cpu_inference(self):
+        torch.set_num_threads(2)
+        root = ASSETS.parent/'phase1_ep6'
+        receipt = json.loads((root/'MANIFEST.json').read_bytes())
+        first = torch.load(root/'best.pt', map_location='cpu', weights_only=False)
+        second = torch.load(ASSETS/'best.pt', map_location='cpu', weights_only=False)
+        self.assertEqual((first['phase'], first['epoch'], first['global_step']), (1, 6, 19578))
+        self.assertEqual(first['source_checkpoint_sha256'], second['binding']['parent_sha256'])
+        self.assertEqual(hashlib.sha256((root/'best.pt').read_bytes()).hexdigest(), receipt['files']['best.pt']['sha256'])
+        for name, binding in [('norm.npz', 'norm_sha256'), ('RQ_FROZEN.pt', 'RQ_sha256')]:
+            actual = hashlib.sha256((ASSETS/name).read_bytes()).hexdigest()
+            self.assertEqual(first['binding'][binding], actual)
+            self.assertEqual(second['binding'][binding], actual)
+            self.assertEqual(receipt['shared_assets'][name]['sha256'], actual)
+        runtime = RingRQInference(root/'best.pt', ASSETS/'norm.npz', ASSETS/'RQ_FROZEN.pt', 'cpu')
+        result = runtime.predict(np.zeros((1, 4000, 16), np.float32))
+        self.assertEqual(result['dense_N'].shape, (1, 5, 3572))
+        self.assertTrue(np.isfinite(result['dense_N']).all())
+
     def test_published_asset_hashes_and_real_checkpoint_cpu_inference(self):
         torch.set_num_threads(2)
         receipt = json.loads((ASSETS/'MANIFEST.json').read_bytes())

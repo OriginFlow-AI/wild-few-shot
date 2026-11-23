@@ -1,11 +1,11 @@
 {
-  "status": "PASS_8_CPU_TESTS_AND_PUBLISHED_ASSET_BINDINGS",
-  "unit_tests": 8,
+  "status": "PASS_9_CPU_TESTS_AND_BOTH_PHASE_PUBLISHED_BINDINGS",
+  "unit_tests": 9,
   "python_files_syntax_checked": 31,
   "source_provenance_checked": 24,
   "source_files_unchanged": true,
   "secret_scan": "PASS",
-  "binary_assets": "Exactly three user-authorized matched assets",
+  "binary_assets": "Exactly four user-authorized files: phase1 EP6 weights, phase2 EP1 weights, shared norm and RQ",
   "real_checkpoint_CPU_load_and_synthetic_prediction": true,
   "W100_wrapper_chunk_tail_reset_test": true,
   "W100_backend_AST_unchanged_from_previously_qualified_evaluation": true,
@@ -17,5 +17,7 @@
     "torch": "2.12.1",
     "numpy": "2.4.6",
     "scipy": "1.17.1"
-  }
+  },
+  "phase1_EP6_endpoint_parent_lineage_verified": true,
+  "phase1_EP6_real_checkpoint_CPU_load_and_synthetic_prediction": true
 }

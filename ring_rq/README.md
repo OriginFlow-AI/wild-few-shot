@@ -173,3 +173,33 @@ sample_indices = result["input_sample_indices"]  # 470+40*k，输入2kHz网格�
 | [`RQ_FROZEN.pt`](assets/phase2_ep1/RQ_FROZEN.pt) | 127,108 bytes | `bea49219886588dd5592c77e97eb2d267d54b02baa45e05b9a85c1a4bf1b1ca6` |
 
 权重、norm和RQ必须成套使用；加载器核验checkpoint的norm/RQ绑定以及冻结readout与码本的一致性。[资产清单](assets/phase2_ep1/MANIFEST.json)。
+
+## 一阶段结束后的 EP6 权重
+
+一期共完成6轮，最终EP6同时是原合同的 **Val Kendall τ_b-best**，也是已发布二期EP1的真实初始化父模型。现已提供 [一期EP6权重](assets/phase1_ep6/best.pt) 和 [来源/指标/父子关系清单](assets/phase1_ep6/MANIFEST.json)，文件约75.15MB；这是纯模型权重，不能直接用于恢复Adam/RNG训练状态。
+
+| 一期终态 | Val A-loss ↓ | MAE N ↓ | MAPE % ↓ | Corr ↑ | R² ↑ | Kendall τ_b ↑ |
+|---|---:|---:|---:|---:|---:|---:|
+| EP6 | 0.444804 | 1.110975 | 90.2335 | 0.624151 | -10.804290 | 0.496453 |
+
+这里是原训练的24个常规stage、87人、895,043窗的 **reset2s/dense3572 Val** 成绩，不是Test；README开头的Test对照表仍只对应二期EP1。本次没有新增一期Test评估。
+
+一期EP6与二期EP1使用完全相同的norm和RQ，因此直接复用 `assets/phase2_ep1/norm.npz`、`assets/phase2_ep1/RQ_FROZEN.pt`，无需重新拟合或复制。加载一期做W100推理只需显式指定权重：
+
+```bash
+python -m ring_rq.infer_w100 \
+  --checkpoint ring_rq/assets/phase1_ep6/best.pt \
+  --emg filtered_segment.npy --output force_phase1_w100.npz --device cuda:0
+```
+
+需要CPU/独立2秒窗口时，用原 `infer.py` 并指定同一套norm/RQ：
+
+```bash
+python -m ring_rq.infer \
+  --checkpoint ring_rq/assets/phase1_ep6/best.pt \
+  --norm ring_rq/assets/phase2_ep1/norm.npz \
+  --rq ring_rq/assets/phase2_ep1/RQ_FROZEN.pt \
+  --emg filtered_windows.npy --output force_phase1_reset2s.npz --device cpu
+```
+
+一期纯权重SHA256：`0ca19153c97a10e0a16338697e60e92c4801405dc933caf9e5ed59e5a9284310`。源一期完整best断点SHA与二期EP1绑定的parent SHA一致，清单保留这一核验关系。

@@ -20,3 +20,4 @@ ring_rq/label_calibration/calibration_assets/tables.npz
 !ring_rq/assets/phase2_ep1/best.pt
 !ring_rq/assets/phase2_ep1/norm.npz
 !ring_rq/assets/phase2_ep1/RQ_FROZEN.pt
+!ring_rq/assets/phase1_ep6/best.pt

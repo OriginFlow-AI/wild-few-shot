@@ -31,3 +31,9 @@ python -m ring_rq.infer_w100 --emg filtered_segment.npy --output force_w100.npz 
 ```
 
 输入：一条连续、已滤波但未标准化的float32[T,16] EMG（uV）。默认加载已发布的权重/norm/RQ；每条录制或技术缺口reset，2秒块之间保持连续状态。W100需要CUDA。CPU固定2秒推理见详细README，和上述Test口径不同。
+
+## 一阶段结束后的权重
+
+已新增 **一期EP6终态 / Val τ-best**：[下载纯权重](ring_rq/assets/phase1_ep6/best.pt) · [来源与指标清单](ring_rq/assets/phase1_ep6/MANIFEST.json)。它是上述二期EP1的真实父模型，直接复用已发布的norm和RQ。
+
+[一期加载方法与Val成绩](ring_rq/README.md#一阶段结束后的-ep6-权重)。开头的Test表仅对应二期EP1，本次未新增一期Test评估。
