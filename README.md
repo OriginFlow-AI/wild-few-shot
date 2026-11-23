@@ -8,4 +8,4 @@
 
 - [AP304 原 loss 与 A-loss](codex/ap304-original-a-20261118.md)：全量排序预训练与 best_tau 选模记录、第二阶段原 loss 和 A-loss 训练包及薄膜评估口径。
 
-- [structure/ring-rq：旧 Ring-RQ 架构](ring_rq/README.md)：W304/E9/D4 模型、Train-only RQ拟合、Kendall两阶段训练、本地数据读取与离线推理；代码包不包含私有数据和权重。
+- [syh/structure/ring-rq：旧 Ring-RQ 架构](ring_rq/README.md)：W304/E9/D4 模型、Train-only RQ拟合、Kendall两阶段训练、本地数据读取与离线推理；代码包不包含私有数据和权重。
