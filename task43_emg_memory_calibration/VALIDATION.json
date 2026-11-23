@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-23",
+  "status": "PASS",
+  "scope": "synthetic engineering validation; no real query or Test signals",
+  "cpu": {
+    "tests": 11,
+    "status": "PASS",
+    "python": "3.11.15",
+    "numpy": "2.4.6",
+    "os": "Windows"
+  },
+  "frozen_sources": {
+    "byte_equal_modules": [
+      "arms.py",
+      "adapter.py",
+      "base_model.py",
+      "force_loss.py",
+      "sampler.py",
+      "train_r6.py",
+      "train_data.py",
+      "val_bands_r6.py",
+      "identity_rule.py",
+      "support_cache.py"
+    ],
+    "calibration_class_ast_equal": true
+  },
+  "restore": {
+    "F": {
+      "continuous2_equals_restart1plus1_bitwise": true,
+      "global_batch": 1024,
+      "adam_states": 21,
+      "history_epochs": 1,
+      "best_epoch": 1
+    },
+    "B_L": {
+      "continuous2_equals_restart1plus1_bitwise": true,
+      "global_batch": 1024,
+      "adam_states": 40,
+      "history_epochs": 1,
+      "best_epoch": 1
+    }
+  },
+  "restore_wall_clock_fields_zeroed_only_for_qualification": true,
+  "model_integration": {
+    "status": "PASS",
+    "input": "synthetic only",
+    "model_assets": "externally supplied SHA-bound historical A/B_L/F",
+    "windows": 3,
+    "native_frames": 89,
+    "graph_batch": 64,
+    "capture_count": 1,
+    "torch_graph_vs_native_max_abs_N": {
+      "A": 3.5762786865234375e-07,
+      "B_L": 3.5762786865234375e-07,
+      "F": 3.5762786865234375e-07
+    },
+    "cold_F_equals_A_bitwise": true,
+    "own_cold_own_reset_bitwise": true,
+    "inference_memory_equals_training_static_bank_bitwise": true,
+    "peak_cuda_allocated_bytes": 2339935232,
+    "torch_version": "2.12.1+cu130",
+    "numpy_version": "1.26.4"
+  },
+  "frozen_original_inference_parity": {
+    "status": "PASS",
+    "windows": 4,
+    "input": "synthetic only",
+    "portable_vs_frozen_original_max_abs_N": {
+      "native": {
+        "A": 0.0,
+        "B_L": 0.0,
+        "F": 0.0
+      },
+      "cuda-graph": {
+        "A": 3.5762786865234375e-07,
+        "B_L": 3.5762786865234375e-07,
+        "F": 3.5762786865234375e-07
+      }
+    },
+    "automatic_support_admission": true,
+    "no_real_query_or_Test_signals": true
+  },
+  "limitations": [
+    "Not a complete Val or Test run",
+    "GPU memory observed only for this finite fixture",
+    "No formal training started",
+    "Consumers must qualify their own assets, data and config"
+  ]
+}

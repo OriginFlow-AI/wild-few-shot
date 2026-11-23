@@ -1,0 +1,24 @@
+{
+  "mode": "formal",
+  "seed": 20261113,
+  "epochs": 24,
+  "smoke_windows": 2048,
+  "micro": 256,
+  "accumulation": 4,
+  "physical_chunk": 32,
+  "val_chunk": 60,
+  "dev_windows_per_hand": 60,
+  "save_every": 8,
+  "early_stop_patience": 10,
+  "gpu_memory_GiB": 10,
+  "gpu_uuid": "SET_GPU_UUID",
+  "input_workers": 64,
+  "plan_sha256": "SET_BY_PREPARE",
+  "train": {
+    "manifest": "PLAN.json"
+  },
+  "dev": {
+    "manifest": "PLAN.json"
+  },
+  "input_reader_revision": "portable_range_v1"
+}

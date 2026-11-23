@@ -1,0 +1,146 @@
+{
+  "schema": "sha256-file-manifest-v1",
+  "date": "2026-11-23",
+  "excludes": [
+    "RELEASE_MANIFEST.json",
+    "__pycache__"
+  ],
+  "files": {
+    "configs/bindings.example.json": {
+      "sha256": "86fe8cd8a6710dff28b2b3f165dc1278a79f076558c76b0b322e2bc98fa60bc9",
+      "bytes": 585
+    },
+    "configs/MODEL_CONFIG.json": {
+      "sha256": "c1a5c28f520038c849edcb596a1a0817e7801396088abddd01ddfd1f4011d274",
+      "bytes": 1251
+    },
+    "configs/PARAMETER_SCOPE.json": {
+      "sha256": "c351ed7b2b36b299f89c439da61ba5ae6199e006c18f76ab091ed0bd8f9eae37",
+      "bytes": 4079
+    },
+    "configs/train_B_L.json": {
+      "sha256": "844d37e754bf7e36b2b991d3d052a20f260e894505f638526e8a80738dc4431a",
+      "bytes": 516
+    },
+    "configs/train_F.json": {
+      "sha256": "844d37e754bf7e36b2b991d3d052a20f260e894505f638526e8a80738dc4431a",
+      "bytes": 516
+    },
+    "docs/DATA.md": {
+      "sha256": "bd0584d50013139908aeb35c2a9ad43aa82a02781e0714e43da8b138ece88b03",
+      "bytes": 4505
+    },
+    "PROVENANCE.json": {
+      "sha256": "3f9d71d24d05a660a8e6c798d6cd364359e0e5f75b047cba5502ffa6d9ee53c2",
+      "bytes": 7949
+    },
+    "README.md": {
+      "sha256": "f5de7e27cbaebfbdbdb9c2ce451898bb695ca28d80caf96368285644a56b9fcb",
+      "bytes": 10527
+    },
+    "requirements.txt": {
+      "sha256": "cedb0014cbdc94c469c66338636bd45f09e1af5ae5e85ecdc29bc8ec6afe144a",
+      "bytes": 177
+    },
+    "runtime/adapter.py": {
+      "sha256": "ce6c51e6ec57a44b08f32abf24c3c2ed5e076c4f9a2acd43ea4675f93359c200",
+      "bytes": 2713
+    },
+    "runtime/admission.py": {
+      "sha256": "4c02f22b4db2310a5f109f78fff88eea2651615cb076a55a0e1a0f0a1d9a4a63",
+      "bytes": 1024
+    },
+    "runtime/arms.py": {
+      "sha256": "fb0c4a4621da1a38561504b2b7ab097a03a889173178e2f75bc9065997a96018",
+      "bytes": 9149
+    },
+    "runtime/base_model.py": {
+      "sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "bytes": 21144
+    },
+    "runtime/calibration/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runtime/calibration/calibration_tools.py": {
+      "sha256": "ea8b592625e1d105029154de9f8001535b1eea50bbdac24192391ec0c710de18",
+      "bytes": 6437
+    },
+    "runtime/fast_shared.py": {
+      "sha256": "afda2ad91318d7c2c9fd0e8c3caef57fed2e353e265e7c43c6dfe8c2bd51fc43",
+      "bytes": 4992
+    },
+    "runtime/force_loss.py": {
+      "sha256": "362242575c7155fa4a400978f1458f9f69132175cab6adb7ec3d598f4c911ea5",
+      "bytes": 7894
+    },
+    "runtime/identity_rule.py": {
+      "sha256": "11c6691efa2cf48b1aa86643103a403919561943c98a24d1f0593db4ca466450",
+      "bytes": 5927
+    },
+    "runtime/infer.py": {
+      "sha256": "0aa032d1f6af24308d4050d542779f91a8dee9b461830ea490a588d542b15e0d",
+      "bytes": 3857
+    },
+    "runtime/inference_models.py": {
+      "sha256": "95d46992f9d7551227b9b313a1827c22b8835ff0f1ee48e844e6bbe98a68a54d",
+      "bytes": 1528
+    },
+    "runtime/s3_readonly.py": {
+      "sha256": "4423e81c93f741b35db302f41aa9e449cda73150d6bb6901bc6db597e5e74896",
+      "bytes": 4101
+    },
+    "runtime/sampler.py": {
+      "sha256": "b36ff94d12bb00165572b1c986ec2dcaef0510df3cad59c22f15ca9eb9e47497",
+      "bytes": 1604
+    },
+    "runtime/source_reader.py": {
+      "sha256": "3034298519adbf2e551043c5c61348918c5118cdcf8cd78aeb9638111da30aa5",
+      "bytes": 8895
+    },
+    "runtime/support_cache.py": {
+      "sha256": "3fa56c08a793cc93ef054eb0e947c38c13738059adad4b80ef01f52d01fcf1f9",
+      "bytes": 4180
+    },
+    "runtime/support_cache_raw_r6.py": {
+      "sha256": "b9aba2ec96736b23253f794a37e7db9bf50982cbac6cabe9cf807928ffbb96b7",
+      "bytes": 1582
+    },
+    "runtime/train_data.py": {
+      "sha256": "135f994f36af005da6f4b361de894cbc7ca5fc1f92332415e45f3f14bccf9ff1",
+      "bytes": 6826
+    },
+    "runtime/train_r6.py": {
+      "sha256": "9c15b2679cb8b7fb38d2275c56b62447d7c5dee0f508d145caf5b8094d344955",
+      "bytes": 21161
+    },
+    "runtime/val_bands_r6.py": {
+      "sha256": "3d9233660512fecad822e0e92c4169d73751132a0a246cb8de1b23f2e0edeec6",
+      "bytes": 4371
+    },
+    "tests/test_data.py": {
+      "sha256": "ba30cb44260f125881648f1b440edb44449acacf7f3de3fd5c76bad704221bf0",
+      "bytes": 6856
+    },
+    "tests/test_models.py": {
+      "sha256": "646d87da32adcb42186d05db97c50a238cedb5b4ce6ed6e7e43d9110e39129ff",
+      "bytes": 2885
+    },
+    "tools/experiment.py": {
+      "sha256": "2968098769e967189877791abba1c10065a7d2fb97430b9598c82172c75bc083",
+      "bytes": 20758
+    },
+    "tools/plan.py": {
+      "sha256": "ac4890e9dafaeffb57289c4d6cead785b49c26a30b6d04109f9e95350d9f03d5",
+      "bytes": 3567
+    },
+    "VALIDATION.json": {
+      "sha256": "abfcd66e34808459841465dcf280bdc8475a62dc5cf51fee529c5f32b3939e0e",
+      "bytes": 2447
+    },
+    "VALIDATION.md": {
+      "sha256": "1af57594da6db9a6951f6a2c859c0a839139429137aa6e642e3899cdfe166192",
+      "bytes": 2263
+    }
+  }
+}

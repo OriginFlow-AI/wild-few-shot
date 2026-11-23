@@ -1,0 +1,24 @@
+{
+  "data_version": "benchmark_v2.0",
+  "plan": "/external/frozen_train_val_PLAN.json",
+  "plan_sha256": "REPLACE_WITH_YOUR_FROZEN_PLAN_SHA256",
+  "assets": {
+    "base": "/external/A_ep1.pt",
+    "norm": "/external/train_norm.npz",
+    "calibration": "/external/calibration"
+  },
+  "data": {
+    "local_roots": ["/external/readonly_raw_N_cache"],
+    "s3_bucket": "",
+    "s3_prefix": "",
+    "endpoint_url": "",
+    "region": "us-east-1"
+  },
+  "checkpoints": {},
+  "training": {
+    "physical_chunk": 32,
+    "val_chunk": 60,
+    "input_workers": 64,
+    "gpu_memory_GiB": 10
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "network": "K2RingNetwork",
+  "config": {
+    "input_channels": 16,
+    "output_channels": 5,
+    "input_samples": 4000,
+    "left_context": 428,
+    "right_context": 0,
+    "d_model": 304,
+    "num_heads": 8,
+    "dim_feedforward": 1216,
+    "encoder_blocks": 9,
+    "decoder_blocks": 4,
+    "pool_queries": 2,
+    "dropout": 0.1,
+    "temporal_chunk_size": 32,
+    "patch_hidden": 96,
+    "patch_stride": 40,
+    "patch_receptive_fields": [
+      40,
+      128
+    ],
+    "patch_left_paddings": [
+      16,
+      98
+    ],
+    "output_scale": 0.01,
+    "gate_bias": 4.0,
+    "num_position_steps": 500
+  },
+  "parameter_count": 18357945,
+  "state_tensor_count": 245,
+  "input_shape": [
+    "B",
+    16,
+    4000
+  ],
+  "output_shape": [
+    "B",
+    5,
+    89
+  ],
+  "input_hz": 2000,
+  "native_output_hz": 50,
+  "finger_order": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "little"
+  ],
+  "evaluation_scoring_offsets": "470+40*k, k=0..88; window-tail timestamps deduplicated",
+  "inference": "4000-sample independent reset windows; not W100 streaming; no MA7",
+  "raw_emg_units": "must match original training recordings; no rescaling assumed",
+  "force_output": "normalized calibrated force; prediction_N=z*force_std+force_mean"
+}

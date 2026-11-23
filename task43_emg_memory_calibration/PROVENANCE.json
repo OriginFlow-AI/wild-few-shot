@@ -1,0 +1,182 @@
+{
+  "base_model": "A-loss A_ep1 W304/E9/D4 Affine (not Ring-RQ)",
+  "checkpoint_reference": {
+    "A": {
+      "sha256": "e7110ae4922820a0d9c9fe51c90377aec1e28d9caac359fd28559c041d8fcc38"
+    },
+    "B_L": {
+      "epoch": 1,
+      "step": 752,
+      "selected_by": "minimum full Val L_A",
+      "sha256": "9a512b48d4bab73a459b7496d4f8dbb3b0b28a63e6a16d11488cd376ce7ceadd"
+    },
+    "F": {
+      "epoch": 8,
+      "step": 6016,
+      "selected_by": "minimum full Val L_A",
+      "sha256": "9912e77b227e99b37851a2ada381e9378f88cf9165207fb38e9a25f044f9954f"
+    }
+  },
+  "external_asset_hashes": {
+    "assets/A_ep1.pt": "e7110ae4922820a0d9c9fe51c90377aec1e28d9caac359fd28559c041d8fcc38",
+    "assets/train_norm.npz": "aac3e006003c91cd4dfcf6b9de78b15436d1edc061ad27fc154a154398274d34",
+    "calibration/LABEL_POLICY.json": "db20decc37bd0ad6d9a17b5c159a3e474f39a452f4580642e94f4d99cf6d92d3",
+    "calibration/calibration_assets/coefficients.json": "c6417c60fa6706b4f624e2323ac3153e6aeb318179c8870764a632f3eb8101c0",
+    "calibration/calibration_assets/tables.npz": "3ff7e7e67ebe2ce7b05ec1d32dcb418e0cf0a985b7a7c1bfdfcc8d751b7b5b77"
+  },
+  "source_files": {
+    "training/arms.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "arms.py",
+      "sha256": "fb0c4a4621da1a38561504b2b7ab097a03a889173178e2f75bc9065997a96018",
+      "size": 9149
+    },
+    "training/adapter.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "adapter.py",
+      "sha256": "ce6c51e6ec57a44b08f32abf24c3c2ed5e076c4f9a2acd43ea4675f93359c200",
+      "size": 2713
+    },
+    "training/base_model.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "base_model.py",
+      "sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "size": 21144
+    },
+    "training/train_data.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "train_data.py",
+      "sha256": "135f994f36af005da6f4b361de894cbc7ca5fc1f92332415e45f3f14bccf9ff1",
+      "size": 6826
+    },
+    "training/identity_rule.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "identity_rule.py",
+      "sha256": "11c6691efa2cf48b1aa86643103a403919561943c98a24d1f0593db4ca466450",
+      "size": 5927
+    },
+    "training/force_loss.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "force_loss.py",
+      "sha256": "362242575c7155fa4a400978f1458f9f69132175cab6adb7ec3d598f4c911ea5",
+      "size": 7894
+    },
+    "training/sampler.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "sampler.py",
+      "sha256": "b36ff94d12bb00165572b1c986ec2dcaef0510df3cad59c22f15ca9eb9e47497",
+      "size": 1604
+    },
+    "training/support_cache.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "support_cache.py",
+      "sha256": "3fa56c08a793cc93ef054eb0e947c38c13738059adad4b80ef01f52d01fcf1f9",
+      "size": 4180
+    },
+    "training/support_cache_raw_r6.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "support_cache_raw_r6.py",
+      "sha256": "b0c19a614f9a45e6813fe89613264f34f3191b8aedb82d99198c38ae583bf9bc",
+      "size": 1348
+    },
+    "training/train_r6.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "train_r6.py",
+      "sha256": "9c15b2679cb8b7fb38d2275c56b62447d7c5dee0f508d145caf5b8094d344955",
+      "size": 21161
+    },
+    "training/val_bands_r6.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "val_bands_r6.py",
+      "sha256": "3d9233660512fecad822e0e92c4169d73751132a0a246cb8de1b23f2e0edeec6",
+      "size": 4371
+    },
+    "training/source_reader_r5.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "source_reader_r5.py",
+      "sha256": "b1b8b469951c2d73a4f7d4aafcda8dd5d092916f77c03538a5d50663acc39513",
+      "size": 7525
+    },
+    "training/s3_readonly.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "s3_readonly.py",
+      "sha256": "d446b89d84ebffff25ebd7811f85618f9f6731423d47456012b46f7a845489f0",
+      "size": 4070
+    },
+    "training/calibration/calibration_tools.py": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "calibration/calibration_tools.py",
+      "sha256": "4c50ac438b25a17de59cdca4aeb2e5f7475f4462a50b6b5a2b7a8a82156578c7",
+      "size": 7678
+    },
+    "training/MODEL_CONFIG.json": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "MODEL_CONFIG.json",
+      "sha256": "c1a5c28f520038c849edcb596a1a0817e7801396088abddd01ddfd1f4011d274",
+      "size": 1251
+    },
+    "training/PARAMETER_SCOPE.json": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "PARAMETER_SCOPE.json",
+      "sha256": "4d99d62772bc5c318af886888f0e1f6c21364d82ee513effc4e0f394d99fb41d",
+      "size": 3136
+    },
+    "training/FORMAL_R6_F.json": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "FORMAL_R6_F.json",
+      "sha256": "52de09367c379e40bf9e080e58e4622267a5488b2f1f8d4f0328daf7c38f5971",
+      "size": 639
+    },
+    "training/FORMAL_R6_B_L.json": {
+      "source_experiment": "stage3_prefix60_crossstage_a_20261113",
+      "source_relative_path": "FORMAL_R6_B_L.json",
+      "sha256": "fd4e86399f34bef9615b4b9dafb148144aa72a7a2824d6eddad561fc7e10163d",
+      "size": 639
+    },
+    "inference/fast_shared.py": {
+      "source_experiment": "stage3_fulltest_fast8_20261119",
+      "source_relative_path": "fast_shared.py",
+      "sha256": "f236028b60e5c2a50ba177dc795e1722f01a1298c34f85fa672f7b54fb57d0b4",
+      "size": 5007
+    },
+    "inference/common.py": {
+      "source_experiment": "stage3_fulltest_fast8_20261119",
+      "source_relative_path": "common.py",
+      "sha256": "ed742fa10ae0a8a7f7f7da7fe6e2b2247781a5db83488601aa3d8d1081215f36",
+      "size": 8387
+    },
+    "inference/scoring.py": {
+      "source_experiment": "stage3_fulltest_fast8_20261119",
+      "source_relative_path": "scoring.py",
+      "sha256": "7dcdf8c7c947cfc5c01bbe6fb20b79537f15fea657692ea602e1460d50a4ea0e",
+      "size": 1793
+    },
+    "inference/BINDING.json": {
+      "source_experiment": "stage3_fulltest_fast8_20261119",
+      "source_relative_path": "BINDING.json",
+      "sha256": "534bd6310944e6019b60e1ffd1d7839649a07578bfd58d760319280022a5bfef",
+      "size": 2824
+    }
+  },
+  "export_notes": {
+    "unchanged_math": [
+      "runtime/arms.py",
+      "runtime/adapter.py",
+      "runtime/base_model.py",
+      "runtime/force_loss.py",
+      "runtime/train_r6.py",
+      "runtime/train_data.py",
+      "runtime/sampler.py",
+      "runtime/val_bands_r6.py"
+    ],
+    "portable_changes": [
+      "Configurable local/S3 input replaces machine-specific SSH fallback",
+      "Raw bank count is derived from the supplied plan",
+      "FastShared model loader is configurable; default backend is qualified Torch",
+      "Private plans, assets and identities are not distributed",
+      "Calibration class preserved exactly; unused legacy normalization helper and CLI omitted",
+      "Read-only mmap arrays copied before torch staging",
+      "CLI adds external prepare, common plan generation, qualification, Val-best registration and explicit inference admission"
+    ]
+  }
+}

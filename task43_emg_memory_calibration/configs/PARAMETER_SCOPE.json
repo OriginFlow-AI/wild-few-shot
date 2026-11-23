@@ -1,0 +1,153 @@
+{
+  "status": "STATIC_CPU_TENSOR_SHAPE_COUNT_ONLY",
+  "model_source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+  "base_sha256": "e7110ae4922820a0d9c9fe51c90377aec1e28d9caac359fd28559c041d8fcc38",
+  "base_parameters": 18357945,
+  "full_decoder_with_pool_and_head_parameters": 4921471,
+  "full_output_head_parameters": 4575,
+  "targets": {
+    "channel_pool.in_proj_weight": [
+      912,
+      304
+    ],
+    "channel_pool.out_proj.weight": [
+      304,
+      304
+    ],
+    "decoder_projection.weight": [
+      304,
+      304
+    ],
+    "decoder_blocks.0.qkv.weight": [
+      912,
+      304
+    ],
+    "decoder_blocks.0.output.weight": [
+      304,
+      304
+    ],
+    "decoder_blocks.0.ffn.0.weight": [
+      1216,
+      304
+    ],
+    "decoder_blocks.0.ffn.2.weight": [
+      304,
+      1216
+    ],
+    "decoder_blocks.1.qkv.weight": [
+      912,
+      304
+    ],
+    "decoder_blocks.1.output.weight": [
+      304,
+      304
+    ],
+    "decoder_blocks.1.ffn.0.weight": [
+      1216,
+      304
+    ],
+    "decoder_blocks.1.ffn.2.weight": [
+      304,
+      1216
+    ],
+    "decoder_blocks.2.qkv.weight": [
+      912,
+      304
+    ],
+    "decoder_blocks.2.output.weight": [
+      304,
+      304
+    ],
+    "decoder_blocks.2.ffn.0.weight": [
+      1216,
+      304
+    ],
+    "decoder_blocks.2.ffn.2.weight": [
+      304,
+      1216
+    ],
+    "decoder_blocks.3.qkv.weight": [
+      912,
+      304
+    ],
+    "decoder_blocks.3.output.weight": [
+      304,
+      304
+    ],
+    "decoder_blocks.3.ffn.0.weight": [
+      1216,
+      304
+    ],
+    "decoder_blocks.3.ffn.2.weight": [
+      304,
+      1216
+    ]
+  },
+  "lora_plus_full_head_by_rank": {
+    "8": 179679,
+    "16": 354783,
+    "32": 704991
+  },
+  "full_decoder_keys": [
+    "pool_query",
+    "fusion_query",
+    "channel_pool.in_proj_weight",
+    "channel_pool.in_proj_bias",
+    "channel_pool.out_proj.weight",
+    "channel_pool.out_proj.bias",
+    "decoder_projection.weight",
+    "decoder_projection.bias",
+    "decoder_blocks.0.attention_norm.weight",
+    "decoder_blocks.0.attention_norm.bias",
+    "decoder_blocks.0.qkv.weight",
+    "decoder_blocks.0.qkv.bias",
+    "decoder_blocks.0.output.weight",
+    "decoder_blocks.0.output.bias",
+    "decoder_blocks.0.ffn_norm.weight",
+    "decoder_blocks.0.ffn_norm.bias",
+    "decoder_blocks.0.ffn.0.weight",
+    "decoder_blocks.0.ffn.0.bias",
+    "decoder_blocks.0.ffn.2.weight",
+    "decoder_blocks.0.ffn.2.bias",
+    "decoder_blocks.1.attention_norm.weight",
+    "decoder_blocks.1.attention_norm.bias",
+    "decoder_blocks.1.qkv.weight",
+    "decoder_blocks.1.qkv.bias",
+    "decoder_blocks.1.output.weight",
+    "decoder_blocks.1.output.bias",
+    "decoder_blocks.1.ffn_norm.weight",
+    "decoder_blocks.1.ffn_norm.bias",
+    "decoder_blocks.1.ffn.0.weight",
+    "decoder_blocks.1.ffn.0.bias",
+    "decoder_blocks.1.ffn.2.weight",
+    "decoder_blocks.1.ffn.2.bias",
+    "decoder_blocks.2.attention_norm.weight",
+    "decoder_blocks.2.attention_norm.bias",
+    "decoder_blocks.2.qkv.weight",
+    "decoder_blocks.2.qkv.bias",
+    "decoder_blocks.2.output.weight",
+    "decoder_blocks.2.output.bias",
+    "decoder_blocks.2.ffn_norm.weight",
+    "decoder_blocks.2.ffn_norm.bias",
+    "decoder_blocks.2.ffn.0.weight",
+    "decoder_blocks.2.ffn.0.bias",
+    "decoder_blocks.2.ffn.2.weight",
+    "decoder_blocks.2.ffn.2.bias",
+    "decoder_blocks.3.attention_norm.weight",
+    "decoder_blocks.3.attention_norm.bias",
+    "decoder_blocks.3.qkv.weight",
+    "decoder_blocks.3.qkv.bias",
+    "decoder_blocks.3.output.weight",
+    "decoder_blocks.3.output.bias",
+    "decoder_blocks.3.ffn_norm.weight",
+    "decoder_blocks.3.ffn_norm.bias",
+    "decoder_blocks.3.ffn.0.weight",
+    "decoder_blocks.3.ffn.0.bias",
+    "decoder_blocks.3.ffn.2.weight",
+    "decoder_blocks.3.ffn.2.bias",
+    "decoder_norm.weight",
+    "decoder_norm.bias",
+    "output_head.weight",
+    "output_head.bias"
+  ]
+}

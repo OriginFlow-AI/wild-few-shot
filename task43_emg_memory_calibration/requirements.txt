@@ -1,0 +1,4 @@
+# Reference environment: Linux, Python3.12, RTX5090, FP32/TF32off.
+# Install the CUDA build of Torch appropriate for the machine (reference: cu130).
+numpy==1.26.4
+torch==2.12.1

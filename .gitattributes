@@ -1,0 +1,2 @@
+# Preserve validated source and manifest bytes across platforms.
+task43_emg_memory_calibration/** -text whitespace=cr-at-eol
