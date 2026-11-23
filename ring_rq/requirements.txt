@@ -1,0 +1,9 @@
+# Python 3.12; validated local CPU tests: torch 2.12.1, NumPy 2.4.6, SciPy 1.17.1.
+# Choose a CUDA-enabled PyTorch build suitable for the target GPU for training.
+torch>=2.6
+numpy>=1.26
+scipy>=1.13
+numba>=0.61
+mcap>=1.2
+lz4>=4.3
+zstandard>=0.23

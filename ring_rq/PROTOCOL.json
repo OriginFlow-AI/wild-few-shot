@@ -1,0 +1,110 @@
+{
+  "schema": "portable_ring_rq_dense3572_v1",
+  "source_split": "User-supplied approved local revision2 manifest; no membership shipped",
+  "membership_frozen": true,
+  "model": {
+    "architecture": "ex45 W304 E9 D4 Ring-RQ",
+    "width": 304,
+    "encoder_blocks": 9,
+    "decoder_blocks": 4,
+    "heads": 8,
+    "streams": 2,
+    "RQ": {
+      "groups": 5,
+      "levels": 2,
+      "codes": 128,
+      "latent": 8,
+      "MLP_hidden": 64
+    },
+    "initialization": "full Encoder+Decoder seed42 scratch; Train-only new fixed RQ books/readout",
+    "trainable_parameters": 18743770,
+    "total_parameters": 18746975,
+    "activation_checkpoint": "patch stem and inner spatial/temporal/FFN only, RNG preserving; no redundant outer checkpoint"
+  },
+  "input_samples": 4000,
+  "left_crop": 428,
+  "target_samples": 3572,
+  "precision": "FP32 parameters/optimizer/forward/loss; TF32 off; deterministic algorithms; no AMP",
+  "label": "Old ex45 frozen LABEL_POLICY: membrane N -> shared per-finger LUT exactly once with last-segment linear tail; gen3 native Newton Fz identity; verified source domains, no cache writes, transform native Force before interpolation, no output clipping",
+  "micro_per_rank": 256,
+  "global_batch": 2048,
+  "seed": 42,
+  "sampling": "stage uniform -> subject uniform -> hand uniform -> eligible integer gap-contained starts duration proportional; 16-window local trial blocks; all qualified members retained",
+  "epoch_budget": "floor(sum valid interval samples /4000 /global_batch)*global_batch sampled windows; not coverage guarantee",
+  "augmentation": [
+    "EMG normalize",
+    "gain U(.8,1.25) per channel",
+    "p=.05 zero one channel",
+    "Gaussian noise std .02 including zeroed channel"
+  ],
+  "loss": {
+    "A": ".5*(1-Corr_w)+.1*MAPE_ratio_w+.15*MAE_N",
+    "MAPE_train_threshold": "max(1e-6,min(.05*max abs raw reference,.5)) N",
+    "Corr_and_MAPE_weight": "five fingers by mean abs raw force per logical micro; Corr normalized predictions/targets",
+    "ordinal": "same window/finger 2048 replacement different-time pairs; remove exact GT ties; softplus(-sign(dy)*dp/T_f)/ln2; valid-pair global micro average",
+    "temperature": "per-finger median nonzero Train-panel absolute differences; frozen both stages",
+    "auxiliary_target": 0.075,
+    "auxiliary_definition": "median Train-panel weighted-aux/main all-trainable-param L2 norm ratio before clipping; calibrated once per phase; never equate coefficient or loss ratio to gradient share"
+  },
+  "phase1": {
+    "objective": "L_ord+epsilon*L_A",
+    "max_epochs": 6,
+    "min_epochs": 5,
+    "patience": 5,
+    "selection": "max complete regular-stage Val per-person mean same-window per-finger exact tau-b; reject prediction-constant attrition",
+    "authorization": "Historical Ring-RQ six-epoch protocol; does not use the new three-view common55 protocol."
+  },
+  "phase2": {
+    "objective": "L_A+lambda*L_ord",
+    "max_epochs": 50,
+    "patience": 10,
+    "selection": "min complete regular-stage Val macro L_A",
+    "initialization": "whole network phase1 Val-best; reset AdamW/scheduler; same RQ and norm; recalibrate lambda on fixed Train panel"
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "LR": 0.0003,
+    "weight_decay": 0.0001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "clip_norm": 1
+  },
+  "scheduler": {
+    "name": "ReduceLROnPlateau",
+    "factor": 0.5,
+    "patience": 2,
+    "cooldown": 1,
+    "min_LR": 1e-05
+  },
+  "Val": "all gap-contained nonoverlap full 2s windows, R reset each window, FP32; held stages diagnostic only and excluded from selection; no augmentation",
+  "Dev_bins": [
+    "abs truth <=.5N",
+    ".5<abs truth<2N",
+    "2<=abs truth<5N",
+    "abs truth>=5N",
+    "abs truth>=10N"
+  ],
+  "Dev_persistence": [
+    "L_A/MAE/MAPE_percent/Corr/R2/tau",
+    "per-person/stage/bin sufficient metrics with denominators/bias/low-force FP>1N",
+    "cumulative best snapshot every complete epoch"
+  ],
+  "Test_model_read": false,
+  "S3_during_training": false,
+  "checkpoint": "every16 updates plus epoch/stop, full model/all Adam/scheduler/per-rank Python NumPy CPU CUDA RNG/cursor/history/best; last+previous+best; exact eight-rank continuous versus resumed qualification required",
+  "explicit_changes_from_historical_Mini": [
+    "new full Force3 split, no stage4/5 or mix9/10",
+    "W304 E9 D4 Ring-RQ instead of W96 Affine",
+    "specified A-loss instead of old .3 MAPE+.03 MAE objective",
+    "stage/subject-balanced sampling",
+    "eight physical GPUs; per-rank logical micro256; global2048 instead of1024",
+    "phase2 select Val A-loss matching new objective; no Test selection"
+  ],
+  "gradient_reduction": "Eight logical micro losses divided by8 before backward; gather complete FP32 per-rank gradient vectors and add in rank0..7 order, then clip/update. No DDP bucket regrouping; preserve global2048 mean objective.",
+  "label_calibration": "Label calibration is separate from Train-only norm, RQ fitting and loss gradient ratio calibration.",
+  "restart": "All Encoder/Decoder seed42 scratch, new calibrated Train-only norm and RQ; new optimizer/scheduler/history; no old model or norm/RQ initialization",
+  "gradient_ratio_calibration_execution": "Single process on physical GPU0, original actual256-window panel, nested memory-only checkpoint with exact all-parameter gradients; other seven GPUs do not wait in NCCL; regular training inner checkpoint unchanged."
+}

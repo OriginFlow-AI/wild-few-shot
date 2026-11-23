@@ -1,0 +1,173 @@
+{
+  "scope": "Legacy Ring-RQ only; no three-view architecture source, trained weights, private data or calibration tables.",
+  "files": [
+    {
+      "path": "model.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/model.py",
+      "source_sha256": "414d4f6e6f1e6a32c39b22b910d8623eb26915519f3045634c62bb9aa8b65846",
+      "export_sha256": "414d4f6e6f1e6a32c39b22b910d8623eb26915519f3045634c62bb9aa8b65846",
+      "changes": []
+    },
+    {
+      "path": "io_local.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/io_local.py",
+      "source_sha256": "480367e1bd7cc1be9385611653fe35b33e9834b14c9739dbcdabc04c5b849787",
+      "export_sha256": "69e67f365442c452c5f7cac72920cc200b21d1d58337e6c8a064e9c4002cb7d5",
+      "changes": [
+        "Replace machine-specific fallback data root by RING_RQ_SOURCE or run-local data/source.",
+        "Use public NumPy v1/v2 npy header APIs; newer format falls back to np.load. Fix NumPy2.4 removed private API without numerical changes."
+      ]
+    },
+    {
+      "path": "batches.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/batches.py",
+      "source_sha256": "d575605a93103ee3cafc67acdf4ae0189c113dcadce57992a47b8522c65e01e3",
+      "export_sha256": "d575605a93103ee3cafc67acdf4ae0189c113dcadce57992a47b8522c65e01e3",
+      "changes": []
+    },
+    {
+      "path": "fast_batches.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/fast_batches.py",
+      "source_sha256": "abfd42a681dfa6641a5a2c653c4786bd3fa0c26d63d2dcb00954ddb1df45c610",
+      "export_sha256": "abfd42a681dfa6641a5a2c653c4786bd3fa0c26d63d2dcb00954ddb1df45c610",
+      "changes": []
+    },
+    {
+      "path": "losses.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/losses.py",
+      "source_sha256": "87485ed0cb30a6501a3c5c6192ab2d9282857520a8f5cbaf7daa4055a63ff190",
+      "export_sha256": "87485ed0cb30a6501a3c5c6192ab2d9282857520a8f5cbaf7daa4055a63ff190",
+      "changes": []
+    },
+    {
+      "path": "ordered_reducer.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/ordered_reducer.py",
+      "source_sha256": "8817a55680250d4e6a5cda563a1357bdec1c5177049eb54401f0105a332119b7",
+      "export_sha256": "69b66a0910fe286eda5895bdf168c900778e6998c174c15225e41e0e627f8083",
+      "changes": [
+        "Remove trailing blank lines only."
+      ]
+    },
+    {
+      "path": "dev_metrics.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/dev_metrics.py",
+      "source_sha256": "165f4f2120729c89d55784df5aaadc537276db46fd830e7b558a73eb7ff6f10b",
+      "export_sha256": "165f4f2120729c89d55784df5aaadc537276db46fd830e7b558a73eb7ff6f10b",
+      "changes": []
+    },
+    {
+      "path": "fast_metrics.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/fast_metrics.py",
+      "source_sha256": "db86c973f44ac37795a6dd3811ec1e887a4df75a7ed8d977994f5095778af969",
+      "export_sha256": "92d6a2b3aeee7f2c54efa5c99b05972792d91a9ae06487dba9a51270c92d57ca",
+      "changes": [
+        "Resolve metric module in the independent run directory."
+      ]
+    },
+    {
+      "path": "val_pipeline.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/val_pipeline.py",
+      "source_sha256": "79afb017de3cbdb1833471c2d9cef2e15b7ed6e5b948920cf34a2df6bbaad1d4",
+      "export_sha256": "79afb017de3cbdb1833471c2d9cef2e15b7ed6e5b948920cf34a2df6bbaad1d4",
+      "changes": []
+    },
+    {
+      "path": "label_policy.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/label_policy.py",
+      "source_sha256": "929e5c4a6064b92124d7fecf95214ffa056322b301d515a9fda6def318e98473",
+      "export_sha256": "929e5c4a6064b92124d7fecf95214ffa056322b301d515a9fda6def318e98473",
+      "changes": []
+    },
+    {
+      "path": "calibration_memory.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/calibration_memory.py",
+      "source_sha256": "d619b3dbc0b1c4b92cb0219434b8d09a13dca0c067ab4893e29385ff3f5dccbf",
+      "export_sha256": "d619b3dbc0b1c4b92cb0219434b8d09a13dca0c067ab4893e29385ff3f5dccbf",
+      "changes": []
+    },
+    {
+      "path": "train.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/train.py",
+      "source_sha256": "255540843593f363d889cca1d547820e5f8be0548e3ad10441c7f6b90d49f9a9",
+      "export_sha256": "60fa497086f04177ca3e21b218ca6f23ede25f8f6c081862fa86941dbb9d99a6",
+      "changes": [
+        "Use historical user-authorized six-epoch phase1 cap; portable host metadata. Equations and dense3572 evaluation unchanged.",
+        "Archive independent weights for each complete epoch; rolling complete optimizer/RNG checkpoints unchanged."
+      ]
+    },
+    {
+      "path": "source/ring_model.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/source/ring_model.py",
+      "source_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "export_sha256": "fe27bedcff30b0d89eb32f3a0c52f28600e4d0d045dd46b75bd5214cc752698a",
+      "changes": []
+    },
+    {
+      "path": "source/native_ring_encoder.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/source/native_ring_encoder.py",
+      "source_sha256": "2002fb1eb1c6e5cabe9a4d84453c125d8e6307db57d027c8bfc8e941df6b458f",
+      "export_sha256": "2002fb1eb1c6e5cabe9a4d84453c125d8e6307db57d027c8bfc8e941df6b458f",
+      "changes": []
+    },
+    {
+      "path": "source/rq_model.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/source/rq_model.py",
+      "source_sha256": "70893d5bb8b3b12890aff2faad73a3527f555bb4405a38a46faf9dac09634c6a",
+      "export_sha256": "b34a5333577ce9467dd260ad7edbda236ac1ae44b5a3aea451db0308f40f74ec",
+      "changes": [
+        "Remove trailing blank lines only."
+      ]
+    },
+    {
+      "path": "source/stable_interpolation.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/source/stable_interpolation.py",
+      "source_sha256": "4cbdf7c44aba0e569797f5f8e8b4dfa57a804435769ce33fb4542cc2d5db12c6",
+      "export_sha256": "4cbdf7c44aba0e569797f5f8e8b4dfa57a804435769ce33fb4542cc2d5db12c6",
+      "changes": []
+    },
+    {
+      "path": "source/ordinal.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/source/ordinal.py",
+      "source_sha256": "f396823e522564c10a51c10d27c3435c4318ec666d652ba2e162f2bfc5b89292",
+      "export_sha256": "f396823e522564c10a51c10d27c3435c4318ec666d652ba2e162f2bfc5b89292",
+      "changes": []
+    },
+    {
+      "path": "source/processed_mcap_fast.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/source/processed_mcap_fast.py",
+      "source_sha256": "4460294666e99a7935476774ccd5f565d876ddab11c294c30af5f9611b283886",
+      "export_sha256": "4460294666e99a7935476774ccd5f565d876ddab11c294c30af5f9611b283886",
+      "changes": []
+    },
+    {
+      "path": "source/reference_loss.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/source/reference_loss.py",
+      "source_sha256": "ae5803b77186738e72e146027a504c9266d23f8fba5bfa14f5b1eeddf7f79190",
+      "export_sha256": "ae5803b77186738e72e146027a504c9266d23f8fba5bfa14f5b1eeddf7f79190",
+      "changes": []
+    },
+    {
+      "path": "label_calibration/label_map.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/label_calibration/label_map.py",
+      "source_sha256": "bb31394def167692c98e0ca26149f645f2d626fe1a16ec749df930825f35e024",
+      "export_sha256": "bb31394def167692c98e0ca26149f645f2d626fe1a16ec749df930825f35e024",
+      "changes": []
+    },
+    {
+      "path": "label_calibration/calibration_assets/calibration.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/label_calibration/calibration_assets/calibration.py",
+      "source_sha256": "f91fec89aa70b35dd6745a957b447c613faef768ce96b46ab04ee858a7ad02a5",
+      "export_sha256": "f91fec89aa70b35dd6745a957b447c613faef768ce96b46ab04ee858a7ad02a5",
+      "changes": []
+    },
+    {
+      "path": "prepare_assets.py",
+      "source": "research/force_full/experiments/force3_kendall_ringrq_calibrated_20261121_v2/prepare.py",
+      "source_sha256": "982d79dbc3354f6bafb71ae8e21b6cd94a27aa0fb40ff26dd8cf6e3115f0226f",
+      "export_sha256": "78b97ac418bc0966e5a9526970159ff36aaeb5c64c74f33b38ab60d72b43d16e",
+      "changes": [
+        "Preserve index, normalization, tokenizer fit and local-window validation functions; replace deployment-specific main by explicit non-overwriting asset-fit CLI."
+      ]
+    }
+  ]
+}

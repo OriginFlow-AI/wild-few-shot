@@ -1,0 +1,16 @@
+{
+  "status": "PASS_SYNTHETIC_CPU_CHECKS",
+  "unit_tests": 6,
+  "python_files_syntax_checked": 26,
+  "source_provenance_checked": 22,
+  "source_files_unchanged": true,
+  "secret_binary_scan": "PASS",
+  "full_eight_GPU_training_rerun": false,
+  "real_recording_read": false,
+  "model_Test_read": false,
+  "environment": {
+    "torch": "2.12.1",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  }
+}

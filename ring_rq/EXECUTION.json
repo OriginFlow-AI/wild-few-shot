@@ -1,0 +1,16 @@
+{
+  "schema": "force3_calibrated_scratch_execution_v2",
+  "checkpoint_mode": "inner",
+  "original_model": true,
+  "original_loss": true,
+  "original_evaluation": true,
+  "precision": "FP32 deterministic math; TF32 disabled",
+  "micro": 256,
+  "global_batch": 2048,
+  "Val_micro": 64,
+  "Val_stats_workers": 8,
+  "Val_max_pending_batches": 2,
+  "Test_read": false,
+  "label_transform": "exact frozen ex45 LUT once at native force grid before interpolation; gen3 identity; immutable caches",
+  "phase1_max_epochs": 6
+}
