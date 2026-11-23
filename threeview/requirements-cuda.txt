@@ -1,0 +1,5 @@
+-r requirements.txt
+# Validated accelerated kernel versions; CUDA/Linux only. No vendored binaries.
+fla-core==0.5.2
+triton==3.7.1
+einops==0.8.1
