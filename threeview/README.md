@@ -2,7 +2,21 @@
 
 本分支 `syh/structure/threeview` 整理当前 Force3 架构消融中实际运行的三视图候选，包括两阶段训练、上游 tokenizer 拟合、三路集成推理和本地数据读取。Ring-RQ 已在独立分支 [syh/structure/ring-rq](https://github.com/OriginFlow-AI/wild-few-shot/tree/syh/structure/ring-rq) 发布；该分支的旧3572点评估、W100成绩和权重不能当作本架构的结果。
 
-**此版发布代码，不附带训练权重、norm、tokenizer、波形、真实人员split、时钟清单或私有标定表。** 当前训练仍在进行，尚无本模型的完整epoch Val，不宣称模型精度收益。已发布代码有独立执行SHA，训练恢复必须在新运行目录中完成资格验证；不会接管服务器上的活动实验。
+本分支提供两份三视图模型权重。训练恢复需在新运行目录完成资格验证。
+
+## 模型权重
+
+- `threeview-phase1-end-ep1.pt` 是一期 EP1 的 Val-best，也是二期初始化权重。
+- `threeview-phase2-ep1.pt` 是二期完成 EP1 后的权重。
+
+在 [GitHub Release](https://github.com/OriginFlow-AI/wild-few-shot/releases/tag/threeview-weights-20261124) 下载全部分卷、清单和合并脚本。脚本自动解压并验证两份 `.pt` 的 SHA256。
+
+```bash
+gh release download threeview-weights-20261124 --repo OriginFlow-AI/wild-few-shot --dir threeview-weights
+python threeview-weights/assemble_weights.py
+```
+
+两份权重包含冻结 tokenizer，经逐张量核对与原快照一致。使用 `threeview/infer.py` 时，把 `--checkpoint` 指向合并后的权重，把 `--norm` 指向配套的原 `norm.npz`。模型与 norm 的 SHA256 见 [CHECKPOINTS.json](https://github.com/OriginFlow-AI/wild-few-shot/releases/download/threeview-weights-20261124/CHECKPOINTS.json)。
 
 ## 架构与时间支持
 
