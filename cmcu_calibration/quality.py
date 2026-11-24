@@ -114,7 +114,13 @@ def basic_quality(ad, reference, model):
     correlation = float(spearmanr(ad, reference).statistic)
     if not np.isfinite(correlation) or correlation < 0.2:
         return "nonpositive_or_weak_calibration_monotonicity"
-    span = float(np.ptp(model["force_N"]))
+    observed_range = model.get("observed_ad_range")
+    observed_force = (
+        predict_lookup(observed_range, model)
+        if observed_range is not None
+        else model["force_N"]
+    )
+    span = float(np.ptp(observed_force))
     if span < 1:
         return "collapsed_calibration_force_range"
     residual = float(np.quantile(abs(predict_lookup(ad, model) - reference), 0.9))

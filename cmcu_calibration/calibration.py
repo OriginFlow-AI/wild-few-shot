@@ -4,7 +4,8 @@ import numpy as np
 from scipy.optimize import isotonic_regression
 
 
-def fit_lookup(ad, reference):
+def fit_lookup(ad, reference, *, zero_anchor=True):
+    """Fit a monotone lookup with an exact zero unless reproducing a legacy fit."""
     ad = np.asarray(ad, dtype=float)
     reference = np.asarray(reference, dtype=float)
     if ad.ndim != 1 or ad.shape != reference.shape:
@@ -21,8 +22,19 @@ def fit_lookup(ad, reference):
     medians = (
         ordered_force[first + (counts - 1) // 2] + ordered_force[first + counts // 2]
     ) * 0.5
+    if zero_anchor:
+        # Nonnegative forces and monotonicity require f(x) = 0 for x <= 0.
+        medians[support <= 0] = 0.0
     force = isotonic_regression(medians, weights=counts).x
-    return {"ad": support.tolist(), "force_N": force.tolist()}
+    model = {"ad": support.tolist(), "force_N": force.tolist()}
+    if zero_anchor:
+        zero_index = int(np.searchsorted(support, 0.0))
+        if zero_index == len(support) or support[zero_index] != 0:
+            if zero_index in (0, len(support)):
+                model["observed_ad_range"] = [float(support[0]), float(support[-1])]
+            model["ad"].insert(zero_index, 0.0)
+            model["force_N"].insert(zero_index, 0.0)
+    return model
 
 
 def predict_lookup(ad, model):
@@ -39,6 +51,10 @@ def predict_lookup(ad, model):
         or np.any(np.diff(force) < 0)
     ):
         raise ValueError("Invalid monotone lookup model")
+    if "observed_ad_range" in model:
+        lower, upper = model["observed_ad_range"]
+        outside = (values < lower) | (values > upper)
+        values = np.where(outside & (values != 0), np.nan, values)
     return np.interp(values, support, force, left=np.nan, right=np.nan)
 
 

@@ -11,7 +11,7 @@ import numpy as np
 from cmcu_calibration.calibration import fit_lookup, predict_lookup, slope_check
 from cmcu_calibration.pipeline import run, select_source
 from cmcu_calibration.io import load_native
-from cmcu_calibration.quality import sliding_audit
+from cmcu_calibration.quality import basic_quality, sliding_audit
 
 
 def native_fixture():
@@ -49,11 +49,39 @@ class LookupTests(unittest.TestCase):
 
     def test_insufficient_and_invalid_models(self):
         self.assertIsNone(fit_lookup([0] * 8, np.arange(8)))
+        self.assertIsNone(fit_lookup([100] * 8, np.arange(8)))
         self.assertIsNone(fit_lookup(np.arange(7), np.arange(7)))
         with self.assertRaises(ValueError):
             fit_lookup([1, 2], [1])
         with self.assertRaises(ValueError):
             predict_lookup([1], {"ad": [0, 1], "force_N": [1, 0]})
+
+    def test_zero_is_fixed_despite_conflicting_reference(self):
+        ad = np.repeat([0, 100, 200], [4, 2, 2])
+        reference = [1, 2, 2, 3, 3, 3, 5, 5]
+        model = fit_lookup(ad, reference)
+        self.assertEqual(model["force_N"][0], 0.0)
+        np.testing.assert_allclose(predict_lookup([-0.0, 50, 200], model), [0, 1.5, 5])
+        legacy = fit_lookup(ad, reference, zero_anchor=False)
+        self.assertEqual(predict_lookup(0, legacy), 2.0)
+
+    def test_added_zero_knot_preserves_observed_domain_and_quality_span(self):
+        ad = np.linspace(100, 300, 20)
+        reference = np.linspace(2.0, 2.5, len(ad))
+        model = json.loads(json.dumps(fit_lookup(ad, reference)))
+        np.testing.assert_allclose(
+            predict_lookup([0, 1, 99, 100, 200, 300, 301], model),
+            [0, np.nan, np.nan, 2, 2.25, 2.5, np.nan],
+        )
+        self.assertEqual(basic_quality(ad, reference, model), "collapsed_calibration_force_range")
+
+    def test_monotone_negative_inputs_do_not_extend_the_domain(self):
+        ad = [-200, -200, -100, -100, 100, 100, 200, 200]
+        model = fit_lookup(ad, [1, 1, 2, 2, 3, 3, 5, 5])
+        np.testing.assert_allclose(
+            predict_lookup([-201, -200, -50, 0, 50, 200], model),
+            [np.nan, 0, 0, 0, 1.5, 5],
+        )
 
     def test_slope_includes_intercept_and_force_band(self):
         x = np.array([0, 1, 2, 8, 15, 25, 30], dtype=float)
@@ -184,6 +212,24 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(
             json.loads((output / "run.json").read_text())["status"], "complete"
         )
+
+    def test_batch_zero_anchor_with_nonzero_source_baseline(self):
+        source = native_fixture()
+        source["left_ad"][:, 0] += 5000
+        np.savez(self.root / "source.npz", **source)
+        with np.load(self.root / "target.npz") as payload:
+            target = dict(payload)
+        target["left_ad"][:3, 0] = [0, 1, 5000]
+        np.savez(self.root / "target.npz", **target)
+
+        output = self.root / "out"
+        run(self.manifest, output)
+        with np.load(output / "force/source.npz") as result:
+            self.assertFalse(result["left_valid"].any())
+        with np.load(output / "force/target.npz") as result:
+            np.testing.assert_array_equal(result["left_valid"][:3, 0], [True, False, True])
+            np.testing.assert_allclose(result["left_force_N"][:3, 0], [0, np.nan, 0])
+            self.assertFalse(result["left_valid"][:, 1:].any())
 
     def test_legacy_nine_channel_native_arrays(self):
         data = native_fixture()
